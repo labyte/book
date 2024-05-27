@@ -1,4 +1,4 @@
-# MBR转GPT
+# 分区MBR格式转GPT格式
 
 本教程将指导您将MBR转换为GPT分区表。
 

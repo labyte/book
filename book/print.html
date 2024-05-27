@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>笔记</title>
+        <title>星君的书</title>
         <meta name="robots" content="noindex">
 
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Windows</li><li class="chapter-item expanded "><a href="Windows/MBR转GPT.html"><strong aria-hidden="true">1.</strong> Windows系统MBR转GPT</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Windows系统</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="windows/mbr-gpt.html"><strong aria-hidden="true">1.1.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> CSharp</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> WPF</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Packges</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="csharp/packges/dotnetty.html"><strong aria-hidden="true">2.2.1.</strong> Packge-DotNetty</a></li><li class="chapter-item expanded "><a href="csharp/packges/stackexchange-redis.html"><strong aria-hidden="true">2.2.2.</strong> Packge-StackExchange.Redis</a></li><li class="chapter-item expanded "><a href="csharp/packges/epplus.html"><strong aria-hidden="true">2.2.3.</strong> Packge-StackExchange.Redis</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Linq</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="csharp/linq/expression.html"><strong aria-hidden="true">2.3.1.</strong> Expression</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Rust</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/mdbook.html"><strong aria-hidden="true">3.1.</strong> mdBook</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -148,7 +148,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">笔记</h1>
+                    <h1 class="menu-title">星君的书</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -181,7 +181,7 @@
                 <div id="content" class="content">
                     <main>
                         <div class="content-wrap">
-                            <h1 id="mbr转gpt"><a class="header" href="#mbr转gpt">MBR转GPT</a></h1>
+                            <h1 id="分区mbr格式转gpt格式"><a class="header" href="#分区mbr格式转gpt格式">分区MBR格式转GPT格式</a></h1>
 <p>本教程将指导您将MBR转换为GPT分区表。</p>
 <h2 id="步骤"><a class="header" href="#步骤">步骤</a></h2>
 <ol>
@@ -223,6 +223,300 @@
 <li>
 <p>回到系统还是不能更新系统，出现错误</p>
 </li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="服务端收到的消息滞后一条"><a class="header" href="#服务端收到的消息滞后一条">服务端收到的消息滞后一条</a></h1>
+<p>第一条消息服务端没收到，客户端发送第二条时，服务端收到上一条的消息？</p>
+<h2 id="原因"><a class="header" href="#原因">原因：</a></h2>
+<p>使用了SSL，加密后出现上述问题，不使用就正常，未测试具体原因。</p>
+<div style="break-before: page; page-break-before: always;"></div><p>官方文档
+https://stackexchange.github.io/StackExchange.Redis/Basics</p>
+<p>伪中文文档
+https://www.gitbook.com/?utm_source=legacy&amp;utm_medium=redirect&amp;utm_campaign=close_legacy</p>
+<p>csdn上总结的api，比较清楚
+https://blog.csdn.net/qq_27461747/article/details/89441778</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="excel插件-epplus"><a class="header" href="#excel插件-epplus">Excel插件-EPPlus</a></h1>
+<ol>
+<li>
+<p>使用前需要设置证书声明</p>
+</li>
+<li>
+<p>一个文件中的sheet,索引是从0开始的</p>
+</li>
+<li>
+<p>表里面的内容，行和列的索引都是从1开始的</p>
+</li>
+<li>
+<p>当new ExcelPackage 时，若没有文件会直接创建</p>
+</li>
+<li>
+<p>在 wpf 和 unity 端都比较好用， unity 端可以用这个来读取配置的excel文件，转换为Unity 多序列化文件，或者 json ，注意exce只是用来配置文件，真正使用的还是json等通用的文件格式，因为excel 在有些平台不支持，或者说使用的插件不支持，且excel文件比较大，冗余数据多</p>
+</li>
+</ol>
+<p>代码：</p>
+<pre><code>public static List&lt;string[]&gt; ReadAllInfo(int hostId)
+{
+    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;//声明非商业证书
+
+    FileInfo fileInfo = new FileInfo(excelPath);
+    if(File.Exists(fileInfo.FullName) == false)
+    {
+        return null;
+    }
+    using (ExcelPackage ep = new ExcelPackage(fileInfo))
+    {
+        List&lt;string[]&gt; listArr = new List&lt;string[]&gt;();
+        ExcelWorksheet ipSheet = ep.Workbook.Worksheets[hostId];
+        if (ipSheet.Cells[2, 1].Value == null) return null;
+        int workStaCount = int.Parse(ipSheet.Cells[2, 3].Value.ToString());
+        int count = 3 + workStaCount;
+        int row = 1;
+        while (true)
+        {
+            if (ipSheet.Cells[row, 1].Value != null)
+            {
+                string[] rowData = new string[count];
+                for (int i = 0; i &lt; count; i++)//遍历列
+                {
+                    if (ipSheet.Cells[row, i + 1].Value != null)
+                        rowData[i] = ipSheet.Cells[row, i + 1].Value.ToString();
+                }
+                listArr.Add(rowData);
+                row++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return listArr;
+    }
+}
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<p>将强类型lambda表达式表示为表达式树形式的数据结构。该类不能被继承。</p>
+</blockquote>
+<h4 id="使用情景"><a class="header" href="#使用情景">使用情景</a></h4>
+<blockquote>
+<p>当一个对象存在多个相同类型的属性，且这些属性控制的功能相同时,可以使用 Expression 来实现</p>
+</blockquote>
+<h4 id="例子"><a class="header" href="#例子">例子</a></h4>
+<ul>
+<li>有一组 Person, 需要遍历每个person，根据属性  <strong>A</strong> 或者  <strong>B</strong>，判断是说 <code>Hello</code> 还是 <code>Bye</code></li>
+<li>Person</li>
+</ul>
+<pre><code>    public class Person
+    {
+        public string Name { get; set; }
+        public bool pA { get; set; }
+        public bool pB { get; set; }
+    }
+
+</code></pre>
+<ul>
+<li>创建 Person List</li>
+</ul>
+<pre><code>    class ExpressionTest
+    {
+        List&lt;Person&gt; persons = new List&lt;Person&gt;();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+        ...
+    }
+</code></pre>
+<h5 id="常规解法"><a class="header" href="#常规解法">常规解法</a></h5>
+<ul>
+<li>分别些两个方法，根据属性A 或者 属性B 来判断</li>
+</ul>
+<pre><code class="language-C#">  internal class ExpressionTest
+    {
+        List&lt;Person&gt; persons = new List&lt;Person&gt;();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+
+        /* 需求： 遍历 persons， 根据 pA 或者 pB 的值，判断每个人是说 hello 还是 bye
+         * 常规写法： 分别些两个方法遍历判断
+         * Expression: 通过表达式实现通用写法
+         * 
+         */
+        #region 常规写法
+
+        private void SayHelloByA()
+        {
+            foreach (var p in persons)
+            {
+                if (p.pA)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+           
+        }
+        private void SayHelloByB()
+        {
+            foreach (var p in persons)
+            {
+                if (p.pB)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+
+        }
+
+        #endregion
+       // 测试
+       public void Test()
+        {
+            SayHelloByA();// 输出: Say Hello!
+            SayHelloByB();// 输出: Say Bye!
+        }
+    }
+</code></pre>
+<ul>
+<li><strong>存在的问题</strong> ： 如果我们有多个属性 C D E F，那么我们就需要写多少方法，但是发现这些方法的逻辑都是一样的。总感觉很别扭，此时就要用到 <strong>Expression</strong></li>
+</ul>
+<h5 id="expression-写法"><a class="header" href="#expression-写法">Expression 写法</a></h5>
+<pre><code> internal class ExpressionTest
+    {
+        List&lt;Person&gt; persons = new List&lt;Person&gt;();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+       
+        #region  Expression
+        public void SayHello(Expression&lt;Func&lt;Person, bool&gt;&gt; expr)
+        {
+            var valProp = (PropertyInfo)(((MemberExpression)expr.Body).Member);
+            foreach (var p in persons)
+            {
+                bool isShow = (bool)valProp.GetValue(p, null);
+                if (isShow)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+        }
+        #endregion
+       // 测试
+       public void Test()
+        {
+            SayHello(x =&gt; x.pA);// 输出: Say Hello!
+            SayHello(x =&gt; x.pB);// 输出: Say Bye!
+        }
+    }
+</code></pre>
+<ul>
+<li>通过表达式，让调用者来确定条件的值。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook"><a class="header" href="#mdbook">mdBook</a></h1>
+<blockquote>
+<p>将markdown 文件转换为html的工具</p>
+</blockquote>
+<h2 id="官方"><a class="header" href="#官方">官方</a></h2>
+<ul>
+<li>
+<p><a href="rust/%5Bhttps://github.com/rust-lang/mdBook%5D()">仓库地址</a></p>
+</li>
+<li>
+<p><a href="rust/%5Bhttps://rust-lang.github.io/mdBook/()">官方文档</a></p>
+</li>
+</ul>
+<p>注意：国内有很多个人翻译的中文版本，时间比较久远，还是看官网的英文版本或者翻译为中文来查看。</p>
+<h2 id="页面中文显示"><a class="header" href="#页面中文显示">页面中文显示</a></h2>
+<p>网页的工具栏等都是英文显示，在国内使用需要更改为中文。</p>
+<h3 id="设置网页为中文"><a class="header" href="#设置网页为中文">设置网页为中文</a></h3>
+<p>在国内使用应该使用中文</p>
+<ul>
+<li>在 <code>book.toml</code>中设置为中文 <code>language = "zh-CN"</code>，这仅仅是说明我们的网页使用的是中文</li>
+</ul>
+<pre><code class="language-C#">[book]
+authors = ["LIXINGJUN"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "成都轨道学院培训楼使用指南"
+description = "该文档仅用于成都轨道学院培训楼使用，禁止外传。"
+</code></pre>
+<h3 id="设置工具栏为中文"><a class="header" href="#设置工具栏为中文">设置工具栏为中文</a></h3>
+<ul>
+<li>工具栏默认提示为英文，如下图中的目录切换：</li>
+</ul>
+<p><img src="rust/image/mdbook/1716796122067.png" alt="1716796122067" /></p>
+<ul>
+<li>这需要通过修改主题来实现，在默认创建的书中没有主题的配置，根据官网文档，通过执行命令 <code>mdbook init --theme</code> 来创建默认的主题文件，然后通过修改文件中内容来修改.</li>
+<li>通过修改 <code> index.hbs</code> 文件中的对应内容</li>
+</ul>
+<p><img src="rust/image/mdbook/1716796153384.png" alt="1716796153384" /></p>
+<p><img src="rust/image/mdbook/1716796162203.png" alt="1716796162203" /></p>
+<p><img src="rust/image/mdbook/1716796171171.png" alt="1716796171171" /></p>
+<p><img src="rust/image/mdbook/1716796178418.png" alt="1716796178418" /></p>
+<h2 id="支持中文搜索"><a class="header" href="#支持中文搜索">支持中文搜索</a></h2>
+<p><strong>说明</strong>： 默认不支持中文搜索，也就是在搜索框总输入中文，搜索不到结果，具体见社区： <a href="https://rustcc.cn/article?id=fd75c670-4e8a-40be-855c-4a5ad1da350a">Rust社区支持中文说明</a>，总结以下的处理方式：</p>
+<ol>
+<li>安装指定插件</li>
+</ol>
+<pre><code class="language-shell">cargo install mdbook-mermaid
+cargo install mdbook-plantuml
+</code></pre>
+<ol start="2">
+<li>本地创建 <code>assets</code>，在社区中指示的仓库下载指定的文件到 <code>assets</code>中</li>
+<li>配置 <code>book.toml</code></li>
+</ol>
+<pre><code class="language-Toml">[output.html]
+mathjax-support = true
+additional-css = ["assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
+additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js","assets/searcher.js"]
+</code></pre>
+<ol start="4">
+<li>配置成功案例 <a href="https://gitee.com/shtzj/userguide.git">https://gitee.com/shtzj/userguide.git</a> 项目设置。</li>
+</ol>
+<h3 id="搜索结果描述的修改"><a class="header" href="#搜索结果描述的修改">搜索结果描述的修改</a></h3>
+<p>如下图显示，我们搜索到内容后提示有多少个结果，默认是英文显示的，要改为中文，这里通过 <code> index.hbs</code>无法修改，因为这个数据是动态显示的，在后端实现。</p>
+<p><img src="rust/image/mdbook/1716796189226.png" alt="1716796189226" /></p>
+<p>通过在渲染输出中，通过字符串查找，在 <code>seracher.js</code> 文件中找到了响应的代码位置，简单的操作，就是每次我们只要将对应的地方改为中文即可，但是存在一个问题，每次构建都会覆盖改好的内容。</p>
+<p><strong>原代码</strong></p>
+<pre><code class="language-JavaScript">    function formatSearchMetric(count, searchterm) {
+        if (count == 1) {
+            return count + " search result for '" + searchterm + "':";
+        } else if (count == 0) {
+            return "No search results for '" + searchterm + "'.";
+        } else {
+            return count + " search results for '" + searchterm + "':";
+        }
+    }
+</code></pre>
+<p><strong>希望的代码</strong></p>
+<pre><code class="language-JavaScript">    function formatSearchMetric(count, searchterm) {
+        if (count == 1) {
+            return count + " 个搜索结果 '" + searchterm + "':";
+        } else if (count == 0) {
+            return "无搜索结果 '" + searchterm + "'.";
+        } else {
+            return count + " 个搜索结果 '" + searchterm + "':";
+        }
+    }
+</code></pre>
+<p><strong>临时解决方式（不理想）</strong></p>
+<ol>
+<li>将 <code>seracher.js</code>  先改好，拷贝到 <code>assets </code>文件夹下；</li>
+<li>配置 <code> book.toml</code> 文件，如下图增加 <code>searcher.js</code> 的引用</li>
+</ol>
+<pre><code class="language-Toml">[output.html]
+mathjax-support = true
+additional-css = ["assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
+additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js","assets/searcher.js"]
+</code></pre>
+<ol start="3">
+<li>每次构建后，会在输出目录的assts下，创建 <code>searcher.js</code>文件，但是同时根目也有相同的文件，需要删除根目下的 <code>searcher.js</code> 文件，否则导致点击 搜索按钮无效。</li>
 </ol>
 
                         </div>

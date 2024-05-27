@@ -3,7 +3,7 @@ authors = ["AByte-L"]
 language = "zh-CN"
 multilingual = false
 src = "src"
-title = "笔记"
+title = "星君的书"
 
 [preprocessor.toc]
 command = "mdbook-toc"

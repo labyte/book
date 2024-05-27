@@ -1,0 +1,33 @@
+[book]
+authors = ["AByte-L"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "笔记"
+
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
+
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+renderer = ["html"]
+
+[preprocessor.plantuml]
+plantuml-cmd="java -jar /opt/plantuml.jar"
+
+[output.html]
+mathjax-support = true
+additional-css = ["theme/pagetoc.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
+additional-js = ["theme/pagetoc.js","assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js"]
+
+
+[output.html.search]
+limit-results = 20
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2

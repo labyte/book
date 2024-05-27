@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>资源引用 - 星君的书</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/pagetoc.css">
+        <link rel="stylesheet" href="../../assets/mermaid.css">
+        <link rel="stylesheet" href="../../assets/print.css">
+        <link rel="stylesheet" href="../../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Windows系统</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../windows/mbr-gpt.html"><strong aria-hidden="true">1.1.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> CSharp</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> WPF</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/wpf/资源引用.html" class="active"><strong aria-hidden="true">2.1.1.</strong> 资源引用</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Packges</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/packges/dotnetty.html"><strong aria-hidden="true">2.2.1.</strong> Packge-DotNetty</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/stackexchange-redis.html"><strong aria-hidden="true">2.2.2.</strong> Packge-StackExchange.Redis</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/epplus.html"><strong aria-hidden="true">2.2.3.</strong> Packge-StackExchange.Redis</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Linq</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/linq/expression.html"><strong aria-hidden="true">2.3.1.</strong> Expression</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Rust</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../rust/mdbook.html"><strong aria-hidden="true">3.1.</strong> mdBook</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索(快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">星君的书</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="资源引用"><a class="header" href="#资源引用">资源引用</a></h1>
+<p>WPF中的资源包含很多，如图片、字体、声音，以及样式、模板等很多，在使用的时候常常出现很多问题。</p>
+<h2 id="资源路径"><a class="header" href="#资源路径">资源路径</a></h2>
+<p>在WPF开发中，对资源的管理非常重要，当我们存在多个项目时，最好是把所有的资源都放在一个基础项目中进行管理，方便维护。</p>
+<p>正确的做法使用</p>
+<pre><code class="language-XML">pack://application:,,,/程序集名称;component/资源路径名
+</code></pre>
+<h3 id="图片资源路径"><a class="header" href="#图片资源路径">图片资源路径</a></h3>
+<p>存在两个项目</p>
+<ul>
+<li>基础项目名称：Demo.Infrastructure</li>
+<li>主项目 Demo</li>
+</ul>
+<p>所有的资源在 <code>Demo.Infrastructure</code>  中定义</p>
+<ul>
+<li>正确的使用</li>
+</ul>
+<pre><code class="language-XML">    &lt;UserControl.Background&gt;
+        &lt;!----&gt;
+        &lt;ImageBrush ImageSource="pack://application:,,,/
+        Demo.Infrastructure;component/images/login_bg.png"/&gt;
+    &lt;/UserControl.Background&gt;
+</code></pre>
+<ul>
+<li>错误的使用（不加 <strong>pack://application:,,,</strong>）此时为相对路径，在编辑模式下可以看到图片，但是运行后不显示</li>
+</ul>
+<pre><code class="language-XML"> &lt;UserControl.Background&gt;
+        &lt;!----&gt;
+        &lt;ImageBrush ImageSource="/
+        Demo.Infrastructure;component/images/login_bg.png"/&gt;
+    &lt;/UserControl.Background&gt;
+</code></pre>
+<ul>
+<li>错误的使用（不加 <strong>pack://application:,,,</strong> 和命名空间）</li>
+</ul>
+<pre><code class="language-XML"> &lt;UserControl.Background&gt;
+        &lt;!----&gt;
+        &lt;ImageBrush ImageSource="images/login_bg.png"/&gt;
+    &lt;/UserControl.Background&gt;
+</code></pre>
+<h3 id="字体资源路径"><a class="header" href="#字体资源路径">字体资源路径</a></h3>
+<p>可以下载阿里巴巴的字体文件，下载后将ttf文件拷贝到项目中</p>
+<pre><code class="language-Toml">
+&lt;TextBlock Text="&amp;#xe657;" FontFamily="{StaticResource iconfont}" FontSize="14" Foreground="Red" VerticalAlignment="Center" /&gt;
+&lt;TextBlock Text="&amp;#xe657;" FontFamily="/OESTS.Modules.Login;component/fonts/#iconfont" FontSize="14" Foreground="Red" VerticalAlignment="Center" /&gt;
+&lt;TextBlock Text="&amp;#xe657;" FontFamily="/fonts/#iconfont" FontSize="14" Foreground="Red" VerticalAlignment="Center"/&gt;
+</code></pre>
+<h3 id="loadcomponent使用的路径"><a class="header" href="#loadcomponent使用的路径">LoadComponent使用的路径</a></h3>
+<p>加载组件函数，可以加载一个xaml文件，这里页存在一个资源路径的问题，此方法仅能使用相对路径，不能使用觉得路径</p>
+<p><strong>案例</strong>：需求加载一个流文档控件的文件资源，</p>
+<p>文件名为flowdoc.xaml，如下</p>
+<pre><code class="language-XML">&lt;FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                TextOptions.TextFormattingMode="Display" &gt;
+    &lt;Paragraph&gt;
+        &lt;Run Text="加载测试" &gt;&lt;/Run&gt;
+    &lt;/Paragraph&gt;
+&lt;/FlowDocument&gt;
+</code></pre>
+<ul>
+<li>当只有一个项目时，若文件存在项目的resources文件中，加载方式如下</li>
+</ul>
+<pre><code class="language-C#">  FlowDocument doc = (FlowDocument)Application.LoadComponent(new Uri("/resources/flowdoc.xaml", UriKind.Relative));
+</code></pre>
+<ul>
+<li>当存在多个项目，如使用了Prism框架，在一个模块项目中加载时（模块项目的程序集为：DemoModule）</li>
+</ul>
+<pre><code class="language-C#">//正确的做法
+FlowDocument doc = (FlowDocument)Application.LoadComponent(
+new Uri("/DemoModule;component/resources/flowdoc.xaml",
+UriKind.Relative));
+
+//错误的做法，不能加pack://application:,,,，加了后为绝对路径
+FlowDocument doc = (FlowDocument)Application.LoadComponent(
+new Uri("pack://application:,,,DemoModule;component/resources/flowdoc.xaml", 
+UriKind.Relative));
+</code></pre>
+<h2 id="资源的引用方式"><a class="header" href="#资源的引用方式">资源的引用方式</a></h2>
+<ul>
+<li>本地添加模板目录：分别创建模板对象。</li>
+<li>App.xaml中添加模板目录，创建全局模板对象，导致大家的数据相同。</li>
+<li>对于样式、转换器、模板选择器等，在App.xaml添加目录比较合适。</li>
+<li>对于模板的使用，在本地添加模板目录不会出现问题。</li>
+<li>如果两者都添加，本地添加的起作用。</li>
+</ul>
+<p><strong>场景描述：</strong> 当前有两个页面（AView,BView）的布局相同，数据不同，定义了一个通用模板为 <code>ContentTemplate</code>， 定义了通用模板，key 为 <code>contentView</code></p>
+<pre><code class="language-xml">&lt;ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:ScreenControlE" &gt;
+    &lt;Grid x:Key="contentView"&gt;
+
+       &lt;TextBlock Text="{Binding Path=Content}" FontSize="14" Foreground="Red" VerticalAlignment="Center" /&gt;
+
+    &lt;/Grid&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+<h3 id="ab页面在本地添加模板目录"><a class="header" href="#ab页面在本地添加模板目录">A、B页面在本地添加模板目录</a></h3>
+<ul>
+<li>A、B页面的前端（这里使用了Prsim框架），在本地添加了资源目录，并引用 <code>contentView</code>，此时两个页面显示正常，分别显示自己的内容</li>
+</ul>
+<pre><code class="language-xml">
+&lt;UserControl x:Class=" ScreenControlE.Views.NCCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"       
+             prism:ViewModelLocator.AutoWireViewModel="True"&gt;
+    &lt;UserControl.Resources&gt;
+        &lt;ResourceDictionary Source="/Themes/ContentTemplate.xaml"/&gt;
+    &lt;/UserControl.Resources&gt;
+    &lt;Grid&gt;
+        &lt;ContentControl x:Name="ncc_contentCrl" Content="{StaticResource contentView }"/&gt;
+    &lt;/Grid&gt;
+&lt;/UserControl&gt;
+
+</code></pre>
+<h3 id="在appxaml中添加模板的目录"><a class="header" href="#在appxaml中添加模板的目录">在App.xaml中添加模板的目录</a></h3>
+<ul>
+<li>App.xaml</li>
+</ul>
+<pre><code class="language-xml">&lt;prism:PrismApplication x:Class="ScreenControlE.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ScreenControlE"
+             xmlns:prism="http://prismlibrary.com/" &gt;
+    &lt;Application.Resources&gt;
+		&lt;ResourceDictionary Source="/Themes/ContentTemplate.xaml"/&gt;
+
+    &lt;/Application.Resources&gt;
+&lt;/prism:PrismApplication&gt;
+
+</code></pre>
+<ul>
+<li>A、B页面的前端（这里使用了Prsim框架），直接引用 <code>contentView</code></li>
+</ul>
+<pre><code class="language-xml">
+&lt;UserControl x:Class=" ScreenControlE.Views.NCCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"       
+             prism:ViewModelLocator.AutoWireViewModel="True"&gt;
+ 
+    &lt;Grid&gt;
+        &lt;ContentControl x:Name="ncc_contentCrl" Content="{StaticResource contentView }"/&gt;
+    &lt;/Grid&gt;
+&lt;/UserControl&gt;
+
+</code></pre>
+<ul>
+<li>
+<p>两个页面显示了相同的内容，在App.xaml中添加的相当于创建了一个全局变量的对象</p>
+</li>
+<li>
+<p>ViewModel（A为例）</p>
+</li>
+</ul>
+<pre><code class="language-csharp">public class AViewModel : ViewModelBase
+{
+    public string Content { get; set; } = "A模板"
+}
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../windows/mbr-gpt.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../csharp/packges/dotnetty.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../windows/mbr-gpt.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../csharp/packges/dotnetty.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/pagetoc.js"></script>
+        <script src="../../assets/fzf.umd.js"></script>
+        <script src="../../assets/elasticlunr.js"></script>
+        <script src="../../assets/mermaid.min.js"></script>
+        <script src="../../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

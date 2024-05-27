@@ -8,6 +8,7 @@
 - [CSharp]()
 
   - [WPF]()
+    - [资源引用](csharp/wpf/资源引用.md)
   - [Packges]()
 
     - [Packge-DotNetty](csharp/packges/dotnetty.md)

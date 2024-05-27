@@ -15,7 +15,7 @@
 
     - [Packge-StackExchange.Redis](csharp/packges/stackexchange-redis.md)
 
-    - [Packge-StackExchange.Redis](csharp/packges/epplus.md)
+    - [Packge-EPPlus](csharp/packges/epplus.md)
 
 
   - [Linq]()

@@ -1,9 +1,10 @@
+# Linq中的Expresion
+
 > 将强类型lambda表达式表示为表达式树形式的数据结构。该类不能被继承。
 
-#### 使用情景
 > 当一个对象存在多个相同类型的属性，且这些属性控制的功能相同时,可以使用 Expression 来实现
 
-#### 例子
+## 多个属性具有相同的处理逻辑例子
 - 有一组 Person, 需要遍历每个person，根据属性  **A** 或者  **B**，判断是说 `Hello` 还是 `Bye`
 - Person
 
@@ -31,7 +32,7 @@
     }
 ```
 
-##### 常规解法
+### 常规解法
 - 分别些两个方法，根据属性A 或者 属性B 来判断
 
 ``` C#
@@ -86,9 +87,9 @@
 
 -  **存在的问题** ： 如果我们有多个属性 C D E F，那么我们就需要写多少方法，但是发现这些方法的逻辑都是一样的。总感觉很别扭，此时就要用到 **Expression** 
 
-##### Expression 写法
+### Expression 写法
 
-```
+```C#
  internal class ExpressionTest
     {
         List<Person> persons = new List<Person>();

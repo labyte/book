@@ -94,7 +94,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Windows系统</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../windows/mbr-gpt.html"><strong aria-hidden="true">1.1.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> CSharp</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> WPF</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/wpf/资源引用.html"><strong aria-hidden="true">2.1.1.</strong> 资源引用</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Packges</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/packges/dotnetty.html"><strong aria-hidden="true">2.2.1.</strong> Packge-DotNetty</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/stackexchange-redis.html"><strong aria-hidden="true">2.2.2.</strong> Packge-StackExchange.Redis</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/epplus.html"><strong aria-hidden="true">2.2.3.</strong> Packge-EPPlus</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Linq</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/linq/expression.html" class="active"><strong aria-hidden="true">2.3.1.</strong> Expression</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Rust</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../rust/mdbook.html"><strong aria-hidden="true">3.1.</strong> mdBook</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Windows系统</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../windows/bat-file.html"><strong aria-hidden="true">1.1.</strong> 批处理</a></li><li class="chapter-item expanded "><a href="../../windows/mbr-gpt.html"><strong aria-hidden="true">1.2.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> CSharp</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> WPF</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/wpf/资源引用.html"><strong aria-hidden="true">2.1.1.</strong> 资源引用</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Packges</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/packges/dotnetty.html"><strong aria-hidden="true">2.2.1.</strong> Packge-DotNetty</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/stackexchange-redis.html"><strong aria-hidden="true">2.2.2.</strong> Packge-StackExchange.Redis</a></li><li class="chapter-item expanded "><a href="../../csharp/packges/epplus.html"><strong aria-hidden="true">2.2.3.</strong> Packge-EPPlus</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Linq</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../csharp/linq/expression.html" class="active"><strong aria-hidden="true">2.3.1.</strong> Expression</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Rust</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../rust/mdbook.html"><strong aria-hidden="true">3.1.</strong> mdBook</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -180,14 +180,14 @@
                 <div id="content" class="content">
                     <main>
                         <div class="content-wrap">
-                            <blockquote>
+                            <h1 id="linq中的expresion"><a class="header" href="#linq中的expresion">Linq中的Expresion</a></h1>
+<blockquote>
 <p>将强类型lambda表达式表示为表达式树形式的数据结构。该类不能被继承。</p>
 </blockquote>
-<h4 id="使用情景"><a class="header" href="#使用情景">使用情景</a></h4>
 <blockquote>
 <p>当一个对象存在多个相同类型的属性，且这些属性控制的功能相同时,可以使用 Expression 来实现</p>
 </blockquote>
-<h4 id="例子"><a class="header" href="#例子">例子</a></h4>
+<h2 id="多个属性具有相同的处理逻辑例子"><a class="header" href="#多个属性具有相同的处理逻辑例子">多个属性具有相同的处理逻辑例子</a></h2>
 <ul>
 <li>有一组 Person, 需要遍历每个person，根据属性  <strong>A</strong> 或者  <strong>B</strong>，判断是说 <code>Hello</code> 还是 <code>Bye</code></li>
 <li>Person</li>
@@ -214,7 +214,7 @@
         ...
     }
 </code></pre>
-<h5 id="常规解法"><a class="header" href="#常规解法">常规解法</a></h5>
+<h3 id="常规解法"><a class="header" href="#常规解法">常规解法</a></h3>
 <ul>
 <li>分别些两个方法，根据属性A 或者 属性B 来判断</li>
 </ul>
@@ -269,8 +269,8 @@
 <ul>
 <li><strong>存在的问题</strong> ： 如果我们有多个属性 C D E F，那么我们就需要写多少方法，但是发现这些方法的逻辑都是一样的。总感觉很别扭，此时就要用到 <strong>Expression</strong></li>
 </ul>
-<h5 id="expression-写法"><a class="header" href="#expression-写法">Expression 写法</a></h5>
-<pre><code> internal class ExpressionTest
+<h3 id="expression-写法"><a class="header" href="#expression-写法">Expression 写法</a></h3>
+<pre><code class="language-C#"> internal class ExpressionTest
     {
         List&lt;Person&gt; persons = new List&lt;Person&gt;();
         public ExpressionTest()
@@ -338,6 +338,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

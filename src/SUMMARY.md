@@ -2,6 +2,7 @@
 
 
 - [Windows系统]()
+  - [批处理](windows/bat-file.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
 
 

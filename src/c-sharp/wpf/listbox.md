@@ -2,7 +2,7 @@
 
 常用于导航
 
-### 自定义ItemContainerStyle
+自定义ItemContainerStyle
 
 在使用ListBox的时候，发现鼠标移入到item上，会有一个很宽的背景，想把它去除，我们自己定义鼠标移入的状态，可以通过 `ItemContainerStyle` 来定义模板，以下实现一个理论考试的题目选择样式，有如下需求:
 
@@ -87,9 +87,8 @@
 
 ```
 
-``` xml
+```xml
 <ListBox ItemsSource="{Binding YourItems}"
          ItemTemplateSelector="{StaticResource MyTemplateSelector}"
          ItemContainerStyle="{x:Null}" />
 ```
-

@@ -5,6 +5,7 @@ multilingual = false
 src = "src"
 title = "星君的书"
 
+
 [preprocessor.toc]
 command = "mdbook-toc"
 renderer = ["html"]
@@ -21,7 +22,8 @@ plantuml-cmd="java -jar /opt/plantuml.jar"
 mathjax-support = true
 additional-css = ["theme/pagetoc.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
 additional-js = ["theme/pagetoc.js","assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js"]
-
+git-repository-url = "https://github.com/labyte/book"
+git-repository-icon = "fa-github"
 
 [output.html.search]
 limit-results = 20

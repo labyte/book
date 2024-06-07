@@ -1,4 +1,3 @@
 # Books
 
-#### 介绍
-开发笔记
+[笔记](https://labyte.github.io/book)

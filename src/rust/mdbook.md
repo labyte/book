@@ -2,9 +2,9 @@
 
 - 将markdown 文件转换为html的工具
 
-- [仓库地址]([https://github.com/rust-lang/mdBook]())
+- [仓库地址](https://github.com/rust-lang/mdBook)
 
-- [官方文档]([https://rust-lang.github.io/mdBook/())
+- [官方文档](https://rust-lang.github.io/mdBook)
 
 
 注意：国内有很多个人翻译的中文版本，时间比较久远，还是看官网的英文版本或者翻译为中文来查看。

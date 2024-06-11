@@ -1,7 +1,7 @@
 
 # Camera组件
 
-![输入图片说明](../../assets/Unity/20230118.png)
+![1718097515607](image/camera/1718097515607.png)
 
 运行的CameraTag 应该为 MainCamera
 
@@ -9,7 +9,7 @@
 
 ## Rendering
 
-![输入图片说明](../../assets/Unity/image2023011801.png)
+![1718097530253](image/camera/1718097530253.png)
 
 - Renderer
 - PostProcession
@@ -37,8 +37,6 @@
 # PhysicsRaycaster
 
 用于射线检测，可对场景中的数据进行交互
-
-![输入图片说明](../../assets/Unity/image2023011802.png)
 
 
 - EventMask：这里勾选需要交互的层级，同时注意在Camera->Renderer->CullingMask 中也要勾选响应的层级

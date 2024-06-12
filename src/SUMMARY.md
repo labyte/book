@@ -1,6 +1,6 @@
 # Summary 
 
-[摘要](introduction.md)
+[摘要](Introduction.md)
 
 # CSharp
 
@@ -79,6 +79,9 @@
     - [NewUIWidgets](unity/packges/NewUIWidgets.md)
     - [NodeGraphProcessor](unity/packges/NodeGraphProcessor.md)
     - [PDF插件](unity/packges/PDF插件.md)
+  
+  - [资源优化](unity/优化/资源优化.md)  
+
   - [发布]()
     - [发布Window平台](unity/build-window.md)
     - [发布安卓平台](unity/build-android.md)
@@ -88,7 +91,7 @@
 
 # Windows系统和软件
 
-- [Windows系统]()
+- [Windows系统](windows/index.md)
 
   - [批处理](windows/bat-file.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)

@@ -1,5 +1,5 @@
 :root {
-    --toc-width: 240px;
+    --toc-width: 300px;
     --center-content-toc-shift: calc(-1 * var(--toc-width) / 2);
 }
 
@@ -19,6 +19,7 @@
 @media only screen {
     main {
         display: flex;
+        float:100px;
     }
 
     @media (max-width: 1179px) {

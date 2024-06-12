@@ -32,14 +32,14 @@
 
 ---
 
-# 域名和证书
+
 - [域名和证书](domain-ssl/域名和证书.md)
-- [Let's Encrypt 申请免费证书](domain-ssl//let-s-encrypt-申请免费证书/let-s-encrypt.md)
-- [公云获取免费域名](domain-ssl/公云获取免费域名/公云获取免费域名.md)
-- [Nginx 配置证书](domain-ssl/nginx-配置证书/Nginx-配置证书.md)
-- [阿里云ECS配置Nginx](domain-ssl/阿里云ECS配置Nginx/阿里云ECS配置Nginx.md)
-- [阿里云购买域名](domain-ssl/阿里云购买域名/阿里云购买域名.md)
-- [路由器配置](domain-ssl/路由器配置/路由器配置.md)
+  - [Let's Encrypt 申请免费证书](domain-ssl/let-s-encrypt-申请免费证书/let-s-encrypt.md)
+  - [公云获取免费域名](domain-ssl/公云获取免费域名/公云获取免费域名.md)
+  - [Nginx 配置证书](domain-ssl/nginx-配置证书/Nginx-配置证书.md)
+  - [阿里云ECS配置Nginx](domain-ssl/阿里云ECS配置Nginx/阿里云ECS配置Nginx.md)
+  - [阿里云购买域名](domain-ssl/阿里云购买域名/阿里云购买域名.md)
+  - [路由器配置](domain-ssl/路由器配置/路由器配置.md)
 
 ---
 

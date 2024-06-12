@@ -1,9 +1,9 @@
 # 安装
 https://partner.steamgames.com/doc/features/steamvr/enterprise
 
-# 1 按键绑定
+# 按键绑定
 
-## 1.1 发布后手柄无效应
+## 发布后手柄无效应
 > 将自己的配置设置为默认配置
 1. Unity中 Window->SteamVR Input,打开设置面板
 2. 点击 open binding ui
@@ -17,7 +17,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 6. 最后显示为你的配置，此时发布可以了
 ![](https://foruda.gitee.com/images/1664636005394933314/3a726189_5369110.png "屏幕截图")
 
-# 2 自带组件
+# 组件说明
 
 >无论是与模型还是UI的交互，无论是直接使用手柄还是射线的交互方式，交互对象(如果对象本身没有，那么子级上要有)需要有Collider，一般为BoxCollider
 
@@ -25,7 +25,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 
 手势交互
 
-## 2.1 Interactable
+## Interactable
 ![Interactable属性](https://foruda.gitee.com/images/1662434357945929445/ac256059_5369110.png "屏幕截图")
 
 - 标识对象是可交互的
@@ -36,12 +36,12 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 
 
 
-## 2.2 Throwable
+## Throwable
 > 投掷功能组件
 添加这个组件时，会自动添加依赖组件Interactable(可交互的) 和 Rigibody（释放时，物理重力）
 
 
-## 2.3 SteamvR_LaserPointer
+## SteamvR_LaserPointer
 > 官方提供的，在CameraRig预制体上的一个组件，用于实现激光交互，我们可以迁移到Player上
 
 ![输入图片说明](https://foruda.gitee.com/images/1662435448942475974/6c62a25c_5369110.png "屏幕截图")
@@ -58,8 +58,8 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 - Reference: 设置无效，源代码中未使用 
 
 
-##  2.4 SteamVR_LoadLevel
-### 2.4.1 组件介绍
+##  SteamVR_LoadLevel
+### 组件介绍
 ![SteamVR_LoadLevel属性面板](https://foruda.gitee.com/images/1662095386876224635/d5e8f58e_5369110.png "屏幕截图")
 所有用到的贴图，检查是否被压缩，全部改为不压缩
 - LevelName:场景名称
@@ -90,7 +90,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 - Auto Trigger On Enable: 脚本激活就触发加载
 
 
-### 2.4.2 注意事项
+### 注意事项
  **（1）组件一直处于Loadind状态，导致无法加载** 
 启动launch场景，自动加载 Hall 场景，这个时候如果在加载其他场景时，无效，代码查看是因为 static laoding 一直为 true
  **解决方案** 
@@ -99,8 +99,8 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 另外使用组件时，使用的是异步加载，不知道换同步是否存在问题
 
 
-## 2.5 Teleport
-### 2.5.1 配置规则
+## Teleport
+### 配置规则
 传送涉及到两个预制体和一个组件
 -  **Teleporting(预制体)** ：必要的预制体，拖到场景，没有不行，提供传送的机制逻辑等
 -  **TeleportPoint(预制体)** ：传送点，定位传送
@@ -109,7 +109,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 - 注意：TeleportPoint 预制体的碰撞体默认是属于UI Layer，所以 Teleporting 检测的层级一定要包含 UI 层，或者你自定义
 ```
 
-### 2.5.2 Teleporting
+### Teleporting
 ![输入图片说明](https://foruda.gitee.com/images/1663642973496348692/b85c1022_5369110.png "屏幕截图")
 主要关注图上属性配置，其他的是特效，声音以及调试的配置
 
@@ -123,7 +123,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 
 ![输入图片说明](https://foruda.gitee.com/images/1665632118199144290/10d2eb97_5369110.png "屏幕截图")
 
-### 2.5.3 TeleportPoint
+### TeleportPoint
 ![输入图片说明](https://foruda.gitee.com/images/1663652653222797043/0668469d_5369110.png "屏幕截图")
 
 -  **Lockked** ：勾选，将无法传送到此区域，可通过代码来控制此变量，动态解锁传送区域
@@ -135,7 +135,7 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 
 
 
-## 2.6 Player
+## Player
 
 >角色组件
 
@@ -144,9 +144,9 @@ https://partner.steamgames.com/doc/features/steamvr/enterprise
 - 或者若你的初始场景是一直存在，加载场景是以“Addtive”的方式，那么可将Player放置在初始场景
 
 
-# 3 扩展组件
+# 扩展组件
 
-## 3.1 激光交互响应组件（LaserHand）
+## 激光交互响应组件（LaserHand）
 > 该组件依赖 `SteamVR_LaserPointer`,并监听其的 `PointerIn`、`PointerOut`、`PointerClick` 三个事件，以实现对对象的指针移入、移出和点击三种交互事件的处理
 
 **代码** 
@@ -266,11 +266,11 @@ namespace LFramework
 2. 对于 TextmeshProUGUI, 它有自己的 overlay shader，我们主要将我们制作的字体材质复制一份，作为ovlerlay材质，将shader换为 Distance filed Overlay shader
 3. 问题：玩家的手部模型，和射线也会被 设置了Overlay的UI覆盖，导致 无法操作 这种UI，目前还没解决，网上的人很狗屎，没人提这个问题
 
-# 4 问题汇总
+# 问题汇总
 
-## 4.1 HTC VIVE 定位器更新固件后闪烁红灯
+## HTC VIVE 定位器更新固件后闪烁红灯
 
-### 4.1.1 官方回复（失败）
+### 官方回复（失败）
 首先联系官方，根据回复指导操作后，未解决问题，以下是官方的回复：
 
 ```
@@ -288,7 +288,7 @@ namespace LFramework
 	11. 等候约 1分钟，然后拔下USB线缆。
 ```
 
-### 4.1.2 网友方法(成功)
+### 网友方法(成功)
 > 注意：若修复成功，定位器会显示一个感叹号，提示更新，千万不要更新，就是因为更新出现的问题，我们的操作就是回退固件。
 {.is-warning}
 
@@ -321,10 +321,10 @@ lighthouse_tx_htc_2_0-244-2016-03-12.bin
 - 若使用两个定位器（有线连接）：AB模式
 - 若使用两个定位器（无线连接）：BC模式
 
-## 4.2 URP渲染模式发布后无法显示传送位置
+## URP渲染模式发布后无法显示传送位置
 需要手动替换下 DestinationReticle 的 材质，具体见 Teleporting章节
 
-## 4.3 发布后手柄无响应
+## 发布后手柄无响应
 1. 发布位置不能有中文
 2. 按键配置需要替换为默认的配置，操作见 相应章节
 

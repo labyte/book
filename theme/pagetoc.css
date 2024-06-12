@@ -1,5 +1,5 @@
 :root {
-    --toc-width: 270px;
+    --toc-width: 240px;
     --center-content-toc-shift: calc(-1 * var(--toc-width) / 2);
 }
 
@@ -54,18 +54,23 @@
 
     .sidetoc {
         margin-top: 20px;
-        margin-left: 10px;
-        margin-right: auto;
+        margin-right: 10px;
+        margin-left: 20px;
     }
     .pagetoc {
         position: fixed;
         /* adjust TOC width */
         width: var(--toc-width);
         height: calc(100vh - var(--menu-bar-height) - 0.67em * 4);
+        /* height: calc(100vh); */
         overflow: auto;
+        /* 自己设置的，默认的太大了 */
+        font-size: 14px;
     }
     .pagetoc a {
-        border-left: 1px solid var(--sidebar-bg);
+
+        /* border-left: 1px solid var(--sidebar-bg); */
+        border-left: 1px solid #d4d4d4;
         color: var(--fg) !important;
         display: block;
         padding-bottom: 5px;

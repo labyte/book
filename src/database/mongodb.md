@@ -60,10 +60,14 @@ var filter = Builders<BsonDocument>.Filter.And(
 
 这些方法用于创建比较条件的过滤器：
 
-Gte（greater than or equal）：大于等于
-Gt（greater than）：大于
-Lte（less than or equal）：小于等于
-Lt（less than）：小于
+- Gte（greater than or equal）：大于等于
+
+- Gt（greater than）：大于
+
+- Lte（less than or equal）：小于等于
+
+- Lt（less than）：小于
+
 
 ```csharp
 var filter = Builders<BsonDocument>.Filter.Gte("fieldName", value);
@@ -89,7 +93,8 @@ var filter = Builders<BsonDocument>.Filter.And(
 
 在 MongoDB 的 C# 驱动程序中，AnyIn 方法用于创建一个过滤器，用于检查一个数组字段中是否至少包含一个指定的值。这在需要查询数组字段中是否存在特定元素的情况下非常有用。
 
-用法示例
+**用法示例**
+
 假设你有一个文档结构如下：
 
 ```json
@@ -108,11 +113,16 @@ var filter = Builders<BsonDocument>.Filter.And(
 var filter = Builders<BsonDocument>.Filter.AnyIn("interests", new BsonArray { "Music", "Sports" });
 ```
 
-解释
+**解释**
+
 Builders`<BsonDocument>`.Filter.AnyIn 方法用于创建一个数组字段的过滤器，该方法接受两个参数：
+
 第一个参数是字段名 "interests"，这是你要进行过滤的数组字段。
+
 第二个参数是一个 BsonArray，其中包含了要匹配的值的列表。在上面的例子中，我们使用了 new BsonArray { "Music", "Sports" } 来表示我们要查询包含 "Music" 或 "Sports" 的兴趣爱好的文档。
-注意事项
+
+**注意事项**
+
 AnyIn 方法是针对数组字段进行查询的一种特定方式。它只匹配数组中至少包含一个指定值的文档。如果数组字段中同时包含了多个指定值，文档也会被匹配。
 在实际应用中，可以根据具体的业务需求和数据结构来灵活使用 AnyIn 方法，从而实现复杂的查询操作。
 以上是关于 AnyIn 方法在 MongoDB C# 驱动程序中的基本用法和示例解释。
@@ -123,7 +133,7 @@ AnyIn 方法是针对数组字段进行查询的一种特定方式。它只匹�
 
 ## 事务
 
-https://www.mongodb.com/docs/manual/core/transactions/
+[官方文档](https://www.mongodb.com/docs/manual/core/transactions/)
 
 ```C#
 // For a replica set, include the replica set name and a seedlist of the members in the URI string; e.g.
@@ -170,11 +180,11 @@ using (var session = client.StartSession())
 
 **原因1：** MongoDB自带的Date是UTC的时间，中国是东八区，所以差了8个小时。
 
-**解决方法：**在mongodb可视化工具Robomongo中，我们可以通过"Options" - “Display Dates in…” - "Local Timezone"来设置显示本地时间。
+**解决方法：** 在mongodb可视化工具Robomongo中，我们可以通过"Options" - “Display Dates in…” - "Local Timezone"来设置显示本地时间。
 
 **原因2：** MongoDB中存储的时间是标准时间 `UTC +0:00`
 
-**解决方法：**C#的驱动支持一个特性，将实体的时间属性上添加上这个特性并指时区就可以了。
+**解决方法：** C#的驱动支持一个特性，将实体的时间属性上添加上这个特性并指时区就可以了。
 
 例如：
 

@@ -36,13 +36,11 @@
 
 ---
 
-- [域名和证书](domain-ssl/域名和证书.md)
-  - [Let&#39;s Encrypt 申请免费证书](domain-ssl/let-s-encrypt-申请免费证书/let-s-encrypt.md)
-  - [公云获取免费域名](domain-ssl/公云获取免费域名/公云获取免费域名.md)
-  - [Nginx 配置证书](domain-ssl/nginx-配置证书/Nginx-配置证书.md)
-  - [阿里云ECS配置Nginx](domain-ssl/阿里云ECS配置Nginx/阿里云ECS配置Nginx.md)
-  - [阿里云购买域名](domain-ssl/阿里云购买域名/阿里云购买域名.md)
-  - [路由器配置](domain-ssl/路由器配置/路由器配置.md)
+- [运维](运维/运维.md)
+  - [阿里云](运维/阿里云/阿里云.md "阿里云")
+  - [自建服务器](运维/自建服务器/自建服务器.md "自建服务器")
+  - [Nginx](运维/nginx/nginx.md "Nginx")
+  - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
 
 ---
 
@@ -55,7 +53,7 @@
 
 - [群晖](群晖/群晖使用Putty.md)
 
-# 数据处理
+# 数据库
 
 - [SQL Server](database/sql-server.md)
 - [MySql](database/my-sql.md)

@@ -19,6 +19,7 @@
 
   - [证书](c-sharp/aspnet/证书.md)
   - [Jwt](c-sharp/aspnet/jwt.md)
+  - [BootstrapBlazor](c-sharp/aspnet/bootstrap-blazor.md)
 - [Packges](c-sharp/packges/index.md)
 
   - [Messagepack](c-sharp/packges/messagepack.md)

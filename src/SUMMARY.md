@@ -29,7 +29,6 @@
   - [DotNetty](c-sharp/packges/dotnetty.md)
   - [StackExchange.Redis](c-sharp/packges/stackexchange-redis.md)
   - [EPPlus](c-sharp/packges/epplus.md)
-  - [EPPlus](c-sharp/packges/epplus.md)
 - [技能树](c-sharp/技能树/index.md)
 
   - [格式化](c-sharp/技能树/format.md)

@@ -4,6 +4,47 @@
 
 [MongoDB C#驱动程序](https://www.mongodb.com/docs/drivers/csharp/current/)
 
+[Mongosh 文档](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#std-label-mdb-shell-overview)
+
+
+## 用户管理
+
+
+用户管理需要通过 Mongosh 操作，Mongosh 是嵌入到 MongoDB Compass 中的一个Javascript 运行环境，官方文档没怎么看懂
+
+[官方 用户管理方式](https://www.mongodb.com/zh-cn/docs/mongodb-shell/reference/methods/#user-management-methods)
+
+
+**添加用户**
+
+```javascript
+
+use admin
+
+db.createUser({
+    user:"admin",
+    pwd:"tzj001",
+    roles:[
+    {role:"readWrite",db:"TSIM"}]
+})
+```
+
+**查看当前用户**
+
+```javascript
+db.getUsers()
+```
+或者
+
+```javascript
+db.system.users.find()
+```
+或者
+
+```javascript
+show users
+```
+
 ## 过滤器
 
 当使用 MongoDB C# 驱动程序进行数据查询和操作时，可以通过 Builders`<T>`.Filter 构造过滤器（Filter），它们用于定义查询条件或者更新/删除操作的条件。以下是一些常用的过滤器方法及其用法解释：

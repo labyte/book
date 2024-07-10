@@ -18,6 +18,7 @@
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     font-size: 12px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局  这样可实现表格第一列固定宽度，剩下的按比例自动拉伸*/
 }
 
 .excel-table th, .excel-table td {
@@ -93,7 +94,8 @@
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    font-size: 12px; /* 设置字体大小 */
+    font-size: 14px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局 */
 }
 
 .excel-table th, .excel-table td {
@@ -116,16 +118,16 @@
 }
 
 .excel-table th:nth-child(1), .excel-table td:nth-child(1) {
-    width: 30%;
-    /*  width: 100px; 固定第一列宽度 */
+    /* width: 30%; */
+      width: 100px; /*固定第一列宽度 */
 }
 
 .excel-table th:nth-child(2), .excel-table td:nth-child(2) {
-    width: 20%;
+    width: 40%;
 }
 
 .excel-table th:nth-child(3), .excel-table td:nth-child(3) {
-    width: 50%;
+    width: 60%;
 }
 </style>
 
@@ -133,21 +135,31 @@
     <table class="excel-table">
         <thead>
             <tr>
-                <th>列1</th>
-                <th>列2</th>
-                <th>列3</th>
+                <th>列1(宽100)</th>
+                <th>列2(宽40%)</th>
+                <th>列3(宽60%)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td>1</td>
                 <td><a href="https://example.com">链接1</a></td>
-                <td><a href="https://example.com">链接2</a></td>
-                <td><a href="https://example.com">链接3</a></td>
+               <td>
+                   <ol>
+                        <li>有序</li>
+                        <li>有序</li>
+                    </ol>
+                </td>
             </tr>
             <tr>
-                <td><a href="https://example.com">链接4</a></td>
-                <td><a href="https://example.com">链接5</a></td>
-                <td><a href="https://example.com">链接6</a></td>
+                <td>2</td>
+                <td>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</td>
+                <td>
+                    <ul>
+                        <li>无序</li>
+                        <li>无序</li>
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

@@ -5,6 +5,10 @@ multilingual = false
 src = "src"
 title = "星君的书"
 
+[dependencies]
+rand = "0.8"
+
+
 
 [preprocessor.toc]
 command = "mdbook-toc"

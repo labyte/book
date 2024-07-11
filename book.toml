@@ -24,7 +24,7 @@ plantuml-cmd="java -jar /opt/plantuml.jar"
 
 [output.html]
 mathjax-support = true
-additional-css = ["theme/pagetoc.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
+additional-css = ["theme/pagetoc.css","theme/css/table.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
 additional-js = ["theme/pagetoc.js","assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js"]
 git-repository-url = "https://github.com/labyte/book"
 git-repository-icon = "fa-github"

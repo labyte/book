@@ -17,6 +17,7 @@
     border: 1px solid #d0d7de;
     padding: 12px;
     text-align: left;
+    vertical-align: top; 
 }
 
 .excel-table th {

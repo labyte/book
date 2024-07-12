@@ -111,6 +111,8 @@
   - [Visual Studio Code](softs/visual-studio-code.md)
   - [JetBrains Rider](softs/jetbrains-rider.md)
   - [Typora](softs/typora.md)
+  - [Git](softs/git.md)
+  - [Vim](softs/vim.md)
 
 # Rust语言
 

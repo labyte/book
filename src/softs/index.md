@@ -51,15 +51,13 @@
 }
 
 .excel-table th:nth-child(2), .excel-table td:nth-child(2) {
-    width: 20%;
+    width: 30%;
 }
 .excel-table th:nth-child(3), .excel-table td:nth-child(3) {
-    width:40%;
+    width:70%;
 }
 
-.excel-table th:nth-child(4), .excel-table td:nth-child(4) {
-    width: 40%;
-}
+
 
 </style>
 
@@ -75,7 +73,6 @@
             <tr>
                 <th>编号</th>
                 <th>软件</th>
-                <th>图示</th>
                 <th>说明</th>
             </tr>
         </thead>
@@ -83,14 +80,12 @@
             <tr>
                 <td>1</td>
                 <td><a href="typora.md">Typora</a></td>
-                <td><iamge ref="" ></td>
                 <td>MarkDown 编辑器，早期开源免费，后期开始收费</td>
             </tr>
             <tr>
                 <td>2</td>
                 <td><a target="_blank" href="https://xournalpp.github.io/">Xournal++</a></td>
-                <td><img  src="image/index/1720776122674.png" ></td>
-                <td>MarkDown 编辑器，早期开源免费，后期开始收费</td>
+                <td>支持数位板的软件，适用于网课等，效果不错<br><br><img  src="image/index/1720776122674.png" ></td>
             </tr>
         </tbody>
     </table>
@@ -104,7 +99,6 @@
             <tr>
                 <th>编号</th>
                 <th>软件</th>
-                <th>图示</th>
                 <th>说明</th>
             </tr>
         </thead>
@@ -112,20 +106,17 @@
             <tr>
                 <td>1</td>
                 <td><a href="visual-studio.md">Visual Studio</a></td>
-                <td><iamge ref="" ></td>
-                <td></td>
+                <td>强大，windwos 端首选</td>
             </tr>
             <tr>
                 <td>2</td>
                 <td><a href="visual-studio-code.md">Visual Studio Code</a></td>
-                <td><iamge ref="" ></td>
-                <td></td>
+                <td>开源免费</td>
             </tr>
              <tr>
                 <td>3</td>
-                <td><a href="etbrains-rider.md">JetBrains Rider</a></td>
-                <td><iamge ref="" ></td>
-                <td></td>
+                <td><a href="jetbrains-rider.md">JetBrains Rider</a></td>
+                <td>付费，需要自己激活</td>
             </tr>
         </tbody>
     </table>

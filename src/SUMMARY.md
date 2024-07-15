@@ -2,27 +2,19 @@
 
 [首页](Introduction.md)
 
-# CSharp
-
 - [WPF](c-sharp/wpf/index.md)
-
   - [ListBox](c-sharp/wpf/listbox.md)
   - [ListView](c-sharp/wpf/listview.md)
-  - [元素焦点](c-sharp/wpf/元素焦点.md)
-  - [剪切板](c-sharp/wpf/剪切板.md)
   - [项目版本号](c-sharp/wpf/项目版本号.md)
   - [资源引用](c-sharp/wpf/资源引用.md)
 - [WinForm]()
-
   - [托盘开发](c-sharp/winform/tray.md)
 - [Asp.Net](c-sharp/aspnet/index.md)
-
   - [SignalR](c-sharp/aspnet/signalr.md)
   - [证书](c-sharp/aspnet/证书.md)
   - [Jwt](c-sharp/aspnet/jwt.md)
   - [BootstrapBlazor](c-sharp/aspnet/bootstrap-blazor.md)
 - [Packges](c-sharp/packges/index.md)
-
   - [Messagepack](c-sharp/packges/messagepack.md)
   - [MemoryPack](c-sharp/packges/memorypack.md)
     - [MemoryPack 基础知识](c-sharp/packges/memorypack-1.md)
@@ -45,23 +37,15 @@
 
 ---
 
-
-# Python
-
 - [Python](python/python.md)
-
-# 群晖
-
+---
 - [群晖](群晖/群晖使用Putty.md)
-
-# 数据库
-
+---
 - [SQL Server](database/sql-server.md)
 - [MySql](database/my-sql.md)
 - [Redis](database/redis.md)
 - [MongoDb](database/mongodb.md)
-
-# 游戏仿真
+---
 
 - [Unity]()
   - [UI](unity/ui.md)
@@ -99,12 +83,13 @@
     - [发布安卓平台](unity/build-android.md)
     - [发布IOS平台](unity/build-ios.md)
 
-# Windows系统和软件
-
+---
 - [Windows系统](windows/index.md)
 
   - [批处理](windows/bat-file.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
+
+---
 - [软件](softs/index.md)
 
   - [Visual Studio](softs/visual-studio.md)
@@ -114,11 +99,9 @@
   - [Git](softs/git.md)
   - [Vim](softs/vim.md)
 
-# Rust语言
-
+---
 - [Rust]()
 
   - [mdBook](rust/mdbook.md)
-
-
+---
 - [Markdown](markdown.md)

@@ -169,7 +169,7 @@
 
 ### 通过代码转换
 
-在 [图标网站](https://www.unicode.org/emoji/charts/full-emoji-list.html) 上查找要使用的图标，例子图标的 **Unicode** 编码为 U+1F34E，则与此表情对应的 CODE 为 1F34E (舍弃前面的 U+)。我们只需在 Markdown 文档中输入 &#x1F34E; 即可显示为 。
+在 [图标网站](https://www.unicode.org/emoji/charts/full-emoji-list.html) 上查找要使用的图标，如 &#x1F34E; 的 **Unicode** 编码为 `U+1F34E`，则与此表情对应的 code 为 `1F34E`，在 Markdown 文档中对应的代码为 `&#x{code};`  既在 Markdown 文档中输入 `&#x1F34E;` 即可显示为 &#x1F34E;。
 
 ### 常用图标
 

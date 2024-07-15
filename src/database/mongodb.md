@@ -45,6 +45,26 @@ db.system.users.find()
 show users
 ```
 
+
+## 连接字符串
+
+当在Web程序中配置MongoDB的连接字符串，有多种方式，简单的记录两种
+
+**第一种**： 连接本机上的 **MongoDB** ,适用于服务程序和数据库在同一个主机
+
+```txt
+"ConnectionString": "mongodb://localhost:27017/数据库名称?authSource=admin",
+```
+
+**第二种**： 连接非本机上的 **MongoDB** ,使用密码连接
+
+```txt
+"ConnectionString": "mongodb://userName:password@domain:27017/数据库名称?authSource=admin",
+```
+
+**authSource=admin 说明**：认证源属于管理员级别
+
+
 ## 过滤器
 
 当使用 MongoDB C# 驱动程序进行数据查询和操作时，可以通过 Builders`<T>`.Filter 构造过滤器（Filter），它们用于定义查询条件或者更新/删除操作的条件。以下是一些常用的过滤器方法及其用法解释：

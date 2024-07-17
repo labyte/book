@@ -237,7 +237,7 @@
 **代码** 
 
 
-```
+```csharp
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.Extras;
@@ -363,9 +363,22 @@ namespace LFramework
 
 ## 7 问题汇总
 
-### 7.1 HTC VIVE 定位器更新固件后闪烁红灯
+### 世界坐标中的Canvas在相机距离改变后被遮挡
+图中的箭头是个UI，当相机离它近时，它正常显示在黄色标签的前面，如下图
 
-#### 7.1.1 官方回复（失败）
+![1721199092376](image/SteamVR/1721199092376.png)
+
+当相机拉远点时，箭头被标签挡住了
+
+![1721199097929](image/SteamVR/1721199097929.png)
+
+解决办法：将Cavans的Order in Layer 设置为1，要大于0
+
+![1721199106664](image/SteamVR/1721199106664.png)
+
+### HTC VIVE 定位器更新固件后闪烁红灯
+
+**官方回复（失败）**
 
 首先联系官方，根据回复指导操作后，未解决问题，以下是官方的回复：
 
@@ -395,7 +408,7 @@ namespace LFramework
 11. 等候约 1分钟，然后拔下USB线缆。
 ```
 
-#### 7.1.2 网友方法(成功)
+**网友方法(成功)**
 
 注意：若修复成功，定位器会显示一个感叹号，提示更新，千万不要更新，就是因为更新出现的问题，我们的操作就是回退固件。
 {.is-warning}
@@ -441,17 +454,17 @@ lighthouse_tx_htc_2_0-244-2016-03-12.bin
 
 - 若使用两个定位器（无线连接）：BC模式
 
-### 7.2 URP渲染模式发布后无法显示传送位置
+### URP渲染模式发布后无法显示传送位置
 
 需要手动替换下 DestinationReticle 的 材质，具体见 Teleporting章节
 
-### 7.3 发布后手柄无响应
+### 发布后手柄无响应
 
 1. 发布位置不能有中文
 
 2. 按键配置需要替换为默认的配置，操作见 相应章节
 
-### 7.4 左右眼渲染不同，视野模糊
+### 左右眼渲染不同，视野模糊
 
 通过 Edit->ProjectSettings->XR Plug-in Managerment 下的 openvr设置为多通道
 
@@ -459,45 +472,36 @@ lighthouse_tx_htc_2_0-244-2016-03-12.bin
 
 以下是一个解决方案，待测试
 
-https://forum.unity.com/threads/ismatrixvalid-matrix-error-spam-when-splitting-up-steamvr-eyes.425474/
+[https://forum.unity.com/threads/ismatrixvalid-matrix-error-spam-when-splitting-up-steamvr-eyes.425474/](https://forum.unity.com/threads/ismatrixvalid-matrix-error-spam-when-splitting-up-steamvr-eyes.425474/)
 
 新建一个脚本，挂在初始场景上
 
-```
+```csharp
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Management;
 using Valve.VR;
-
 namespace LFramework
 {
-
     public class XRFix : MonoBehaviour
     {
         List<XRDisplaySubsystem> displays = new List<XRDisplaySubsystem>();
-
         private void Awake()
         {
             //StartXR();
             //SteamVR.Initialize();
         }
-
-
         public void StartXR()
         {
-
             XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
             XRGeneralSettings.Instance.Manager.StartSubsystems();
         }
-
         private void Update()
         {
             EnforceStereoTexture();
         }
-
-
         void EnforceStereoTexture()
         {
             displays.Clear();
@@ -513,10 +517,38 @@ namespace LFramework
         }
     }
 }
-
-
 ```
+### 非多样采集的贴图绑定到多样采集器上的错误
 
+版本：untiy 2020.3.40
+
+VR开发
+
+❌错误提示：`A non-multisampled texture being bound to a multisampled sampler. Disabling in order to avoid undefined behavior. Please enable the bindMS flag on the texture.`
+
+**报错说明**：将非多样采集的贴图绑定到多样采集器上，为了避免未知的结果应该禁用它，请激活贴图的bindMS
+
+**报错的原因**：
+
+在进行VR开发时，场景结构是一个原始场景一直存在，通过Addtive的方式加载其他场景，但是第二次加载的时候就会报错，信息显示是SteamVR_loadlevel的脚本中调用了Shader.WarmupAllShaders();
+
+![1721198690359](image/SteamVR/1721198690359.png)
+
+
+查找资料： 1 设置抗锯齿（MSAA）导致的，网上说的是要关闭，但是我关闭后，第一次就报错
+
+![1721198700183](image/SteamVR/1721198700183.png)
+
+其他资料
+https://docs.unity3d.com/Manual/shader-variant-collections.html
+
+https://github.com/ValveSoftware/unity-xr-plugin/issues/88
+
+https://forum.unity.com/threads/a-non-multisampled-texture-spams-the-console.1143884/
+
+https://blog.csdn.net/u013716859/article/details/124644214
+
+3.目前先注释调这个代码看看
 
 
 

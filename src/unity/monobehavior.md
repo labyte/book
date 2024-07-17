@@ -1,3 +1,65 @@
+<style>
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center; /* 垂直居中 */
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 15px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局 */
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    vertical-align: top; 
+}
+
+.excel-table th {
+    background-color: #f0f3f5;
+    font-weight: bold;
+    text-align: center;
+}
+
+.excel-table tr:nth-child(even), table tr:nth-child(odd) {
+    background-color: transparent; /* 确保所有行背景色一致 */
+}
+
+.excel-table tr:hover {
+    background-color: inherit;
+}
+/*
+
+.excel-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.excel-table tr:hover {
+    background-color: #e9e9e9;
+}
+*/
+.excel-table th:nth-child(1), .excel-table td:nth-child(1) {
+    width: 18%;
+}
+.excel-table th:nth-child(2), .excel-table td:nth-child(2) {
+    width: 18%;
+}
+.excel-table th:nth-child(3), .excel-table td:nth-child(3) {
+    width: 18%;
+}
+.excel-table th:nth-child(4), .excel-table td:nth-child(4) {
+    width: 18%;
+}
+.excel-table th:nth-child(5), .excel-table td:nth-child(5) {
+    width: 28%;
+}
+
+</style>
 # Awake
 
 ```
@@ -194,14 +256,36 @@ public class Test:MonoBehaviour
 - 游戏对象需要显示
 - 两个对象至少有个挂载 `刚体(Rigidbody)`  组件，两个都挂也会触发
 - 两个对象都要挂载 `Collider` 组件,至少有个设置IsTrigger = true
-- 两个对象可以挂载多个 Collider，但是不能同时存在 IsTrigger = false 的 Collider
+- 两个对象可以挂载多个 Collider，但是不能同时存在 `IsTrigger = false`的 Collider (A/B上不能同时存在) 
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>A <br>Collider数量</th>
+                <th>A 勾选IsTrigger数量</th>
+                <th>B <br>Collider数量</th>
+                <th>B 勾选IsTrigger数量</th>
+                <th>触发结果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td><td>1</td> <td>1</td><td>1</td>
+                <td>触发 <b>1</b> 次Enter/Exit</td>
+            </tr>
+            <tr>
+                <td>2</td><td>2</td> <td>1</td><td>1</td>
+                <td>触发 <b>2</b> 次Enter/Exit</td>
+            </tr> <tr>
+                <td>1</td><td>1</td> <td>2</td><td>2</td>
+                <td>触发 <b>2</b> 次Enter/Exit</td>
+            </tr> <tr>
+                <td>2</td><td>2</td> <td>2</td><td>2</td>
+                <td>触发 <b>4</b> 次Enter/Exit</td>
+        </tbody>
+    </table>
+</div>
 
-| 组件挂载情况  |对象1(都勾选IsTrigger)   |对象2(都勾选IsTrigger)    | 效果  |
-|---|---|---|---|
-|  1 | Collider x1 |  Collider x1  |  触发1次 Enter/Exit |
-| 2 | Collider x2 |  Collider x1  |  触发2次 Enter/Exit |
-| 3 | Collider x1 |  Collider x2  |  触发2次 Enter/Exit |
-| 4 | Collider x2 |  Collider x2  |  触发4次 Enter/Exit |
 
 ## 注意事项
 

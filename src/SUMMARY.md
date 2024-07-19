@@ -23,25 +23,6 @@
   - [证书](c-sharp/aspnet/证书.md)
   - [Jwt](c-sharp/aspnet/jwt.md)
   - [BootstrapBlazor](c-sharp/aspnet/bootstrap-blazor.md)
-
----
-
-- [运维](运维/运维.md)
-  - [阿里云](运维/阿里云/阿里云.md "阿里云")
-  - [自建服务器](运维/自建服务器/自建服务器.md "自建服务器")
-  - [Nginx](运维/nginx/nginx.md "Nginx")
-  - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
-
----
-
-- [Python](python/python.md)
----
-- [群晖](群晖/群晖使用Putty.md)
----
-- [SQL Server](database/sql-server.md)
-- [MySql](database/my-sql.md)
-- [Redis](database/redis.md)
-- [MongoDb](database/mongodb.md)
 ---
 
 - [Unity](unity/unity.md)
@@ -73,6 +54,29 @@
   - [包：PDF插件](unity/packages/PDF插件.md)
   - [IDE：VS Code](unity/ide-vscode.md)
 ---
+- [Rust](rust/rust.md)
+
+  - [mdBook](rust/mdbook.md)
+---
+- [Python](python/python.md)
+---
+- [数据库]()
+  - [SQL Server](database/sql-server.md)
+  - [MySql](database/my-sql.md)
+  - [Redis](database/redis.md)
+  - [MongoDb](database/mongodb.md)
+---
+- [运维](运维/运维.md)
+  - [阿里云](运维/阿里云/阿里云.md "阿里云")
+  - [自建服务器](运维/自建服务器/自建服务器.md "自建服务器")
+  - [Nginx](运维/nginx/nginx.md "Nginx")
+  - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
+
+---
+- [群晖](群晖/群晖使用Putty.md)
+
+---
+
 - [Windows系统](windows/index.md)
 
   - [批处理](windows/bat-file.md)
@@ -88,9 +92,5 @@
   - [Git](softs/git.md)
   - [Vim](softs/vim.md)
 
----
-- [Rust]()
-
-  - [mdBook](rust/mdbook.md)
 ---
 - [Markdown](markdown.md)

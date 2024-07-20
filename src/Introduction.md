@@ -100,7 +100,21 @@
             <tr>
                 <td>1</td>
                 <td><a  target="_blank"  href="https://zh.go-to-library.sk/">Z-Library</a></td>
-                <td>全球最大的网上图书管</td>
+                <td>
+                    通过邮箱发送到设备Kindle：
+                    <ul>
+                        <li>先从网站发送到QQ邮箱，从QQ邮箱发送到亚马逊邮箱，注意qq邮箱收到验证确认后，需要确认（自动发过去了）</li>
+                        <li>在https://www.amazon.cn/hz/mycd/digital-console/contentlist/pdocs/dateDsc/上查看是否发送过去了，如果存在，点击【发送到设备】</li>
+                        <li>支持格式：EPUB/MOBI/azw3</li>
+                        <li>文件小于20M</li>
+                    </ul>
+                    <hr>
+                    拷贝到设备Kindle：
+                    <ul>
+                        <li>不支持 <b>EPUB</b> 格式,支持<b>azw3</b> 格式</li>
+                        <li>不限制大小</li>
+                    </ul>
+                </td>
             </tr>
               <tr>
                 <td>2</td>

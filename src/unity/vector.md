@@ -1,5 +1,6 @@
-# 1 基础知识
-## 1.1 向量叉积
+# 向量
+## 1 基础知识
+### 1.1 向量叉积
 
 若有向量a、b 则向量的叉积为：
 
@@ -22,7 +23,7 @@ Unity 对应函数:
  **二维坐标中** 
 - 叉积等于由向量A和向量B构成的平行四边形的面积
 
-## 1.2 向量点积
+### 1.2 向量点积
 若有向量a、b 则向量的点积为：
 
 数学定义：
@@ -42,7 +43,7 @@ public static float Dot(Vector3 lhs, Vector3 rhs);
 
 
 
-## 1.3 弧度和度
+### 1.3 弧度和度
 > 通常我们说两个向量的角度为30度，30指的是 **度** ，
 > 弧度：180度对应的 **弧度** 是 Π，Unity里为常量： UnityEngine.Mathf.PI
 - Unity里使用向量的方法都是使用弧度计算，而我们通常配置都是使用度（度在描述时更形象，一圈就是360度），所以需要将度转换为弧度
@@ -59,10 +60,10 @@ var v = Mathf.Sin(30*Mathf.Deg2Rad)
 ```
 
 
-# 2 常用函数
+## 2 常用函数
 
 
-## 2.1 两向量的夹角
+### 2.1 两向量的夹角
 
 ```
 var cosValue= Vector3.Dot(player.forward.normalized, (target.position - player.position).normalized);
@@ -71,14 +72,14 @@ var deg = rad * Mathf.Rad2Deg;//弧度转度
 
 ```
 
-## 2.2 判断目标点相对玩家的方位
+### 2.2 判断目标点相对玩家的方位
 
 设:
 
 - 玩家为： player(Transform)
 - 目标为： target(Transform)
 
-### 2.2.1 前后判断
+#### 2.2.1 前后判断
 - 原理说明：通过玩家正前方向量(forward)与玩家到目标构成的向量之间的夹角来判断，>90度（余玄值<0）在后方，<90度 (余玄值>0) 在前方
 - 使用知识：点乘
 
@@ -99,7 +100,7 @@ var value = Vector3.Dot(player.forward.normalized, (target.position - player.pos
 
 ```
 
-### 2.2.2 左右判断
+#### 2.2.2 左右判断
 
 与“前后判断”原理相同，仅需要使用 `player.right` 进行计算即可
 ```
@@ -110,7 +111,7 @@ var value = Vector3.Dot(player.right.normalized, (target.position - player.posit
 
 ```
 
-### 2.2.3 上下判断
+#### 2.2.3 上下判断
 
 与“前后判断”原理相同，仅需要使用 `player.up` 进行计算即可
 ```
@@ -123,8 +124,8 @@ var value = Vector3.Dot(player.up.normalized, (target.position - player.position
 
 
 
-# 3 需求案例
-## 3.1 判断对象是否在玩家视野内
+## 3 需求案例
+### 3.1 判断对象是否在玩家视野内
 
  **分析** 
 - 视野是以相机为起点的一个圆锥体
@@ -178,7 +179,7 @@ private bool Check(Transform player, int filedView)
 
 ```
 
-## 3.2 怪物看向玩家
+### 3.2 怪物看向玩家
 
 
 > 要点：控制怪物仅围绕Y轴旋转，否则怪物会倾斜
@@ -197,7 +198,7 @@ private void lookat(Transform self, Transform target)
     }
 
 ```
-## 3.3 VR中在玩家面前显示UI
+### 3.3 VR中在玩家面前显示UI
 
 **分析** 
 - 一个位置坐标 + 一个向量 = 从这个位置，以向量方向移动向量模的距离后的新的位置点

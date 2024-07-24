@@ -1,8 +1,6 @@
-# 1 组件
-> 组件介绍
+# Timeline
 
-
-## 1.1 PlayableDirector
+## PlayableDirector
 > 导演，挂在场景游戏对象上的一个组件
 
 -  **Playable**  ：Timeline编辑的资源，类型为 “TimelineAsset”
@@ -13,39 +11,39 @@
 -  **Bindings**  ：绑定的轨道数据
 
 
-## 1.2 Timeline资源(TimelineAsset)
+## TimelineAsset
 > 编辑时间线数据时，存储的数据
 
-- 获取轨道集合
+获取轨道集合
 
-```
+```csharp
 timelineAsset.GetOutputTracks()
 ```
 
-- 通过轨道获取timeline资源( `track.timelineAsset` )，但是可能返回null，导致异常，可能的原因是复制timeline导致的，如果出现异常，可以通过 遍历打印出每个轨道的名字来检测
+通过轨道获取timeline资源( `track.timelineAsset` )，但是可能返回null，导致异常，可能的原因是复制timeline导致的，如果出现异常，可以通过 遍历打印出每个轨道的名字来检测
 
-```
-        public TimelineAsset timelineAsset
+```csharp
+public TimelineAsset timelineAsset
+{
+    get
+    {
+        var node = this;
+        while (node != null)
         {
-            get
-            {
-                var node = this;
-                while (node != null)
-                {
-                    if (node.parent == null)
-                        return null;
-                    var seq = node.parent as TimelineAsset;
-                    if (seq != null)
-                        return seq;
-                    node = node.parent as TrackAsset;
-                }
+            if (node.parent == null)
                 return null;
-            }
+            var seq = node.parent as TimelineAsset;
+            if (seq != null)
+                return seq;
+            node = node.parent as TrackAsset;
         }
+        return null;
+    }
+}
 ```
 
 
-## 1.3 轨道(TrackAsset)
+## TrackAsset(轨道)
 > 编辑时间线数据时，存储的数据
 
 -  **name** :轨道名称
@@ -57,28 +55,28 @@ timelineAsset.GetOutputTracks()
 -  **parent（PlayableAsset）**  ：轨道的父节点（轨道的拥有者），轨道是可以嵌套的， TrackGroup 可以包含其他 轨道，所有轨道的最终父节点应为 TimelineAsset，即我们编辑的资源
 
 -  **clips（TimelineClip[]）**  ：轨道片段数组
--  **获取轨道绑定的对象**  
+
+获取轨道绑定的对象
+
+```csharp
+var bind = director.GetGenericBinding(track);//需要使用Director来获取，  得到的是一个UnityEngine.Object  
 
 ```
- var bind = director.GetGenericBinding(track);//需要使用Director来获取，  得到的是一个UnityEngine.Object  
 
-```
+重写CreateTrackMixer
 
--  **重写CreateTrackMixer**  
-
-```
+```csharp
  public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
  {
     //graph: timelineasset构建的图
     //go: 挂载 director 的游戏对象
     //inputCount: 片段数量
-
      return base.CreateTrackMixer(graph, go, inputCount);
  }
 ```
 
-## 1.4 混合器的使用
-### 1.4.1 作用描述
+## 混合器
+### 描述
 
 根据片段的权重来控制某个参数的百分比，可用于解决以下需求：
 
@@ -89,116 +87,119 @@ timelineAsset.GetOutputTracks()
 （3）解决监听播放一个片段结束问题（这里可以避免因暂停timeline导致误认为播发结束的问题）
 
 
-### 1.4.2 淡进淡出案例
+### 淡进淡出案例
 
 使用 `CanvasGroup` 组件来实现效果
 
-```
-
-    public class CanvasGroupTrack : TrackAsset
+```csharp
+public class CanvasGroupTrack : TrackAsset
+{
+    public float easeduration = 0.5f;
+    public bool useSettingForAllClips;
+    public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
     {
-        public float easeduration = 0.5f;
-        public bool useSettingForAllClips;
-        public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
-        {
-            if (useSettingForAllClips) UpdateEaseDuration();
-            return ScriptPlayable<CanvasGroupMixerBehaviour>.Create(graph, inputCount);
-        }
-
-        private void UpdateEaseDuration()
-        {
-            foreach (var clip in GetClips())
-            {
-                clip.easeInDuration = easeduration;
-                clip.easeOutDuration = easeduration;
-            }
-        }
+        //graph: timelineasset构建的图
+        //go: 挂载 director 的游戏对象
+        //inputCount: 片段数量
+        if (useSettingForAllClips) UpdateEaseDuration();
+        return ScriptPlayable<CanvasGroupMixerBehaviour>.Create(graph, inputCount);
     }
 
-
-     /// <summary>
-  /// 注意事项：
-  /// 1 gameObject.activeSelf 必须为true 否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
-  /// 2 当淡出后，必须设置canvasgroup 不可交互，否则会挡住其他的交互
-  /// </summary>
-    public class CanvasGroupMixerBehaviour : PlayableBehaviour
+    private void UpdateEaseDuration()
     {
-        CanvasGroup canvasGroup;
-
-        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+        foreach (var clip in GetClips())
         {
+            clip.easeInDuration = easeduration;
+            clip.easeOutDuration = easeduration;
+        }
+    }
+}
+
+
+/// <summary>
+/// 注意事项：
+/// 1 gameObject.activeSelf 必须为true 否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
+/// 2 当淡出后，必须设置canvasgroup 不可交互，否则会挡住其他的交互
+/// </summary>
+public class CanvasGroupMixerBehaviour : PlayableBehaviour
+{
+    CanvasGroup canvasGroup;
+
+    public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+    {
+        if (canvasGroup == null)
+        {
+            MonoBehaviour bind = playerData as MonoBehaviour;
+            if (bind == null) return;
+            if (bind.gameObject.activeSelf == false)
+            {
+                bind.gameObject
+                    .SetActive(true); //注意：滚到绑定的对象必须设置为 active 状态，否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
+            }
+
+            canvasGroup = bind.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
             {
-                MonoBehaviour bind = playerData as MonoBehaviour;
-                if (bind == null) return;
-                if (bind.gameObject.activeSelf == false)
-                {
-                    bind.gameObject
-                        .SetActive(true); //注意：滚到绑定的对象必须设置为 active 状态，否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
-                }
-
-                canvasGroup = bind.GetComponent<CanvasGroup>();
-                if (canvasGroup == null)
-                {
-                    Debug.LogWarning("CanvasGroupMixerBehaviour：轨道使用淡进淡出效果，但是缺少 CanvasGroup组件");
-                    return;
-                }
-            }
-
-            int inputCount = playable.GetInputCount(); //这是当前轨道上所有片段的数量，注意不是当前帧
-
-            //通过每个片段当前的权重和来设置 canvasGroup alpha值
-            float inputWeight = 0;
-            for (int i = 0; i < inputCount; i++)
-            {
-                float curWeight = playable.GetInputWeight(i);
-                if (curWeight > 0)
-                    inputWeight += curWeight;
-            }
-            canvasGroup.alpha = inputWeight;
-            var b = inputWeight > 0.05f; //设置使用0.05的阈值来设定而非0，避免极限情况的出现
-            if (canvasGroup.blocksRaycasts != b)
-            {
-                canvasGroup.blocksRaycasts = b;
+                Debug.LogWarning("CanvasGroupMixerBehaviour：轨道使用淡进淡出效果，但是缺少 CanvasGroup组件");
+                return;
             }
         }
-    }
 
+        int inputCount = playable.GetInputCount(); //这是当前轨道上所有片段的数量，注意不是当前帧
+
+        //通过每个片段当前的权重和来设置 canvasGroup alpha值
+        float inputWeight = 0;
+        for (int i = 0; i < inputCount; i++)
+        {
+            float curWeight = playable.GetInputWeight(i);
+            if (curWeight > 0)
+                inputWeight += curWeight;
+        }
+        canvasGroup.alpha = inputWeight;
+        var b = inputWeight > 0.05f; //设置使用0.05的阈值来设定而非0，避免极限情况的出现
+        if (canvasGroup.blocksRaycasts != b)
+        {
+            canvasGroup.blocksRaycasts = b;
+        }
+    }
+}
 ```
 
-注意事项，在这个案例中，场景中对轨道绑定的CanvasGroup对象默认为“未激活”状态，每次运行的时候报错，最后在首次给CanvasGroup赋值时，将对象激活显示出来，解决问题
+**注意事项**：在这个案例中，场景中对轨道绑定的CanvasGroup对象默认为“未激活”状态，每次运行的时候报错，最后在首次给CanvasGroup赋值时，将对象激活显示出来，解决问题。
 
-![输入图片说明](../../assets/unity/Snipaste_2023-06-02_10-42-08.png)
+![1721813944567](image/timeline/1721813944567.png)
 
-<br>
 
-# 2 扩展功能
-## 2.1  复制Timeline资源，解决绑定丢失
+## 扩展功能
+### 复制Timeline资源，解决绑定丢失
 
 已在UKit中添加了工具处理，下面可作为原理参照。
 
 
  _ ** 应用场景：复制已经配置好的TimelineA,改为TimelineB,发现B上的轨道绑定丢失 **_ 
 
-- 配置 **TimelineA** 
-![输入图片说明](../../assets/unity/20230209-01.png)
+配置 **TimelineA** 
 
-- 在场景中复制TimelineA，改为 TimelineB
-![输入图片说明](../../assets/Unity/20230209-02.png)
+![1721813994579](image/timeline/1721813994579.png)
 
-- 复制资源 TimelineA，改为 TimelineB，并托给场景中 TimelineB 的Director,此时发现绑定丢失
-![输入图片说明](../../assets/unity/20230209-03.png)
+在场景中复制TimelineA，改为 TimelineB
 
-- 观看下图分析，它隐藏绑定了A的，且绑定正确，B上的丢失了，我们就要去找到这部分配置，修改，使用Notepad++工具
-![输入图片说明](../../assets/Unity/20230209-4.png)
+![1721814013936](image/timeline/1721814013936.png)
 
-- 通过  **TimelineA.playable.meta ** 文件找到 TimelineA 资源文件的 guid:56b3a74b657957d4cae6622c4a199001
-- 通过  **TimelineB.playable.meta ** 文件找到 TimelineB 资源文件的 guid:c4cdb66148603ca4080d5eeb2b49d526
+复制资源 TimelineA，改为 TimelineB，并托给场景中 TimelineB 的Director,此时发现绑定丢失
 
-- 打开 TimelineAssetCopyTest.unity 场景文件，然后找到 c4cdb66148603ca4080d5eeb2b49d526的位置
+![1721814028802](image/timeline/1721814028802.png)
 
-![输入图片说明](../../assets/20230209-5.png)
+观看下图分析，它隐藏绑定了A的，且绑定正确，B上的丢失了，我们就要去找到这部分配置，修改，使用Notepad++工具
 
+![1721814045040](image/timeline/1721814045040.png)
+
+- 通过  **TimelineA.playable.meta** 文件找到 TimelineA 资源文件的 `guid:56b3a74b657957d4cae6622c4a199001`
+- 通过  **TimelineB.playable.meta** 文件找到 TimelineB 资源文件的 `guid:c4cdb66148603ca4080d5eeb2b49d526`
+
+- 打开 TimelineAssetCopyTest.unity 场景文件，然后找到 `c4cdb66148603ca4080d5eeb2b49d526的位置`
+
+![1721814094360](image/timeline/1721814094360.png)
 
 
 - 我们只需要将下方的B的 guid 替换上方的A的 guid,并删除下方 fileID 为 0 的绑定，就可以了
@@ -230,32 +231,27 @@ PlayableDirector:
 
 - 改后截图
 
-![输入图片说明](../../assets/Unity/20230209-6.png)
+![1721814115192](image/timeline/1721814115192.png)
 
 
-## 2.2
-
-
-# 3 注意事项
+## 注意事项
 > 开发过程中的经验总结
 
 - 冗余绑定，复制Timeline会将原有的轨道绑定复制过来，需要删除掉不必要的信息
 - Timeline资源最好不要复制
 - 编辑器模式下正常，发布后若出现Timeline不能播放，有可能是某些轨道有问题（track.timelineAsset == null）,编写测试找到轨道，然后新建相同的轨道功能，删除原有轨道
 
-<br>
-
-# 4 问题与解决方案
+## 问题与解决方案
 > 此处的问题解决后会将解决方案加入的注意事项中
  
 
-## 4.1 发布后Timeline不播放
+### 发布后Timeline不播放
 
 - 版本 Unity2020.3.40f
 - Timeline版本是最新的
 - 问题详情：在编辑器模式下，播放正常，发布后Timeline不播放（无论是安卓端还是PC端）
 
-### 第一次处理
+#### 第1次处理
 
 - 删除Timeline的冗余
 - 隐藏其他Timeline
@@ -265,37 +261,36 @@ PlayableDirector:
 2. 有种情况是即使在起始位置，也会有问题，需要再次打开这个场景，然后再发布，不知道到底什么原因
 
 
-### 第二次处理
+#### 第2次处理
 **调试处理过程记录** 
 
 1. 开始发布的是安卓版本，不是很好调试，后面发布PC端的 Debug 版本来查看下报错信息
 
 2. 报错信息是TimelinePlayable(插件内置类)中的 下面165行 存在 null 引用，判断是 timelineasset 为 null
 
-
-![输入图片说明](../../assets/7.png)
+![1721814195696](image/timeline/1721814195696.png)
 
 3. 从截图看出是某个 **Track** 的 **TimelineAsset** 为空， TimelineAseet 是创建的timeline资源
 
 4. 现在就是要找到是哪个轨道的 TimelineAsset 为 null,编写测试代码
 
-![输入图片说明](../../assets/unity/8.png)
+![1721814204519](image/timeline/1721814204519.png)
 
 第一行是打印测试的名字，第二行如果为空会报错
 
 5. 打包运行后日志如下，是一个  **Teach_模式选择开关高亮** 的轨道 为 null,且两个不能播放Timeline的都是因为这个同名的轨道
 
-![输入图片说明](../../assets/Unity/9.png)
+![1721814235064](image/timeline/1721814235064.png)
 
 6. 查看轨道，该轨道是内置的 PlayableTrack, 自己扩展编写的 Asset 和 behaviour
 
 轨道
 
-![输入图片说明](../../assets/unity/10.png)
+![1721814216815](image/timeline/1721814216815.png)
 
 属性
 
-![输入图片说明](../../assets/Unity/11.png)
+![1721814247671](image/timeline/1721814247671.png)
 
 
 7. 检查是否是因为这个轨道有问题引起的，发现其他使用了此轨道的Timelien正常，排除这个原因
@@ -305,7 +300,7 @@ PlayableDirector:
 11. 总结： 有可能是这个轨道创建的时候，脚本未编写完成，导致这个轨道异常
 
 
-### 第三次处理
+#### 第3次处理
 **使用第二次的方式还是为解决，通过调试代码找不到错误轨道** 
 
 通过构建时，勾选 “development build” 得知是在 track.TimelineAsset 获取为空时，出现问题
@@ -313,12 +308,12 @@ PlayableDirector:
 - 当前Timeline上应该有GroupTrack，将组内的轨道拖动到组外，有可能的异常，如果拖到的是异常的轨道，会连带其他正常的轨道一起到组外，需要逐个的尝试
 
 - 逐个的删除轨道，一般也是组内的轨道，若异常会出现图情况
- ![输入图片说明](../../assets/Unity/20230417/11.png)
+
+![1721814267535](image/timeline/1721814267535.png)
 
  错误信息如下
 
 ```
-
 MissingReferenceException: The object of type 'AnimationTrack' has been destroyed but you are still trying to access it.
 Your script should either check if it is null or you should not destroy the object.
 UnityEngine.Object.get_name () (at <c7a29af87eea4c208ef711c9671e7831>:0)
@@ -348,7 +343,7 @@ UnityEngine.GUIUtility:ProcessEvent (int,intptr,bool&)
 
 - Ctr+Z 后如下图所示
 
-![输入图片说明](../../assets/Unity/20230417/12.png)
+![1721814291143](image/timeline/1721814291143.png)
 
 - 总结办法：1. 随意的将轨道在组外和组内拖动，查看是否正常;2. 逐个删除轨道，查看是否异常， 将出现的异常的组轨道以及异常轨道删除重新制作
 

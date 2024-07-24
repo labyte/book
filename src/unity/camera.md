@@ -1,5 +1,5 @@
 
-# Camera组件
+# Camera(相机)
 
 ![1718097515607](image/camera/1718097515607.png)
 

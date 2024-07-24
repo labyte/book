@@ -1,3 +1,5 @@
+#  UI
+
 ## UI边缘锯齿严重
 
 1.没有开启canvas上的抗锯齿选项，project setting里也要开启抗锯齿，选择2x，4x，8x 

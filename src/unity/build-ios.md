@@ -1,4 +1,4 @@
-# Unity 上架 IOS
+# 发布 IOS 平台
 
 [Unity官方文档 - iOS 构建过程详解](https://docs.unity.cn/cn/2021.1/Manual/iphone-BuildProcess.html)
 

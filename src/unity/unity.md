@@ -3,7 +3,7 @@
 ## Enum
 
 ### 自定义特性实现
-1. 定义特性
+定义特性
 
 ```c#
 using UnityEngine;
@@ -13,24 +13,24 @@ using UnityEditor;
 
 namespace EnumTest
 {
-public class EnumFlags : PropertyAttribute
-{
-  public EnumFlags() { }
-}
-
-#if UNITY_EDITOR
-[CustomPropertyDrawer( typeof( EnumFlags ) )]
-public class EnumFlagsPropertyDrawer : PropertyDrawer
-{
-  public override void OnGUI( Rect position, SerializedProperty property, GUIContent label )
+  public class EnumFlags : PropertyAttribute
   {
-    property.intValue = EditorGUI.MaskField( position, label, property.intValue, property.enumNames );
+    public EnumFlags() { }
   }
-}
+
+  #if UNITY_EDITOR
+  [CustomPropertyDrawer( typeof( EnumFlags ) )]
+  public class EnumFlagsPropertyDrawer : PropertyDrawer
+  {
+    public override void OnGUI( Rect position, SerializedProperty property, GUIContent label )
+    {
+      property.intValue = EditorGUI.MaskField( position, label, property.intValue, property.enumNames);
+    }
+  }
 #endif
 }
 ```
-2.  定义枚举，定义枚举需标记1，2，4...,一次2的次方，代码如下：
+定义枚举，定义枚举需标记1，2，4...,一次2的次方，代码如下：
 ```c#
 public enum MyEnum
 {
@@ -40,14 +40,14 @@ public enum MyEnum
 }
 ```
 
-3. 使用特性标记属性面板多选
+使用特性标记属性面板多选
 
 ```c#
 [EnumFlags]
 public MyEnum val;
 ```
 
-4. 判断两个枚举值是否包含相同
+判断两个枚举值是否包含相同
 
 ```c#
 public bool IsSelectEnumType(MyEnum e1, MyEnum e2)

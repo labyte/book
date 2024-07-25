@@ -57,7 +57,9 @@
   - [IDE：VS Code](unity/ide-vscode.md)
 ---
 - [Rust](rust/rust.md)
-
+  - [Tauri](rust/tauri.md)
+  - [Slint](rust/slint.md)
+  - [Iced](rust/iced.md)
   - [mdBook](rust/mdbook.md)
 ---
 - [Python](python/python.md)

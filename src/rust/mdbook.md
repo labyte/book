@@ -146,3 +146,43 @@ additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.m
 ## (1)部署github章节显示空白
 
 1. 在本地测试所有内容正常，部署到Github上后， `csharp` 文件夹下的所有章节都显示空白，将`csharp`改为 `c-sharp` 后显示正常。
+
+
+
+
+## 章节跳转
+
+### 本页跳转
+
+
+```markdown
+[跳转到章节](#chapter-1)
+ 
+...
+ 
+<a name="chapter-1"></a>
+# 章节1
+这里是章节1的内容。
+```
+
+### 跨页跳转
+
+假设 `a.md` 和 `b.md` 在同一个目录下
+
+a内容：
+
+```markdown
+<a name="chapter-1"></a>
+# 章节1
+这里是章节1的内容。
+
+<a name="chapter-2"></a>
+# 章节2
+这里是章节2的内容。
+```
+
+在 `b` 中跳转到 `a` 的章节2
+
+```markdown
+[跳转到 a 的章节2](a.md#chapter-2)
+```

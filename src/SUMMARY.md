@@ -77,7 +77,9 @@
   - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
 
 ---
-- [群晖](群晖/群晖使用Putty.md)
+- [群晖](synology/synology.md)
+  - [证书](synology/certficate.md)
+  - [Drive](synology/drive.md)
 
 ---
 

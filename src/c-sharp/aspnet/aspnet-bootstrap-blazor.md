@@ -49,3 +49,18 @@ private ListView<VideoCollModel> listView { get; set; }
 //通过对象查询更新内容
 listView.QueryAsync();
 ```
+## 本地化资源缺失错误
+❌ `System.Resources.MissingManifestResourceException”(位于 System.Private.CoreLib.dll 中)`
+
+状态：⚠️**未解决**⚠️
+
+由于当前提示的错误不影响使用，没继续研究。
+
+[组件相关章节](https://www.blazor.zone/localization)
+
+异常通常发生在 .NET 程序无法找到指定的资源文件时。这通常出现在使用本地化、资源文件或卫星程序集的应用程序中。
+
+[ChatGPT 回复](https://chatgpt.com/c/0ac209cd-b5f8-4626-9e15-d807c92c58f0)
+
+
+

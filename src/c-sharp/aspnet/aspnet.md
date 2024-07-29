@@ -1,5 +1,21 @@
 # Asp.Net
 
+## 快速使用
+
+### 页面丢失
+
+当复制一个界面作为一个新的界面时，配置了新的 `@page` ，但是无法路由到此界面，最后新建页面解决，感觉复制页面容易出现Bug，通过新建，把内容复制过来比较靠谱。
+
+### 页面中注入服务
+
+不能通过构造函数注入
+
+服务不加 ? 会有警告
+
+```c#
+[Inject][NotNull] NavigationManager? nav { get; set; }
+```
+
 ## Page
 
 在ASP.NET Core Razor页面上，我们可以执行以下操作来更改默认的基于文件夹的路由：
@@ -19,7 +35,6 @@ public const string Myroute ="/student-list";
 ```
 
 编译时出现错误：`The 'page' directive expects a string surrounded by double quotes.`
-
 
 总结：网上有一些解决办法，但是都比较复杂，没必要使用，就按照标注的使用双引号字符直接编写。
 

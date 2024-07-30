@@ -91,6 +91,7 @@
 ---
 - [软件](softs/index.md)
 
+  - [Excel](softs/excel.md)
   - [Visual Studio](softs/visual-studio.md)
   - [Visual Studio Code](softs/visual-studio-code.md)
   - [JetBrains Rider](softs/jetbrains-rider.md)

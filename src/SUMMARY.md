@@ -60,6 +60,7 @@
   - [Tauri](rust/tauri.md)
   - [Slint](rust/slint.md)
   - [Iced](rust/iced.md)
+  - [ECS](rust/ecs.md)
   - [mdBook](rust/mdbook.md)
 ---
 - [Python](python/python.md)
@@ -69,6 +70,8 @@
   - [MySql](database/my-sql.md)
   - [Redis](database/redis.md)
   - [MongoDb](database/mongodb.md)
+- [消息队列]()
+  - [RabbitMQ](message-queue/rabbitmq.md)
 ---
 - [运维](运维/运维.md)
   - [阿里云](运维/阿里云/阿里云.md "阿里云")

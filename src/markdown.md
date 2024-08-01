@@ -1,3 +1,18 @@
+# Markdown
+
+## 设置字体风格
+
+代码：
+
+```markdown
+> ⚠️ <span style="color:red;font-weight:bold;">这是一条红色粗体的警告信息</span>
+```
+
+显示：
+
+> ⚠️ <span style="color:red;font-weight:bold;">这是一条红色粗体的警告信息</span>
+
+
 ## 表格
 
 嵌入 `Html` 自定义表格（横向拉伸，固定每列的比列，设置为excel样式等）

@@ -144,9 +144,9 @@ Properties.Settings.Default.Save();
                 <td><code>C:\Users\<用户名>\AppData\Local\<公司名>\<应用程序名>\<版本号>\user.config</code></td>
             </tr>
             <tr>
-                <td>修改 <code>App.config</code> 文件</td>
-                <td>有效</td>
-                <td>无效</td>
+                <td>修改 <code>App.config</code> 文件有效</td>
+                <td>✔️</td>
+                <td>❌</td>
             </tr>
              <tr>
                 <td>可读</td>

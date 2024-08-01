@@ -16,6 +16,7 @@
   - [ListView](c-sharp/wpf/listview.md)
   - [项目版本号](c-sharp/wpf/项目版本号.md)
   - [资源引用](c-sharp/wpf/资源引用.md)
+  - [DevExpress](c-sharp/wpf/devexpress.md)
 - [WinForm]()
   - [托盘开发](c-sharp/winform/tray.md)
 - [Asp.Net](c-sharp/aspnet/aspnet.md)

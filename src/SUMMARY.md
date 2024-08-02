@@ -38,9 +38,10 @@
   - [Steam VR](unity/vr/SteamVR.md)
   - [资源优化](unity/优化/资源优化.md)
   - [特殊文件夹](unity/特殊文件夹.md)
-  - [发布Window平台](unity/build-window.md)
-  - [发布安卓平台](unity/build-android.md)
-  - [发布IOS平台](unity/build-ios.md)
+  - [发布 Window 平台](unity/build-window.md)
+  - [发布 WebGL 平台](unity/build-webgl.md)
+  - [发布 安卓 平台](unity/build-android.md)
+  - [发布 IOS 平台](unity/build-ios.md)
   - [包：Sqlite](unity/packages/sqlite.md)
   - [包：StarterAssets](unity/packages/StarterAssets.md)
   - [包：Addressables](unity/packages/Addressables.md)
@@ -79,6 +80,7 @@
   - [自建服务器](运维/自建服务器/自建服务器.md "自建服务器")
   - [Nginx](运维/nginx/nginx.md "Nginx")
   - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
+  - [Npm](运维/npm.md "Npm")
 
 ---
 - [群晖](synology/synology.md)

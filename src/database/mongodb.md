@@ -6,14 +6,11 @@
 
 [Mongosh 文档](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#std-label-mdb-shell-overview)
 
-
 ## 用户管理
-
 
 用户管理需要通过 Mongosh 操作，Mongosh 是嵌入到 MongoDB Compass 中的一个Javascript 运行环境，官方文档没怎么看懂
 
 [官方 用户管理方式](https://www.mongodb.com/zh-cn/docs/mongodb-shell/reference/methods/#user-management-methods)
-
 
 **添加用户**
 
@@ -34,18 +31,18 @@ db.createUser({
 ```javascript
 db.getUsers()
 ```
+
 或者
 
 ```javascript
 db.system.users.find()
 ```
+
 或者
 
 ```javascript
 show users
 ```
-
- 
 
 ## 连接字符串
 
@@ -65,10 +62,9 @@ show users
 
 **authSource=admin 说明**：认证源属于管理员级别
 
-
 ## 过滤器
 
-当使用 MongoDB C# 驱动程序进行数据查询和操作时，可以通过 Builders`<T>`.Filter 构造过滤器（Filter），它们用于定义查询条件或者更新/删除操作的条件。以下是一些常用的过滤器方法及其用法解释：
+当使用 MongoDB C# 驱动程序进行数据查询和操作时，可以通过 Builders `<T>`.Filter 构造过滤器（Filter），它们用于定义查询条件或者更新/删除操作的条件。以下是一些常用的过滤器方法及其用法解释：
 
 ### Eq 方法
 
@@ -123,13 +119,9 @@ var filter = Builders<BsonDocument>.Filter.And(
 这些方法用于创建比较条件的过滤器：
 
 - Gte（greater than or equal）：大于等于
-
 - Gt（greater than）：大于
-
 - Lte（less than or equal）：小于等于
-
 - Lt（less than）：小于
-
 
 ```csharp
 var filter = Builders<BsonDocument>.Filter.Gte("fieldName", value);
@@ -177,7 +169,7 @@ var filter = Builders<BsonDocument>.Filter.AnyIn("interests", new BsonArray { "M
 
 **解释**
 
-Builders`<BsonDocument>`.Filter.AnyIn 方法用于创建一个数组字段的过滤器，该方法接受两个参数：
+Builders `<BsonDocument>`.Filter.AnyIn 方法用于创建一个数组字段的过滤器，该方法接受两个参数：
 
 第一个参数是字段名 "interests"，这是你要进行过滤的数组字段。
 
@@ -235,7 +227,9 @@ using (var session = client.StartSession())
 ```
 
 ## Bson序列化特性
+
 ### BsonIgnoreExtraElements
+
 **类特性描述**：反序列化时用来忽略多余的字段，一般版本兼容需要考虑，低版本的协议需要能够反序列化高版本的内容,否则新版本删除字段，旧版本结构反序列化会出错
 
 ## 时区
@@ -250,11 +244,10 @@ using (var session = client.StartSession())
 
 例如：
 
-``` csharp
+```csharp
 [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
 public DateTime CreateTime{get;set;}
 ```
-
 
 ## 数据库迁移
 
@@ -270,15 +263,13 @@ public DateTime CreateTime{get;set;}
 
 具体步骤如下：
 
-
 ### 安装 MongoDB 数据库工具
 
->注意：我们安装 Mongodb 数据库时，并没有附带安装 mongodb 的命令行工具，需要另外下载
+> 注意：我们安装 Mongodb 数据库时，并没有附带安装 mongodb 的命令行工具，需要另外下载
 
 **1. 下载工具**
 
 - 访问 [MongoDB Command Line Database Tools Download](https://www.mongodb.com/try/download/database-tools)
-
 - 选择适用于你的操作系统（Windows）的安装包进行下载。
 
 **2. 安装工具**
@@ -289,14 +280,9 @@ public DateTime CreateTime{get;set;}
 
 为了在命令提示符中使用 `mongodump` 和 `mongorestore` 命令，需要将 MongoDB 数据库工具的安装路径添加到系统的 PATH 环境变量中：
 
-
-
 - 右键单击“此电脑”或“计算机”图标，然后选择“属性”。
 - 在左侧菜单中选择“高级系统设置”。
 - 在“系统属性”窗口中，点击“环境变量”按钮。
-
-
-
 - 在“系统变量”部分找到并选择 Path 变量，然后点击“编辑”。
 - 在“编辑环境变量”窗口中，点击“新建”，并输入 MongoDB 数据库工具的安装路径，例如 `C:\mongodb-database-tools\bin`。
 - 点击“确定”保存更改。
@@ -304,31 +290,29 @@ public DateTime CreateTime{get;set;}
 **4. 重启命令提示符：**
 
 关闭所有打开的命令提示符窗口，然后重新打开一个新的命令提示符窗口，以确保更改生效。
-  
+
 **5. 验证安装**
 
 打开新的命令提示符窗口，输入以下命令以验证 mongodump 是否可用：
 
-
 ```powershell
 mongodump --version
 ```
-如果命令输出了版本信息，则说明安装和配置成功，现在，可以使用 mongodump 和 mongorestore 命令来备份和恢复 MongoDB 数据库。
 
+如果命令输出了版本信息，则说明安装和配置成功，现在，可以使用 mongodump 和 mongorestore 命令来备份和恢复 MongoDB 数据库。
 
 ### 备份现有数据库
 
 你可以使用 mongodump 工具来创建数据库的备份。以下是命令示例：
 
-
-``` cmd
+```cmd
 mongodump --uri="mongodb://username:password@source_host:port/dbname" --out=/path/to/backup
 ```
+
 这个命令会把 dbname 数据库的所有数据导出到指定路径 /path/to/backup。
 
+### 将备份文件传输到目标服务器
 
-
-###  将备份文件传输到目标服务器
 你可以使用 scp 命令（对于 Linux）或其他文件传输工具（如 SFTP、FTP 等）将备份文件传输到目标服务器：
 
 Windows
@@ -336,10 +320,10 @@ Windows
 通过远程桌面直接拷贝即可。
 
 Linux
+
 ```bash
 scp -r /path/to/backup user@target_host:/path/to/destination
 ```
-
 
 ### 在目标服务器上恢复备份
 
@@ -349,13 +333,12 @@ scp -r /path/to/backup user@target_host:/path/to/destination
 mongorestore --uri="mongodb://username:password@target_host:port/dbname" /path/to/destination/backup
 ```
 
-
-### 异常处理   
+### 异常处理
 
 SASL（Simple Authentication and Security Layer）错误通常与身份验证和安全相关，特别是在连接到 MongoDB 时使用用户名和密码进行身份验证时。为了排查和解决这个问题，请按照以下步骤操作：
 
 **1. 检查连接字符串**
-   
+
 确保你的连接字符串格式正确，包括用户名、密码、主机和端口，例如：
 
 ```bash
@@ -375,6 +358,7 @@ mongodb://username:password@source_host:port/dbname
 ```bash
 mongodb://username:pa%40ss%3Aword%23123@source_host:port/dbname
 ```
+
 **3. 使用 --authenticationDatabase 选项**
 
 如果用户名和密码属于 admin 数据库（或其他非目标数据库），需要指定 --authenticationDatabase 选项。例如：
@@ -385,6 +369,7 @@ mongodb://username:pa%40ss%3Aword%23123@source_host:port/dbname
 mongodump --uri="mongodb://username:password@source_host:27017/dbname" 
 --authenticationDatabase="admin" --out="C:\path\to\backup"
 ```
+
 恢复数据库：
 
 ```bash
@@ -395,7 +380,6 @@ mongorestore --uri="mongodb://username:password@target_host:27017/dbname" --auth
 
 MongoDB 3.0 及以上版本默认使用 SCRAM-SHA-1 进行身份验证，MongoDB 4.0 及以上版本默认使用 SCRAM-SHA-256。如果你的 MongoDB 服务器配置了不同的身份验证机制，需要确保客户端也支持该机制。
 
-
 ### 其他注意事项
 
 **确保版本兼容性**：确保源 MongoDB 服务器和目标 MongoDB 服务器的版本兼容。如果版本差异过大，可能需要进行数据格式的转换。
@@ -405,9 +389,31 @@ MongoDB 3.0 及以上版本默认使用 SCRAM-SHA-1 进行身份验证，MongoDB
 **安全性**：在传输敏感数据时，请确保使用安全的传输协议和方法。
 
 ### 使用 MongoDB Atlas
+
 如果你使用的是 MongoDB Atlas，MongoDB 官方提供了一些迁移工具，如 mongomirror，可以帮助你将自托管的 MongoDB 数据库迁移到 Atlas 上。这些工具可以实现实时数据同步和迁移。
 
 ### 在线迁移
+
 如果你需要在迁移过程中保持数据库的高可用性，可以考虑使用 MongoDB 的副本集（replica set）来进行无缝迁移。这个方法更为复杂，但可以确保在迁移过程中数据的持续可用。
 
+## Windows 账户问题
 
+使用 windwos 账户A 安装 MongoDB，切换到 windows 账户B 通过localhost:27017 来访问可能失败
+
+这通常与文件和服务的权限设置有关。以下是详细的解决方法：
+
+1. 为账户B授予MongoDB安装目录的访问权限
+   - 打开 MongoDB 安装目录（通常是 C:\Program Files\MongoDB\Server\<version>\）。
+   - 右键点击安装目录，选择“属性”。
+   - 转到“安全”选项卡，点击“编辑”按钮。
+   - 点击“添加”按钮，输入账户B的用户名，然后点击“检查名称”确认。
+   - 为账户B授予“读取和运行”、“列出文件夹内容”、“读取”和其他必要的权限。
+   - 点击“应用”并保存更改。
+2. 配置MongoDB服务的权限（重启即可）
+   - 打开“服务”窗口（按 Win + R，输入 services.msc，然后按 Enter）。
+   - 找到 MongoDB 服务，右键点击选择“属性”。
+   - 转到“登录”选项卡。
+   - 选择“此账户”，然后输入账户A的用户名和密码。
+   - 点击“应用”并重启MongoDB服务。
+
+**备注：MongoDBCompass 的安装是在账户目录下：`C:\Users\XXX\AppData\Local\MongoDBCompass`**

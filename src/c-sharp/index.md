@@ -52,6 +52,7 @@
 # CSharp
 
 ## 应用程序设置（Settings.settings）
+
 在WPF、Winform、Web项目中都有应用程序设置，以下以WPF为例。
 
 **创建和打开配置文件**
@@ -67,7 +68,6 @@
 * **范围**：应用程序和用户
 * **值**：默认值
 
-
 程序发布后，设置的数据存储在：`程序集.exe.config` 文件中，如你的程序集为 `MyTool`，对应的文件名为：`MyTool.exe.config`，内容如下：
 
 ```xml
@@ -78,14 +78,14 @@
         <MyTool.Properties.Settings>
             <setting name="Number" serializeAs="String">
             <value>1</value>
-            </setting>      
+            </setting>    
         </MyTool.Properties.Settings>
     </userSettings>
     <applicationSettings>
     <MyTool.Properties.Settings>
         <setting name="Count" serializeAs="String">
         <value>10</value>
-        </setting>     
+        </setting>   
     </MyTool.Properties.Settings>
     </applicationSettings>
 </configuration>
@@ -103,9 +103,7 @@ Windows XP: C:\Documents and Settings\<用户名>\Local Settings\Application Dat
 
 **❕ 注：公司名通过项目属性查看。**
 
-
-> ⚠️ <span style="color:red;font-weight:bold;">注：修改程序根目录下的 “MyTool.exe.config” 配置文件无效</span>
-
+> ⚠️ `<span style="color:red;font-weight:bold;">`注：修改程序根目录下的 “MyTool.exe.config” 配置文件无效
 
 **应用程序范围设置**：如果设置是应用程序范围的（而不是用户特定的），那么它们会保存在应用程序的配置文件中，通常是 `App.config(程序集.exe.config)` 或 `Web.config`（对于 Web 应用程序）。不过，这些文件中的设置是只读的，运行时的修改不会保存回这些文件。
 
@@ -124,7 +122,6 @@ Properties.Settings.Default.Save();
 ```
 
 保存后，新的设置值会写入 user.config 文件中，下次启动应用程序时会读取这个值。
-
 
 **总结**：
 
@@ -162,12 +159,12 @@ Properties.Settings.Default.Save();
     </table>
 </div>
 
-
 **使用场景** ：
 
 动态配置数据，如用户偏好、应用程序配置参数等。
 
 ## 应用程序资源（Resources.resx）
+
 **用途**：管理应用程序的静态资源和多语言资源。
 
 **存储位置**：通常定义在 .resx 文件中，这些文件可以包含字符串、图像、图标、文件等资源。
@@ -179,7 +176,7 @@ Properties.Settings.Default.Save();
 - 存储应用程序的静态文本，支持多语言本地化。
 - 存储应用程序所需的图像、图标等静态资源。
 - 组织和管理资源文件，方便维护和更新。
- 
+
 `.resx` 文件示例
 
 **定义资源**
@@ -197,7 +194,7 @@ Visual Studio 会自动生成一个与 `.resx` 文件对应的资源类，你可
 using MyApp.Properties;
 
 // 读取资源值
-string greeting = Resources.Greeting;
+string greeting = Resources.Greeting;//注：若文件名称为：Resources.xx.resx  那么读取时为：Resources_xx.Greeting
 string farewell = Resources.Farewell;
 ```
 
@@ -226,7 +223,6 @@ string greeting = Resources.Greeting; // 将会返回法语的问候语
 ```
 
 **应用程序资源与设置的区别总结**
-
 
 应用程序资源（Resources）:
 

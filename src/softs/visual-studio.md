@@ -39,7 +39,6 @@ VS的输出编码更改为UTF-8，按照图示安装UTF-8插件，若未解决�
 ![1722583601644](image/visual-studio/1722583601644.png)
 
 6. 勾选“Beta版：使用 Unicode UTF-8 提供全球语言支持(U)”
-
 7. 最后重启电脑就ok了
 
 ## Entity Framework
@@ -94,6 +93,13 @@ dotnet ef migrations add xxxx
 dotnet ef database update
 ```
 
+## 项目文件加载异常
+
+当出现以下问题时，通过删除 `.vs` 文件处理：
+
+* 解决方案加载异常
+* 项目文件加载异常
+* Asp.net.core 中，@page 名称正确，无法路由
 
 ## 查找替换功能失效
 

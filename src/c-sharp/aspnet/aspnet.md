@@ -16,7 +16,17 @@
 [Inject][NotNull] NavigationManager? nav { get; set; }
 ```
 
+## 脚本函数
+
+### OnInitializedAsync
+
+页面加载进行初始化。
+
+⚠️该函数异步执行，其他函数可能在此函数执行完成后就执行了，所以注意数据的使用
+
 ## Page
+
+### 路由问题
 
 在ASP.NET Core Razor页面上，我们可以执行以下操作来更改默认的基于文件夹的路由：
 

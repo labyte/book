@@ -3,6 +3,7 @@
 ## Enum
 
 ### 自定义特性实现
+
 定义特性
 
 ```c#
@@ -30,7 +31,9 @@ namespace EnumTest
 #endif
 }
 ```
+
 定义枚举，定义枚举需标记1，2，4...,一次2的次方，代码如下：
+
 ```c#
 public enum MyEnum
 {
@@ -51,7 +54,7 @@ public MyEnum val;
 
 ```c#
 public bool IsSelectEnumType(MyEnum e1, MyEnum e2)
-{           
+{         
     return ((int)e1 & (int)e2) != 0 ;
 }
 ```
@@ -64,17 +67,17 @@ public bool IsSelectEnumType(MyEnum e1, MyEnum e2)
 
 在开发过程中，我们需要将一些dll放入Pulgins文件夹下，这时最好使用对应Unity版本的dll，并不是dll的版本越高越好，不同版本在引用Unity中的dll的路径不同，具体参照下表
 
-| 版本 | dll路径 | 备注 |
-| :-----| :---- | :---- |
-| 以前版本 | `C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0` | 没有使用HUB安装的以前的版本 |
-| Unity2020.3.x | `Editor\Data\MonoBleedingEdge\lib\mono\unityjit` | 在对应版本的 `Editor` 下 |
+| 版本          | dll路径                                                  | 备注                        |
+| :------------ | :------------------------------------------------------- | :-------------------------- |
+| 以前版本      | `C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0` | 没有使用HUB安装的以前的版本 |
+| Unity2020.3.x | `Editor\Data\MonoBleedingEdge\lib\mono\unityjit`       | 在对应版本的 `Editor` 下  |
 
 开发中，我们可能需要使用到如下的dll
+
 - I18N.CJK.dll
 - I18N.dll
 - Mono.Data.Sqlite.dll
 - System.Data.dll
-
 
 注：某些dll是可以在Unity安装的目录找到的，有些不能，这时需要在官网上看是否有对应Unity的版本，不要一味的最求最新版本
 
@@ -172,6 +175,7 @@ Unity版本：Unity2017.1.0
 （1）按需加载，不要将太多的资源直接关联到场景中，应该按需加载
 （2）手动进行Gc回收，可能导致系统卡顿，且存在问题，最好是在退出任务的时候，进下gc回收
 
-## 素材
+## 链接
 
-1. [贴图(有些需要收费，支持Unity和UE)](https://freepbr.com/materials/fiber-textured-wall1/)
+* [贴图(有些需要收费，支持Unity和UE)](https://freepbr.com/materials/fiber-textured-wall1/)
+* [Unity 插件收集](https://gitee.com/jackyuzju/UnityAssetsResources)

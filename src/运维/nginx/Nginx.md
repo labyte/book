@@ -1,4 +1,18 @@
-# Nginx 
+# Nginx
+
+## 说明
+
+一个证书对应一个域名，即可以所有的代理端口都可以使用同一个证书。
+
+## 配置UnityWebGL服务器
+
+根据目录名称，访问unity 内容时，定位到 指定位置，配置和文件目录结构对比
+
+![1723531679363](image/Nginx/1723531679363.png)
+
+![1723531697200](image/Nginx/1723531697200.png)
+
+访问001的Unity项目（443端口省略）：[https://www.11training.com/unisim/001/?](http://192.168.0.199/unisim/001/?NjUyNTA5N2ZmYjU1OTU1ODNlYzA2NzE4KzErNjVlMTliYjgzNjU2N2YyMjRhMjZmNjRmKzY1ZTE5YjhiMzY1NjdmMjI0YTI2ZjY0ZQ==)参数
 
 
 ## 配置证书
@@ -10,17 +24,15 @@
 - **证书的路径**：相对于配置文件的，这里的cert文件夹就是和配置文件同目录的，当然可以放在外边去；
 - 重启生效。
 
-
 ## 命令行重启（勿用）
 
 **Windows**:
 
 > ❌不知道什么原因，使用命令行来进行重启，要么，就是启动了多个进程，要么就是关掉了进程没重启。
 >
-> 老老实实在任务管理器中 结束任务，再重启比较靠谱 
+> 老老实实在任务管理器中 结束任务，再重启比较靠谱
 
-
-``` 重启
+```重启
 chcp 65001 > nul
 @echo off
 cd /d %~dp0

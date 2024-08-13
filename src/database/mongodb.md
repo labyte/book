@@ -6,6 +6,136 @@
 
 [Mongosh 文档](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#std-label-mdb-shell-overview)
 
+## Windows
+
+### 重启
+
+在 Windows 上安装 MongoDB 后，你可以按照以下步骤重启 MongoDB 服务：
+
+#### 使用命令提示符（适用于服务安装）
+
+打开命令提示符：以管理员身份运行命令提示符。
+
+停止 MongoDB 服务：
+
+```bash
+net stop MongoDB
+```
+
+启动 MongoDB 服务：
+
+```bash
+net start MongoDB
+```
+
+重启 MongoDB 服务（可以直接使用此命令代替上述两个命令）：
+
+```bash
+net stop MongoDB && net start MongoDB
+```
+
+#### 使用 Windows 服务管理器
+
+打开服务管理器：
+
+按 Win + R，输入 services.msc，然后按回车。
+找到 MongoDB 服务：
+
+在服务列表中找到 MongoDB 或者 MongoDB Server。
+重启服务：
+
+右键点击 MongoDB 服务，选择 重启。或者选择 停止，然后再点击 启动。
+
+#### 手动启动和停止（适用于手动启动的 MongoDB）
+
+停止 MongoDB：
+
+打开命令提示符，执行以下命令找到并终止 MongoDB 进程：
+
+```bash
+taskkill /f /im mongod.exe
+```
+
+启动 MongoDB：
+
+通过命令提示符进入 MongoDB 安装目录，然后执行以下命令：
+
+```bash
+mongod --config "C:\Program Files\MongoDB\Server\5.0\bin\mongod.cfg"
+```
+
+配置文件路径根据你的安装路径调整。
+
+通过这些步骤，你可以在 Windows 上重启 MongoDB 服务。
+
+### 远程连接失败
+
+> 失败信息：mongodb远程连接出现connect ECONNREFUSED（连接被拒绝）错误的解决方法
+
+**阿里云ECS(Windows Server)**
+
+在 Windows 上安装，Mongodb 的配置文件中的 bind_ip 默认为 `127.0.0.1`，默认只有本机 IP 可以连接，需要将 `bind_ip` 配置为：`0.0.0.0`，标识接收任何 `IP` 的连接。默认只绑定了本机IP
+
+配置文件地址： `C:\Program Files\MongoDB\Server\7.0\bin\mongod.cfg`
+
+修改为如下图
+
+```bash
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+```
+
+重启 `net stop MongoDB && net start MongoDB`
+
+## MacOS
+
+### 重启
+
+macOS 上安装 MongoDB 后，使用以下命令来重启 MongoDB 服务：
+
+1. **停止 MongoDB 服务：**
+  
+```bash
+brew services stop mongodb
+```
+
+2. **启动 MongoDB 服务：**
+
+```bash
+brew services stop mongodb
+```
+
+3. **重启 MongoDB 服务：**
+   
+```bash
+brew services stop mongodb
+```
+
+如果你是手动启动的 MongoDB（而不是通过 `brew` 服务管理），你可以使用以下命令：
+
+1. **停止 MongoDB：**
+   
+```bash
+sudo pkill -f mongod
+```
+
+2. **启动 MongoDB：**
+   进入 MongoDB 的安装目录，然后执行：
+   
+```bash
+mongod --config /usr/local/etc/mongod.conf
+```
+
+
+这个命令假设你在安装时使用了默认的配置文件路径 `/usr/local/etc/mongod.conf`。如果你的配置文件位于其他路径，请替换为实际的路径。
+
+通过这些步骤，你可以成功地在 macOS 上重启 MongoDB 服务。
+
+
+
 ## 用户管理
 
 用户管理需要通过 Mongosh 操作，Mongosh 是嵌入到 MongoDB Compass 中的一个Javascript 运行环境，官方文档没怎么看懂

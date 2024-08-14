@@ -85,19 +85,38 @@ elements.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, 
 这个官方文档比较清楚，比较好用，但是在Unity端要报错，用不了，在.net端倒是比较好用，如在WPF上使用
 
 
-## 渲染PDF的插件
-
-### PDF Renderer
+## PDF Renderer（渲染）
 
 Unity 商店中的一款插件，收费较高，目前最新版本 5.51，自己目前最新为 5.30
 
 注 在 csdn上有个资源为 5.51 是假的
 
-#### 新输入系统（new input system）报错
+导入包后有相关文档 `ApiDocumentation.chm` 和 `Documentation.pdf`
 
-1. 若项目使用新输入系统， PDFViewerPage.cs 脚本会报错，原因是插件默认使用的是旧输入系统的输入方式
+### 新输入系统（new input system）报错
 
-2. 在PDF Renderer 文件夹的程序集定义文件中，添加 InputSystem 的依赖
+1. 若项目使用新输入系统， `PDFViewerPage.cs` 脚本会报错，原因是插件默认使用的是旧输入系统的输入方式
+
+2. 在 `PDF Renderer` 文件夹的程序集定义文件中，添加 `InputSystem` 的依赖
+
+```asmdef
+{
+    "name": "Paroxe.PDFRenderer",
+    "rootNamespace": "",
+    "references": [
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
+```
 
 3. 打开 PDFViewerPage.cs，修改脚本
 
@@ -114,7 +133,7 @@ Unity 商店中的一款插件，收费较高，目前最新版本 5.51，自己
 
 ```
 
-#### 构建
+### 构建
 
 1. 先确认build平台相关的文件是否存在，不存在需要重新导入，或者拖入文件夹
 

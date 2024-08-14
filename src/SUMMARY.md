@@ -51,6 +51,7 @@
   - [包：ET网络框架](unity/packages/ET网络框架.md)
   - [包：InputSystemPackage](unity/packages/InputSystemPackage.md)
   - [包：MagicOnion](unity/packages/MagicOnion.md)
+  - [包：Nativefileso](unity/packages/NativeShare.md)
   - [包：Nativefileso](unity/packages/Nativefileso.md)
   - [包：Newtonsoft](unity/packages/Newtonsoft.md)
   - [包：NewUIWidgets](unity/packages/NewUIWidgets.md)

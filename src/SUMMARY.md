@@ -72,6 +72,7 @@
   - [Git](developer-tools/git.md)
   - [Vim](developer-tools/vim.md)
   - [Npm](developer-tools/npm.md "Npm")
+  - [PIP](developer-tools/pip.md "PIP")
 ---
 - [数据库]()
   - [SQL Server](database/sql-server.md)

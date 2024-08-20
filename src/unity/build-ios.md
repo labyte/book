@@ -233,6 +233,11 @@ Bundle Identifiers: 同创建证书时的一致
   ![alt text](image/build-ios/provisioning%20profile-error-ok.png)
 
 
+  如果连接手机测试，此处要这样配置
+
+  ![alt text](image/build-ios/auto-mng-signing.png)
+
+
 ### （3）Resources Tages
 
 暂无配置

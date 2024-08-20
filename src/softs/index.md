@@ -148,3 +148,24 @@
     </table>
 </div>
 
+
+## 播放器
+
+<div class="table-container">
+    <table class="excel-table" id="example-table">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>软件</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><a href="https://potplayer.daum.net">PotPlayer</a></td>
+                <td>外网访问</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

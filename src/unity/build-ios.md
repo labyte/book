@@ -562,3 +562,27 @@ ipa文件不能直接通过苹果手机安装，需要通过分发平台进行�
 
 
 
+## 十、错误汇总
+
+### PC端正常，构建IOS后无法进入场景
+
+情况说明：
+
+当前同个项目会发布4个软件（APP），前面两个正常，后面两个加载场景后无法进入场景
+
+后面两个场景有5个任务场景，当发布一个的时候又正常
+
+错误提示
+
+```
+MissingMethodException: Default constructor not found for type UnityEngine.ResourceManagement.AsyncOperations.ProviderOperation`1[[UnityEngine.AddressableAssets.Initialization.ResourceManagerRuntimeData, Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+  at System.RuntimeType.CreateInstanceMono (System.Boolean nonPublic) [0x00000] in <00000000000000000000000000000000>:0 
+  at System.Activator.CreateInstance (System.Type type, System.Boolean nonPublic) [0x00000] in <00000000000000000000000000000000>:0 
+  at UnityEngine.ResourceManagement.Util.LRUCacheAllocationStrategy.New (System.Type type, System.Int32 typeHash) [0x00000] in <00000000000000000000000000000000>:0 
+  at UnityEngine.ResourceManagement.ResourceManager.CreateOperation[T] (System.Type actualType, System.Int32 typeHash, UnityEngine.ResourceManagement.Util.IOperationCacheKey cacheKey, System.Action`1[T] onDestroyAction) [0x00000] in <00000000000000000000000000000000>:0 
+
+```
+
+
+尝试解决方案：[参考文章](https://blog.csdn.net/hack_yin/article/details/126028734)
+

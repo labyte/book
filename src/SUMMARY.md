@@ -97,7 +97,7 @@
 
 - [Windows系统](windows/index.md)
 
-  - [批处理](windows/windows-commands.md)
+  - [Windows 命令行](windows/windows-commands.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
 ----
 - [MacOS](mac/mac.md)

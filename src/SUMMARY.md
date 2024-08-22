@@ -97,8 +97,13 @@
 
 - [Windows系统](windows/index.md)
 
-  - [批处理](windows/bat-file.md)
+  - [批处理](windows/windows-commands.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
+----
+- [MacOS](mac/mac.md)
+  - [XCode](mac/xcode.md)
+  - [TestFlight](mac/testflight.md)
+ 
 
 ---
 - [软件](softs/index.md)

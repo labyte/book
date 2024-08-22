@@ -108,6 +108,7 @@
   - [Visual Studio Code](softs/visual-studio-code.md)
   - [JetBrains Rider](softs/jetbrains-rider.md)
   - [Typora](softs/typora.md)
+  - [Telegram](softs/telegram.md)
   
 
 ---

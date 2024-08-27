@@ -450,6 +450,57 @@ mongodump --uri="mongodb://username:password@source_host:port/dbname" --out=/pat
 
 这个命令会把 dbname 数据库的所有数据导出到指定路径 /path/to/backup。
 
+
+### 定时备份
+
+> ☀️最好创建定时任务，定时备份数据，避免数据丢失。
+
+
+**一、创建定时任务脚本，示例：**
+
+```bat
+@echo off
+:: 定义备份目录（可以根据需要更改） 
+:: 注意：若设置中文编码，日期时间格式化存不同
+set backupDir=C:\TZJ\TSIM\mongodb_backup\backup\%date:~0,4%-%date:~5,2%-%date:~8,2%-%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+
+:: 创建备份目录
+if not exist %backupDir% (
+    mkdir %backupDir%
+)
+
+:: 备份 MongoDB 数据库（修改为实际的数据库和路径）
+mongodump --uri="mongodb://localhost:27017/TSIM" --out=%backupDir%
+
+:: 输出备份完成信息
+echo Backup completed at %date% %time%
+
+
+pause
+```
+
+
+**二、配置 Windows 任务计划程序**
+
+通过 Windows 任务计划程序来定时执行上面的备份脚本。
+
+步骤：
+
+- 打开任务计划程序：按下 Win + S，搜索“任务计划程序”并打开。
+- 创建基本任务：
+- 在任务计划程序窗口中，点击右侧的“创建基本任务”。
+- 为任务命名，例如“MongoDB 定时备份”。
+- 选择触发器，例如每日、每周、每月等。比如选择“每日”。
+- 设置时间，选择希望执行任务的时间。
+- 设置操作：
+- 在“操作”步骤，选择“启动程序”。
+- 浏览并选择上一步中创建的批处理文件 (例如 backup_mongo.bat)。
+- 完成任务：点击完成，任务将自动按照设置的计划执行。
+
+**三、验证任务**
+
+完成后可以手动运行任务以验证是否正常工作。在任务计划程序中，右键点击任务，选择“运行”，查看备份文件是否生成。
+
 ### 将备份文件传输到目标服务器
 
 你可以使用 scp 命令（对于 Linux）或其他文件传输工具（如 SFTP、FTP 等）将备份文件传输到目标服务器：

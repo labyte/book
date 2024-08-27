@@ -38,6 +38,30 @@ Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render,
 new Action(() => pwdBoxPWD.Focus()));
 ```
 
+## WPF hardware acceleration in RDP
+
+> 在 .net 8.0 后出现的问题
+
+调试模式正常运行，发布后无法运行，提示设置硬件加速
+
+[google 文章](https://startdebugging.net/2023/10/wpf-hardware-acceleration-in-rdp/)
+
+**解决方案：**
+
+
+
+在项目中配置此设置RuntimeHostConfigurationOption：
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="Switch.System.Windows.Media.EnableHardwareAccelerationInRdp" Value="true" />
+  </ItemGroup>
+</Project>
+```
+
+删除所有的文件，再生成
+
 **项目示例：**
 
 在某项目中，有一组菜单按钮，一个菜单对应一个页面，假设A按钮对应A页面，B按钮对应B页面，同时有个需求，在A页面，按下空格键后代码控制跳转到B页面。

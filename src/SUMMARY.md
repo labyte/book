@@ -68,6 +68,12 @@
 ---
 - [Python](python/python.md)
 ---
+- [开发工具]()
+  - [Git](developer-tools/git.md)
+  - [Vim](developer-tools/vim.md)
+  - [Npm](developer-tools/npm.md "Npm")
+  - [PIP](developer-tools/pip.md "PIP")
+---
 - [数据库]()
   - [SQL Server](database/sql-server.md)
   - [MySql](database/my-sql.md)
@@ -81,7 +87,6 @@
   - [自建服务器](运维/自建服务器/自建服务器.md "自建服务器")
   - [Nginx](运维/nginx/nginx.md "Nginx")
   - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
-  - [Npm](运维/npm.md "Npm")
 
 ---
 - [群晖](synology/synology.md)
@@ -92,8 +97,13 @@
 
 - [Windows系统](windows/index.md)
 
-  - [批处理](windows/bat-file.md)
+  - [Windows 命令行](windows/windows-commands.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
+----
+- [MacOS](mac/mac.md)
+  - [XCode](mac/xcode.md)
+  - [TestFlight](mac/testflight.md)
+ 
 
 ---
 - [软件](softs/index.md)
@@ -103,8 +113,8 @@
   - [Visual Studio Code](softs/visual-studio-code.md)
   - [JetBrains Rider](softs/jetbrains-rider.md)
   - [Typora](softs/typora.md)
-  - [Git](softs/git.md)
-  - [Vim](softs/vim.md)
+  - [Telegram](softs/telegram.md)
+  
 
 ---
 - [Markdown](markdown.md)

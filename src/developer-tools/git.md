@@ -1,5 +1,34 @@
 # Git
 
+
+## 推送失败
+
+### error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+
+推送时出现以下错误提示
+
+```bash
+
+Enumerating objects: 22, done.
+Counting objects: 100% (22/22), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (16/16), done.
+Writing objects: 100% (16/16), 1019.20 KiB | 33.97 MiB/s, done.
+Total 16 (delta 9), reused 0 (delta 0), pack-reused 0
+error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+
+```
+
+缓存区太小的原因：
+
+设置为5大小
+```bash
+git config --global http.postBuffer 5242880000
+```
+
 ## 在拉取中提示版本冲突
 
 当在终端或者在VS中拉取时，提示版本冲突，此时都要回到终端来进行处理

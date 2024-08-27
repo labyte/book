@@ -57,7 +57,11 @@
 
 </style>
 
-# 批处理文件
+# Windows 命令行
+
+## cd
+
+更改当前目录。
 
 [官网](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/cd)
 
@@ -1014,7 +1018,47 @@ move [{/y|-y}] [<source>] [<target>]
 
 ```
 move \data\*.xls \second_q\reports\
+
 ```
+
+
+### ren(rename)
+
+重命名文件（文件夹）。
+
+修改文件名示例：
+
+```bat
+ren a.txt b.txt
+```
+
+若要将当前目录中的所有 .txt 文件扩展名更改为 .doc 扩展名，请键入：
+
+
+```bat
+ren *.txt *.doc
+```
+
+
+若要将目录的名称从 Chap10 更改为 Part10，请键入：
+
+
+```bat
+ren chap10 part1
+```
+
+
+备注
+
+- 重命名文件时不能指定新的驱动器或路径。 你也不能使用此命令跨驱动器重命名文件或将文件移动到不同的目录（可以使用 `mkdir` 创建文件夹，`move` 移动文件路径 ）。
+
+- filename2 中通配符表示的字符与 filename1 中对应的字符相同。
+
+- filename2 必须是唯一的文件名。 如果 filename2 与现有文件名匹配，则会显示以下消息：Duplicate file name or file not found。
+
+在mac/linux/unix系统中，重命名文件使用`mv`命令。
+
+注意 `mv`可以修改文件路径
 
 ### start
 

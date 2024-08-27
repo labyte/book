@@ -68,7 +68,9 @@ mongod --config "C:\Program Files\MongoDB\Server\5.0\bin\mongod.cfg"
 
 通过这些步骤，你可以在 Windows 上重启 MongoDB 服务。
 
-### 远程连接失败
+### 远程连接
+
+⚠️⚠️⚠️ 设置远程连接，容易遭到攻击，谨慎使用 ⚠️⚠️⚠️
 
 > 失败信息：mongodb远程连接出现connect ECONNREFUSED（连接被拒绝）错误的解决方法
 
@@ -155,6 +157,13 @@ db.createUser({
     {role:"readWrite",db:"TSIM"}]
 })
 ```
+
+**删除 `admin` 用户**
+
+```shell
+db.drop("admin")
+```
+
 
 **查看当前用户**
 
@@ -477,11 +486,12 @@ mongodb://username:password@source_host:port/dbname
 
 **2. 使用 URI 编码特殊字符**
 
-如果用户名或密码中包含特殊字符（如 @, :, # 等），需要对这些字符进行 URI 编码。你可以使用在线工具来对特殊字符进行编码。例如：
+如果用户名或密码中包含特殊字符（如 @, :, # 等），需要对这些字符进行 URI 编码。你可以使用 [URL编码在线工具 ](https://www.bejson.com/enc/urlencode/) 来对特殊字符进行编码，常见的有：
 
 - `@ 编码为 %40`
 - `: 编码为 %3A`
 - `# 编码为 %23`
+- `% 编码为 %25`
 
 例如，如果密码是 pa@ss:word#123，则连接字符串应为：
 

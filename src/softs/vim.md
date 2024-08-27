@@ -67,6 +67,23 @@
 # Vim
 
 
+## 安装
+
+### Windows 安装
+
+
+通过下载执行文件 安装 [下载地址](https://www.vim.org/download.php)
+
+下载后添加环境变量，即可使用 `vim`
+
+
+### MacOS
+
+```shell
+brew install vim
+```
+
+
 ## 快速使用
 
 ### Vim 的基本概念

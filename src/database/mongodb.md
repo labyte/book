@@ -460,9 +460,14 @@ mongodump --uri="mongodb://username:password@source_host:port/dbname" --out=/pat
 
 ```bat
 @echo off
-:: 定义备份目录（可以根据需要更改） 
-:: 注意：若设置中文编码，日期时间格式化存不同
-set backupDir=C:\TZJ\TSIM\mongodb_backup\backup\%date:~0,4%-%date:~5,2%-%date:~8,2%-%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+
+:: 处理时间的小时数为个位数时，出现空格问题。使用0补位
+set t=%time:~0,2%%time:~3,2%%time:~6,2%
+set t=%t: =0%
+
+
+:: 定义备份目录（可以根据需要更改）
+set backupDir=C:\TZJ\TSIM\mongodb_backup\backup\%date:~0,4%-%date:~5,2%-%date:~8,2%-%t%
 
 :: 创建备份目录
 if not exist %backupDir% (
@@ -475,9 +480,11 @@ mongodump --uri="mongodb://localhost:27017/TSIM" --out=%backupDir%
 :: 输出备份完成信息
 echo Backup completed at %date% %time%
 
-
-pause
 ```
+
+> ⚠️ 脚本注意事项
+> - 需要处理当小时数小于10时出现空格，需要补位0
+> - 脚本中不要出现 `pause`，否则在计划中，当前实例会一直存在，导致后续无法创建新实例（在设置中默认配置“请勿创建新实例”），即使设置了可以并行运行，那也会无限制的创建新实例，资源浪费。
 
 
 **二、配置 Windows 任务计划程序**

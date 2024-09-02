@@ -1,12 +1,13 @@
-# Asp.Net
+# Balzor
 
-## 快速使用
 
-### 不要复制Razor文件
+## 不要复制Razor文件
 
 当复制一个界面作为一个新的界面时，配置了新的 `@page` ，但是无法路由到此界面，最后新建页面解决，感觉复制页面容易出现Bug，通过新建，把内容复制过来比较靠谱。
 
-### 页面中注入服务
+## 注入服务
+
+### 页面中中注入服务
 
 不能通过构造函数注入
 
@@ -15,6 +16,15 @@
 ```c#
 [Inject][NotNull] NavigationManager? nav { get; set; }
 ```
+
+### 服务中注入其他服务
+
+最好通过构造函数注入，如 “A” 服务依赖 “B” 服务，在 “A” 中通过构造函数注入 “B”服务，通过属性注入的方式可能会导致注入失败。
+
+
+
+
+
 
 ## 脚本函数
 
@@ -86,60 +96,70 @@ private string GetMajorText(MajorType type)
 }
 ```
 
-## 部署 IIS
+## BlazorInputFile-不支持同步读取
 
-> 说明：使用IIS部署，通常是 `http` 协议，后面要通过 **Nginx** 来代理访问，因为 **Nginx** 配置证书等比较方便
+> BlazorInputFile - Synchronous reads are not supported
 
-[官网手册](https://learn.microsoft.com/zh-cn/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-8.0&tabs=visual-studio)
+在 `Blazor` 中上传文件，不支持同步读取，仅支持异步，如下方法中上传文件：
 
-以 Windows Server 为例：
 
-### 先决条件
+```c#
+private async Task Upload(InputFileChangeEventArgs e)
+{
+    MemoryStream ms = new MemoryStream();
+    e.File.OpenReadStream().CopyTo(ms);
+    var bytes = ms.ToArray();
+    UploadFile file = new UploadFile
+    {
+        FileName = e.File.Name,
+        FileContent = bytes,
+        Size = e.File.Size,
+        ContentType = e.File.ContentType
+    };
+        await Http.PostAsJsonAsync<UploadFile>("/api/uploadfile", file);
+        await OnInitializedAsync();
+}
+```
 
-- [NET Core SDK](https://learn.microsoft.com/zh-cn/dotnet/core/sdk) 安装在开发计算机上。如果发布的程序勾选了独立运行，可以不安装SDK。
-- 安装IIS，自行网上查找资料。
-- 在 IIS 服务器上安装 [.NET Core 托管捆绑包](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)。 捆绑包可安装 .NET Core 运行时、.NET Core 库和 ASP.NET Core 模块。 该模块允许 ASP.NET Core 应用在 IIS 后面运行。
-- 上面安装的托管捆绑包应该包含了 AspNetCoreModuleV2
+报错：
 
-### 发布Asp.NET程序
+```txt
+ortunately I keep getting an error/exception from BlazorInputFile which says "Synchronous reads are not supported".
+```
 
-发布到文件夹。
+**解决办法**： 将 `OpenReadStream`  的复制改为 异步复制：
 
-不要发布单文件格式，好像无法运行。
+```c# 
+MemoryStream ms = new MemoryStream();
+await e.File.OpenReadStream().CopyToAsync(ms);
+```
 
-### 创建站点
+如下写法在非Blazor程序中正确，但是在Blazor中不行：
 
-**创建应用程序池**：在IIS管理器中创建一个新的应用程序池，注意：
+```c# 
+MemoryStream ms = new MemoryStream();
+await e.File.OpenReadStream().CopyTo(ms);
 
-- 当部署Blazor项目时：设置.NET CLR版本为“No Managed Code”，正常运行
-- 当部署 **Web API** 项目，并且从 Blazor 项目中跨域访问时(注：API项目中已经配置了跨域策略)，这里要选择一个版本，否则会因 **跨域问题** 无法访问。
+//or
+MemoryStream ms =  e.File.OpenReadStream();
+```
 
-![1723516732615](image/aspnet/1723516732615.png)
 
-**创建网站**：设置网站名称（仅显示作用），选择自己创建的应用程序池，选择程序目录，设置端口，IP地址和主机名不用填，默认就行
+[Blazor 文件上传说明文档](https://learn.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-8.0&pivots=server)
 
-![1723516895463](image/aspnet/1723516895463.png)
 
-## 使用 Nginx部署
+**阿里云对象存储（OSS）接口** 
 
-## 问题汇总
 
-### 部署后有的浏览器不能访问
+- 在阿里云的对象存储接口中，只提供了同步方法，导致用户认为，无法在 Blazor 中使用
 
-**环境**：
+- 上传文件只能先将客户端的资源保存到服务端，然后使用服务端的本地路径进行上传，不能使用 `Stream` 上传，否则报 “数组越界”
 
-- 阿里云域名
-- 阿里云免费云解析
-- 阿里云服务器（带固定公网IP）
-- 未备案
 
-阿里云售后给出的答复是，网站未备案，详细回复如下：
 
-您好，www.xxx.com看解析到阿里云大陆主机，未在阿里云备案导致备案拦截无法访问
 
-网站托管在中国内地（大陆）的服务器上，您需根据所在省市的管局规则进行备案申请。当您使用阿里云中国内地（大陆）节点服务器时，您可以在PC端或移动端的阿里云ICP代备案系统中提交ICP备案申请，审核通过便可开通网站访问服务。
-https://help.aliyun.com/document_detail/61819.html
 
-**备案后**：
 
-网站正常访问。
+
+
+

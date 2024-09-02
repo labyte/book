@@ -23,7 +23,8 @@
   - [SignalR](c-sharp/aspnet/aspnet-signalr.md)
   - [证书](c-sharp/aspnet/aspnet-证书.md)
   - [Jwt](c-sharp/aspnet/aspnet-jwt.md)
-  - [BootstrapBlazor](c-sharp/aspnet/aspnet-bootstrap-blazor.md)
+  - [Blazor](c-sharp/aspnet/aspnet-blazor.md)
+    - [BootstrapBlazor](c-sharp/aspnet/aspnet-bootstrap-blazor.md)
 ---
 
 - [Unity](unity/unity.md)

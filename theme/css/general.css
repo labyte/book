@@ -4,7 +4,8 @@
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
+    font-size: 60.5%;
     color-scheme: var(--color-scheme);
 }
 
@@ -105,9 +106,9 @@ h6:target::before {
     margin-inline-end: auto;
     max-width: var(--content-max-width);
 }
-.content p { line-height: 1.45em; }
-.content ol { line-height: 1.45em; }
-.content ul { line-height: 1.45em; }
+.content p { line-height: 1.6em; }
+.content ol { line-height: 1.55em; }
+.content ul { line-height: 1.55em; }
 .content a { text-decoration: none; }
 .content a:hover { text-decoration: underline; }
 .content img, .content video { max-width: 100%; }

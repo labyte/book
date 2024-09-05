@@ -1,5 +1,6 @@
 # mdBook
 
+
 - 将markdown 文件转换为html的工具
 
 - [仓库地址](https://github.com/rust-lang/mdBook)
@@ -8,6 +9,7 @@
 
 
 注意：国内有很多个人翻译的中文版本，时间比较久远，还是看官网的英文版本或者翻译为中文来查看。
+
 
 ## 常用命令
 
@@ -21,6 +23,27 @@ mdbook build --open
 ```
 mdbook server
 ```
+
+## 基于默认主题微调
+
+### 设置界面字体
+
+- `theme/css/general.css` 中的 `:root` 和 `Body` 可整体调整左侧章节目录和整文的字体大小
+
+- `theme/css/chrome.css` 中的 `.sidebar` 可整体调整左侧章节目录字体大小，两者结合，可满足相关需求
+
+
+### 设置整文行间距
+
+theme/css/general.css:
+
+```css
+.content p { line-height: 1.5em; }
+.content ol { line-height: 1.5em; }
+.content ul { line-height: 1.5em; }
+
+```
+
 
 ## 主题
 

@@ -58,3 +58,12 @@ https://help.aliyun.com/document_detail/61819.html
 **备案后**：
 
 网站正常访问。
+
+
+### 重启IIS服务可能存在访问异常
+
+
+> 错误信息： Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery|An exception was thrown while deserializing the token. Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException: The antiforgery token could not be decrypted.
+
+
+当IIS重启过程中，客户端通过刷新浏览器发起请求，由于两次请求的服务不一样，导致出现此错误信息，应该不影响。

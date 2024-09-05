@@ -1060,6 +1060,26 @@ ren chap10 part1
 
 注意 `mv`可以修改文件路径
 
+
+
+### setx(设置环境变量)
+
+> 若 key 或者 value 中有空格，使用双引号括起来。
+
+设置当前用户的环境变量
+
+```shell
+setx KEY VALUE
+
+```
+
+设系统环境变量，后面追加 `/m`
+
+```shell
+setx KEY VALUE /m
+
+```
+
 ### start
 
 启动单独的命令提示符窗口以运行指定的程序或命令。

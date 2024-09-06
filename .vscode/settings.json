@@ -1,4 +1,7 @@
 {
     "Codegeex.Chat.LanguagePreference": "中文",
-    "Codegeex.Comment.LanguagePreference": "中文"
+    "Codegeex.Comment.LanguagePreference": "中文",
+    "markdown.copyFiles.destination": {
+        "**/*.md": "assets/${documentBaseName}/${fileName}"
+    }
 }

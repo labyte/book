@@ -14,7 +14,7 @@
   ![alt text](image-1.png)
 
 
-- 集成到资源字典，接下来我们可以把转换得到了xaml 集成到资源字典中，新建一个IconDictionary.xaml，将xmal拷贝到资源字典中
+- 集成到资源字典，接下来我们可以把转换得到了xaml 集成到资源字典中，以下是直接放在 `App.xaml` 中（可创建一个资源文件来存放）：
 
 ```xml
 <Application x:Class="WpfApp3.App"
@@ -59,6 +59,22 @@
     </StackPanel>
 </Window>
 
+```
+
+
+后端添加文本changed处理事件
+
+```c#
+  private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
+  {
+      if (sender is TextBox box)
+      {
+          if (string.IsNullOrEmpty(box.Text))
+              box.Background = (ImageBrush)FindResource("watermark");
+          else
+              box.Background = null;
+      }
+  }
 ```
 
 ## 剪切板错误

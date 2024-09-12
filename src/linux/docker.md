@@ -39,7 +39,11 @@ docker run -d --rm --name nuget-server -p 8008:8008 --env-file bagetter.env -v "
 
 ## 实例-BaGetter
 
+### 搭建包管理器
+
 搭建私有 **Nuget** 仓库，[BaGetter-github](https://github.com/bagetter/BaGetter)
+
+以下流程基于群晖的 **Docker** 进行部署。
 
 **一、[连接Docker所在的服务器](ssh-connect-server.md#ssh-连接服务器)**
 
@@ -110,26 +114,82 @@ docker search bagetter
 docker pull bagetter/bagetter:latest
 ```
 
-**五、发布包**
+**五、浏览包**
 
-在 vs 的程序包管理器控制台窗口中输入（注意路径）
+
+在浏览器中浏览包，在群晖的上部署的不方便使用 `localhost` 来访问，使用域名，并在开发 `8008` 端口外部访问
+
+通过访问 `http://你的域名:8008`
+
+只能使用 `http` ，没看到相关的 `https` 设置。
+
+### 发布包
+
+**一、设置包属性**
+
+**包ID**：在部署的仓库中必须是唯一的，设置好后，就不要更改了
+
+**标题**：与ID相同即可
+
+**包版本**：每次打包必须更新版本号，不能存在相同的版本号，[版本规范](https://learn.microsoft.com/zh-cn/nuget/concepts/package-versioning?tabs=semver20sort)，特定版本号的格式为 Major.Minor.Patch[-Suffix]，其中的组件具有以下含义：
+
+- 主要：重大更改
+- 次要：新增功能，但可向后兼容
+- 补丁：仅可向后兼容的 bug 修复
+- -Suffix（可选）：连字符后跟字符串，表示预发布版本（遵循语义化版本控制或 SemVer 约定）。
+
+排序：
+
+```text
+1.0.1
+1.0.1-zzz
+1.0.1-rc.10
+1.0.1-rc.2
+1.0.1-open
+1.0.1-beta
+1.0.1-alpha2
+1.0.1-alpha10
+1.0.1-aaa
+```
+
+**作者、公司**：自定义
+
+**产品**：默认
+
+**说明**：包的简要说明
+
+**发行说明**：更新日志
+
+**许可证**：可选择许可证表达式、填写MIT
+
+
+**二、打包**
+
+
+右键项目->打包，输出窗口查看打包信息，打包文件默认在: `bin/Release/xxx.nuget`
+
+**三、发布包**
+
+在 `vs` 中打开 `powershell` 终端，使用命令发布，将 `NUGET-SERVER-API-KEY` 替换为自己的Key（若搭建的库中没配置key，不需要key），`package.1.0.0.nupkg` 替换为实际的包名（注意路径）
 
 ```bash
 dotnet nuget push -s http://xxxx:8008/v3/index.json -k NUGET-SERVER-API-KEY package.1.0.0.nupkg
 
 ```
 
-**六、在VS中添加源**
+### 使用包
 
-- 名称：自定义
-- 源：`http://xxxx:8008/v3/index.json`，有要求使用 `https` 的警告，不影响
+- 在VS工具栏：工具->Nuget 包管理器->程序包管理器设置，打开设置窗口
+- 选择：程序包源标签
+- 点击右上角的 **+**
+  - 名称：自定义
+  - 源：`http://xxxx:8008/v3/index.json` （警告要求使用 `https` ，忽略不影响）
+  - 点击更新保存
+- 使用时切换程序包源即可。
 
-**七、浏览包**
-
-通过访问 `http://你的域名:8008`
 
 
-**注意事项**：
+### 注意事项
 
 - 需要在环境变量中配置 `ASPNETCORE_HTTP_PORT=8008` 或者在群晖的界面设置中更改,否则在运行命令中设置的端口无效
 

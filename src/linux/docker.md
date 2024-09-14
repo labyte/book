@@ -183,7 +183,7 @@ dotnet nuget push -s http://xxxx:8008/v3/index.json -k NUGET-SERVER-API-KEY pack
 - 选择：程序包源标签
 - 点击右上角的 **+**
   - 名称：自定义
-  - 源：`http://xxxx:8008/v3/index.json` （警告要求使用 `https` ，忽略不影响）
+  - 源：`http://xxxx:8008/v3/index.json` （警告要求使用 `https` 很烦，可通过 [反向代理服务器](../synology/反向代理服务器.md#反向代理服务器) 实现https访问）
   - 点击更新保存
 - 使用时切换程序包源即可。
 

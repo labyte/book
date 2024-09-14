@@ -87,7 +87,7 @@
 ---
 
 - [Windows系统](windows/index.md)
-
+  - [WinSW](windows/winsw.md)
   - [Windows 命令行](windows/windows-commands.md)
   - [分区MBR格式转GPT格式](windows/mbr-gpt.md)
 ---

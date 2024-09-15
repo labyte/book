@@ -116,12 +116,17 @@ docker pull bagetter/bagetter:latest
 
 **五、浏览包**
 
+如果在主机的windows或者linux系统上的docker环境，通过访问 `http://你的域名:8008`
 
-在浏览器中浏览包，在群晖的上部署的不方便使用 `localhost` 来访问，使用域名，并在开发 `8008` 端口外部访问
+如果在群晖上，还需要将开放 `8008` 端口，使用群晖的域名和 `8008` 端口访问.
 
-通过访问 `http://你的域名:8008`
 
-只能使用 `http` ，没看到相关的 `https` 设置。
+**六、通过反向代理实现https访问**
+
+无论是在浏览器中还是在 `vs` 中使用  `http`，都会显示很多警告，甚至出现无法访问的问题。所以最好配置 `https`。
+
+[群晖中配置反向代理](../synology/反向代理服务器.md#反向代理服务器)
+
 
 ### 发布包
 
@@ -193,7 +198,7 @@ dotnet nuget push -s http://xxxx:8008/v3/index.json -k NUGET-SERVER-API-KEY pack
 
 - 需要在环境变量中配置 `ASPNETCORE_HTTP_PORT=8008` 或者在群晖的界面设置中更改,否则在运行命令中设置的端口无效
 
-- 目前暂时无法使用 `https`，或者不方便使用
+- 很多容器中的服务都不支持 `https`，通过群晖的反向代理来实现
 
 - 如果配置了 `ApiKey`， 发布包时要携带 `Key`
 

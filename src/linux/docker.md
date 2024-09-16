@@ -161,9 +161,18 @@ docker pull bagetter/bagetter:latest
 
 **产品**：默认
 
-**说明**：包的简要说明
+**说明（Description）**：包的简要说明
 
-**发行说明**：更新日志
+**发行说明(PackageReleaseNotes)**：包的版本更新日志，可以直接填写文本，也可以从一个文件中去读取，在项目文件中进行配置
+
+```xml
+<PropertyGroup>
+  <ChangeLogFile>$(MSBuildProjectDirectory)\CHANGELOG.md</ChangeLogFile>
+  <PackageReleaseNotes>$([System.IO.File]::ReadAllText($(ChangeLogFile)))</PackageReleaseNotes>
+</PropertyGroup>
+```
+
+**二、设置许可证**  
 
 **许可证**：可选择许可证表达式、填写MIT
 
@@ -181,6 +190,29 @@ docker pull bagetter/bagetter:latest
 dotnet nuget push -s http://xxxx:8008/v3/index.json -k NUGET-SERVER-API-KEY package.1.0.0.nupkg
 
 ```
+
+**四、删除包**
+
+> 注意：使用命令删除包，仅仅是将版本标记为 **未列出** 状态，也就是包的信息还在服务器的数据库中，这就导致无法再上传同名的包，由于bagetter没有提供管理界面，所以目前能想到的办法就是直接操作数据库文件进行修改。
+
+打开 `powershell` 终端（注意：使用vs中的powershell会出现无法输入 y/n 的情况，因为删除的时候要求确认）。
+
+假设打包的文件为：test-pkg.1.0.0.nupkg, 那么删除此版本的命令为：
+
+
+```bash
+dotnet nuget delete text-pkg 1.0.0 -s http://xxxx:8008/v3/index.json -k NUGET-SERVER-API-KEY 
+
+```
+
+先备份数据文件夹
+
+将docker共享文件夹设置为可以在网上邻居上显示
+
+使用sqlitestudio 连接数据库文件 bagetter.db
+
+可以将 Packages 表中对应版本号的数据的版本号 改为一个测试版本号，也就是不删除，这样可以保持数据完整性，同时又可以重复上传同名的版本号
+
 
 ### 使用包
 

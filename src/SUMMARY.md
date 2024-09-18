@@ -100,6 +100,10 @@
 - [Linux]()
   - [SSH连接服务器](linux/ssh-connect-server.md)
   - [Docker](linux/docker.md "docker")
+---
+- [Googel]()
+  - [下载Google商店中的APK](Googel/download-apk.md)
+   
 ----
 - [开发工具]()
   - [Git](developer-tools/git.md)

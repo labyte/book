@@ -1,6 +1,6 @@
 # 下载Google商定APK
 
-使用梯子进入Googel商店
+使用梯子进入[Googel商店](https://play.google.com/store)
 
 找到要下载的软件
 

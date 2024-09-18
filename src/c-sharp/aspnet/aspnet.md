@@ -1,6 +1,73 @@
 # Asp.Net
 
 
+## 全局异常捕获
+
+默认的异常提示
+
+```
+2024-09-18 17:47:51.7860 error：An unhandled exception has occurred while executing the request.
+```
+
+希望的异常提示，最好是有栈跟踪，或者具有明确的错误信息。
+
+### 通过控制器的过滤器捕获
+
+> 具有栈跟踪
+
+定义过滤器
+
+```c#
+ public class CustomExceptionFilter : IExceptionFilter
+ {
+     private readonly ILogger<CustomExceptionFilter> _logger;
+
+     // 注入日志服务
+     public CustomExceptionFilter(ILogger<CustomExceptionFilter> logger)
+     {
+         _logger = logger;
+     }
+     public void OnException(ExceptionContext context)
+     {
+         var exception = context.Exception;
+
+         _logger.LogError("控制器异常："+exception.ToString());
+         // 记录异常
+         context.Result = new RedirectToActionResult("Error", "Home", null);
+         context.ExceptionHandled = false; // 标记异常未处理，让全局获取
+     }
+ }
+```
+
+注册
+
+```c#
+    // 注册全局异常过滤器
+    builder.Services.AddControllersWithViews(options =>
+    {
+        options.Filters.Add<CustomExceptionFilter>(); // 全局添加过滤器
+    });
+
+
+```
+
+
+### 捕获控制器的过滤器无法处理的
+
+> 无栈跟踪，提供错误信息
+
+
+```c#
+    builder.Services.AddProblemDetails(options =>
+            options.CustomizeProblemDetails = (context) =>
+            {
+                logger.Error($"全局异常捕获：Title: {context.ProblemDetails.Title}，Detail: {context.ProblemDetails.Detail}");
+
+            }
+        );
+```
+
+
 ## 部署 IIS
 
 > 说明：使用IIS部署，通常是 `http` 协议，后面要通过 **Nginx** 来代理访问，因为 **Nginx** 配置证书等比较方便

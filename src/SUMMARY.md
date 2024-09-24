@@ -119,14 +119,18 @@
   - [Nginx](运维/nginx/nginx.md "Nginx")
   - [Let's Encrypt](运维/let-s-encrypt/let-s-encrypt.md "Let's Encrypt")
 ---
-- [软件](softs/index.md)
 
+- [软件]()
+  - [Typora](softs/typora.md)
+  - [Xournal++](softs/xournalpp.md)
+  - [Bulk Rename Utility](softs/bulk-rename-utility.md)
+  - [ExifTool](softs/exif-tool.md)
+  - [Telegram](softs/telegram.md)
   - [Excel](softs/excel.md)
   - [Visual Studio](softs/visual-studio.md)
   - [Visual Studio Code](softs/visual-studio-code.md)
   - [JetBrains Rider](softs/jetbrains-rider.md)
-  - [Typora](softs/typora.md)
-  - [Telegram](softs/telegram.md)
+  - [其他](softs/others.md)
   
 
 ---

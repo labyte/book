@@ -51,17 +51,18 @@
 
 # CSharp
 
-## 应用程序设置（Settings.settings）
+## 项目设置
+### 应用程序设置（Settings.settings）
 
 在WPF、Winform、Web项目中都有应用程序设置，以下以WPF为例。
 
 **创建和打开配置文件**
 
-![1722478718891](image/index/1722478718891.png)
+![1722478718891](image/c-sharp/1722478718891.png)
 
 **配置文件设计窗口**
 
-![1722478766425](image/index/1722478766425.png)
+![1722478766425](image/c-sharp/1722478766425.png)
 
 * **名称**：变量名
 * **类型**：字符串、整数、布尔值、集合等。
@@ -163,7 +164,7 @@ Properties.Settings.Default.Save();
 
 动态配置数据，如用户偏好、应用程序配置参数等。
 
-## 应用程序资源（Resources.resx）
+### 应用程序资源（Resources.resx）
 
 **用途**：管理应用程序的静态资源和多语言资源。
 
@@ -239,6 +240,173 @@ string greeting = Resources.Greeting; // 将会返回法语的问候语
 - 使用场景：动态配置数据，如用户偏好、应用程序配置参数等。
 - 通过理解这些区别，你可以更好地管理和组织 WPF 应用程序中的资源和设置，确保应用程序的灵活性和可维护性。
 
-## 资源收集
+
+
+## 时间格式化
+
+**DateTime 格式化**
+
+```C#
+dateTime.ToString("yyyy-MM-DD hh:mm:ss");
+```
+**TimeSpan 格式化**
+
+`常用：timeSpan.ToString(@"dd\.hh\:mm\:ss");` 或则 `timeSpan.ToString("dd\\.hh\\:mm\\:ss");`区别是否使用转义符号。
+
+```C#
+using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      TimeSpan duration = new TimeSpan(1, 12, 23, 62);
+
+      string output = null;
+      output = "Time of Travel: " + duration.ToString("%d") + " days";
+      Console.WriteLine(output);
+      output = "Time of Travel: " + duration.ToString(@"dd\.hh\:mm\:ss");
+      Console.WriteLine(output);
+
+      Console.WriteLine("Time of Travel: {0:%d} day(s)", duration);
+      Console.WriteLine("Time of Travel: {0:dd\\.hh\\:mm\\:ss} days", duration);
+   }
+}
+// The example displays the following output:
+//       Time of Travel: 1 days
+//       Time of Travel: 01.12:24:02
+//       Time of Travel: 1 day(s)
+//       Time of Travel: 01.12:24:02 days
+```
+
+
+## Linq
+
+### 多个属性具有相同处理逻辑
+
+使用 Expression 来实现
+
+> Expression：将强类型lambda表达式表示为表达式树形式的数据结构。该类不能被继承，当一个对象存在多个相同类型的属性，且这些属性控制的功能相同时,可以使用 Expression 来实现
+
+
+- 有一组 Person, 需要遍历每个person，根据属性  **A** 或者  **B**，判断是说 `Hello` 还是 `Bye`
+- Person
+
+```
+    public class Person
+    {
+        public string Name { get; set; }
+        public bool pA { get; set; }
+        public bool pB { get; set; }
+    }
+
+```
+- 创建 Person List
+
+```
+    class ExpressionTest
+    {
+        List<Person> persons = new List<Person>();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+        ...
+    }
+```
+
+#### 常规解法
+- 分别写两个方法，根据属性A 或者 属性B 来判断
+
+``` C#
+  internal class ExpressionTest
+    {
+        List<Person> persons = new List<Person>();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+
+        /* 需求： 遍历 persons， 根据 pA 或者 pB 的值，判断每个人是说 hello 还是 bye
+         * 常规写法： 分别些两个方法遍历判断
+         * Expression: 通过表达式实现通用写法
+         * 
+         */
+        #region 常规写法
+
+        private void SayHelloByA()
+        {
+            foreach (var p in persons)
+            {
+                if (p.pA)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+           
+        }
+        private void SayHelloByB()
+        {
+            foreach (var p in persons)
+            {
+                if (p.pB)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+
+        }
+
+        #endregion
+       // 测试
+       public void Test()
+        {
+            SayHelloByA();// 输出: Say Hello!
+            SayHelloByB();// 输出: Say Bye!
+        }
+    }
+```
+
+-  **存在的问题** ： 如果我们有多个属性 C D E F，那么我们就需要写多少方法，但是发现这些方法的逻辑都是一样的。总感觉很别扭，此时就要用到 **Expression** 
+
+#### Expression 写法
+
+```C#
+ internal class ExpressionTest
+    {
+        List<Person> persons = new List<Person>();
+        public ExpressionTest()
+        {
+            persons.Add(new Person { Name = "Jerry", pA = true, pB = false });
+            persons.Add(new Person { Name = "Shin", pA = true, pB = false });
+        }
+       
+        #region  Expression
+        public void SayHello(Expression<Func<Person, bool>> expr)
+        {
+            var valProp = (PropertyInfo)(((MemberExpression)expr.Body).Member);
+            foreach (var p in persons)
+            {
+                bool isShow = (bool)valProp.GetValue(p, null);
+                if (isShow)
+                    Console.WriteLine($"[{p.Name}]\tSay Hello！");
+                else
+                    Console.WriteLine($"[{p.Name}]\tSay Bye！");
+            }
+        }
+        #endregion
+       // 测试
+       public void Test()
+        {
+            SayHello(x => x.pA);// 输出: Say Hello!
+            SayHello(x => x.pB);// 输出: Say Bye!
+        }
+    }
+```
+- 通过表达式，让调用者来确定条件的值。
+
+## 开源项目
 
 1. [一款基于.Net WinForm的节点编辑器](https://github.com/DebugST/STNodeEditor)：纯GDI+绘制 使用方式非常简洁 提供了丰富的属性以及事件 可以非常方便的完成节点之间数据的交互及通知 大量的虚函数供开发者重写具有很高的自由性。

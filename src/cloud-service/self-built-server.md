@@ -29,23 +29,23 @@
 
 **新增**
 
-![](image/image_I2EhGQ_mKL.png)
+![](assets/self-built-server/image_I2EhGQ_mKL.png)
 
 **列表**
 
-![](image/image_i9l8pdqZ9c.png)
+![](assets/self-built-server/image_i9l8pdqZ9c.png)
 
 ### 路由器配置虚拟服务器
 
 配置端口映射，配置完成后需要 **重启**！
 
-![](image/image_b05kzKxZzb.png)
+![](assets/self-built-server/image_b05kzKxZzb.png)
 
 ### NAT-DMZ
 
 设置哪些主机（IP）对外开放
 
-![](image/image_SQ2bSN50xm.png)
+![](assets/self-built-server/image_SQ2bSN50xm.png)
 
 ### UPnP
 
@@ -53,4 +53,4 @@
 
 ## Nginx 作为代理服务器
 
-详细见: [Nginx](../nginx/Nginx.md)
+详细见: [Nginx](../technology-stack/nginx.md#nginx)

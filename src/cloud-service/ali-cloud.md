@@ -12,11 +12,11 @@
 - 填写域名，并根据提示设置，自动Dns验证等
 - 提交审核，注意这里点击下验证，是否成功，可以看到 需要填写 TXT 记录（注意这里有可能是CNAME记录），在我们的云解析里面看下是否有相关的一条 记录，没有就加上，我第一次操作的时候没自动加上，审核失败，然后第二次看这里自动多了条记录。如下图：
 
-![](image/image_RKRrhCkBWt.png)
+![](assets/ali-cloud/image_RKRrhCkBWt.png)
 
 - **审核通过** 后出现了下载按钮，可根据选项下载
 
-![](image/image_22eoF1qt5u.png)
+![](assets/ali-cloud/image_22eoF1qt5u.png)
 
 - **证书的更新** ：免费证书仅3个月的有效期，在将要过期前，我们可以再申请一个证书，替换将要过期的证书。
 
@@ -30,7 +30,7 @@
 
 - 设置安全组，注意这里一定要选择地域，之前找不到这个地域在哪里，看半天才看到。
 
-![](image/image_M-t0SM94cS.png)
+![](assets/ali-cloud/image_M-t0SM94cS.png)
 
 - 主机的防护墙可以关闭
 
@@ -139,15 +139,15 @@ AliyunECSFullAccess”的授权，创建角色完成。
 
 3. 在页面左侧顶部，选择目标资源所在的资源组和地域。地域
 
-    ![alt text](image/image-选择目标资源所在的资源组和地域.png)
+    ![alt text](assets/ali-cloud/image-选择目标资源所在的资源组和地域.png)
 
 4. 找到要操作的ECS实例，选择图标 > 实例设置 > 授予/收回RAM角色。
 
-    ![alt text](image/image-授予收回RAM角色.png)
+    ![alt text](assets/ali-cloud/image-授予收回RAM角色.png)
 
 5. 在对话框中，选择创建好的实例RAM角色，单击确定。
 
-    ![alt text](image/image-选择RAM角色.png)
+    ![alt text](assets/ali-cloud/image-选择RAM角色.png)
 
 
 **SDK 使用示例**
@@ -219,16 +219,16 @@ client.SetRegion(region);
 2. 如果使用了阿里云的 ECS 云服务器，那么可以使用 ECS 云服务器的域名，来解析一个二级域名，比如当前注册的域名为 yuming.com,目前可以通过 `yuming.com` 或者 `www.yuming.com` 访问 ECS 云服务器上部署的网站，同时可以添加解析 `abc.yuming.com` 来绑定 oss 的 bucket.
 3. 在域名控制台添加解析，这里选择 `CNAME`，并添加一个二级域名 `abc`（这步优先在OSS绑定域名）
 
-    ![alt text](image/添加域名解析.png)
+    ![alt text](assets/ali-cloud/添加域名解析.png)
 
 4. OSS 绑定域名 `abc.yuming.com`，注意不是绑定 `yuming.com`（现在域名控制台添加解析后，再操作这步）
 
-   ![alt text](image/image_oss-band-domain.png)
+   ![alt text](assets/ali-cloud/image_oss-band-domain.png)
 
 
 5. 为资源设定 自有域名，然后通过URL地址可预览，注意只有在公共读的权限下才可以使用这个地址预览，否则要使用签名
 
-    ![alt text](image/image_oss-资源详情.png)
+    ![alt text](assets/ali-cloud/image_oss-资源详情.png)
 
 6. 关于签名获取地址，通过 [官网文档](https://help.aliyun.com/zh/oss/developer-reference/ddd-signatures-to-urls?spm=a2c4g.11186623.0.0.15c93bb91D6GFD#section-4lx-3kk-upk) 获取各语言的接口
 

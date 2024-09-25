@@ -4,7 +4,7 @@
 
 ## 连接服务器
 
-连接Docker所在的服务器：[前往](ssh-connect-server.md#ssh-连接服务器)，连接成功后即可使用 `docker` 命令
+连接Docker所在的服务器：[前往](ssh.md#ssh)，连接成功后即可使用 `docker` 命令
 
 ## 命令
 
@@ -45,7 +45,7 @@ docker run -d --rm --name nuget-server -p 8008:8008 --env-file bagetter.env -v "
 
 以下流程基于群晖的 **Docker** 进行部署。
 
-**一、[连接Docker所在的服务器](ssh-connect-server.md#ssh-连接服务器)**
+**一、[连接Docker所在的服务器](ssh.md#ssh)**
 
 **二、创建外部挂载的文件夹 `/volume2/docker/bagetter/8008/data`，如果不创建会报错找不到文件夹**
 

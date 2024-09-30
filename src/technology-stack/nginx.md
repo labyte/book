@@ -54,3 +54,65 @@ timeout /t 2 /nobreak >nul
 pause
 
 ```
+
+
+## 实现浏览器播放音视频
+
+默认情况下，将音视频放在Nginx中，在浏览器上打开触发的是下载操作
+
+修改配置文件（支持单格式）
+
+```conf
+server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+			# autoindex off; # 好像不能写这个
+			expires 30d;
+			add_header Content-Type audio/wav; # 这里配置支持wav文件，其他格式相应调整
+			add_header Cache-Control "public";
+            index  index.html index.htm;
+        }
+}
+```
+
+修改配置文件（支持多格式）
+
+```conf
+server {
+  listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+			# autoindex off;
+			expires 30d;
+			# add_header Content-Type audio/wav; # 这里配置支持wav文件，其他格式相应调整
+			# add_header Cache-Control "public";
+			
+			types {
+				# 添加音频MIME类型
+				audio/mpeg mp3;
+				audio/ogg ogg;
+				audio/wav wav;
+				audio/x-aac aac;
+				audio/x-ms-wma wma;
+				audio/webm webm;
+			}
+
+			# 设置默认类型为octet-stream可作为通用后备
+			default_type application/octet-stream;		
+            index  index.html index.htm;
+        }      
+}
+```

@@ -1,9 +1,32 @@
 # Git
 
+## 退出代理导致连接失败
+
+环境：macbook
+
+现象：使用代理后，退出代理，出现无法连接仓库地址（浏览器正常），github 和 gitee都无法连接。
+
+错误信息：
+
+```
+fatal: unable to access 'https://github.com/benjieqiang/programmer.git/': Failed to connect to 127.0.0.1 port 7890: Connection refused
+```
+
+解决方案：
+
+查看代理
+git config --global --get http.proxy
+git config --global --get https.proxy
+
+取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
 
 ## 推送失败
 
-### error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+```
+error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+```
 
 推送时出现以下错误提示
 
@@ -55,7 +78,7 @@ Hint: invocation.
 这个错误提示是因为你的本地分支和远程分支之间有分歧（divergent branches），Git 需要你指定如何处理这些分歧。在拉取（pull）代码时，Git 既可以通过合并（merge）来解决分歧，也可以通过重置（rebase）来解决分歧。
 
 
-### 快速解决
+快速解决
 
 使用终端执行命令：
 

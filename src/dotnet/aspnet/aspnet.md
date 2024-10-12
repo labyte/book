@@ -1,6 +1,38 @@
 # Asp.Net
 
 
+## 控制器
+
+### 访问路径问题
+
+假设在本机访问，端口为 `80`， 代码示例，配置了两个接口 `Get1` 和 `Get2` 
+
+```c#
+    [ApiController]
+    [Route("[controller]")]
+    public class TestController : ControllerBase
+    {
+
+        //使用 http://localhost/Test/Get1 访问
+        [HttpGet("Get1")] 
+        public async Task<int> Get1()
+        {
+            //...
+        }
+        //使用 http://localhost/Get2 访问
+        [HttpGet("/Get2")]
+        public async Task<int> Get2()
+        {
+            //...
+        }
+    }
+```
+
+- 当 HttpGet 中的路由地址以 `/` 开头，那么地址不会加上控制器的名称，如：http://localhost/Get2
+- 当 HttpGet 中的路由地址不以 `/` 开头，那么地址会自动加上控制器的名称，如：http://localhost/Test/Get1
+
+
+
 ## 全局异常捕获
 
 默认的异常提示

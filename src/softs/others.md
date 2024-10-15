@@ -76,8 +76,13 @@
         <tbody>
             <tr>
                 <td>1</td>
-                <td><a href="https://potplayer.daum.net">PotPlayer</a></td>
+                <td><a href="https://potplayer.daum.net">视频播放器：potplayer</a></td>
                 <td>外网访问</td>
+            </tr>
+             <tr>
+                <td>2</td>
+                <td><a href="https://obsproject.com">录屏软件：OBS Studio</a></td>
+                <td>开源，免费，可选择录屏来源，如某个程序，下载时有点慢，可以在群晖上下载</td>
             </tr>
         </tbody>
     </table>

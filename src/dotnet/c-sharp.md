@@ -407,6 +407,191 @@ public class Example
 ```
 - 通过表达式，让调用者来确定条件的值。
 
+
+## 泛型基类
+
+> 无法创建显示类型的基类问题
+> 解决方案：将泛型参数作为构造函数的参数，调用的函数中不要包含泛型参数，同时将函数提升为接口（新增接口），转换为面向接口编程
+
+**需求场景**：
+
+有多个数据结构，它们继承同一个基类，需要创建不同的 'Handler' 来处理不同的数据结构。
+
+
+基类：
+
+```csharp
+public class BaseClass{
+    public string Name{get;set;}
+}
+```
+
+子类A
+
+```csharp
+public class AClass：BaseClass{
+}
+```
+
+
+子类B
+
+```csharp
+public class BClass：BaseClass{
+}
+```
+Handler base
+
+```csharp
+public abstract class BaseHandler<T>{
+
+    public abstract void DoSomthing(T data);
+   
+
+}
+```
+
+
+
+Handler A
+
+```csharp
+public class AHandler:BaseHandler<AClass>{
+
+    public override void DoSomthing(T data)
+    {
+       Console.WriteLine($"A handel {data.Name}");
+    }
+}
+```
+
+Handler B
+
+```csharp
+public class BHandler:BaseHandler<BClass>{
+     public override void DoSomthing(T data)
+    {
+          Console.WriteLine($"B handel {data.Name}");
+    }
+}
+```
+
+处理逻辑(失败)
+
+```csharp
+public void Handler(T data)
+{
+    //这里无法这样声明，因为泛型需要显示的指定类型，然后如果显示的指定类型，就无法使用到达我们多态的需求
+    BaseHandler? = null;
+    if(typeof(T) == typeof(AClass))
+        return new AHandler();
+    if(typeof(T) == typeof(BClass))
+        return new BHandler();
+    BaseHandler.DoSomthing(data);
+
+}
+```
+
+**处理逻辑解读：** 无法这样声明，因为泛型需要显示的指定类型，然后如果显示的指定类型，就无法使用到达我们多态的需求
+
+--- 
+
+**解决办法**：
+
+- 将多态的概念转变为面向接口编程
+- 将调用的函数提升为接口，并且接口不要包含泛型参数
+- 将参数放在构造函数中初始化
+- 使用工厂创建处理器
+
+接口定义
+
+```csharp
+public interface IHandler{
+    void DoSomthing();
+}
+
+```
+
+
+处理器基类实现接口，并定义包含泛型参数的构造函数
+
+```csharp
+public abstract class BaseHandler<T>:IHandler{
+
+    public T Data{get;set;}
+    public abstract void DoSomthing();
+   
+
+}
+```
+
+
+Handler A 新增 含泛型参数的构造函数
+
+```csharp
+public class AHandler:BaseHandler<AClass>{
+
+    public AHandler(AClass data)
+    {
+        this.Data = data;
+    }
+    public override void DoSomthing(T data)
+    {
+       Console.WriteLine($"A handel {Data.Name}");
+    }
+}
+```
+
+Handler B 新增 含泛型参数的构造函数
+
+```csharp
+public class BHandler:BaseHandler<BClass>{
+     public BHandler(BClass data)
+    {
+        this.Data = data;
+    }
+     public override void DoSomthing()
+    {
+          Console.WriteLine($"B handel {Data.Name}");
+    }
+}
+```
+
+增加创建工厂
+
+```csharp
+public class HandlerFactory
+    {
+        public static IHandler CreateHandler<T>(T data) where T : BaseClass 
+        {
+            if (typeof(T) == typeof(AClass))
+            {
+                return new AHandler(data as AClass);
+            }
+            if (typeof(T) == typeof(FlowPsdSingelOpen))
+            {
+               return new BHandler(data as BClass);
+            }
+            throw new ArgumentException("HandlerFactory: CreateHandler: Unsupported type: " + data.GetType());
+        }
+    }
+```
+
+
+处理逻辑(使用接口)
+
+```csharp
+public void Handler(T data)
+{
+    //使用工厂创建
+    BaseHandler= HandlerFactory.CreateHandler(data);
+    BaseHandler.DoSomthing();
+
+}
+```
+
 ## 开源项目
 
 1. [一款基于.Net WinForm的节点编辑器](https://github.com/DebugST/STNodeEditor)：纯GDI+绘制 使用方式非常简洁 提供了丰富的属性以及事件 可以非常方便的完成节点之间数据的交互及通知 大量的虚函数供开发者重写具有很高的自由性。
+
+

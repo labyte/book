@@ -41,6 +41,7 @@
   - [发布 WebGL 平台](unity/build-webgl.md)
   - [发布 安卓 平台](unity/build-android.md)
   - [发布 IOS 平台](unity/build-ios.md)
+  - [包：UniTask](unity/packages/UniTask.md)
   - [包：Sqlite](unity/packages/sqlite.md)
   - [包：StarterAssets](unity/packages/StarterAssets.md)
   - [包：Addressables](unity/packages/Addressables.md)

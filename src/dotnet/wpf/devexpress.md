@@ -32,13 +32,89 @@ vs中直接创建DevExpress的模板项目，可以选择使用的.net版本
 ![1722507105165](image/devexpress/1722507105165.png)
 
 
+## 案例
+
+### 运行案例
+
+在 `VS` 中打开
+
+![DevExpress 案例程序](assets/devexpress/image-1.png)
+
+在开始菜单中直接打开程序（操作略）。
+
+### Demo Source Code
+
+案例源码打开方式：
+
+在开始菜单中，点击开始菜单->所有程序->DevExpress xx.x
+
+![DevExpress demo source code](assets/devexpress/image.png)
+
+一般路径为：
+
+`C:\Users\Public\Documents\DevExpress Demos 23.2`
+
+## 汉化 
+
+**网络上教程**：[DevExpress：手把手教你用官方汉化资源做汉化](https://blog.csdn.net/weixin_45132755/article/details/132039135?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-132039135-blog-109551776.235^v43^pc_blog_bottom_relevance_base5&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-132039135-blog-109551776.235^v43^pc_blog_bottom_relevance_base5&utm_relevant_index=5)
+
+**防丢失记录**：
+
+- 进入官网 [https://www.devexpress.com/MyAccount/](https://www.devexpress.com/MyAccount/)，使用账号登录
+
+- 点击 支持（SUPPORT $ DOCS）
+
+- 点击本地化 （Localization）
+
+    ![alt text](assets/devexpress/image-2.png)
+ 
+- 选择当前使用的 **DevExpress** 版本和对应的语言 
+
+- 中文包相关说明
+    - zh-CN：简体中文
+    - zh-hans：简体中文，和zh-CN等价，在net 6.0中发布时，默认已经有一个 zh-hans包，我们只需要使用这个就可以了
+    - zh-hant：繁体中文
+
+    ![alt text](assets/devexpress/image-3.png)
+
+- 点击下载，大概半个小时以邮件的方式发送连接给我们
+
+- 收到邮件后下载（邮件中的附件地址有过期时间），解压后包含源码文件夹 `src` 和已经发布的汉化文件 `dll`, 拷贝需要的dll到自己的工程中，如：zh-hans
+
+- 源码可自定义汉化，并且处理一些原本未汉化的内容。
+
+
+
+**汉化失败处理**：
+
+官方提供的汉化包，有些没有汉化，可以通过提供的源码自己更改汉化。
+
+
+（1）通过邮件附件中附带的src源码工程添加缺少的汉化，注意工程中勾选了生产签名，取消签名即可。
+
+（2）通过 资源设置 来配置汉化。
+
+
+Windows 窗口，最小化按钮汉化失败处理对比：
+
+版本：23.2.4 wpf
+
+修改前
+
+![1722507003938](image/devexpress/1722507003938.png)
+
+修改后
+
+![1722507009226](image/devexpress/1722507009226.png)
+
+
 ## 功能模块
 
 ### SplashScreen
 
 > 软件启动时的加载界面
 
-#### 模板自带的启动画面
+**模板自带的启动画面**
 
 **版本：** 23.2
 
@@ -55,9 +131,9 @@ vs中直接创建DevExpress的模板项目，可以选择使用的.net版本
  }
 ```
 
-#### 自定义启动加载画面
+**自定义启动加载画面**
 
-**根据官方文档（失败）**
+> 根据官方文档（失败）
 
 自定义启动加载画面，根据官网文档以及下载github上的模板参考后还是没有成功，后续再研究
 
@@ -125,7 +201,7 @@ To apply the default theme mechanism to the splash screen content, set AllowThem
 
 ### GridControl 
 
-#### 行模块中绑定按钮
+**(1) 行模块中绑定按钮**
 
 注意当我们点击行中的某个按钮，把当前行绑定的对象作为参数传递给命令函数时：
 
@@ -184,37 +260,3 @@ public MainViewModel()
      });
 }
 ```
-
-## 汉化 
-
-[网络上教程](https://blog.csdn.net/weixin_45132755/article/details/132039135?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-132039135-blog-109551776.235^v43^pc_blog_bottom_relevance_base5&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-132039135-blog-109551776.235^v43^pc_blog_bottom_relevance_base5&utm_relevant_index=5)
-
-
-- 进入官网 [https://www.devexpress.com/MyAccount/](https://www.devexpress.com/MyAccount/)，可以免费下载汉化包
-- 点击支持→本地化
-- 然后添加你要下载的版本，有几个相关的包
-    - zh-CN：简体中文
-    - zh-hans：简体中文，和zh-CN等价，在net 6.0中发布时，默认已经有一个 zh-hans包，我们只需要使用这个就可以了
-    - zh-hant：繁体中文
-- 点击下载，以邮件的方式发送连接给我们
-- 收到邮件后下载，解压，拷贝需要的dll到 文件夹下，如：zh-hans
-
-
-
-### 汉化失败记录
-
-**一、 windows 窗口，最小化按钮汉化失败**
-
-版本：23.2.4 wpf
-
-修改前
-
-![1722507003938](image/devexpress/1722507003938.png)
-
-修改后
-
-![1722507009226](image/devexpress/1722507009226.png)
-
-
-**解决方案：** 通过附带的src源码自己添加缺少的汉化，注意工程中勾选了生产签名，取消签名即可。
-

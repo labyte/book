@@ -34,23 +34,27 @@ vs中直接创建DevExpress的模板项目，可以选择使用的.net版本
 
 ## 案例
 
-### 运行案例
+> DevExpress 安装时，提供了一系列案例（包含源码和编译好的exe）
 
-在 `VS` 中打开
+**运行案例程序**
+
+- 第一种：在 `VS` 中直接运行案例程序：
 
 ![DevExpress 案例程序](assets/devexpress/image-1.png)
 
-在开始菜单中直接打开程序（操作略）。
+- 第二种：在开始菜单中运行案例exe程序（操作略）。
 
-### Demo Source Code
+**查看案例源码**
 
-案例源码打开方式：
+每个案例窗口上可以查看源码或者直接打开源码解决方案，如下图：
 
-在开始菜单中，点击开始菜单->所有程序->DevExpress xx.x
+![alt text](assets/devexpress/image-4.png)
+
+同时也可以通过开始菜单，所有程序->DevExpress xx.x 中打开源码路径
 
 ![DevExpress demo source code](assets/devexpress/image.png)
 
-一般路径为：
+路径默认在 **公共用户** 的文档目录下：
 
 `C:\Users\Public\Documents\DevExpress Demos 23.2`
 
@@ -260,3 +264,90 @@ public MainViewModel()
      });
 }
 ```
+
+
+### RichEditControl
+
+富文本控件：可以渲染长文和图片。可以读取 mht/rtf/odt 等格式的文件，但是使用后，如下效果：
+
+- rtf: 显示正常（注意段落中不要打空格，否则会直接换行）
+- mht: 中文显示 ？号，英文和图片正常显示（未解决）
+- odt：直接没有渲染出来
+
+使用描述（RTF）：
+
+1. 通过 **Word** 编辑好文本后,转化为 `tft` 格式
+2. 后端加载文件
+
+```c#
+using DevExpress.Mvvm;
+using DevExpress.Mvvm.POCO;
+using Microsoft.Win32;
+using System.Collections.ObjectModel;
+using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+using System.Windows.Media;
+using System.IO;
+using System.Linq;
+using TsimTool.Properties;
+using System.Windows;
+
+namespace TsimTool.ViewModels
+{
+    public class ToolDescriptionViewModel : ViewModelBase
+    {
+        private string _text;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get { return _text; }
+            set { _text = value; }
+        }
+
+        public ToolDescriptionViewModel() {
+
+            Text = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Docs/工具说明.rtf"));
+        }
+
+    }
+}
+
+```
+
+3. 前端绑定（注意要使用rtf转换器），感觉控件是根据绑定的文本内容格式来自动设定控件的内容格式，但是要手动指定转换器
+```xml
+<UserControl xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  
+             xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"  
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+             xmlns:ViewModels="clr-namespace:TsimTool.ViewModels" 
+             xmlns:dxe1="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"  
+             x:Class="TsimTool.Views.ToolDescriptionView"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <dxre:MhtToContentConverter x:Key="MhtToContentConverter"/>
+        <dxre:RtfToContentConverter x:Key="RtfToContentConverter"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <ViewModels:ToolDescriptionViewModel/>
+    </UserControl.DataContext>
+    <dxre:RichEditControl x:Name="richEditControl"  
+    ReadOnly="True" ActiveViewType="Simple" ShowBorder="False" 
+    HorizontalScrollBarVisibility="Collapsed" HorizontalAlignment="Stretch"
+    Content="{Binding Path=Text, Converter={StaticResource RtfToContentConverter}}"/>
+
+</UserControl>
+
+```
+
+

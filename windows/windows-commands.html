@@ -1,0 +1,1113 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Windows 命令行 - Labyte Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/style1.css">
+        <link rel="stylesheet" href="../theme/css/table.css">
+        <link rel="stylesheet" href="../assets/mermaid.css">
+        <link rel="stylesheet" href="../assets/print.css">
+        <link rel="stylesheet" href="../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Introduction.html">首页</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> DotNet</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/c-sharp.html"><strong aria-hidden="true">1.1.</strong> CSharp</a></li><li class="chapter-item "><a href="../dotnet/nuget.html"><strong aria-hidden="true">1.2.</strong> Nuget</a></li><li class="chapter-item "><a href="../dotnet/packages/messagepack.html"><strong aria-hidden="true">1.3.</strong> 包：Messagepack</a></li><li class="chapter-item "><a href="../dotnet/packages/memorypack.html"><strong aria-hidden="true">1.4.</strong> 包：MemoryPack</a></li><li class="chapter-item "><a href="../dotnet/packages/dotnetty.html"><strong aria-hidden="true">1.5.</strong> 包：DotNetty</a></li><li class="chapter-item "><a href="../dotnet/packages/stackexchange-redis.html"><strong aria-hidden="true">1.6.</strong> 包：StackExchange.Redis</a></li><li class="chapter-item "><a href="../dotnet/packages/epplus.html"><strong aria-hidden="true">1.7.</strong> 包：EPPlus</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/wpf/index.html"><strong aria-hidden="true">2.</strong> WPF</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/wpf/listbox.html"><strong aria-hidden="true">2.1.</strong> ListBox</a></li><li class="chapter-item "><a href="../dotnet/wpf/listview.html"><strong aria-hidden="true">2.2.</strong> ListView</a></li><li class="chapter-item "><a href="../dotnet/wpf/项目版本号.html"><strong aria-hidden="true">2.3.</strong> 项目版本号</a></li><li class="chapter-item "><a href="../dotnet/wpf/资源引用.html"><strong aria-hidden="true">2.4.</strong> 资源引用</a></li><li class="chapter-item "><a href="../dotnet/wpf/devexpress.html"><strong aria-hidden="true">2.5.</strong> DevExpress</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> WinForm</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/winform/tray.html"><strong aria-hidden="true">3.1.</strong> 托盘开发</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/aspnet/aspnet.html"><strong aria-hidden="true">4.</strong> Asp.Net</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-signalr.html"><strong aria-hidden="true">4.1.</strong> SignalR</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-证书.html"><strong aria-hidden="true">4.2.</strong> 证书</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-jwt.html"><strong aria-hidden="true">4.3.</strong> Jwt</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-blazor.html"><strong aria-hidden="true">4.4.</strong> Blazor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-bootstrap-blazor.html"><strong aria-hidden="true">4.4.1.</strong> BootstrapBlazor</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">5.</strong> Unity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../unity/ui.html"><strong aria-hidden="true">5.1.</strong> UI</a></li><li class="chapter-item "><a href="../unity/animation.html"><strong aria-hidden="true">5.2.</strong> 动画</a></li><li class="chapter-item "><a href="../unity/camera.html"><strong aria-hidden="true">5.3.</strong> 相机</a></li><li class="chapter-item "><a href="../unity/vector.html"><strong aria-hidden="true">5.4.</strong> 向量</a></li><li class="chapter-item "><a href="../unity/lighting.html"><strong aria-hidden="true">5.5.</strong> 灯光</a></li><li class="chapter-item "><a href="../unity/material-shader.html"><strong aria-hidden="true">5.6.</strong> 材质</a></li><li class="chapter-item "><a href="../unity/monobehavior.html"><strong aria-hidden="true">5.7.</strong> 行为脚本</a></li><li class="chapter-item "><a href="../unity/timeline.html"><strong aria-hidden="true">5.8.</strong> Timeline</a></li><li class="chapter-item "><a href="../unity/vr/SteamVR.html"><strong aria-hidden="true">5.9.</strong> Steam VR</a></li><li class="chapter-item "><a href="../unity/优化/资源优化.html"><strong aria-hidden="true">5.10.</strong> 资源优化</a></li><li class="chapter-item "><a href="../unity/特殊文件夹.html"><strong aria-hidden="true">5.11.</strong> 特殊文件夹</a></li><li class="chapter-item "><a href="../unity/build-window.html"><strong aria-hidden="true">5.12.</strong> 发布 Window 平台</a></li><li class="chapter-item "><a href="../unity/build-webgl.html"><strong aria-hidden="true">5.13.</strong> 发布 WebGL 平台</a></li><li class="chapter-item "><a href="../unity/build-android.html"><strong aria-hidden="true">5.14.</strong> 发布 安卓 平台</a></li><li class="chapter-item "><a href="../unity/build-ios.html"><strong aria-hidden="true">5.15.</strong> 发布 IOS 平台</a></li><li class="chapter-item "><a href="../unity/packages/UniTask.html"><strong aria-hidden="true">5.16.</strong> 包：UniTask</a></li><li class="chapter-item "><a href="../unity/packages/sqlite.html"><strong aria-hidden="true">5.17.</strong> 包：Sqlite</a></li><li class="chapter-item "><a href="../unity/packages/StarterAssets.html"><strong aria-hidden="true">5.18.</strong> 包：StarterAssets</a></li><li class="chapter-item "><a href="../unity/packages/Addressables.html"><strong aria-hidden="true">5.19.</strong> 包：Addressables</a></li><li class="chapter-item "><a href="../unity/packages/CurvySpine.html"><strong aria-hidden="true">5.20.</strong> 包：CurvySpine</a></li><li class="chapter-item "><a href="../unity/packages/DoTween.html"><strong aria-hidden="true">5.21.</strong> 包：DoTween</a></li><li class="chapter-item "><a href="../unity/packages/EasySave.html"><strong aria-hidden="true">5.22.</strong> 包：EasySave</a></li><li class="chapter-item "><a href="../unity/packages/ET网络框架.html"><strong aria-hidden="true">5.23.</strong> 包：ET网络框架</a></li><li class="chapter-item "><a href="../unity/packages/InputSystemPackage.html"><strong aria-hidden="true">5.24.</strong> 包：InputSystemPackage</a></li><li class="chapter-item "><a href="../unity/packages/MagicOnion.html"><strong aria-hidden="true">5.25.</strong> 包：MagicOnion</a></li><li class="chapter-item "><a href="../unity/packages/NativeShare.html"><strong aria-hidden="true">5.26.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Nativefileso.html"><strong aria-hidden="true">5.27.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Newtonsoft.html"><strong aria-hidden="true">5.28.</strong> 包：Newtonsoft</a></li><li class="chapter-item "><a href="../unity/packages/NewUIWidgets.html"><strong aria-hidden="true">5.29.</strong> 包：NewUIWidgets</a></li><li class="chapter-item "><a href="../unity/packages/NodeGraphProcessor.html"><strong aria-hidden="true">5.30.</strong> 包：NodeGraphProcessor</a></li><li class="chapter-item "><a href="../unity/packages/PDF插件.html"><strong aria-hidden="true">5.31.</strong> 包：PDF插件</a></li><li class="chapter-item "><a href="../unity/ide-vscode.html"><strong aria-hidden="true">5.32.</strong> IDE：VS Code</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../rust/rust.html"><strong aria-hidden="true">6.</strong> Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../rust/tauri.html"><strong aria-hidden="true">6.1.</strong> Tauri</a></li><li class="chapter-item "><a href="../rust/slint.html"><strong aria-hidden="true">6.2.</strong> Slint</a></li><li class="chapter-item "><a href="../rust/iced.html"><strong aria-hidden="true">6.3.</strong> Iced</a></li><li class="chapter-item "><a href="../rust/ecs.html"><strong aria-hidden="true">6.4.</strong> ECS</a></li><li class="chapter-item "><a href="../rust/mdbook.html"><strong aria-hidden="true">6.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../python/python.html"><strong aria-hidden="true">7.</strong> Python</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sql-server.html"><strong aria-hidden="true">8.1.</strong> SQL Server</a></li><li class="chapter-item "><a href="../database/my-sql.html"><strong aria-hidden="true">8.2.</strong> MySql</a></li><li class="chapter-item "><a href="../database/redis.html"><strong aria-hidden="true">8.3.</strong> Redis</a></li><li class="chapter-item "><a href="../database/mongodb.html"><strong aria-hidden="true">8.4.</strong> MongoDb</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../synology/synology.html"><strong aria-hidden="true">9.</strong> 群晖</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../synology/certficate.html"><strong aria-hidden="true">9.1.</strong> 证书</a></li><li class="chapter-item "><a href="../synology/drive.html"><strong aria-hidden="true">9.2.</strong> Drive</a></li><li class="chapter-item "><a href="../synology/反向代理服务器.html"><strong aria-hidden="true">9.3.</strong> 反向代理服务器</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../windows/index.html"><strong aria-hidden="true">10.</strong> Windows系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../windows/winsw.html"><strong aria-hidden="true">10.1.</strong> WinSW</a></li><li class="chapter-item expanded "><a href="../windows/windows-commands.html" class="active"><strong aria-hidden="true">10.2.</strong> Windows 命令行</a></li><li class="chapter-item "><a href="../windows/mbr-gpt.html"><strong aria-hidden="true">10.3.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../mac/mac.html"><strong aria-hidden="true">11.</strong> MacOS</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../mac/xcode.html"><strong aria-hidden="true">11.1.</strong> XCode</a></li><li class="chapter-item "><a href="../mac/testflight.html"><strong aria-hidden="true">11.2.</strong> TestFlight</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Google</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Google/download-apk.html"><strong aria-hidden="true">12.1.</strong> 下载Google商店中的APK</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">13.</strong> 技术栈</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../technology-stack/nginx.html"><strong aria-hidden="true">13.1.</strong> Nginx</a></li><li class="chapter-item "><a href="../technology-stack/rabbitmq.html"><strong aria-hidden="true">13.2.</strong> RabbitMQ</a></li><li class="chapter-item "><a href="../technology-stack/git.html"><strong aria-hidden="true">13.3.</strong> Git</a></li><li class="chapter-item "><a href="../technology-stack/svn.html"><strong aria-hidden="true">13.4.</strong> SVN</a></li><li class="chapter-item "><a href="../technology-stack/vim.html"><strong aria-hidden="true">13.5.</strong> Vim</a></li><li class="chapter-item "><a href="../technology-stack/npm.html"><strong aria-hidden="true">13.6.</strong> Npm</a></li><li class="chapter-item "><a href="../technology-stack/pip.html"><strong aria-hidden="true">13.7.</strong> PIP</a></li><li class="chapter-item "><a href="../technology-stack/ssh.html"><strong aria-hidden="true">13.8.</strong> SSH</a></li><li class="chapter-item "><a href="../technology-stack/docker.html"><strong aria-hidden="true">13.9.</strong> Docker</a></li><li class="chapter-item "><a href="../technology-stack/regular-expression.html"><strong aria-hidden="true">13.10.</strong> 正则表达式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> 云服务</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cloud-service/ali-cloud.html"><strong aria-hidden="true">14.1.</strong> 阿里云</a></li><li class="chapter-item "><a href="../cloud-service/self-built-server.html"><strong aria-hidden="true">14.2.</strong> 自建服务器</a></li><li class="chapter-item "><a href="../cloud-service/let-s-encrypt.html"><strong aria-hidden="true">14.3.</strong> Let's Encrypt</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> 软件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../softs/typora.html"><strong aria-hidden="true">15.1.</strong> Typora</a></li><li class="chapter-item "><a href="../softs/xournalpp.html"><strong aria-hidden="true">15.2.</strong> Xournal++</a></li><li class="chapter-item "><a href="../softs/bulk-rename-utility.html"><strong aria-hidden="true">15.3.</strong> Bulk Rename Utility</a></li><li class="chapter-item "><a href="../softs/exif-tool.html"><strong aria-hidden="true">15.4.</strong> ExifTool</a></li><li class="chapter-item "><a href="../softs/telegram.html"><strong aria-hidden="true">15.5.</strong> Telegram</a></li><li class="chapter-item "><a href="../softs/excel.html"><strong aria-hidden="true">15.6.</strong> Excel</a></li><li class="chapter-item "><a href="../softs/visual-studio.html"><strong aria-hidden="true">15.7.</strong> Visual Studio</a></li><li class="chapter-item "><a href="../softs/visual-studio-code.html"><strong aria-hidden="true">15.8.</strong> Visual Studio Code</a></li><li class="chapter-item "><a href="../softs/jetbrains-rider.html"><strong aria-hidden="true">15.9.</strong> JetBrains Rider</a></li><li class="chapter-item "><a href="../softs/others.html"><strong aria-hidden="true">15.10.</strong> 其他</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../markdown.html"><strong aria-hidden="true">16.</strong> Markdown</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+        
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="章节" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="主题" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索. (快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Labyte Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="打印" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/labyte/book" title="Git 仓库" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索 ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <style>
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.excel-table ,.excel-table-c2 {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 15px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局 */
+}
+
+.excel-table th,.excel-table-c2 th, .excel-table td,.excel-table-c2 td {
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top; 
+}
+
+.excel-table th,.excel-table-c2 th  {
+    background-color: #f0f3f5;
+    font-weight: bold;
+}
+
+.excel-table tr:nth-child(even),.excel-table-c2 tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* .excel-table tr:hover {
+    background-color: #e9e9e9;
+} */
+
+.excel-table th:nth-child(1), .excel-table td:nth-child(1) {
+    width: 20%;
+    font-weight: bold;
+}
+
+.excel-table th:nth-child(2), .excel-table td:nth-child(2) {
+    width: 40%;
+}
+.excel-table th:nth-child(3), .excel-table td:nth-child(3) {
+    width: 40%;
+}
+
+/*c2*/
+.excel-table-c2 th:nth-child(1), .excel-table-c2 td:nth-child(1) {
+    width: 50%;
+    /* font-weight: bold; */
+}
+
+.excel-table-c2 th:nth-child(2), .excel-tablec-2 td:nth-child(2) {
+    width: 50%;
+}
+
+</style>
+<h1 id="windows-命令行"><a class="header" href="#windows-命令行">Windows 命令行</a></h1>
+<h2 id="cd"><a class="header" href="#cd">cd</a></h2>
+<p>更改当前目录。</p>
+<p><a href="https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/cd">官网</a></p>
+<h2 id="命令行语法项"><a class="header" href="#命令行语法项">命令行语法项</a></h2>
+<p>下表描述用于指示命令行语法的表示法。</p>
+<div class="table-container">
+    <table class="excel-table-c2">
+        <thead>
+            <tr>
+                <th>表示法</th>
+                <th>说明</th>   
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>不含方括号或大括号的文本</td>
+                <td>必须按所显示键入的项。</td>
+            </tr>
+              <tr>
+                <td><code><Text inside angle brackets></code></td>
+                <td>必须为其提供值的占位符。</td>
+            </tr>
+             <tr>
+                <td><code>[Text inside square brackets]</code></td>
+                <td>可选项。</td>
+            </tr>
+            <tr>
+                <td><code>{Text inside braces}</code></td>
+                <td>一组必需的项。 你必须选择一个。</td>
+            </tr>
+             <tr>
+                <td>竖线 (|</code>)</td>
+                <td>互斥项的分隔符。 你必须选择一个。</td>
+            </tr>
+             <tr>
+                <td>省略号 (…)</td>
+                <td>可重复使用多次的项。</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h2 id="创建批处理文件"><a class="header" href="#创建批处理文件">创建批处理文件</a></h2>
+<p>在Windows中，批处理文件以 <code>.bat</code>为扩展名。</p>
+<p>创建一个名为 <code>hello.bat</code>的文件，并输入以下内容：</p>
+<pre><code class="language-bat">echo Hello, World!
+pause
+</code></pre>
+<p>保存文件后，双击该文件即可运行。</p>
+<h2 id="执行批处理文件"><a class="header" href="#执行批处理文件">执行批处理文件</a></h2>
+<p>执行一个批处理文件，可以通过双击运行，也可以右键以管理员身份运行，但他们有区别。</p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>区别项目</th>
+                <th>双击运行</th>
+                <th>管理员运行</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>执行目录</td>
+                <td>工作目录是该<code>.bat</code>文件所在的目录</td>
+                <td>工作目录是 <code>C:\Windows\System32</code>，这容易导致某些文件路径错误，解决办法，添加以下代码：<br>
+                    <code>@echo off<br>cd /d %~dp0 </code>
+                </td>
+            </tr>
+              <tr>
+                <td>权限</td>
+                <td>以当前用户的权限运行，如果当前用户没有管理员权限，某些操作（如修改系统文件、注册表、安装软件等）可能会失败</td>
+                <td>以管理员权限运行。能够执行需要提升权限的操作</td>
+            </tr>
+             <tr>
+                <td>环境变量</td>
+                <td>使用当前用户的环境变量，有些环境变量仅加入到了系统环境变量中，可能无法访问</td>
+                <td>使用系统管理员的环境变量，这可能会导致一些变量（如用户目录等）不同</td>
+            </tr>
+            <tr>
+                <td>用户账户控制（UAC）</td>
+                <td>不会触发 UAC 提示</td>
+                <td>会触发 UAC 提示，要求用户确认提升权限。这是为了确保用户有意图执行管理员级别的操作。</td>
+            </tr>
+             <tr>
+                <td>安装路径和访问权限</td>
+                <td>对用户目录（如 C:\Users\Username）有完全访问权限，但对系统目录（如 C:\Windows、C:\Program Files）的访问可能受限。</td>
+                <td>对所有目录都有完全访问权限，包括系统目录。</td>
+            </tr>
+             <tr>
+                <td>操作系统保护机制</td>
+                <td>受操作系统保护机制的约束较多，不能执行某些系统级操作。</td>
+                <td>如果脚本涉及到计划任务，可能需要管理员权限来创建或修改计划任务。</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>双击 <code>hello.bat</code>文件后，会弹出一个命令行窗口，显示 <code>Hello, World!</code>，然后等待用户按下任意键后关闭窗口。</p>
+<h2 id="中文编码"><a class="header" href="#中文编码">中文编码</a></h2>
+<p>在文件中加入</p>
+<pre><code class="language-bat">chcp 65001 &gt; nul
+</code></pre>
+<p>备注：<code>&gt;nul</code> ：表示将输入重定向到空设备，也就是不输出这条命令的操作信息，此处如果不加会输出一条消息：<code>Active code page:6 5001</code>，</p>
+<h2 id="参考"><a class="header" href="#参考">参考</a></h2>
+<h3 id="call调用批处理程序"><a class="header" href="#call调用批处理程序">call（调用批处理程序）</a></h3>
+<p>从另一个批处理程序调用一个批处理程序，而不停止父批处理程序。 call 命令接受标签作为调用的目标。</p>
+<p>若要从另一个批处理程序运行 checknew.bat 程序，请在父批处理程序中键入以下命令：</p>
+<pre><code class="language-shell">call checknew
+</code></pre>
+<p>如果父批处理程序接受两个批处理参数，并且你希望它将这些参数传递给 checknew.bat，请在父批处理程序中键入以下命令：</p>
+<pre><code>call checknew %1 %2
+</code></pre>
+<h3 id="cd同chdir显示或更改当前目录"><a class="header" href="#cd同chdir显示或更改当前目录">cd（同chdir：显示或更改当前目录）</a></h3>
+<p>显示当前目录的名称或更改当前目录。 如果仅与驱动器号一起使用（例如，<code>cd C:</code>），cd 将显示指定驱动器中当前目录的名称。 如果使用时不带参数，cd 将显示当前驱动器和目录。</p>
+<p>语法：</p>
+<pre><code class="language-shell">cd [/d] [&lt;drive&gt;:][&lt;path&gt;]
+cd [..]
+chdir [/d] [&lt;drive&gt;:][&lt;path&gt;]
+chdir [..]
+</code></pre>
+<p>参数</p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>参数</th>
+                <th>说明</th>   
+            </tr>
+        </thead>
+        <tbody>  
+              <tr>
+                <td><code>/d</code></td>
+                <td>更改当前驱动器以及驱动器的当前目录。</td>
+            </tr>
+             <tr>
+                <td><code><drive>:</code></td>
+                <td>指定要显示或更改的驱动器（如果与当前驱动器不同）。</td>
+            </tr>
+            <tr>
+                <td><code><<path>></code></td>
+                <td>指定要显示或更改的目录的路径。</td>
+            </tr>
+            <tr>
+                <td><code>[..]</code></td>
+                <td>指定要更改为父文件夹。</td>
+            </tr>
+             <tr>
+                <td><code>/?</code></td>
+                <td>在命令提示符下显示帮助。</td>
+            </tr>  
+        </tbody>
+    </table>
+</div>
+<p><strong>注解</strong></p>
+<p>如果启用了命令扩展，则以下条件适用于 cd 命令：</p>
+<ul>
+<li>
+<p>当前目录字符串将转换为使用与磁盘上的名称相同的大小写。 例如，<code>cd c:\temp</code> 会将当前目录设置为 C:\Temp（如果磁盘上是这种大小写）。</p>
+</li>
+<li>
+<p>系统不会将空格视为分隔符，因此 <code>&lt;path&gt;</code> 可以包含不带引号的空格。 例如：
+复制</p>
+<pre><code>cd username\programs\start menu
+</code></pre>
+<p>相当于：</p>
+<p>复制</p>
+<pre><code>cd "username\programs\start menu"
+</code></pre>
+<p>如果禁用扩展，则需要引号。</p>
+</li>
+<li>
+<p>若要禁用命令扩展，请键入：
+复制</p>
+<pre><code>cmd /e:off
+</code></pre>
+</li>
+</ul>
+<p><strong>示例</strong></p>
+<p>要返回到根目录，即驱动器的目录层次结构顶层：</p>
+<pre><code>cd\
+</code></pre>
+<p>要更改与你当前所在驱动器不同的驱动器上的默认目录，请输入以下命令：</p>
+<pre><code>cd [&lt;drive&gt;:[&lt;directory&gt;]]
+</code></pre>
+<p>若要验证对目录的更改，请键入：</p>
+<pre><code>cd [&lt;drive&gt;:]
+</code></pre>
+<h3 id="chcp设置语言"><a class="header" href="#chcp设置语言">chcp（设置语言）</a></h3>
+<p>设置代码页和语言</p>
+<div class="table-wrapper"><table><thead><tr><th>代码页</th><th>国家/地区或语言</th></tr></thead><tbody>
+<tr><td>437</td><td>美国</td></tr>
+<tr><td>850</td><td>多语言 (拉丁文我)</td></tr>
+<tr><td>852</td><td>西里尔语 （俄语）</td></tr>
+<tr><td>855</td><td>西里尔语 （俄语）</td></tr>
+<tr><td>857</td><td>土耳其语</td></tr>
+<tr><td>860</td><td>葡萄牙语</td></tr>
+<tr><td>861</td><td>冰岛语</td></tr>
+<tr><td>863</td><td>加拿大法语</td></tr>
+<tr><td>865</td><td>北欧</td></tr>
+<tr><td>866</td><td>俄语</td></tr>
+<tr><td>869</td><td>现代希腊语</td></tr>
+<tr><td>936</td><td>中文（gbk）</td></tr>
+<tr><td>65001</td><td>utf-8</td></tr>
+</tbody></table>
+</div>
+<p>若要查看活动的代码页设置，请键入︰</p>
+<pre><code>chcp
+</code></pre>
+<p>将显示类似于以下内容的消息：<code>Active code page: 437</code></p>
+<p>若要将活动代码页更改为 936（中文），请键入：</p>
+<pre><code>chcp 936
+</code></pre>
+<p>如果指定的代码页无效，将显示以下错误消息：<code>Invalid code page</code></p>
+<h3 id="clean删除分区"><a class="header" href="#clean删除分区">clean（删除分区）</a></h3>
+<p>从获得焦点的磁盘中删除所有分区或卷格式设置。</p>
+<p>不要轻易使用</p>
+<h3 id="cls清除命令窗口"><a class="header" href="#cls清除命令窗口">cls（清除命令窗口）</a></h3>
+<p>清除命令提示符窗口。</p>
+<p>若要清除命令提示符窗口中显示的所有信息并返回到空白窗口，请键入：</p>
+<pre><code>cls
+</code></pre>
+<h3 id="cmd"><a class="header" href="#cmd">cmd</a></h3>
+<p>启动命令解释器的新实例 Cmd.exe。 使用时如果没有参数，cmd 将显示操作系统的版本和版权信息。</p>
+<h3 id="copy复制"><a class="header" href="#copy复制">copy（复制）</a></h3>
+<p>将一个或多个文件从一个位置复制到另一个位置。</p>
+<p><a href="https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/copy">copy 文档</a></p>
+<p>若要将名为 memo.doc 的文件复制到当前驱动器中的 letter.doc，并确保文件结束字符 (CTRL+Z) 位于复制的文件的末尾，请键入：</p>
+<pre><code>copy memo.doc letter.doc /a
+</code></pre>
+<p>若要将名为 robin.typ 的文件从当前驱动器和目录复制到驱动器 C 上名为 Birds 的现有目录，请键入：</p>
+<pre><code>copy robin.typ c:\birds
+</code></pre>
+<blockquote>
+<p>备注</p>
+<p>如果 Birds 目录不存在，则会将文件 robin.typ 复制到名为 Birds 的文件中，该文件位于磁盘驱动器 C 上的根目录中。</p>
+</blockquote>
+<p>若要合并当前目录中的 Mar89.rpt、Apr89.rpt 和 May89.rpt，并将其放入名为 Report 的文件（也在当前目录中），请键入：</p>
+<pre><code>copy mar89.rpt + apr89.rpt + may89.rpt Report
+</code></pre>
+<blockquote>
+<p>备注</p>
+<p>如果合并文件，copy 命令会使用当前日期和时间标记目标文件。 如果省略 destination，将使用列表中第一个文件的名称合并和存储文件。</p>
+</blockquote>
+<p>若要合并 Report 中的所有文件，当名为 Report 的文件已存在时，请键入：</p>
+<pre><code>copy report + mar89.rpt + apr89.rpt + may89.rpt
+</code></pre>
+<p>若要将当前目录中所有文件扩展名为 .txt 的文件合并到名为 Combined.doc 的单个文件，请键入：</p>
+<pre><code>copy *.txt Combined.doc
+</code></pre>
+<p>若要使用通配符将多个二进制文件合并为一个文件，请包含 /b。 这可以防止 Windows 将 CTRL+Z 视为文件结束字符。 例如，键入：</p>
+<pre><code>copy /b *.exe Combined.exe
+</code></pre>
+<blockquote>
+<p>注意</p>
+<p>如果合并二进制文件，生成的文件可能因内部格式问题而无法使用。</p>
+</blockquote>
+<ul>
+<li>将扩展名为 .txt 的每个文件与其相应 .ref 文件合并会创建文件名相同，但扩展名为 .doc 的文件。 Copy 命令将 file1.txt 与 file1.ref 合并成 file1.doc，然后该命令将 file2.txt 与 file2.ref 合并成 file2.doc，依此类推。 例如，键入：</li>
+</ul>
+<pre><code>copy *.txt + *.ref *.doc
+</code></pre>
+<p>若要合并扩展名为 .txt 的所有文件，然后将扩展名为 .ref 的所有文件合并为一个名为 Combined.doc 的文件，请键入：</p>
+<pre><code class="language-shell">copy *.txt + *.ref Combined.doc
+</code></pre>
+<h3 id="create创建分区"><a class="header" href="#create创建分区">create（创建分区）</a></h3>
+<p>创建分区命令</p>
+<h3 id="del删除文件"><a class="header" href="#del删除文件">del（删除文件）</a></h3>
+<p>删除一个或多个文件。 此命令执行与 erase 命令相同的操作。</p>
+<p>del 命令还可以使用不同参数从 Windows 恢复控制台运行。 有关详细信息，请参阅 <a href="https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference">Windows 恢复环境 (WinRE)</a>。</p>
+<blockquote>
+<p>警告</p>
+<p>如果使用 del 从磁盘中删除某个文件，则无法检索该文件。</p>
+</blockquote>
+<p>要删除驱动器 C 上名为 test 的文件夹中的所有文件，请键入以下任一命令：</p>
+<pre><code>del c:\test
+del c:\test\*.*
+</code></pre>
+<p>若要删除文件夹中名称中包含空格的所有文件，需要用双引号将完整路径括起来。 键入以下任一命令：</p>
+<pre><code>del "c:\test folder\"
+del "c:\test folder\*.*"
+</code></pre>
+<p>要从当前目录中删除文件扩展名为 .bat 的所有文件，请键入：</p>
+<pre><code>del *.bat
+</code></pre>
+<p>要删除当前目录中的所有只读文件，请键入：</p>
+<pre><code>del /a:r *.*
+</code></pre>
+<h3 id="delete删除分区"><a class="header" href="#delete删除分区">delete（删除分区）</a></h3>
+<p>删除分区或卷。 此命令还会从磁盘列表中删除动态磁盘。</p>
+<h3 id="dir显示目录"><a class="header" href="#dir显示目录">dir（显示目录）</a></h3>
+<p>显示目录的文件和子目录的列表。 如果使用此命令时不带参数，则将显示磁盘的卷标和序列号，后跟磁盘上的目录和文件列表（包括其名称以及上次修改每个目录和文件的日期和时间）。 对于文件，此命令显示扩展名和大小（以字节为单位）。 此命令还显示列出的文件和目录总数、其累积大小以及磁盘上剩余的可用空间（以字节为单位）。</p>
+<p>dir 命令还可以使用不同参数从 Windows 恢复控制台运行。 有关详细信息，请参阅 <a href="https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference">Windows 恢复环境 (WinRE)</a>。</p>
+<h4 id="语法"><a class="header" href="#语法">语法</a></h4>
+<pre><code>dir [&lt;drive&gt;:][&lt;path&gt;][&lt;filename&gt;] [...] [/p] [/q] [/w] [/d] [/a[[:]&lt;attributes&gt;]][/o[[:]&lt;sortorder&gt;]] [/t[[:]&lt;timefield&gt;]] [/s] [/b] [/l] [/n] [/x] [/c] [/4] [/r]
+</code></pre>
+<h4 id="参数"><a class="header" href="#参数">参数</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>[&lt;drive&gt;:][&lt;path&gt;]</code></td><td>指定要查看其列表的驱动器和目录。</td></tr>
+<tr><td><code>[&lt;filename&gt;]</code></td><td>指定要查看其列表的特定文件或文件组。</td></tr>
+<tr><td>/p</td><td>一次显示一个列表屏幕。 要查看下一个屏幕，请按任意键。</td></tr>
+<tr><td>/q</td><td>显示文件所有权信息。</td></tr>
+<tr><td>/w</td><td>以宽格式显示列表，每行最多包含五个文件名或目录名称。</td></tr>
+<tr><td>/d</td><td>以与 /w 相同的格式显示列表，但文件按列排序。</td></tr>
+<tr><td>/a[[:]<code>&lt;attributes&gt;</code>]</td><td>仅显示具有指定属性的目录和文件的名称。 如果不使用此参数，此命令将显示除隐藏文件和系统文件之外的所有文件的名称。 如果在未指定任何属性的情况下使用此参数，则此命令将显示所有文件的名称，包括隐藏文件和系统文件。 可能的属性值列表包括：* d - 目录* h - 隐藏文件* s - 系统文件* l - 重新分析点* r - 只读文件* a - 可用于存档的文件* i - 非内容索引文件你可以使用这些值的任意组合，但不要使用空格分隔值。 （可选）可以使用冒号 (:) 分隔符，或者你可以使用连字符 (-) 作为前缀来表示“非”。 例如，使用 -s 属性不会显示系统文件。</td></tr>
+<tr><td>/o[[:]<code>&lt;sortorder&gt;</code>]</td><td>根据 sortorder 对输出进行排序，可以是以下值的任意组合：* n - 按名称字母顺序排列* e - 按扩展名字母顺序排列* g - 首先列出组目录* s - 按大小，最先列出最小的文件* d - 按日期/时间，最先列出最早的文件* 使用**-** 前缀可反转排序顺序多个值将按照你列出它们的顺序进行处理。 不要用空格分隔多个值，但可以选择使用冒号 (:)。如果未指定 sortorder，则 dir /o 将按字母顺序列出目录，后跟文件，这些文件也按字母顺序排序。</td></tr>
+<tr><td>/t[[:]<code>&lt;timefield&gt;</code>]</td><td>指定要显示或用于排序的时间字段。 timefield 的可用值包括：* c - 创建时间* a - 上次访问时间* w - 最后写入时间</td></tr>
+<tr><td>/s</td><td>列出指定目录和所有子目录中出现的指定文件名的每个匹配项。</td></tr>
+<tr><td>/b</td><td>显示纯粹的目录和文件列表，不含其他信息。 /b 参数将覆盖 /w。</td></tr>
+<tr><td>/l</td><td>使用小写显示未排序的目录名称和文件名。</td></tr>
+<tr><td>/n</td><td>在屏幕最右侧显示带有文件名的长列表格式。</td></tr>
+<tr><td>/x</td><td>显示为非 8dot3 文件名生成的短名称。 显示内容与 /n 的显示内容相同，但短名称插入到长名称之前。</td></tr>
+<tr><td>/c</td><td>以千位分隔符显示文件大小。 此选项为默认行为。 使用 /-c 隐藏分隔符。</td></tr>
+<tr><td>/4</td><td>以四位数格式显示年份。</td></tr>
+<tr><td>/r</td><td>显示文件的备用数据流。</td></tr>
+<tr><td>/?</td><td>在命令提示符下显示帮助。</td></tr>
+</tbody></table>
+</div>
+<h4 id="注解"><a class="header" href="#注解">注解</a></h4>
+<ul>
+<li>
+<p>若要使用多个 filename 参数，请用空格、逗号或分号分隔每个文件名。</p>
+</li>
+<li>
+<p>可以使用通配符（***** 或 ?）来表示文件名的一个或多个字符，并显示文件或子目录的子集。</p>
+</li>
+<li>
+<p>可以使用通配符 ***** 来替换任何字符串，例如：</p>
+<ul>
+<li><code>dir *.txt</code> 将列出当前目录中扩展名以 .txt 开头的所有文件，例如 .txt、.txt1、.txt_old。</li>
+<li><code>dir read *.txt</code> 将列出当前目录中以 read 开头并且扩展名以 .txt 开头的所有文件，例如 .txt、.txt1 或 .txt_old。</li>
+<li><code>dir read *.*</code> 将列出当前目录中以 read 开头的所有文件（无论任何扩展名）。</li>
+</ul>
+<p>星号通配符始终使用短文件名映射，因此你可能会得到意外的结果。 例如，以下目录包含两个文件（t.txt2 和 t97.txt）：
+复制</p>
+<pre><code>C:\test&gt;dir /x
+Volume in drive C has no label.
+Volume Serial Number is B86A-EF32
+
+Directory of C:\test
+
+11/30/2004  01:40 PM &lt;DIR&gt;  .
+11/30/2004  01:40 PM &lt;DIR&gt; ..
+11/30/2004  11:05 AM 0 T97B4~1.TXT t.txt2
+11/30/2004  01:16 PM 0 t97.txt
+</code></pre>
+<p>你可能期望键入 <code>dir t97\*</code> 后将返回文件 t97.txt。 但是，键入 <code>dir t97\*</code> 会返回这两个文件，因为星号通配符使用其短名称映射 T97B4~1.TXT，因此会认为文件 t.txt2 与 t97.txt 匹配。 同样，键入 <code>del t97\*</code> 会删除这两个文件。</p>
+</li>
+<li>
+<p>可以使用问号 (?) 代替名称中的单个字符。 例如，键入 <code>dir read???.txt</code> 会列出当前目录中扩展名为 .txt 的任何文件，这些文件以 read 开头，后跟最多三个字符。 这包括 Read.txt、Read1.txt、Read12.txt、Read123.txt 和 Readme1.txt，但不包括 Readme12.txt。</p>
+</li>
+<li>
+<p>如果在 attributes 中使用 /a 和多个值，则此命令仅显示具有所有指定属性的文件的名称。 例如，如果将 /a 与 r 和 -h 一起使用作为属性（使用 <code>/a:r-h</code> 或 <code>/ar-h</code>），则此命令将仅显示未隐藏的只读文件的名称。</p>
+</li>
+<li>
+<p>如果指定多个 sortorder 值，则此命令将首先按第一个条件对文件名进行排序，然后按第二个条件排序，依此类推。 例如，如果将 /o 与 sortorder 的 e 和 -s 参数一起使用（使用 <code>/o:e-s</code> 或 <code>/oe-s</code>），则此命令按扩展名对目录和文件的名称进行排序，首先显示最大的文件，然后显示最终结果。 按扩展名按字母顺序排序会导致首先显示没有扩展名的文件名，然后显示目录名称，然后显示带有扩展名的文件名。</p>
+</li>
+<li>
+<p>如果使用重定向符号 (<code>&gt;</code>) 将此命令的输出发送到文件，或者使用管道符号 (<code>|</code>) 将此命令的输出发送到另一个命令，则必须使用 <code>/a:-d</code> 和 /b，以仅列出文件名。 可以将 filename 与 /b 和 /s 一起使用，以指定此命令要在当前目录及其子目录中搜索与 filename 参数匹配的所有文件名。 此命令仅列出它找到的每个文件名的驱动器号、目录名、文件名和文件扩展名（每行一个路径）。 在使用管道符号将此命令的输出发送到另一个命令之前，应首先在 Autoexec.nt 文件中设置 TEMP 环境变量。</p>
+</li>
+</ul>
+<h4 id="示例"><a class="header" href="#示例">示例</a></h4>
+<p>若要按字母顺序、宽格式逐个显示所有目录，并在每个屏幕后暂停，请确保根目录是当前目录，然后键入：</p>
+<pre><code>dir /s/w/o/p
+</code></pre>
+<p>输出列出了根目录、子目录和根目录中的文件，包括扩展名。 此命令还会列出树中每个子目录中的子目录名称和文件名。</p>
+<p>若要更改前面的示例，以便 dir 显示文件名和扩展名，但省略目录名称，请键入：</p>
+<pre><code>dir /s/w/o/p/a:-d
+</code></pre>
+<p>要打印目录列表，请键入：</p>
+<pre><code>dir &gt; prn
+</code></pre>
+<p>如果指定 prn，则目录列表将发送到连接到 LPT1 端口的打印机。 如果打印机连接到其他端口，则必须将 prn 替换为正确端口的名称。</p>
+<p>还可以将 prn 替换为文件名，从而将 dir 命令的输出重定向到文件。 也可以键入路径。 例如，若要将 dir 命令的输出定向到 Records 目录中的 dir.doc 文件，请键入：</p>
+<pre><code>dir &gt; \records\dir.doc
+</code></pre>
+<p>如果 dir.doc 不存在，dir 将创建此文件，除非 Records 目录不存在。 如果 Records 目录不存在，将显示以下消息：</p>
+<pre><code>File creation error
+</code></pre>
+<p>若要显示驱动器 C 上所有目录中扩展名为.txt 的所有文件名的列表，请键入：</p>
+<pre><code>dir c:\*.txt /w/o/s/p
+</code></pre>
+<p>dir 命令以宽格式显示每个目录中按字母顺序排列的匹配文件名列表，并且每次屏幕填满时都会暂停，按任意键可继续显示。</p>
+<h3 id="echo打印消息和回显功能"><a class="header" href="#echo打印消息和回显功能">echo（打印消息和回显功能）</a></h3>
+<p>显示消息或者打开或关闭命令回显功能。 如果不结合任何参数使用，echo 会显示当前回显设置。</p>
+<p>若要显示当前的回显设置，请键入：</p>
+<pre><code>echo
+</code></pre>
+<p>若要在屏幕上回显空白行，请键入：</p>
+<pre><code>echo.
+</code></pre>
+<blockquote>
+<p>备注</p>
+<p>不要在句点前面包含空格。 否则，将显示句点而不是空白行。</p>
+</blockquote>
+<p>若要防止在命令提示符处回显命令，请键入：</p>
+<pre><code>echo off
+</code></pre>
+<blockquote>
+<p>备注</p>
+<p>关闭回显时，命令提示符不会出现在“命令提示符”窗口中。 若要再次显示命令提示符，请键入 echo on。</p>
+</blockquote>
+<p>若要防止批处理文件中的所有命令（包括 echo off 命令）显示在屏幕上，请在批处理文件的第一行中键入：</p>
+<pre><code>@echo off
+</code></pre>
+<p>可以将 <code>echo</code> 命令用作 <code>if</code> 语句的一部分。 例如，若要在当前目录中搜索文件扩展名为 .rpt 的任何文件，并在找到此类文件时回显消息，请键入：</p>
+<pre><code>if exist *.rpt echo The report has arrived.
+</code></pre>
+<p>以下批处理文件在当前目录中搜索文件扩展名为 .txt 的文件，并显示一条消息来指示搜索结果：</p>
+<pre><code>@echo off
+if not exist *.txt (
+echo This directory contains no text files.
+) else (
+   echo This directory contains the following text file^(s^):
+   echo.
+   dir /b *.txt
+   )
+</code></pre>
+<p>如果运行该批处理文件时未找到 .txt 文件，则会显示以下消息：</p>
+<pre><code>This directory contains no text files.
+</code></pre>
+<p>如果运行该批处理文件时找到 .txt 文件，则会显示以下输出（此示例假设文件 File1.txt、File2.txt 和 File3.txt 存在）：</p>
+<pre><code>This directory contains the following text file(s):
+
+File1.txt
+File2.txt
+File3.txt
+</code></pre>
+<h3 id="find搜索文本字符"><a class="header" href="#find搜索文本字符">find（搜索文本字符）</a></h3>
+<p>在一个或多个文件中搜索文本字符串，并显示包含指定字符串的文本行。</p>
+<h4 id="语法-1"><a class="header" href="#语法-1">语法</a></h4>
+<pre><code>find [/v] [/c] [/n] [/i] [/off[line]] &lt;"string"&gt; [[&lt;drive&gt;:][&lt;path&gt;]&lt;filename&gt;[...]]
+</code></pre>
+<h4 id="参数-1"><a class="header" href="#参数-1">参数</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
+<tr><td>/v</td><td>显示不包含指定 <code>&lt;string&gt;</code> 的所有行。</td></tr>
+<tr><td>/c</td><td>对包含指定 <code>&lt;string&gt;</code> 的行进行计数，并显示总计。</td></tr>
+<tr><td>/n</td><td>每行前面都有文件的行号。</td></tr>
+<tr><td>/i</td><td>指定搜索不区分大小写。</td></tr>
+<tr><td>/off[line]</td><td>如果文件设置了脱机属性，则不会被跳过。</td></tr>
+<tr><td><code>&lt;"string"&gt;</code></td><td>必需。 指定想要搜索的字符组（用引号括起来）。</td></tr>
+<tr><td><code>[&lt;drive&gt;:][&lt;path&gt;]&lt;filename&gt;</code></td><td>指定要在其中搜索指定字符串的文件的位置和名称。</td></tr>
+<tr><td>/?</td><td>在命令提示符下显示帮助。</td></tr>
+</tbody></table>
+</div>
+<p>若要显示包含字符串“pencil sharpener”的 pencil.md 中的所有行，请键入：</p>
+<pre><code>find "pencil sharpener" pencil.txt
+</code></pre>
+<p>为了在 report.txt 文件中找到文本“科学家标明他们的论文仅供讨论，并不是最终报告。”（含引号），请键入：</p>
+<pre><code>find """The scientists labeled their paper for discussion only. It is not a final report.""" &lt; report.txt
+</code></pre>
+<p><strong>若要搜索一组文件，可以使用通配符。 若要在当前目录中搜索扩展名为 .bat 且包含忽略大小写的字符串 PROMPT 的文件，请键入</strong>：</p>
+<pre><code>find /i "PROMPT" *.bat
+</code></pre>
+<p>若要在包含字符串 CPU 的目录中查找文件名，请使用管道 (|) 将 dir 命令的输出定向到 find 命令，如下所示：</p>
+<pre><code>dir c:\temp /s /b | find "CPU"
+</code></pre>
+<p>查找不包含 “agent” 的所有正在运行的进程：</p>
+<pre><code>tasklist | find /v /i "agent"
+</code></pre>
+<p>检查服务是否正在运行：</p>
+<pre><code>sc query  Winmgmt | find "RUNNING" &gt;nul 2&gt;&amp;1 &amp;&amp; (echo service is started) || (echo service is stopped)
+</code></pre>
+<h3 id="for遍历文件"><a class="header" href="#for遍历文件">for（遍历文件）</a></h3>
+<p>为一组文件中的每个文件运行指定命令。</p>
+<h4 id="语法-2"><a class="header" href="#语法-2">语法</a></h4>
+<pre><code>for {%% | %}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<h4 id="参数-2"><a class="header" href="#参数-2">参数</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>{%% | %}&lt;variable&gt;</code></td><td>必填。 表示可替换参数。 使用单百分号 (<code>%</code>) 可在命令提示符下执行 for 命令。 使用双百分号 (<code>%%</code>) 可在批处理文件中执行 for 命令。 变量区分大小写，并且必须用字母值表示，例如 %a、%b 或 %c。</td></tr>
+<tr><td>(<code>&lt;set&gt;</code>)</td><td>必需。 指定要对其运行命令的一个或多个文件、目录或文本字符串或值范围。 需要使用括号。</td></tr>
+<tr><td><code>&lt;command&gt;</code></td><td>必需。 指定要对每个文件、目录或文本字符串执行的命令，或针对 set 中包含的值范围执行的命令。</td></tr>
+<tr><td><code>&lt;commandlineoptions&gt;</code></td><td>指定要与指定命令一起使用的任何命令行选项。</td></tr>
+<tr><td>/?</td><td>在命令提示符下显示帮助。</td></tr>
+</tbody></table>
+</div>
+<h4 id="备注"><a class="header" href="#备注">备注</a></h4>
+<ul>
+<li>可以在批处理文件中使用此命令，也可以直接从命令提示符使用此命令。</li>
+<li>以下属性适用于 for 命令：
+<ul>
+<li>此命令将 <code>% variable</code> 或 <code>%% variable</code> 替换为指定集中的每个文本字符串，直到指定的命令处理完所有文件。</li>
+<li>变量名称区分大小写并且是全局性的，一次最多不能超过 52 个处于活动状态。</li>
+<li>可以对变量使用任何字符，但为了避免与批处理参数 <code>%0</code> 到 <code>%9</code> 混淆，请避免使用数字 0 到 9。 对于简单的批处理文件，单个字符（如 <code>%%f</code>）将起作用。</li>
+<li>可以在复杂的批处理文件中对变量使用多个值，以区分不同的可替换变量。</li>
+</ul>
+</li>
+<li>set 参数可以表示单个文件组或多组文件。 可以使用通配符（***** 和 ?）指定文件集。 以下是有效的文件集：
+复制</li>
+</ul>
+<pre><code>  (*.doc)
+  (*.doc *.txt *.me)
+  (jan*.doc jan*.rpt feb*.doc feb*.rpt)
+  (ar??1991.* ap??1991.*)
+</code></pre>
+<ul>
+<li>使用此命令时，set 参数中的第一个值将替换 <code>% variable</code> 或 <code>%% variable</code>，然后指定的命令将处理此值。 这一直持续到与 set 值相对应的所有文件（或文件组）都被处理为止。</li>
+<li>In 和 do 不是参数，但必须将它们与此命令一起使用。 如果省略其中任何一个关键字，则会出现错误消息。</li>
+<li>如果启用了命令扩展（默认状态），则支持下列形式的 for：
+<ul>
+<li>
+<p>仅限目录：如果 set 参数中包含通配符（***** 或 ?），则将针对与 set 参数匹配的每个目录（而不是指定目录中的一组文件）执行指定的命令。 语法为：</p>
+<pre><code>for /d {%%|%}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+</li>
+<li>
+<p>递归：遍历以 drive:path 为根的目录树，并在树的每个目录中执行 for 语句。 如果在 /r 之后没有指定目录，则使用当前目录作为根目录。 如果 set 参数只是一个句点 (.)，则仅枚举目录树。 语法为：</p>
+<pre><code>for /r [[&lt;drive&gt;:]&lt;path&gt;] {%%|%}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+</li>
+<li>
+<p>迭代值范围：使用迭代变量设置起始值 (start#)，然后逐步通过设置的值范围，直到该值超过设置的结束值 (end#)。 <strong>/l</strong> 将通过比较  <em>start</em> # 和  <em>end</em> # 来执行迭代。 如果  <em>start</em> # 小于  <em>end</em> #，则执行该命令。 当迭代变量超过 end# 时，命令 shell 退出循环。 你还可以使用 step# 来逐步减少值的范围。 例如，(1,1,5) 生成序列 1 2 3 4 5，(5,-1,1) 生成序列 5 4 3 2 1。 语法为：</p>
+<pre><code>for /l {%%|%}&lt;variable&gt; in (&lt;start#&gt;,&lt;step#&gt;,&lt;end#&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+</li>
+<li>
+<p>迭代和文件解析：使用文件解析来处理命令输出、字符串和文件内容。 使用迭代变量定义要检查的内容或字符串，并使用各种 parsingkeywords 选项进一步修改解析。 使用 parsingkeywords 标记选项来指定哪些标记应作为迭代变量传递。 如果使用时不带标记选项，/f 将只检查第一个标记。
+文件解析包括读取输出、字符串或文件内容，然后将其拆分为单独的文本行，并将每一行解析为零个或多个标记。 然后调用 for 循环，并将迭代变量值设置为标记。 默认情况下，/f 传递每个文件的每一行中的第一个空白分隔标记。 空行将被跳过。
+语法为：</p>
+<pre><code>for /f [&lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+for /f [&lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in (&lt;literalstring&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+for /f [&lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in ('&lt;command&gt;') do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<p>set 参数指定一个或多个文件名。 将依次打开、读取和处理每个文件，然后才会移动到 set 参数中指定的下一个文件。 要覆盖默认分析行为，请指定 parsingkeywords。 这是一个带引号的字符串，其中包含一个或多个用于指定不同分析选项的关键字。</p>
+<p>如果使用 usebackq 选项，请使用以下语法之一：</p>
+<pre><code>for /f [usebackq &lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+for /f [usebackq &lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in ('&lt;literalstring&gt;') do &lt;command&gt; [&lt;commandlineoptions&gt;]
+for /f [usebackq &lt;parsingkeywords&gt;] {%%|%}&lt;variable&gt; in (`&lt;command&gt;`) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<p>下表列出了可用于 parsingkeywords 的分析关键字。
+展开表</p>
+<div class="table-wrapper"><table><thead><tr><th>关键字</th><th>说明</th></tr></thead><tbody>
+<tr><td>eol=<code>&lt;c&gt;</code></td><td>指定行尾字符（只有一个字符）。</td></tr>
+<tr><td>skip=<code>&lt;n&gt;</code></td><td>指定文件开头要跳过的行数。</td></tr>
+<tr><td>delims=<code>&lt;xxx&gt;</code></td><td>指定分隔符集。 这将替换默认分隔符集，即空格和制表符。</td></tr>
+<tr><td>tokens=<code>&lt;x,y,m–n&gt;</code></td><td>指定每次迭代时要将每行中的哪些标记传递给 for 循环。 因此，会分配额外的变量名。 m-n 指定从第 m 个到第 n 个标记的范围。 如果 tokens= 字符串中的最后一个字符是星号 ( ***** )，则会分配一个额外的变量，并且会接收解析的最后一个标记之后的行上的剩余文本。</td></tr>
+<tr><td>usebackq</td><td>指定将双引号字符串作为命令运行，使用单引号字符串作为文字字符串，或者对于包含空格的长文件名，允许将 <code>&lt;set&gt;</code> 中的每个文件名都括在双引号中。</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<p>变量替换：下表列出了可选语法（适用于任何变量 I）：
+展开表</p>
+<div class="table-wrapper"><table><thead><tr><th>带修饰符的变量</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>%~I</code></td><td>扩展 <code>%I</code>，这将移除所有周围的引号。</td></tr>
+<tr><td><code>%~fI</code></td><td>将 <code>%I</code> 扩展为完全限定的路径名。</td></tr>
+<tr><td><code>%~dI</code></td><td>将 <code>%I</code> 扩展为仅包含驱动器号。</td></tr>
+<tr><td><code>%~pI</code></td><td>将 <code>%I</code> 扩展为仅包含路径。</td></tr>
+<tr><td><code>%~nI</code></td><td>将 <code>%I</code> 扩展为仅包含文件名。</td></tr>
+<tr><td><code>%~xI</code></td><td>将 <code>%I</code> 扩展为仅包含文件扩展名。</td></tr>
+<tr><td><code>%~sI</code></td><td>将路径扩展为仅包含短名称。</td></tr>
+<tr><td><code>%~aI</code></td><td>将 <code>%I</code> 扩展为文件属性。</td></tr>
+<tr><td><code>%~tI</code></td><td>将 <code>%I</code> 扩展为文件的日期和时间。</td></tr>
+<tr><td><code>%~zI</code></td><td>将 <code>%I</code> 扩展为文件的大小。</td></tr>
+<tr><td><code>%~$PATH:I</code></td><td>搜索 PATH 环境变量中列出的目录，然后将 <code>%I</code> 扩展为找到的第一个目录的完全限定名称。 如果未定义环境变量名称或搜索找不到该文件，则此修饰符将扩展为空字符串。</td></tr>
+</tbody></table>
+</div>
+<p>下表列出了可用于获取复合结果的修饰符组合。
+展开表</p>
+<div class="table-wrapper"><table><thead><tr><th>带组合修饰符的变量</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>%~dpI</code></td><td>将 <code>%I</code> 扩展为仅包含驱动器号和路径。</td></tr>
+<tr><td><code>%~nxI</code></td><td>将 <code>%I</code> 扩展为仅包含文件名和扩展名。</td></tr>
+<tr><td><code>%~fsI</code></td><td>将 <code>%I</code> 扩展为仅包含短名称的完整路径名。</td></tr>
+<tr><td><code>%~dp$PATH:I</code></td><td>在 PATH 环境变量中列出的目录中搜索 <code>%I</code>，然后扩展为找到的第一个目录的驱动器号和路径。</td></tr>
+<tr><td><code>%~ftzaI</code></td><td>将 <code>%I</code> 扩展为类似于 dir 命令的输出行。</td></tr>
+</tbody></table>
+</div>
+<p>在上面的示例中，可以将 <code>%I</code> 和 PATH 替换为其他有效值。 有效的 for 变量名称将结束 <strong>%~</strong> 语法。
+通过使用大写的变量名（如 <code>%I</code>），可以提高代码的易读性，并避免与不区分大小写的修饰符混淆。</p>
+</li>
+</ul>
+</li>
+<li>解析字符串：你可以在直接字符串上使用解析逻辑，方法是：使用双引号（不带 usebackq）或单引号（带usebackq）--例如，(MyString) 或 ('MyString')。<code>for /f``&lt;literalstring&gt;</code> <code>&lt;literalstring&gt;</code> 被视为来自文件的单行输入。 解析用双引号括起的 <code>&lt;literalstring&gt;</code> 时，命令符号（如 <code>\ &amp; | &gt; &lt; ^</code>）被视为普通字符。</li>
+<li>解析输出：可以使用 <code>for /f</code> 命令来解析命令的输出，方法是在括号之间加上反引号 <code>&lt;command&gt;</code>。 它将被视为命令行，随后传递给子 cmd.exe。 输出会捕获到内存中，并像文件一样进行解析。</li>
+</ul>
+<h4 id="示例-1"><a class="header" href="#示例-1">示例</a></h4>
+<p>要在批处理文件中使用 for，请使用以下语法：</p>
+<pre><code>for {%%|%}&lt;variable&gt; in (&lt;set&gt;) do &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<p>要使用可替换变量 %f 显示当前目录中扩展名为.doc 或.txt 的所有文件的内容，请键入：</p>
+<pre><code>for %f in (*.doc *.txt) do type %f
+</code></pre>
+<p>在前面的示例中，当前目录中扩展名为 .doc 或 .txt 的每个文件都将被替换为 %f 变量，直到显示每个文件的内容。 要在批处理文件中使用此命令，请将所有出现的 %f 替换为 %%f。 否则，将忽略该变量并显示错误消息。</p>
+<p>要分析文件并忽略注释行，请键入：</p>
+<pre><code>for /f eol=; tokens=2,3* delims=, %i in (myfile.txt) do @echo %i %j %k
+</code></pre>
+<p>此命令将解析 myfile.txt 中的每一行。 此命令将忽略以分号开头的行，并将每行的第二个和第三个标记传递给 for 主体（标记由逗号或空格分隔）。 for 语句的主体引用 %i 以获取第二个标记，引用 %j 以获取第三个标记，引用 %k 以获取所有剩余标记。 如果你提供的文件名包含空格，请在文本两边使用引号（例如，File Name）。 要使用引号，必须使用 usebackq。 否则，引号将被解释为定义要解析的文字字符串。</p>
+<p>%i 在 for 语句中显式声明。 %j 和 %k 是使用 tokens= 隐式声明的。 可以使用 <strong>tokens=</strong> 来指定最多 26 个标记，前提是不会导致尝试声明超过字母 z 或 Z 的变量。</p>
+<p>要通过将 set 放在括号中来解析命令的输出，请键入：</p>
+<pre><code>for /f "usebackq delims==" %i in (`set`) do @echo %i
+</code></pre>
+<p>要对目录中的所有文件执行递归循环（包括子目录）并回显其完整路径、上次修改时间及其文件大小，请键入：</p>
+<pre><code>for /r "C:\My Dir\" %A in (*.*) do echo %~ftzA
+</code></pre>
+<h3 id="if条件"><a class="header" href="#if条件">if（条件）</a></h3>
+<p>在批处理程序中执行条件处理。</p>
+<h4 id="语法-3"><a class="header" href="#语法-3">语法</a></h4>
+<pre><code>if [not] ERRORLEVEL &lt;number&gt; &lt;command&gt; [else &lt;expression&gt;]
+if [not] &lt;string1&gt;==&lt;string2&gt; &lt;command&gt; [else &lt;expression&gt;]
+if [not] exist &lt;filename&gt; &lt;command&gt; [else &lt;expression&gt;]
+</code></pre>
+<p>如果启用了命令扩展，请使用以下语法：</p>
+<pre><code>if [/i] &lt;string1&gt; &lt;compareop&gt; &lt;string2&gt; &lt;command&gt; [else &lt;expression&gt;]
+if cmdextversion &lt;number&gt; &lt;command&gt; [else &lt;expression&gt;]
+if defined &lt;variable&gt; &lt;command&gt; [else &lt;expression&gt;]
+</code></pre>
+<h4 id="参数-3"><a class="header" href="#参数-3">参数</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
+<tr><td>not</td><td>指定仅当条件为 false 时，才应执行该命令。</td></tr>
+<tr><td>errorlevel <code>&lt;number&gt;</code></td><td>仅当由 Cmd.exe 运行的上一个程序返回等于或大于 number 的退出代码时，才指定 true 条件。</td></tr>
+<tr><td><code>&lt;command&gt;</code></td><td>指定在满足上述条件时应执行的命令。</td></tr>
+<tr><td><code>&lt;string1&gt;==&lt;string2&gt;</code></td><td>仅当 string1 和 string2 相同时，才指定 true 条件。 这些值可以是字符串或批处理变量（例如，<code>%1</code>）。 无需将字符串用引号括起来。</td></tr>
+<tr><td>存在 <code>&lt;filename&gt;</code></td><td>如果指定的文件名存在，则指定 true 条件。</td></tr>
+<tr><td><code>&lt;compareop&gt;</code></td><td>指定三字母比较运算符，包括：* EQU - 等于* NEQ - 不等于* LSS - 小于* LEQ - 小于或等于* GTR - 大于* GEQ - 大于或等于</td></tr>
+<tr><td>/i</td><td>强制字符串比较忽略大小写。 可以采用 if 的 <code>string1==string2</code> 形式使用 /i。 这些比较是通用的，因为如果 string1 和 string2 仅由数字组成，则字符串将转换为数值并执行数值比较。</td></tr>
+<tr><td>cmdextversion <code>&lt;number&gt;</code></td><td>仅当与 Cmd.exe 的命令扩展功能关联的内部版本号等于或大于指定的数值时，才指定 true 条件。 第一个版本为 1。 向命令扩展添加大量增强功能时，它会以 1 为增量增加。 禁用命令扩展时（默认情况下，启用命令扩展），cmdextversion 条件永远不会为 true。</td></tr>
+<tr><td>defined <code>&lt;variable&gt;</code></td><td>如果定义了变量，则指定 true 条件。</td></tr>
+<tr><td><code>&lt;expression&gt;</code></td><td>指定命令行命令以及要在 else 子句中传递给该命令的任何参数。</td></tr>
+<tr><td>/?</td><td>在命令提示符下显示帮助。</td></tr>
+</tbody></table>
+</div>
+<h4 id="备注-1"><a class="header" href="#备注-1">备注</a></h4>
+<ul>
+<li>
+<p>如果 if 子句中指定的条件为 true，则执行条件后面的命令。如果条件为 false，则忽略 if 子句中的命令，并且该命令执行 else 子句中指定的任何命令。</p>
+</li>
+<li>
+<p>程序停止时，它将返回退出代码。 若要使用退出代码作为条件，请使用 errorlevel 参数。</p>
+</li>
+<li>
+<p>如果使用 defined，则将以下三个变量添加到环境中：%errorlevel%、%cmdcmdline% 和 %cmdextversion%。</p>
+<ul>
+<li>%errorlevel%：扩展为 ERRORLEVEL 环境变量的当前值的字符串表示形式。 此变量假定尚不存在名为 ERRORLEVEL 的现有环境变量。 如果存在，将获得该 ERRORLEVEL 值。</li>
+</ul>
+</li>
+<li>
+<p>%cmdcmdline%：扩展到在 Cmd.exe 进行任何处理之前传递给 Cmd.exe 的原始命令行。 这假定尚不存在名为 CMDCMDLINE 的现有环境变量。 如果存在，将获得该 CMDCMDLINE 值。</p>
+</li>
+<li>
+<p>%cmdextversion%：扩展为 cmdextversion 的当前值的字符串表示形式。 这假定不存在名为 CMDEXTVERSION 的现有环境变量。 如果存在，将获取该 CMDEXTVERSION 值。</p>
+</li>
+<li>
+<p>必须在 if 后面的命令所在的同一行上使用 else 子句。</p>
+</li>
+</ul>
+<p><a href="https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/if#examples"></a>### 示例</p>
+<p>若要显示消息“如果找不到文件 Product.dat ，则找不到数据文件”，请键入：</p>
+<pre><code>if not exist product.dat echo Cannot find data file
+</code></pre>
+<p>若要在驱动器 A 中格式化磁盘并在格式化过程中发生错误时显示错误消息，请在批处理文件中键入以下行：</p>
+<pre><code>:begin
+@echo off
+format a: /s
+if not errorlevel 1 goto end
+echo An error occurred during formatting.
+:end
+echo End of batch program.
+</code></pre>
+<p>若要从当前目录中删除文件 Product.dat 或在找不到 Product.dat 时显示消息，请在批处理文件中键入以下行：</p>
+<pre><code>IF EXIST Product.dat (
+del Product.dat
+) ELSE (
+echo The Product.dat file is missing.
+)
+</code></pre>
+<p>备注</p>
+<p>这些行可以组合成一行，如下所示：</p>
+<pre><code>IF EXIST Product.dat (del Product.dat) ELSE (echo The Product.dat file is missing.)
+</code></pre>
+<p>若要在运行批处理文件后回显 ERRORLEVEL 环境变量的值，请在批处理文件中键入以下行：</p>
+<pre><code>goto answer%errorlevel%
+:answer1
+echo The program returned error level 1
+goto end
+:answer0
+echo The program returned error level 0
+goto end
+:end
+echo Done!
+</code></pre>
+<p>若要在 ERRORLEVEL 环境变量的值小于或等于 1 时转到 ok 标签，请键入：</p>
+<pre><code>if %errorlevel% LEQ 1 goto okay
+</code></pre>
+<h3 id="ipconfig"><a class="header" href="#ipconfig">ipconfig</a></h3>
+<p>显示所有当前的 TCP/IP 网络配置值，并刷新动态主机配置协议 (DHCP) 和域名系统 (DNS) 设置。 在没有参数的情况下使用时，ipconfig 会显示 Internet 协议版本 4 (IPv4) 和 IPv6 地址、子网掩码以及所有适配器的默认网关。</p>
+<h3 id="mkdir同md创建目录"><a class="header" href="#mkdir同md创建目录">mkdir（同md：创建目录）</a></h3>
+<p>创建目录或子目录。 命令扩展（默认情况下启用）允许使用单个 mkdir 命令在指定路径中创建中间目录。</p>
+<p>若要在当前目录中创建名为 Directory1 的目录，请键入：</p>
+<pre><code>mkdir Directory1
+</code></pre>
+<p>若要在启用命令扩展的情况下在根目录中创建目录树 Taxes\Property\Current，请键入：</p>
+<pre><code>mkdir \Taxes\Property\Current
+</code></pre>
+<p>若要与上一示例中一样在根目录中创建目录树 Taxes\Property\Current，但禁用命令扩展，请键入以下命令序列：</p>
+<pre><code>mkdir \Taxes
+mkdir \Taxes\Property
+mkdir \Taxes\Property\Current
+</code></pre>
+<h3 id="move移动文件"><a class="header" href="#move移动文件">move（移动文件）</a></h3>
+<p>将一个或多个文件从一个目录移动到另一个目录。</p>
+<h4 id="语法-4"><a class="header" href="#语法-4">语法</a></h4>
+<pre><code>move [{/y|-y}] [&lt;source&gt;] [&lt;target&gt;]
+</code></pre>
+<h4 id="参数-4"><a class="header" href="#参数-4">参数</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
+<tr><td>/y</td><td>停止确认是否要覆盖现有目标文件的提示。 COPYCMD 环境变量中可能预设了此参数。 可以使用 -y 参数替代此预设。 除非命令是从批处理脚本中运行，否则默认会在覆盖文件之前进行提示。</td></tr>
+<tr><td>-y</td><td>启动确认是否要覆盖现有目标文件的提示。</td></tr>
+<tr><td><code>&lt;source&gt;</code></td><td>指定要移动的文件的路径和名称。 若要移动或重命名目录，<em>source</em> 应为当前目录的路径和名称。</td></tr>
+<tr><td><code>&lt;target&gt;</code></td><td>指定要将文件移动到的路径和名称。 若要移动或重命名目录，<em>target</em> 应为目标目录的路径和名称。</td></tr>
+<tr><td>/?</td><td>在命令提示符下显示帮助。</td></tr>
+</tbody></table>
+</div>
+<h4 id="示例-2"><a class="header" href="#示例-2">示例</a></h4>
+<p>若要将扩展名为 .xls 的所有文件从 \Data 目录移动到 \Second_Q\Reports 目录，请键入：</p>
+<pre><code>move \data\*.xls \second_q\reports\
+
+</code></pre>
+<h3 id="renrename"><a class="header" href="#renrename">ren(rename)</a></h3>
+<p>重命名文件（文件夹）。</p>
+<p>修改文件名示例：</p>
+<pre><code class="language-bat">ren a.txt b.txt
+</code></pre>
+<p>若要将当前目录中的所有 .txt 文件扩展名更改为 .doc 扩展名，请键入：</p>
+<pre><code class="language-bat">ren *.txt *.doc
+</code></pre>
+<p>若要将目录的名称从 Chap10 更改为 Part10，请键入：</p>
+<pre><code class="language-bat">ren chap10 part1
+</code></pre>
+<p>备注</p>
+<ul>
+<li>
+<p>重命名文件时不能指定新的驱动器或路径。 你也不能使用此命令跨驱动器重命名文件或将文件移动到不同的目录（可以使用 <code>mkdir</code> 创建文件夹，<code>move</code> 移动文件路径 ）。</p>
+</li>
+<li>
+<p>filename2 中通配符表示的字符与 filename1 中对应的字符相同。</p>
+</li>
+<li>
+<p>filename2 必须是唯一的文件名。 如果 filename2 与现有文件名匹配，则会显示以下消息：Duplicate file name or file not found。</p>
+</li>
+</ul>
+<p>在mac/linux/unix系统中，重命名文件使用<code>mv</code>命令。</p>
+<p>注意 <code>mv</code>可以修改文件路径</p>
+<h3 id="setx设置环境变量"><a class="header" href="#setx设置环境变量">setx(设置环境变量)</a></h3>
+<blockquote>
+<p>若 key 或者 value 中有空格，使用双引号括起来。</p>
+</blockquote>
+<p>设置当前用户的环境变量</p>
+<pre><code class="language-shell">setx KEY VALUE
+
+</code></pre>
+<p>设系统环境变量，后面追加 <code>/m</code></p>
+<pre><code class="language-shell">setx KEY VALUE /m
+
+</code></pre>
+<h3 id="start"><a class="header" href="#start">start</a></h3>
+<p>启动单独的命令提示符窗口以运行指定的程序或命令。</p>
+<h2 id="样例"><a class="header" href="#样例">样例</a></h2>
+<h3 id="复制文件示例"><a class="header" href="#复制文件示例">复制文件示例</a></h3>
+<p>本示例描述，将指定目录下的三个文件夹复制到目标文件夹下，要求：</p>
+<ul>
+<li>复制所有子目录</li>
+<li>覆盖现有文件而不提示</li>
+</ul>
+<pre><code class="language-bat">@echo off
+rem 将执行目录切换到当前目录，因为以管理员运行默认为 c://Windwows/System32 目录
+cd /d %~dp0
+rem 中文编码，避免一些中文乱码
+chcp 65001 &gt; nul
+rem 设置源文件夹路径和目标文件夹路径变量
+set "source_folder=TSIM.Shared"  
+set "destination_folder=TSIM.Unity/Packages/TSIM.Shared"  
+  
+:: 确保目标文件夹存在，如果不存在则创建它  
+if not exist "%destination_folder%" mkdir "%destination_folder%"  
+  
+:: 复制文件夹  
+xcopy /E /I /Y "%source_folder%\Models" "%destination_folder%\Models"  
+xcopy /E /I /Y "%source_folder%\Models_Common" "%destination_folder%\Models_Common"  
+xcopy /E /I /Y "%source_folder%\Services" "%destination_folder%\Services" 
+
+
+echo "复制完成！"
+pause
+</code></pre>
+<p><strong>选项说明</strong></p>
+<ul>
+<li>/E：复制所有子目录，包括空的子目录。</li>
+<li>/I：如果目标不存在且复制多个文件，此选项将假定目标必须是目录。这在目标目录尚未创建时尤其有用，可以避免提示确认。</li>
+<li>/Y：覆盖现有的目标文件而不提示。</li>
+</ul>
+<h3 id="获取日期和时间作为文件名"><a class="header" href="#获取日期和时间作为文件名">获取日期和时间作为文件名</a></h3>
+<p>例子：创建一个用日期和时间命名的文件夹: <code>C:\dddd-MM-dd-hhmmss</code></p>
+<pre><code class="language-bat">@echo off
+
+:: 处理时间的小时数为个位数时，出现空格(会导致认为是命令分割)。使用0补位
+set t=%time:~0,2%%time:~3,2%%time:~6,2%
+set t=%t: =0%
+
+
+:: 定义备份目录（可以根据需要更改）
+set backupDir=C:\%date:~0,4%-%date:~5,2%-%date:~8,2%-%t%
+</code></pre>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../windows/winsw.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../windows/mbr-gpt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../windows/winsw.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../windows/mbr-gpt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "windows/windows-commands.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/fzf.umd.js"></script>
+        <script src="../assets/elasticlunr.js"></script>
+        <script src="../assets/mermaid.min.js"></script>
+        <script src="../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

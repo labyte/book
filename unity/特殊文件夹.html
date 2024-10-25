@@ -1,0 +1,545 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>特殊文件夹 - Labyte Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/style1.css">
+        <link rel="stylesheet" href="../theme/css/table.css">
+        <link rel="stylesheet" href="../assets/mermaid.css">
+        <link rel="stylesheet" href="../assets/print.css">
+        <link rel="stylesheet" href="../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Introduction.html">首页</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> DotNet</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/c-sharp.html"><strong aria-hidden="true">1.1.</strong> CSharp</a></li><li class="chapter-item "><a href="../dotnet/nuget.html"><strong aria-hidden="true">1.2.</strong> Nuget</a></li><li class="chapter-item "><a href="../dotnet/packages/messagepack.html"><strong aria-hidden="true">1.3.</strong> 包：Messagepack</a></li><li class="chapter-item "><a href="../dotnet/packages/memorypack.html"><strong aria-hidden="true">1.4.</strong> 包：MemoryPack</a></li><li class="chapter-item "><a href="../dotnet/packages/dotnetty.html"><strong aria-hidden="true">1.5.</strong> 包：DotNetty</a></li><li class="chapter-item "><a href="../dotnet/packages/stackexchange-redis.html"><strong aria-hidden="true">1.6.</strong> 包：StackExchange.Redis</a></li><li class="chapter-item "><a href="../dotnet/packages/epplus.html"><strong aria-hidden="true">1.7.</strong> 包：EPPlus</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/wpf/index.html"><strong aria-hidden="true">2.</strong> WPF</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/wpf/listbox.html"><strong aria-hidden="true">2.1.</strong> ListBox</a></li><li class="chapter-item "><a href="../dotnet/wpf/listview.html"><strong aria-hidden="true">2.2.</strong> ListView</a></li><li class="chapter-item "><a href="../dotnet/wpf/项目版本号.html"><strong aria-hidden="true">2.3.</strong> 项目版本号</a></li><li class="chapter-item "><a href="../dotnet/wpf/资源引用.html"><strong aria-hidden="true">2.4.</strong> 资源引用</a></li><li class="chapter-item "><a href="../dotnet/wpf/devexpress.html"><strong aria-hidden="true">2.5.</strong> DevExpress</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> WinForm</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/winform/tray.html"><strong aria-hidden="true">3.1.</strong> 托盘开发</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/aspnet/aspnet.html"><strong aria-hidden="true">4.</strong> Asp.Net</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-signalr.html"><strong aria-hidden="true">4.1.</strong> SignalR</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-证书.html"><strong aria-hidden="true">4.2.</strong> 证书</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-jwt.html"><strong aria-hidden="true">4.3.</strong> Jwt</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-blazor.html"><strong aria-hidden="true">4.4.</strong> Blazor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-bootstrap-blazor.html"><strong aria-hidden="true">4.4.1.</strong> BootstrapBlazor</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">5.</strong> Unity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../unity/ui.html"><strong aria-hidden="true">5.1.</strong> UI</a></li><li class="chapter-item "><a href="../unity/animation.html"><strong aria-hidden="true">5.2.</strong> 动画</a></li><li class="chapter-item "><a href="../unity/camera.html"><strong aria-hidden="true">5.3.</strong> 相机</a></li><li class="chapter-item "><a href="../unity/vector.html"><strong aria-hidden="true">5.4.</strong> 向量</a></li><li class="chapter-item "><a href="../unity/lighting.html"><strong aria-hidden="true">5.5.</strong> 灯光</a></li><li class="chapter-item "><a href="../unity/material-shader.html"><strong aria-hidden="true">5.6.</strong> 材质</a></li><li class="chapter-item "><a href="../unity/monobehavior.html"><strong aria-hidden="true">5.7.</strong> 行为脚本</a></li><li class="chapter-item "><a href="../unity/timeline.html"><strong aria-hidden="true">5.8.</strong> Timeline</a></li><li class="chapter-item "><a href="../unity/vr/SteamVR.html"><strong aria-hidden="true">5.9.</strong> Steam VR</a></li><li class="chapter-item "><a href="../unity/优化/资源优化.html"><strong aria-hidden="true">5.10.</strong> 资源优化</a></li><li class="chapter-item expanded "><a href="../unity/特殊文件夹.html" class="active"><strong aria-hidden="true">5.11.</strong> 特殊文件夹</a></li><li class="chapter-item "><a href="../unity/build-window.html"><strong aria-hidden="true">5.12.</strong> 发布 Window 平台</a></li><li class="chapter-item "><a href="../unity/build-webgl.html"><strong aria-hidden="true">5.13.</strong> 发布 WebGL 平台</a></li><li class="chapter-item "><a href="../unity/build-android.html"><strong aria-hidden="true">5.14.</strong> 发布 安卓 平台</a></li><li class="chapter-item "><a href="../unity/build-ios.html"><strong aria-hidden="true">5.15.</strong> 发布 IOS 平台</a></li><li class="chapter-item "><a href="../unity/packages/UniTask.html"><strong aria-hidden="true">5.16.</strong> 包：UniTask</a></li><li class="chapter-item "><a href="../unity/packages/sqlite.html"><strong aria-hidden="true">5.17.</strong> 包：Sqlite</a></li><li class="chapter-item "><a href="../unity/packages/StarterAssets.html"><strong aria-hidden="true">5.18.</strong> 包：StarterAssets</a></li><li class="chapter-item "><a href="../unity/packages/Addressables.html"><strong aria-hidden="true">5.19.</strong> 包：Addressables</a></li><li class="chapter-item "><a href="../unity/packages/CurvySpine.html"><strong aria-hidden="true">5.20.</strong> 包：CurvySpine</a></li><li class="chapter-item "><a href="../unity/packages/DoTween.html"><strong aria-hidden="true">5.21.</strong> 包：DoTween</a></li><li class="chapter-item "><a href="../unity/packages/EasySave.html"><strong aria-hidden="true">5.22.</strong> 包：EasySave</a></li><li class="chapter-item "><a href="../unity/packages/ET网络框架.html"><strong aria-hidden="true">5.23.</strong> 包：ET网络框架</a></li><li class="chapter-item "><a href="../unity/packages/InputSystemPackage.html"><strong aria-hidden="true">5.24.</strong> 包：InputSystemPackage</a></li><li class="chapter-item "><a href="../unity/packages/MagicOnion.html"><strong aria-hidden="true">5.25.</strong> 包：MagicOnion</a></li><li class="chapter-item "><a href="../unity/packages/NativeShare.html"><strong aria-hidden="true">5.26.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Nativefileso.html"><strong aria-hidden="true">5.27.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Newtonsoft.html"><strong aria-hidden="true">5.28.</strong> 包：Newtonsoft</a></li><li class="chapter-item "><a href="../unity/packages/NewUIWidgets.html"><strong aria-hidden="true">5.29.</strong> 包：NewUIWidgets</a></li><li class="chapter-item "><a href="../unity/packages/NodeGraphProcessor.html"><strong aria-hidden="true">5.30.</strong> 包：NodeGraphProcessor</a></li><li class="chapter-item "><a href="../unity/packages/PDF插件.html"><strong aria-hidden="true">5.31.</strong> 包：PDF插件</a></li><li class="chapter-item "><a href="../unity/ide-vscode.html"><strong aria-hidden="true">5.32.</strong> IDE：VS Code</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../rust/rust.html"><strong aria-hidden="true">6.</strong> Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../rust/tauri.html"><strong aria-hidden="true">6.1.</strong> Tauri</a></li><li class="chapter-item "><a href="../rust/slint.html"><strong aria-hidden="true">6.2.</strong> Slint</a></li><li class="chapter-item "><a href="../rust/iced.html"><strong aria-hidden="true">6.3.</strong> Iced</a></li><li class="chapter-item "><a href="../rust/ecs.html"><strong aria-hidden="true">6.4.</strong> ECS</a></li><li class="chapter-item "><a href="../rust/mdbook.html"><strong aria-hidden="true">6.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../python/python.html"><strong aria-hidden="true">7.</strong> Python</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sql-server.html"><strong aria-hidden="true">8.1.</strong> SQL Server</a></li><li class="chapter-item "><a href="../database/my-sql.html"><strong aria-hidden="true">8.2.</strong> MySql</a></li><li class="chapter-item "><a href="../database/redis.html"><strong aria-hidden="true">8.3.</strong> Redis</a></li><li class="chapter-item "><a href="../database/mongodb.html"><strong aria-hidden="true">8.4.</strong> MongoDb</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../synology/synology.html"><strong aria-hidden="true">9.</strong> 群晖</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../synology/certficate.html"><strong aria-hidden="true">9.1.</strong> 证书</a></li><li class="chapter-item "><a href="../synology/drive.html"><strong aria-hidden="true">9.2.</strong> Drive</a></li><li class="chapter-item "><a href="../synology/反向代理服务器.html"><strong aria-hidden="true">9.3.</strong> 反向代理服务器</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../windows/index.html"><strong aria-hidden="true">10.</strong> Windows系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../windows/winsw.html"><strong aria-hidden="true">10.1.</strong> WinSW</a></li><li class="chapter-item "><a href="../windows/windows-commands.html"><strong aria-hidden="true">10.2.</strong> Windows 命令行</a></li><li class="chapter-item "><a href="../windows/mbr-gpt.html"><strong aria-hidden="true">10.3.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../mac/mac.html"><strong aria-hidden="true">11.</strong> MacOS</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../mac/xcode.html"><strong aria-hidden="true">11.1.</strong> XCode</a></li><li class="chapter-item "><a href="../mac/testflight.html"><strong aria-hidden="true">11.2.</strong> TestFlight</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Google</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Google/download-apk.html"><strong aria-hidden="true">12.1.</strong> 下载Google商店中的APK</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">13.</strong> 技术栈</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../technology-stack/nginx.html"><strong aria-hidden="true">13.1.</strong> Nginx</a></li><li class="chapter-item "><a href="../technology-stack/rabbitmq.html"><strong aria-hidden="true">13.2.</strong> RabbitMQ</a></li><li class="chapter-item "><a href="../technology-stack/git.html"><strong aria-hidden="true">13.3.</strong> Git</a></li><li class="chapter-item "><a href="../technology-stack/svn.html"><strong aria-hidden="true">13.4.</strong> SVN</a></li><li class="chapter-item "><a href="../technology-stack/vim.html"><strong aria-hidden="true">13.5.</strong> Vim</a></li><li class="chapter-item "><a href="../technology-stack/npm.html"><strong aria-hidden="true">13.6.</strong> Npm</a></li><li class="chapter-item "><a href="../technology-stack/pip.html"><strong aria-hidden="true">13.7.</strong> PIP</a></li><li class="chapter-item "><a href="../technology-stack/ssh.html"><strong aria-hidden="true">13.8.</strong> SSH</a></li><li class="chapter-item "><a href="../technology-stack/docker.html"><strong aria-hidden="true">13.9.</strong> Docker</a></li><li class="chapter-item "><a href="../technology-stack/regular-expression.html"><strong aria-hidden="true">13.10.</strong> 正则表达式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> 云服务</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cloud-service/ali-cloud.html"><strong aria-hidden="true">14.1.</strong> 阿里云</a></li><li class="chapter-item "><a href="../cloud-service/self-built-server.html"><strong aria-hidden="true">14.2.</strong> 自建服务器</a></li><li class="chapter-item "><a href="../cloud-service/let-s-encrypt.html"><strong aria-hidden="true">14.3.</strong> Let's Encrypt</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> 软件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../softs/typora.html"><strong aria-hidden="true">15.1.</strong> Typora</a></li><li class="chapter-item "><a href="../softs/xournalpp.html"><strong aria-hidden="true">15.2.</strong> Xournal++</a></li><li class="chapter-item "><a href="../softs/bulk-rename-utility.html"><strong aria-hidden="true">15.3.</strong> Bulk Rename Utility</a></li><li class="chapter-item "><a href="../softs/exif-tool.html"><strong aria-hidden="true">15.4.</strong> ExifTool</a></li><li class="chapter-item "><a href="../softs/telegram.html"><strong aria-hidden="true">15.5.</strong> Telegram</a></li><li class="chapter-item "><a href="../softs/excel.html"><strong aria-hidden="true">15.6.</strong> Excel</a></li><li class="chapter-item "><a href="../softs/visual-studio.html"><strong aria-hidden="true">15.7.</strong> Visual Studio</a></li><li class="chapter-item "><a href="../softs/visual-studio-code.html"><strong aria-hidden="true">15.8.</strong> Visual Studio Code</a></li><li class="chapter-item "><a href="../softs/jetbrains-rider.html"><strong aria-hidden="true">15.9.</strong> JetBrains Rider</a></li><li class="chapter-item "><a href="../softs/others.html"><strong aria-hidden="true">15.10.</strong> 其他</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../markdown.html"><strong aria-hidden="true">16.</strong> Markdown</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+        
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="章节" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="主题" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索. (快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Labyte Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="打印" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/labyte/book" title="Git 仓库" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索 ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <style>
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 15px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局 */
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top; 
+}
+
+.excel-table th {
+    background-color: #f0f3f5;
+    font-weight: bold;
+}
+
+.excel-table tr:nth-child(even), table tr:nth-child(odd) {
+    background-color: transparent; /* 确保所有行背景色一致 */
+}
+
+.excel-table tr:hover {
+    background-color: inherit;
+}
+
+.excel-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.excel-table th:nth-child(1), .excel-table td:nth-child(1) {
+    /* width: 30%; */
+    width:100px;
+}
+
+.excel-table th:nth-child(2), .excel-table td:nth-child(2) {
+    width: 50%;
+}
+
+.excel-table th:nth-child(3), .excel-table td:nth-child(3) {
+    width: 50%;
+}
+</style>
+<h1 id="unity中的特殊文件夹"><a class="header" href="#unity中的特殊文件夹">Unity中的特殊文件夹</a></h1>
+<h2 id="文件夹"><a class="header" href="#文件夹">文件夹</a></h2>
+<h3 id="editor"><a class="header" href="#editor">Editor</a></h3>
+<p><strong>Editor</strong>文件夹可以在<code>Assets</code>目录下，也可以在子目录里，只要名子叫<code>Editor</code>就可以。例如目录<code>Assets/Editor和Assets/Scripts/Editor</code>是一样的，无论多少个叫<code>Editor</code>的文件夹都可以
+<code>Editor</code>文件夹下存放的所有资源文件或脚本文件都不会被打进包中，并且脚本也只能在编辑时使用。一般会把一些编辑器扩展的脚本放在这里，或者是一些编辑时用的DLL</p>
+<h3 id="editor-default-resources"><a class="header" href="#editor-default-resources">Editor Default Resources</a></h3>
+<p>必须放在Assets目录下，可以把编辑器扩展用到的一些资源放在这里，比如图片、文本文件、等等。它和Editor文件夹一样都不会被打到包中，仅仅用于开发时使用
+通过 <strong>EditorGUIUtility.Load</strong> 可以读取到该文件夹下的资源</p>
+<pre><code class="language-csharp">using UnityEngine;
+using UnityEditor;
+
+public class LoadExample
+{
+    [MenuItem("Examples/Load Editor Texture Example")]
+    static void loadExample()
+    {
+        Texture tex  = (Texture)EditorGUIUtility.Load("aboutwindow.mainheader");
+        Debug.Log("Got: " + tex.name + " !");
+
+        Renderer r = GameObject.Find("Cube").GetComponent&lt;Renderer&gt;();
+        r.sharedMaterial.mainTexture = tex;
+    }
+}
+</code></pre>
+<h3 id="gizmos"><a class="header" href="#gizmos">Gizmos</a></h3>
+<p>必须放在<code>Assets</code>目录下，可以将绘制在场景中的<code>Gizmo</code>素材放在这个文件夹下，使用<code>Gizmos.DrawIcon</code>绘制的时候可以直接传入图片路径，打包时会打到包中</p>
+<h3 id="plugins"><a class="header" href="#plugins">Plugins</a></h3>
+<p>可以将sdk、dll库文件、插件等放在这里，打完包后就会自动将这些文件打到包中</p>
+<h3 id="resources"><a class="header" href="#resources">Resources</a></h3>
+<blockquote>
+<p>❗❗❗ <strong>项目开发时不要使用它</strong> ❗❗❗</p>
+<p>它只是用来快速构建demo</p>
+</blockquote>
+<p><strong>Resources</strong>文件夹可以在<code>Assets</code>目录下，也可以在子目录里，只要名子叫<code>Resources</code>就可以，<code>Resources</code>文件夹下的所有资源不管你用还是不用都会被打进包中
+可以使用<code>Resource.Load</code>读取此文件夹下的资源
+因为<code>Resource</code>文件夹下的所有资源都会被打进包中，所以一般开发时使用<code>AssetDatabase.LoadAssetAtPath</code>，它可以读取<code>Assets</code>目录下的任意文件夹下的资源，只能在编辑器下使用，它的路径是<code>Assets/xx/xx.xxx</code>，需要注意路径带文件的后缀名</p>
+<h3 id="streamingassets"><a class="header" href="#streamingassets">StreamingAssets</a></h3>
+<p>这个文件夹下的资源也都会被打进包中，它和<code>Resources</code>的区别是<code>Resources</code>会压缩文件，但是<code>StreamingAssets</code>不会压缩而是原封不动的打包进去。并且它是一个只读的文件夹，就是程序运行时只能读不能写。它在各个平台下的路径是不同的
+使用<code>Application.streamingAssetsPath</code>会根据当前的平台选择对应的路径</p>
+<p>其他文件夹: 如果是没有用到的资源，就不会被打到包中，如果是用到了的资源就会被打到包中</p>
+<h2 id="路径"><a class="header" href="#路径">路径</a></h2>
+<h3 id="applicationdatapath"><a class="header" href="#applicationdatapath">Application.dataPath</a></h3>
+<ul>
+<li>这里是列表文本<code>Assets</code>文件夹路径，</li>
+<li>只在编辑器模式下有效，打包后该路径不存在</li>
+</ul>
+<h3 id="applicationstreamingassetspath"><a class="header" href="#applicationstreamingassetspath">Application.streamingAssetsPath</a></h3>
+<p>StreamingAssets文件夹路径，不同平台读取方式不同，详细见图：</p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>平台</th>
+                <th>File读取</th>
+                <th>UnityWebRequest读取</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PC</td>
+                <td>✔️ 无前缀</td>
+                <td>✔️</td>
+            </tr>
+              <tr>
+                <td>安卓</td>
+                <td>❌</td>
+                <td>✔️ 加前缀：<code>jar:file://</code></td>
+            </tr>
+             <tr>
+                <td>IOS</td>
+                <td>✔️ 无前缀</td>
+                <td>✔️ 加前缀：<code>file://</code></td>
+            </tr>
+             <tr>
+                <td>Mac</td>
+                <td>✔️ 无前缀</td>
+                <td>✔️ 加前缀：<code>file://</code></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>UnityWebRequest读取代码示例：</p>
+<pre><code class="language-csharp">/// &lt;summary&gt;
+/// 使用UnityWebRequest请求时的地址（根据各个平台处理）
+/// 注：这个路径不能使用File来使用
+/// &lt;/summary&gt;
+/// &lt;param name="fileName"&gt;&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public static string GetRequestURL(string fileName)
+{
+
+    string path = Path.Combine(Application.streamingAssetsPath, fileName);
+
+#if UNITY_ANDROID &amp;&amp; !UNITY_EDITOR
+            path ="jar:file://" + ptah;
+#elif UNITY_EIDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_IPHONE //苹果下是这样
+            path ="file://"+ ptah;
+
+// #else // UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_IPHONE 这些的路径一样
+//             request = new UnityWebRequest(Application.streamingAssetsPath + "/" + fileName);
+#endif
+    return path;
+}
+</code></pre>
+<h3 id="applicationpersistentdatapath"><a class="header" href="#applicationpersistentdatapath">Application.persistentDataPath</a></h3>
+<p>这个文件夹在不同平台下的路径不同</p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>平台</th>
+                <th>路径</th>
+                <th>读写方式</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PC</td>
+                <td>与普通文件路径相同</td>
+                <td>File直接读写</td>
+            </tr>
+              <tr>
+                <td>安卓</td>
+                <td>/data/data/xxx.xxx.xxx/files</td>
+                <td>File直接读写（安卓端唯一可以用File读写的路径）<br>安卓手机连接电脑，可通过 <code>Android/data/com.xxx.xxx</code>查看</td>
+            </tr>
+             <tr>
+                <td>IOS</td>
+                <td>Application/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Documents</td>
+                <td>File直接读写</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h4 id="读写案例"><a class="header" href="#读写案例">读写案例</a></h4>
+<pre><code class="language-csharp">    public UnityEngine.UI.Text infoText;
+    public void FileRead()
+    {
+        System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.persistentDataPath);
+        infoText.text = "";
+        foreach (FileInfo file in di.GetFiles())
+        {
+            //Debug.Log(file.Name);
+            infoText.text += file.Name.ToString();
+            StreamReader sr = file.OpenText();
+            infoText.text += ":" + sr.ReadToEnd()+"\n";
+            sr.Close();
+        }
+    }
+    public void FileWrite()
+    {
+        string fileName = "Test.txt";
+        string path = Path.Combine(Application.persistentDataPath, fileName);
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "Persistent path test!");
+            infoText.text = "添加了 Test.txt 文件 ";
+        }
+        else
+        {
+           infoText.text = "已经存在 Test.txt,已删除 ";
+           File.Delete(path);
+        }
+    }
+</code></pre>
+<h4 id="itextshap插创建字体案例"><a class="header" href="#itextshap插创建字体案例">itextShap插创建字体案例</a></h4>
+<p>itextShap 插件是用于创建PDF文档的，但是需要使用我们自己的字体。</p>
+<ul>
+<li>创建字体函数的方法</li>
+</ul>
+<pre><code>public static BaseFont CreateFont(string name, string encoding, bool embedded);//底层应该是通过 System.IO.File 来访问创建的
+</code></pre>
+<ul>
+<li>在PC或者IOS上，我们只需要将字体放到 <code>StreamingAssets</code> 文件夹可正常使用接口创建</li>
+<li>在安卓端，是不能通过 <strong>System.Io.File</strong>  访问  <strong>StreamingAssets</strong> 的，唯一可以访问的是  <strong>PersistentData</strong> 文件夹，所以我们需要在程序首次启动的时候，将<code>StreamingAssets</code> 中的字体文件 拷贝到 <code>PersistentData</code>中</li>
+</ul>
+<pre><code class="language-csharp">     const string SIMHEI = "SIMHEI.TTF";
+    /// &lt;summary&gt;
+    /// 安卓下调用
+    /// 将自己使用的字体从 StreamingAssets中复制到 persisentData 中 
+    /// StreamingAssets 中的 在 安卓端 被压缩了 不能直接通过  IO读取
+    /// &lt;/summary&gt;
+    private static void CopyFontToPersistentData()
+    {
+        string path = Path.Combine(Application.persistentDataPath, SIMHEI);
+        //如果持久化目录下没有配置文件，先从streamingAssets里复制一份到持久化目录
+        if (!File.Exists(path))
+        {
+            //先通过 UnityWebRequest 将 streamingAssetsPath 中的 字体读取出来
+            UnityWebRequest request = UnityWebRequest.Get(Path.Combine(Application.streamingAssetsPath, SIMHEI));
+            request.SendWebRequest();
+            while (request.isDone == false) { }
+            //写入 persistentDataPath
+            File.WriteAllBytes(path, request.downloadHandler.data);
+        }
+
+    }
+
+</code></pre>
+<h4 id="注意事项"><a class="header" href="#注意事项">注意事项</a></h4>
+<p><strong>该路径常用来存储档案的注意事项</strong></p>
+<ul>
+<li>卸载软件后该路径会被 <strong>删除</strong> ，再次安装数据被重置了（安卓端测试）</li>
+<li>不卸载软件，直接重新安装，原数据还在（安卓端测试）</li>
+<li>在PC端，有些时候是免安装版本，该路径是在程序所在的文件夹外，所以不会被删除</li>
+<li>总结以上情况：在版本升级中，若对存储的数据结构进行改变了，那应先删除原来的数据，否则程序要出错</li>
+</ul>
+<h3 id="applicationtemporarycachepath"><a class="header" href="#applicationtemporarycachepath">Application.temporaryCachePath</a></h3>
+<p>基本未使用过，未深入研究。</p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>平台</th>
+                <th>路径</th>
+                <th>读写方式</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PC</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+              <tr>
+                <td>安卓</td>
+                <td>/data/data/xxx.xxx.xxx/cache</td>
+                <td>-</td>
+            </tr>
+             <tr>
+                <td>IOS</td>
+                <td>Application/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Library/Caches</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../unity/优化/资源优化.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../unity/build-window.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../unity/优化/资源优化.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../unity/build-window.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "unity/特殊文件夹.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/fzf.umd.js"></script>
+        <script src="../assets/elasticlunr.js"></script>
+        <script src="../assets/mermaid.min.js"></script>
+        <script src="../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

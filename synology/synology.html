@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>群晖 - Labyte Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/style1.css">
+        <link rel="stylesheet" href="../theme/css/table.css">
+        <link rel="stylesheet" href="../assets/mermaid.css">
+        <link rel="stylesheet" href="../assets/print.css">
+        <link rel="stylesheet" href="../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Introduction.html">首页</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> DotNet</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/c-sharp.html"><strong aria-hidden="true">1.1.</strong> CSharp</a></li><li class="chapter-item "><a href="../dotnet/nuget.html"><strong aria-hidden="true">1.2.</strong> Nuget</a></li><li class="chapter-item "><a href="../dotnet/packages/messagepack.html"><strong aria-hidden="true">1.3.</strong> 包：Messagepack</a></li><li class="chapter-item "><a href="../dotnet/packages/memorypack.html"><strong aria-hidden="true">1.4.</strong> 包：MemoryPack</a></li><li class="chapter-item "><a href="../dotnet/packages/dotnetty.html"><strong aria-hidden="true">1.5.</strong> 包：DotNetty</a></li><li class="chapter-item "><a href="../dotnet/packages/stackexchange-redis.html"><strong aria-hidden="true">1.6.</strong> 包：StackExchange.Redis</a></li><li class="chapter-item "><a href="../dotnet/packages/epplus.html"><strong aria-hidden="true">1.7.</strong> 包：EPPlus</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/wpf/index.html"><strong aria-hidden="true">2.</strong> WPF</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/wpf/listbox.html"><strong aria-hidden="true">2.1.</strong> ListBox</a></li><li class="chapter-item "><a href="../dotnet/wpf/listview.html"><strong aria-hidden="true">2.2.</strong> ListView</a></li><li class="chapter-item "><a href="../dotnet/wpf/项目版本号.html"><strong aria-hidden="true">2.3.</strong> 项目版本号</a></li><li class="chapter-item "><a href="../dotnet/wpf/资源引用.html"><strong aria-hidden="true">2.4.</strong> 资源引用</a></li><li class="chapter-item "><a href="../dotnet/wpf/devexpress.html"><strong aria-hidden="true">2.5.</strong> DevExpress</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> WinForm</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/winform/tray.html"><strong aria-hidden="true">3.1.</strong> 托盘开发</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/aspnet/aspnet.html"><strong aria-hidden="true">4.</strong> Asp.Net</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-signalr.html"><strong aria-hidden="true">4.1.</strong> SignalR</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-证书.html"><strong aria-hidden="true">4.2.</strong> 证书</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-jwt.html"><strong aria-hidden="true">4.3.</strong> Jwt</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-blazor.html"><strong aria-hidden="true">4.4.</strong> Blazor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-bootstrap-blazor.html"><strong aria-hidden="true">4.4.1.</strong> BootstrapBlazor</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">5.</strong> Unity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../unity/ui.html"><strong aria-hidden="true">5.1.</strong> UI</a></li><li class="chapter-item "><a href="../unity/animation.html"><strong aria-hidden="true">5.2.</strong> 动画</a></li><li class="chapter-item "><a href="../unity/camera.html"><strong aria-hidden="true">5.3.</strong> 相机</a></li><li class="chapter-item "><a href="../unity/vector.html"><strong aria-hidden="true">5.4.</strong> 向量</a></li><li class="chapter-item "><a href="../unity/lighting.html"><strong aria-hidden="true">5.5.</strong> 灯光</a></li><li class="chapter-item "><a href="../unity/material-shader.html"><strong aria-hidden="true">5.6.</strong> 材质</a></li><li class="chapter-item "><a href="../unity/monobehavior.html"><strong aria-hidden="true">5.7.</strong> 行为脚本</a></li><li class="chapter-item "><a href="../unity/timeline.html"><strong aria-hidden="true">5.8.</strong> Timeline</a></li><li class="chapter-item "><a href="../unity/vr/SteamVR.html"><strong aria-hidden="true">5.9.</strong> Steam VR</a></li><li class="chapter-item "><a href="../unity/优化/资源优化.html"><strong aria-hidden="true">5.10.</strong> 资源优化</a></li><li class="chapter-item "><a href="../unity/特殊文件夹.html"><strong aria-hidden="true">5.11.</strong> 特殊文件夹</a></li><li class="chapter-item "><a href="../unity/build-window.html"><strong aria-hidden="true">5.12.</strong> 发布 Window 平台</a></li><li class="chapter-item "><a href="../unity/build-webgl.html"><strong aria-hidden="true">5.13.</strong> 发布 WebGL 平台</a></li><li class="chapter-item "><a href="../unity/build-android.html"><strong aria-hidden="true">5.14.</strong> 发布 安卓 平台</a></li><li class="chapter-item "><a href="../unity/build-ios.html"><strong aria-hidden="true">5.15.</strong> 发布 IOS 平台</a></li><li class="chapter-item "><a href="../unity/packages/UniTask.html"><strong aria-hidden="true">5.16.</strong> 包：UniTask</a></li><li class="chapter-item "><a href="../unity/packages/sqlite.html"><strong aria-hidden="true">5.17.</strong> 包：Sqlite</a></li><li class="chapter-item "><a href="../unity/packages/StarterAssets.html"><strong aria-hidden="true">5.18.</strong> 包：StarterAssets</a></li><li class="chapter-item "><a href="../unity/packages/Addressables.html"><strong aria-hidden="true">5.19.</strong> 包：Addressables</a></li><li class="chapter-item "><a href="../unity/packages/CurvySpine.html"><strong aria-hidden="true">5.20.</strong> 包：CurvySpine</a></li><li class="chapter-item "><a href="../unity/packages/DoTween.html"><strong aria-hidden="true">5.21.</strong> 包：DoTween</a></li><li class="chapter-item "><a href="../unity/packages/EasySave.html"><strong aria-hidden="true">5.22.</strong> 包：EasySave</a></li><li class="chapter-item "><a href="../unity/packages/ET网络框架.html"><strong aria-hidden="true">5.23.</strong> 包：ET网络框架</a></li><li class="chapter-item "><a href="../unity/packages/InputSystemPackage.html"><strong aria-hidden="true">5.24.</strong> 包：InputSystemPackage</a></li><li class="chapter-item "><a href="../unity/packages/MagicOnion.html"><strong aria-hidden="true">5.25.</strong> 包：MagicOnion</a></li><li class="chapter-item "><a href="../unity/packages/NativeShare.html"><strong aria-hidden="true">5.26.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Nativefileso.html"><strong aria-hidden="true">5.27.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Newtonsoft.html"><strong aria-hidden="true">5.28.</strong> 包：Newtonsoft</a></li><li class="chapter-item "><a href="../unity/packages/NewUIWidgets.html"><strong aria-hidden="true">5.29.</strong> 包：NewUIWidgets</a></li><li class="chapter-item "><a href="../unity/packages/NodeGraphProcessor.html"><strong aria-hidden="true">5.30.</strong> 包：NodeGraphProcessor</a></li><li class="chapter-item "><a href="../unity/packages/PDF插件.html"><strong aria-hidden="true">5.31.</strong> 包：PDF插件</a></li><li class="chapter-item "><a href="../unity/ide-vscode.html"><strong aria-hidden="true">5.32.</strong> IDE：VS Code</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../rust/rust.html"><strong aria-hidden="true">6.</strong> Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../rust/tauri.html"><strong aria-hidden="true">6.1.</strong> Tauri</a></li><li class="chapter-item "><a href="../rust/slint.html"><strong aria-hidden="true">6.2.</strong> Slint</a></li><li class="chapter-item "><a href="../rust/iced.html"><strong aria-hidden="true">6.3.</strong> Iced</a></li><li class="chapter-item "><a href="../rust/ecs.html"><strong aria-hidden="true">6.4.</strong> ECS</a></li><li class="chapter-item "><a href="../rust/mdbook.html"><strong aria-hidden="true">6.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../python/python.html"><strong aria-hidden="true">7.</strong> Python</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sql-server.html"><strong aria-hidden="true">8.1.</strong> SQL Server</a></li><li class="chapter-item "><a href="../database/my-sql.html"><strong aria-hidden="true">8.2.</strong> MySql</a></li><li class="chapter-item "><a href="../database/redis.html"><strong aria-hidden="true">8.3.</strong> Redis</a></li><li class="chapter-item "><a href="../database/mongodb.html"><strong aria-hidden="true">8.4.</strong> MongoDb</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../synology/synology.html" class="active"><strong aria-hidden="true">9.</strong> 群晖</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../synology/certficate.html"><strong aria-hidden="true">9.1.</strong> 证书</a></li><li class="chapter-item "><a href="../synology/drive.html"><strong aria-hidden="true">9.2.</strong> Drive</a></li><li class="chapter-item "><a href="../synology/反向代理服务器.html"><strong aria-hidden="true">9.3.</strong> 反向代理服务器</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../windows/index.html"><strong aria-hidden="true">10.</strong> Windows系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../windows/winsw.html"><strong aria-hidden="true">10.1.</strong> WinSW</a></li><li class="chapter-item "><a href="../windows/windows-commands.html"><strong aria-hidden="true">10.2.</strong> Windows 命令行</a></li><li class="chapter-item "><a href="../windows/mbr-gpt.html"><strong aria-hidden="true">10.3.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../mac/mac.html"><strong aria-hidden="true">11.</strong> MacOS</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../mac/xcode.html"><strong aria-hidden="true">11.1.</strong> XCode</a></li><li class="chapter-item "><a href="../mac/testflight.html"><strong aria-hidden="true">11.2.</strong> TestFlight</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Google</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Google/download-apk.html"><strong aria-hidden="true">12.1.</strong> 下载Google商店中的APK</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">13.</strong> 技术栈</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../technology-stack/nginx.html"><strong aria-hidden="true">13.1.</strong> Nginx</a></li><li class="chapter-item "><a href="../technology-stack/rabbitmq.html"><strong aria-hidden="true">13.2.</strong> RabbitMQ</a></li><li class="chapter-item "><a href="../technology-stack/git.html"><strong aria-hidden="true">13.3.</strong> Git</a></li><li class="chapter-item "><a href="../technology-stack/svn.html"><strong aria-hidden="true">13.4.</strong> SVN</a></li><li class="chapter-item "><a href="../technology-stack/vim.html"><strong aria-hidden="true">13.5.</strong> Vim</a></li><li class="chapter-item "><a href="../technology-stack/npm.html"><strong aria-hidden="true">13.6.</strong> Npm</a></li><li class="chapter-item "><a href="../technology-stack/pip.html"><strong aria-hidden="true">13.7.</strong> PIP</a></li><li class="chapter-item "><a href="../technology-stack/ssh.html"><strong aria-hidden="true">13.8.</strong> SSH</a></li><li class="chapter-item "><a href="../technology-stack/docker.html"><strong aria-hidden="true">13.9.</strong> Docker</a></li><li class="chapter-item "><a href="../technology-stack/regular-expression.html"><strong aria-hidden="true">13.10.</strong> 正则表达式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> 云服务</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cloud-service/ali-cloud.html"><strong aria-hidden="true">14.1.</strong> 阿里云</a></li><li class="chapter-item "><a href="../cloud-service/self-built-server.html"><strong aria-hidden="true">14.2.</strong> 自建服务器</a></li><li class="chapter-item "><a href="../cloud-service/let-s-encrypt.html"><strong aria-hidden="true">14.3.</strong> Let's Encrypt</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> 软件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../softs/typora.html"><strong aria-hidden="true">15.1.</strong> Typora</a></li><li class="chapter-item "><a href="../softs/xournalpp.html"><strong aria-hidden="true">15.2.</strong> Xournal++</a></li><li class="chapter-item "><a href="../softs/bulk-rename-utility.html"><strong aria-hidden="true">15.3.</strong> Bulk Rename Utility</a></li><li class="chapter-item "><a href="../softs/exif-tool.html"><strong aria-hidden="true">15.4.</strong> ExifTool</a></li><li class="chapter-item "><a href="../softs/telegram.html"><strong aria-hidden="true">15.5.</strong> Telegram</a></li><li class="chapter-item "><a href="../softs/excel.html"><strong aria-hidden="true">15.6.</strong> Excel</a></li><li class="chapter-item "><a href="../softs/visual-studio.html"><strong aria-hidden="true">15.7.</strong> Visual Studio</a></li><li class="chapter-item "><a href="../softs/visual-studio-code.html"><strong aria-hidden="true">15.8.</strong> Visual Studio Code</a></li><li class="chapter-item "><a href="../softs/jetbrains-rider.html"><strong aria-hidden="true">15.9.</strong> JetBrains Rider</a></li><li class="chapter-item "><a href="../softs/others.html"><strong aria-hidden="true">15.10.</strong> 其他</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../markdown.html"><strong aria-hidden="true">16.</strong> Markdown</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+        
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="章节" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="主题" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索. (快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Labyte Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="打印" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/labyte/book" title="Git 仓库" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索 ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <h1 id="synology-群晖"><a class="header" href="#synology-群晖">Synology (群晖)</a></h1>
+<h2 id="putty-连接"><a class="header" href="#putty-连接">Putty 连接</a></h2>
+<h3 id="登录群晖"><a class="header" href="#登录群晖">登录群晖</a></h3>
+<ol>
+<li>使用SSH，输入地址，端口（22） 打开命令窗口</li>
+<li>输入群晖账户和密码</li>
+<li>输入 sudo -i 切换到root 下，提供权限，此时，再次输入账号的密</li>
+<li>输入: cd /volume1 切换到容器1，这里根据你的容器名称</li>
+<li>然后使用 ls 查看内容列表</li>
+</ol>
+<h3 id="运行python-程序"><a class="header" href="#运行python-程序">运行Python 程序</a></h3>
+<p>需要先安装Python，直接在套件中安装即可。</p>
+<p>运行python，切换到对应文件夹下，python3 test.py</p>
+<h2 id="powershell-连接"><a class="header" href="#powershell-连接">PowerShell 连接</a></h2>
+<p>群晖上启动 SSH 功能，并设置一个可以访问的端口默认22如果不能访问，设置其他端口</p>
+<p><img src="image/synology/1721886156722.png" alt="1721886156722" /></p>
+<p>使用 PowerShell 登录，输入 <code>ssh username@domain -p port</code>，账号和地址真确，会提示 <code>ECDSA host key for ip address 否则提示： not in list of known hosts</code> ，然后提示输入密码，输入密码不可见，输入成功后显示账号和主机名称。</p>
+<p><img src="image/synology/1721886427739.png" alt="1721886427739" /></p>
+<p>切换到root账户，可以看到当前是 <code>$</code> 符号，表示非root账号，输入：<code>sudo -i</code>， 再次输入密码，此时变为 <code>#</code> ，表示 root 账户</p>
+<p><img src="image/synology/1721886444618.png" alt="1721886444618" /></p>
+<p>切换到根目录 <code>cd ..</code>,将 ~# 变为 /#，并用 <code>ls</code> ,查看目录</p>
+<p><img src="image/synology/1721886458497.png" alt="1721886458497" /></p>
+<p><code>/</code> : 表示根节点</p>
+<p><code>~</code> : 表示当前登录用户的 home 目录</p>
+<p>如果以 <code>root </code>账号登陆，<code>~</code> 代表 <code>/root/</code> 目录，当你任何环境下输入： <code>#cd ~</code> 会进入到 <code>/root</code> 目录。</p>
+<h2 id="docker-操作"><a class="header" href="#docker-操作">Docker 操作</a></h2>
+<h3 id="查询镜像"><a class="header" href="#查询镜像">查询镜像</a></h3>
+<p>docker 安装在 <code>lib64</code> 里面 ，输入 <code>cd lib64</code></p>
+<p><strong>列出容器</strong>：<code>docker ps</code>，<a href="https://www.runoob.com/docker/docker-ps-command.html">命令手册</a></p>
+<p><img src="image/synology/1721887061068.png" alt="1721887061068" /></p>
+<p><strong>获取容器</strong>/镜像的元数据：<code>docker inspect</code>，如：查看WIKI这个容器的所有挂载信息：</p>
+<p><img src="image/synology/1721887074140.png" alt="1721887074140" /></p>
+<p>命令说明：</p>
+<ul>
+<li><code>grep</code>: 表示全局正则表达式</li>
+<li><code>Mounts</code>: 匹配挂载开始</li>
+<li><code>-A</code> : 所有</li>
+<li><code>100</code> : 返回的行数</li>
+<li><code>Source</code>: 宿主的目录，也就是我们看得见的目录</li>
+<li><code>Destination</code>: 容器目录</li>
+</ul>
+<h3 id="拉取镜像"><a class="header" href="#拉取镜像">拉取镜像</a></h3>
+<p>现在的群晖在 <code>Docker hub</code> 里面显示查询镜像失败，获取不到镜像，使用命令行获取</p>
+<p><a href="https://www.bilibili.com/video/BV1ns4y1q79g/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ae505290000a9de26b4d6c8111c5e5dd">B站视频</a></p>
+<p>参照命令行章节，连接群晖</p>
+<p><code>sudo -i</code> 获取到超级用户权限</p>
+<p>搜索镜像，如: mongo，如数命令：</p>
+<pre><code class="language-shell">docker search mongo
+</code></pre>
+<p>搜索结果：</p>
+<pre><code class="language-shell">NAME                              DESCRIPTION                      STARS     OFFICIAL   AUTOMATED
+mongo                             MongoDB document databases ...   1989      [OK]     
+mongo-express                     Web-based MongoDB admin int...   22        [OK]     
+mvertes/alpine-mongo              light MongoDB container          19                   [OK]
+mongooseim/mongooseim-docker      MongooseIM server the lates...   9                    [OK]
+torusware/speedus-mongo           Always updated official Mon...   9                    [OK]
+jacksoncage/mongo                 Instant MongoDB sharded cluster  6                    [OK]
+mongoclient/mongoclient           Official docker image for M...   4                    [OK]
+jadsonlourenco/mongo-rocks        Percona Mongodb with Rocksd...   4                    [OK]
+asteris/apache-php-mongo          Apache2.4 + PHP + Mongo + m...   2                    [OK]
+19hz/mongo-container              Mongodb replicaset for coreos    1                    [OK]
+nitra/mongo                       Mongo3 centos7                   1                    [OK]
+ackee/mongo                       MongoDB with fixed Bluemix p...  1                    [OK]
+kobotoolbox/mongo                 https://github.com/kobotoolb...  1                    [OK]
+valtlfelipe/mongo                 Docker Image based on the la...  1                    [OK]
+</code></pre>
+<p>拉取镜像：<code> docker pull mongo:latest</code>，冒号后面需要跟版本号（latest：表示最新的版本号）</p>
+<p>使用中转加速拉取，在群晖里面配置加速</p>
+<p><strong>本期涉及的一些网站和链接</strong>：</p>
+<ul>
+<li><a href="https://hub.docker.com/">Dockerhub仓库1</a></li>
+<li><a href="https://registry.hub.docker.com">Dockerhub仓库2</a></li>
+<li><a href="https://dockerproxy.com/">镜像代理加速网站</a></li>
+<li><a href="https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6">镜像加速器地址</a></li>
+<li><a href="https://www.putty.be/latest.html">putty官网</a></li>
+</ul>
+<h2 id="mysql"><a class="header" href="#mysql">MySQL</a></h2>
+<p><code>&lt;a name="mysql-install"&gt;&lt;/a&gt;</code></p>
+<h3 id="安装"><a class="header" href="#安装">安装</a></h3>
+<p>下载镜像后启动安装，仅需要设置下端口映射和环境变量，其他保持默认。</p>
+<p><img src="image/synology/1721887472748.png" alt="1721887472748" /></p>
+<h3 id="操作"><a class="header" href="#操作">操作</a></h3>
+<p>浏览器登录 <code>DSM</code>，进入 <code>Mysql</code> 容器，选择终端机，点击新增，选择新增的 <code>bash</code>（不能使用默认的控制台，需要新增一个控制台）</p>
+<pre><code class="language-bash">#这里不知道为什么不能输入123，是复制的
+mysql -uroot -ptzj123
+</code></pre>
+<p><img src="%E7%BE%A4%E6%99%96%E4%BD%BF%E7%94%A8Putty/image-20220307113952416.png" alt="image-20220307113952416" /></p>
+<p>使用 <code>help</code> 命令查看</p>
+<h2 id="wiki"><a class="header" href="#wiki">Wiki</a></h2>
+<h3 id="安装-1"><a class="header" href="#安装-1">安装</a></h3>
+<p><strong>环境需求说明</strong>：2核 1G内存</p>
+<p>打开Dcoker，在注册表搜索 <code>wiki</code>,找到 <code>requarks/wiki</code> ，选中后点击下载</p>
+<p><img src="image/synology/1721888262468.png" alt="1721888262468" /></p>
+<p>下载后在映像如图</p>
+<p><img src="image/synology/1721888271732.png" alt="1721888271732" /></p>
+<h3 id="配置mysql数据库"><a class="header" href="#配置mysql数据库">配置mysql数据库</a></h3>
+<p>Mysql容器的安装参考: <a href="#mysql-install">MySQL 安装</a></p>
+<p>在数据库里面创建好数据库，如:wiki</p>
+<h3 id="配置环境变量"><a class="header" href="#配置环境变量">配置环境变量</a></h3>
+<p><a href="https://docs.requarks.io/install/docker">官方手册</a></p>
+<p><strong>启动镜像</strong>：在镜像列表中选中 <code>wiki</code> ，点击<strong>启动</strong>：</p>
+<p><img src="image/synology/1721889057429.png" alt="1721889057429" /></p>
+<p><strong>常规设置</strong>:填写容器名称，然后点击 <strong>高级设置</strong></p>
+<p><img src="image/synology/1721889072045.png" alt="1721889072045" /></p>
+<p><strong>高级设置</strong>：启用自动重新启动，可勾选</p>
+<p><img src="image/synology/1721889096301.png" alt="1721889096301" /></p>
+<p><strong>端口配置</strong>，<code>http：3000</code>，<code>https：3443</code>（但是目前无法使用）</p>
+<p><img src="image/synology/1721889115653.png" alt="1721889115653" /></p>
+<p><strong>配置环境变量，根据官方手册如下</strong>：</p>
+<p><img src="image/synology/1721889177004.png" alt="1721889177004" /></p>
+<p><strong>对应配置如下</strong>：</p>
+<p><img src="image/synology/1721889238900.png" alt="1721889238900" /></p>
+<h3 id="配置文件启动"><a class="header" href="#配置文件启动">配置文件启动</a></h3>
+<p>使用配置文件启动，需要存储空间进行挂载，让容器加载我们挂载的配置文件。</p>
+<p>官网上对挂载配置文件说明，看到容器会读取 /wiki/config.yml配置文件，<a href="https://github.com/Requarks/wiki/blob/main/config.sample.yml">配置文件模板</a></p>
+<p><img src="image/synology/1721889365564.png" alt="1721889365564" /></p>
+<p>群晖上的目录</p>
+<p><img src="image/synology/1721889374780.png" alt="1721889374780" /></p>
+<p>编辑好配置文件后，按照下图挂载，忽略 content 的挂载</p>
+<p><img src="image/synology/1721889389093.png" alt="1721889389093" /></p>
+<p>配置文件主要内容：</p>
+<p><img src="image/synology/1721889420293.png" alt="1721889420293" /></p>
+<p>启动容器，使用 <code> http://你的IP地址或者域名:3000</code>访问</p>
+<p>注意还不能使用https访问，这是个问题，后面会讲</p>
+<h3 id="https访问"><a class="header" href="#https访问">HTTPS访问</a></h3>
+<p><strong>停止容器</strong></p>
+<p><strong>注</strong>：官网上说可以简单配置 <code>LETSENCRPT</code> 实现 <code>Https</code>，但是没成功，还是使用自定义密钥的方式来做</p>
+<p><img src="image/synology/1721890749526.png" alt="1721890749526" /></p>
+<p><strong>创建证书</strong>，参看 <a href="drive.html">创建证书</a></p>
+<p><strong>挂载证书目录</strong>，还是看下图，我们会将证书拷贝到 docker/wiki/data/content中</p>
+<p><img src="image/synology/1721890845501.png" alt="1721890845501" /></p>
+<p><strong>为什么是这个目录？</strong>  首先，通过 <code>docker inspect wiki</code> 查看这个目录是容器本身存在的，并且可以挂载的，我们也可以挂载其他的目录，但是必须是/wiki/...这样的。</p>
+<p><strong>！！！不能直接挂载/wiki/data ！！！</strong></p>
+<p><strong>下载证书</strong>，创建后下载下来，解压拷贝到群晖的文件夹下</p>
+<p><img src="image/synology/1721890855919.png" alt="1721890855919" /></p>
+<p><strong>修改配置文件</strong></p>
+<p><img src="image/synology/1721890867533.png" alt="1721890867533" /></p>
+<p><strong>启动容器</strong>，使用 <code>https://你的ip或者域名:3443</code> 访问</p>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../database/mongodb.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../synology/certficate.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../database/mongodb.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../synology/certficate.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "synology/synology.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/fzf.umd.js"></script>
+        <script src="../assets/elasticlunr.js"></script>
+        <script src="../assets/mermaid.min.js"></script>
+        <script src="../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

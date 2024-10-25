@@ -1,0 +1,586 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Timeline - Labyte Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/style1.css">
+        <link rel="stylesheet" href="../theme/css/table.css">
+        <link rel="stylesheet" href="../assets/mermaid.css">
+        <link rel="stylesheet" href="../assets/print.css">
+        <link rel="stylesheet" href="../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Introduction.html">首页</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> DotNet</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/c-sharp.html"><strong aria-hidden="true">1.1.</strong> CSharp</a></li><li class="chapter-item "><a href="../dotnet/nuget.html"><strong aria-hidden="true">1.2.</strong> Nuget</a></li><li class="chapter-item "><a href="../dotnet/packages/messagepack.html"><strong aria-hidden="true">1.3.</strong> 包：Messagepack</a></li><li class="chapter-item "><a href="../dotnet/packages/memorypack.html"><strong aria-hidden="true">1.4.</strong> 包：MemoryPack</a></li><li class="chapter-item "><a href="../dotnet/packages/dotnetty.html"><strong aria-hidden="true">1.5.</strong> 包：DotNetty</a></li><li class="chapter-item "><a href="../dotnet/packages/stackexchange-redis.html"><strong aria-hidden="true">1.6.</strong> 包：StackExchange.Redis</a></li><li class="chapter-item "><a href="../dotnet/packages/epplus.html"><strong aria-hidden="true">1.7.</strong> 包：EPPlus</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/wpf/index.html"><strong aria-hidden="true">2.</strong> WPF</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/wpf/listbox.html"><strong aria-hidden="true">2.1.</strong> ListBox</a></li><li class="chapter-item "><a href="../dotnet/wpf/listview.html"><strong aria-hidden="true">2.2.</strong> ListView</a></li><li class="chapter-item "><a href="../dotnet/wpf/项目版本号.html"><strong aria-hidden="true">2.3.</strong> 项目版本号</a></li><li class="chapter-item "><a href="../dotnet/wpf/资源引用.html"><strong aria-hidden="true">2.4.</strong> 资源引用</a></li><li class="chapter-item "><a href="../dotnet/wpf/devexpress.html"><strong aria-hidden="true">2.5.</strong> DevExpress</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> WinForm</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/winform/tray.html"><strong aria-hidden="true">3.1.</strong> 托盘开发</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/aspnet/aspnet.html"><strong aria-hidden="true">4.</strong> Asp.Net</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-signalr.html"><strong aria-hidden="true">4.1.</strong> SignalR</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-证书.html"><strong aria-hidden="true">4.2.</strong> 证书</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-jwt.html"><strong aria-hidden="true">4.3.</strong> Jwt</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-blazor.html"><strong aria-hidden="true">4.4.</strong> Blazor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-bootstrap-blazor.html"><strong aria-hidden="true">4.4.1.</strong> BootstrapBlazor</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">5.</strong> Unity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../unity/ui.html"><strong aria-hidden="true">5.1.</strong> UI</a></li><li class="chapter-item "><a href="../unity/animation.html"><strong aria-hidden="true">5.2.</strong> 动画</a></li><li class="chapter-item "><a href="../unity/camera.html"><strong aria-hidden="true">5.3.</strong> 相机</a></li><li class="chapter-item "><a href="../unity/vector.html"><strong aria-hidden="true">5.4.</strong> 向量</a></li><li class="chapter-item "><a href="../unity/lighting.html"><strong aria-hidden="true">5.5.</strong> 灯光</a></li><li class="chapter-item "><a href="../unity/material-shader.html"><strong aria-hidden="true">5.6.</strong> 材质</a></li><li class="chapter-item "><a href="../unity/monobehavior.html"><strong aria-hidden="true">5.7.</strong> 行为脚本</a></li><li class="chapter-item expanded "><a href="../unity/timeline.html" class="active"><strong aria-hidden="true">5.8.</strong> Timeline</a></li><li class="chapter-item "><a href="../unity/vr/SteamVR.html"><strong aria-hidden="true">5.9.</strong> Steam VR</a></li><li class="chapter-item "><a href="../unity/优化/资源优化.html"><strong aria-hidden="true">5.10.</strong> 资源优化</a></li><li class="chapter-item "><a href="../unity/特殊文件夹.html"><strong aria-hidden="true">5.11.</strong> 特殊文件夹</a></li><li class="chapter-item "><a href="../unity/build-window.html"><strong aria-hidden="true">5.12.</strong> 发布 Window 平台</a></li><li class="chapter-item "><a href="../unity/build-webgl.html"><strong aria-hidden="true">5.13.</strong> 发布 WebGL 平台</a></li><li class="chapter-item "><a href="../unity/build-android.html"><strong aria-hidden="true">5.14.</strong> 发布 安卓 平台</a></li><li class="chapter-item "><a href="../unity/build-ios.html"><strong aria-hidden="true">5.15.</strong> 发布 IOS 平台</a></li><li class="chapter-item "><a href="../unity/packages/UniTask.html"><strong aria-hidden="true">5.16.</strong> 包：UniTask</a></li><li class="chapter-item "><a href="../unity/packages/sqlite.html"><strong aria-hidden="true">5.17.</strong> 包：Sqlite</a></li><li class="chapter-item "><a href="../unity/packages/StarterAssets.html"><strong aria-hidden="true">5.18.</strong> 包：StarterAssets</a></li><li class="chapter-item "><a href="../unity/packages/Addressables.html"><strong aria-hidden="true">5.19.</strong> 包：Addressables</a></li><li class="chapter-item "><a href="../unity/packages/CurvySpine.html"><strong aria-hidden="true">5.20.</strong> 包：CurvySpine</a></li><li class="chapter-item "><a href="../unity/packages/DoTween.html"><strong aria-hidden="true">5.21.</strong> 包：DoTween</a></li><li class="chapter-item "><a href="../unity/packages/EasySave.html"><strong aria-hidden="true">5.22.</strong> 包：EasySave</a></li><li class="chapter-item "><a href="../unity/packages/ET网络框架.html"><strong aria-hidden="true">5.23.</strong> 包：ET网络框架</a></li><li class="chapter-item "><a href="../unity/packages/InputSystemPackage.html"><strong aria-hidden="true">5.24.</strong> 包：InputSystemPackage</a></li><li class="chapter-item "><a href="../unity/packages/MagicOnion.html"><strong aria-hidden="true">5.25.</strong> 包：MagicOnion</a></li><li class="chapter-item "><a href="../unity/packages/NativeShare.html"><strong aria-hidden="true">5.26.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Nativefileso.html"><strong aria-hidden="true">5.27.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Newtonsoft.html"><strong aria-hidden="true">5.28.</strong> 包：Newtonsoft</a></li><li class="chapter-item "><a href="../unity/packages/NewUIWidgets.html"><strong aria-hidden="true">5.29.</strong> 包：NewUIWidgets</a></li><li class="chapter-item "><a href="../unity/packages/NodeGraphProcessor.html"><strong aria-hidden="true">5.30.</strong> 包：NodeGraphProcessor</a></li><li class="chapter-item "><a href="../unity/packages/PDF插件.html"><strong aria-hidden="true">5.31.</strong> 包：PDF插件</a></li><li class="chapter-item "><a href="../unity/ide-vscode.html"><strong aria-hidden="true">5.32.</strong> IDE：VS Code</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../rust/rust.html"><strong aria-hidden="true">6.</strong> Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../rust/tauri.html"><strong aria-hidden="true">6.1.</strong> Tauri</a></li><li class="chapter-item "><a href="../rust/slint.html"><strong aria-hidden="true">6.2.</strong> Slint</a></li><li class="chapter-item "><a href="../rust/iced.html"><strong aria-hidden="true">6.3.</strong> Iced</a></li><li class="chapter-item "><a href="../rust/ecs.html"><strong aria-hidden="true">6.4.</strong> ECS</a></li><li class="chapter-item "><a href="../rust/mdbook.html"><strong aria-hidden="true">6.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../python/python.html"><strong aria-hidden="true">7.</strong> Python</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sql-server.html"><strong aria-hidden="true">8.1.</strong> SQL Server</a></li><li class="chapter-item "><a href="../database/my-sql.html"><strong aria-hidden="true">8.2.</strong> MySql</a></li><li class="chapter-item "><a href="../database/redis.html"><strong aria-hidden="true">8.3.</strong> Redis</a></li><li class="chapter-item "><a href="../database/mongodb.html"><strong aria-hidden="true">8.4.</strong> MongoDb</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../synology/synology.html"><strong aria-hidden="true">9.</strong> 群晖</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../synology/certficate.html"><strong aria-hidden="true">9.1.</strong> 证书</a></li><li class="chapter-item "><a href="../synology/drive.html"><strong aria-hidden="true">9.2.</strong> Drive</a></li><li class="chapter-item "><a href="../synology/反向代理服务器.html"><strong aria-hidden="true">9.3.</strong> 反向代理服务器</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../windows/index.html"><strong aria-hidden="true">10.</strong> Windows系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../windows/winsw.html"><strong aria-hidden="true">10.1.</strong> WinSW</a></li><li class="chapter-item "><a href="../windows/windows-commands.html"><strong aria-hidden="true">10.2.</strong> Windows 命令行</a></li><li class="chapter-item "><a href="../windows/mbr-gpt.html"><strong aria-hidden="true">10.3.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../mac/mac.html"><strong aria-hidden="true">11.</strong> MacOS</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../mac/xcode.html"><strong aria-hidden="true">11.1.</strong> XCode</a></li><li class="chapter-item "><a href="../mac/testflight.html"><strong aria-hidden="true">11.2.</strong> TestFlight</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Google</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Google/download-apk.html"><strong aria-hidden="true">12.1.</strong> 下载Google商店中的APK</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">13.</strong> 技术栈</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../technology-stack/nginx.html"><strong aria-hidden="true">13.1.</strong> Nginx</a></li><li class="chapter-item "><a href="../technology-stack/rabbitmq.html"><strong aria-hidden="true">13.2.</strong> RabbitMQ</a></li><li class="chapter-item "><a href="../technology-stack/git.html"><strong aria-hidden="true">13.3.</strong> Git</a></li><li class="chapter-item "><a href="../technology-stack/svn.html"><strong aria-hidden="true">13.4.</strong> SVN</a></li><li class="chapter-item "><a href="../technology-stack/vim.html"><strong aria-hidden="true">13.5.</strong> Vim</a></li><li class="chapter-item "><a href="../technology-stack/npm.html"><strong aria-hidden="true">13.6.</strong> Npm</a></li><li class="chapter-item "><a href="../technology-stack/pip.html"><strong aria-hidden="true">13.7.</strong> PIP</a></li><li class="chapter-item "><a href="../technology-stack/ssh.html"><strong aria-hidden="true">13.8.</strong> SSH</a></li><li class="chapter-item "><a href="../technology-stack/docker.html"><strong aria-hidden="true">13.9.</strong> Docker</a></li><li class="chapter-item "><a href="../technology-stack/regular-expression.html"><strong aria-hidden="true">13.10.</strong> 正则表达式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> 云服务</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cloud-service/ali-cloud.html"><strong aria-hidden="true">14.1.</strong> 阿里云</a></li><li class="chapter-item "><a href="../cloud-service/self-built-server.html"><strong aria-hidden="true">14.2.</strong> 自建服务器</a></li><li class="chapter-item "><a href="../cloud-service/let-s-encrypt.html"><strong aria-hidden="true">14.3.</strong> Let's Encrypt</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> 软件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../softs/typora.html"><strong aria-hidden="true">15.1.</strong> Typora</a></li><li class="chapter-item "><a href="../softs/xournalpp.html"><strong aria-hidden="true">15.2.</strong> Xournal++</a></li><li class="chapter-item "><a href="../softs/bulk-rename-utility.html"><strong aria-hidden="true">15.3.</strong> Bulk Rename Utility</a></li><li class="chapter-item "><a href="../softs/exif-tool.html"><strong aria-hidden="true">15.4.</strong> ExifTool</a></li><li class="chapter-item "><a href="../softs/telegram.html"><strong aria-hidden="true">15.5.</strong> Telegram</a></li><li class="chapter-item "><a href="../softs/excel.html"><strong aria-hidden="true">15.6.</strong> Excel</a></li><li class="chapter-item "><a href="../softs/visual-studio.html"><strong aria-hidden="true">15.7.</strong> Visual Studio</a></li><li class="chapter-item "><a href="../softs/visual-studio-code.html"><strong aria-hidden="true">15.8.</strong> Visual Studio Code</a></li><li class="chapter-item "><a href="../softs/jetbrains-rider.html"><strong aria-hidden="true">15.9.</strong> JetBrains Rider</a></li><li class="chapter-item "><a href="../softs/others.html"><strong aria-hidden="true">15.10.</strong> 其他</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../markdown.html"><strong aria-hidden="true">16.</strong> Markdown</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+        
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="章节" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="主题" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索. (快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Labyte Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="打印" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/labyte/book" title="Git 仓库" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索 ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <h1 id="timeline"><a class="header" href="#timeline">Timeline</a></h1>
+<h2 id="playabledirector"><a class="header" href="#playabledirector">PlayableDirector</a></h2>
+<blockquote>
+<p>导演，挂在场景游戏对象上的一个组件</p>
+</blockquote>
+<ul>
+<li><strong>Playable</strong>  ：Timeline编辑的资源，类型为 “TimelineAsset”</li>
+<li><strong>UpdateMethod</strong>  ：更新方式，默认 GameTime</li>
+<li><strong>PlayOnAwake</strong>  ：在游戏对象Wake时，是否播放Timeline</li>
+<li><strong>WrapMode</strong>  ：循环模式</li>
+<li><strong>InitialTime</strong>  ：初始化时间，若设置了时间，会等待这个时间之后才播放</li>
+<li><strong>Bindings</strong>  ：绑定的轨道数据</li>
+</ul>
+<h2 id="timelineasset"><a class="header" href="#timelineasset">TimelineAsset</a></h2>
+<blockquote>
+<p>编辑时间线数据时，存储的数据</p>
+</blockquote>
+<p>获取轨道集合</p>
+<pre><code class="language-csharp">timelineAsset.GetOutputTracks()
+</code></pre>
+<p>通过轨道获取timeline资源( <code>track.timelineAsset</code> )，但是可能返回null，导致异常，可能的原因是复制timeline导致的，如果出现异常，可以通过 遍历打印出每个轨道的名字来检测</p>
+<pre><code class="language-csharp">public TimelineAsset timelineAsset
+{
+    get
+    {
+        var node = this;
+        while (node != null)
+        {
+            if (node.parent == null)
+                return null;
+            var seq = node.parent as TimelineAsset;
+            if (seq != null)
+                return seq;
+            node = node.parent as TrackAsset;
+        }
+        return null;
+    }
+}
+</code></pre>
+<h2 id="trackasset轨道"><a class="header" href="#trackasset轨道">TrackAsset(轨道)</a></h2>
+<blockquote>
+<p>编辑时间线数据时，存储的数据</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>name</strong> :轨道名称</p>
+</li>
+<li>
+<p><strong>Start(float)</strong>  ：开始时间</p>
+</li>
+<li>
+<p><strong>End(float)</strong>  ：结束时间</p>
+</li>
+<li>
+<p><strong>duration(float)</strong>  ：轨道长度</p>
+</li>
+<li>
+<p><strong>muted(bool)</strong>  ：是否静音，静音轨道从生成的PlayableGraph中被排除，所以应先静音，再 buildGraph</p>
+</li>
+<li>
+<p><strong>timelineAsset(TimelineAsset)</strong>  ：这个指向 时间线资源，实际上对应的是 轨道的 根 父节点</p>
+</li>
+<li>
+<p><strong>parent（PlayableAsset）</strong>  ：轨道的父节点（轨道的拥有者），轨道是可以嵌套的， TrackGroup 可以包含其他 轨道，所有轨道的最终父节点应为 TimelineAsset，即我们编辑的资源</p>
+</li>
+<li>
+<p><strong>clips（TimelineClip[]）</strong>  ：轨道片段数组</p>
+</li>
+</ul>
+<p>获取轨道绑定的对象</p>
+<pre><code class="language-csharp">var bind = director.GetGenericBinding(track);//需要使用Director来获取，  得到的是一个UnityEngine.Object  
+
+</code></pre>
+<p>重写CreateTrackMixer</p>
+<pre><code class="language-csharp"> public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
+ {
+    //graph: timelineasset构建的图
+    //go: 挂载 director 的游戏对象
+    //inputCount: 片段数量
+     return base.CreateTrackMixer(graph, go, inputCount);
+ }
+</code></pre>
+<h2 id="混合器"><a class="header" href="#混合器">混合器</a></h2>
+<h3 id="描述"><a class="header" href="#描述">描述</a></h3>
+<p>根据片段的权重来控制某个参数的百分比，可用于解决以下需求：</p>
+<p>（1）动画轨道（可以和controller 混合使用）</p>
+<p>（2）解决淡进淡出问题</p>
+<p>（3）解决监听播放一个片段结束问题（这里可以避免因暂停timeline导致误认为播发结束的问题）</p>
+<h3 id="淡进淡出案例"><a class="header" href="#淡进淡出案例">淡进淡出案例</a></h3>
+<p>使用 <code>CanvasGroup</code> 组件来实现效果</p>
+<pre><code class="language-csharp">public class CanvasGroupTrack : TrackAsset
+{
+    public float easeduration = 0.5f;
+    public bool useSettingForAllClips;
+    public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
+    {
+        //graph: timelineasset构建的图
+        //go: 挂载 director 的游戏对象
+        //inputCount: 片段数量
+        if (useSettingForAllClips) UpdateEaseDuration();
+        return ScriptPlayable&lt;CanvasGroupMixerBehaviour&gt;.Create(graph, inputCount);
+    }
+
+    private void UpdateEaseDuration()
+    {
+        foreach (var clip in GetClips())
+        {
+            clip.easeInDuration = easeduration;
+            clip.easeOutDuration = easeduration;
+        }
+    }
+}
+
+
+/// &lt;summary&gt;
+/// 注意事项：
+/// 1 gameObject.activeSelf 必须为true 否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
+/// 2 当淡出后，必须设置canvasgroup 不可交互，否则会挡住其他的交互
+/// &lt;/summary&gt;
+public class CanvasGroupMixerBehaviour : PlayableBehaviour
+{
+    CanvasGroup canvasGroup;
+
+    public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+    {
+        if (canvasGroup == null)
+        {
+            MonoBehaviour bind = playerData as MonoBehaviour;
+            if (bind == null) return;
+            if (bind.gameObject.activeSelf == false)
+            {
+                bind.gameObject
+                    .SetActive(true); //注意：滚到绑定的对象必须设置为 active 状态，否则会导致 初次设置 淡进淡出 报错，提示就是获取不到 reacTransform 
+            }
+
+            canvasGroup = bind.GetComponent&lt;CanvasGroup&gt;();
+            if (canvasGroup == null)
+            {
+                Debug.LogWarning("CanvasGroupMixerBehaviour：轨道使用淡进淡出效果，但是缺少 CanvasGroup组件");
+                return;
+            }
+        }
+
+        int inputCount = playable.GetInputCount(); //这是当前轨道上所有片段的数量，注意不是当前帧
+
+        //通过每个片段当前的权重和来设置 canvasGroup alpha值
+        float inputWeight = 0;
+        for (int i = 0; i &lt; inputCount; i++)
+        {
+            float curWeight = playable.GetInputWeight(i);
+            if (curWeight &gt; 0)
+                inputWeight += curWeight;
+        }
+        canvasGroup.alpha = inputWeight;
+        var b = inputWeight &gt; 0.05f; //设置使用0.05的阈值来设定而非0，避免极限情况的出现
+        if (canvasGroup.blocksRaycasts != b)
+        {
+            canvasGroup.blocksRaycasts = b;
+        }
+    }
+}
+</code></pre>
+<p><strong>注意事项</strong>：在这个案例中，场景中对轨道绑定的CanvasGroup对象默认为“未激活”状态，每次运行的时候报错，最后在首次给CanvasGroup赋值时，将对象激活显示出来，解决问题。</p>
+<p><img src="image/timeline/1721813944567.png" alt="1721813944567" /></p>
+<h2 id="扩展功能"><a class="header" href="#扩展功能">扩展功能</a></h2>
+<h3 id="复制timeline资源解决绑定丢失"><a class="header" href="#复制timeline资源解决绑定丢失">复制Timeline资源，解决绑定丢失</a></h3>
+<p>已在UKit中添加了工具处理，下面可作为原理参照。</p>
+<p>_ ** 应用场景：复制已经配置好的TimelineA,改为TimelineB,发现B上的轨道绑定丢失 **_</p>
+<p>配置 <strong>TimelineA</strong></p>
+<p><img src="image/timeline/1721813994579.png" alt="1721813994579" /></p>
+<p>在场景中复制TimelineA，改为 TimelineB</p>
+<p><img src="image/timeline/1721814013936.png" alt="1721814013936" /></p>
+<p>复制资源 TimelineA，改为 TimelineB，并托给场景中 TimelineB 的Director,此时发现绑定丢失</p>
+<p><img src="image/timeline/1721814028802.png" alt="1721814028802" /></p>
+<p>观看下图分析，它隐藏绑定了A的，且绑定正确，B上的丢失了，我们就要去找到这部分配置，修改，使用Notepad++工具</p>
+<p><img src="image/timeline/1721814045040.png" alt="1721814045040" /></p>
+<ul>
+<li>
+<p>通过  <strong>TimelineA.playable.meta</strong> 文件找到 TimelineA 资源文件的 <code>guid:56b3a74b657957d4cae6622c4a199001</code></p>
+</li>
+<li>
+<p>通过  <strong>TimelineB.playable.meta</strong> 文件找到 TimelineB 资源文件的 <code>guid:c4cdb66148603ca4080d5eeb2b49d526</code></p>
+</li>
+<li>
+<p>打开 TimelineAssetCopyTest.unity 场景文件，然后找到 <code>c4cdb66148603ca4080d5eeb2b49d526的位置</code></p>
+</li>
+</ul>
+<p><img src="image/timeline/1721814094360.png" alt="1721814094360" /></p>
+<ul>
+<li>我们只需要将下方的B的 guid 替换上方的A的 guid,并删除下方 fileID 为 0 的绑定，就可以了</li>
+</ul>
+<pre><code>PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410287964}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: c4cdb66148603ca4080d5eeb2b49d526, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 8672370563209045018, guid: c4cdb66148603ca4080d5eeb2b49d526, type: 2}
+    value: {fileID: 1191359100}
+  - key: {fileID: -1281548762813716947, guid: c4cdb66148603ca4080d5eeb2b49d526, type: 2}
+    value: {fileID: 1489575779}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &amp;1410287966
+</code></pre>
+<ul>
+<li>改后截图</li>
+</ul>
+<p><img src="image/timeline/1721814115192.png" alt="1721814115192" /></p>
+<h2 id="注意事项"><a class="header" href="#注意事项">注意事项</a></h2>
+<blockquote>
+<p>开发过程中的经验总结</p>
+</blockquote>
+<ul>
+<li>冗余绑定，复制Timeline会将原有的轨道绑定复制过来，需要删除掉不必要的信息</li>
+<li>Timeline资源最好不要复制</li>
+<li>编辑器模式下正常，发布后若出现Timeline不能播放，有可能是某些轨道有问题（track.timelineAsset == null）,编写测试找到轨道，然后新建相同的轨道功能，删除原有轨道</li>
+</ul>
+<h2 id="问题与解决方案"><a class="header" href="#问题与解决方案">问题与解决方案</a></h2>
+<blockquote>
+<p>此处的问题解决后会将解决方案加入的注意事项中</p>
+</blockquote>
+<h3 id="发布后timeline不播放"><a class="header" href="#发布后timeline不播放">发布后Timeline不播放</a></h3>
+<ul>
+<li>版本 Unity2020.3.40f</li>
+<li>Timeline版本是最新的</li>
+<li>问题详情：在编辑器模式下，播放正常，发布后Timeline不播放（无论是安卓端还是PC端）</li>
+</ul>
+<h4 id="第1次处理"><a class="header" href="#第1次处理">第1次处理</a></h4>
+<ul>
+<li>删除Timeline的冗余</li>
+<li>隐藏其他Timeline</li>
+</ul>
+<p>未找到根本的原因，使用下面的方式可以正常播放，但是总是不靠谱</p>
+<ol>
+<li>在发布前，将timeline的播放针头托到起始位置</li>
+<li>有种情况是即使在起始位置，也会有问题，需要再次打开这个场景，然后再发布，不知道到底什么原因</li>
+</ol>
+<h4 id="第2次处理"><a class="header" href="#第2次处理">第2次处理</a></h4>
+<p><strong>调试处理过程记录</strong></p>
+<ol>
+<li>
+<p>开始发布的是安卓版本，不是很好调试，后面发布PC端的 Debug 版本来查看下报错信息</p>
+</li>
+<li>
+<p>报错信息是TimelinePlayable(插件内置类)中的 下面165行 存在 null 引用，判断是 timelineasset 为 null</p>
+</li>
+</ol>
+<p><img src="image/timeline/1721814195696.png" alt="1721814195696" /></p>
+<ol start="3">
+<li>
+<p>从截图看出是某个 <strong>Track</strong> 的 <strong>TimelineAsset</strong> 为空， TimelineAseet 是创建的timeline资源</p>
+</li>
+<li>
+<p>现在就是要找到是哪个轨道的 TimelineAsset 为 null,编写测试代码</p>
+</li>
+</ol>
+<p><img src="image/timeline/1721814204519.png" alt="1721814204519" /></p>
+<p>第一行是打印测试的名字，第二行如果为空会报错</p>
+<ol start="5">
+<li>打包运行后日志如下，是一个  <strong>Teach_模式选择开关高亮</strong> 的轨道 为 null,且两个不能播放Timeline的都是因为这个同名的轨道</li>
+</ol>
+<p><img src="image/timeline/1721814235064.png" alt="1721814235064" /></p>
+<ol start="6">
+<li>查看轨道，该轨道是内置的 PlayableTrack, 自己扩展编写的 Asset 和 behaviour</li>
+</ol>
+<p>轨道</p>
+<p><img src="image/timeline/1721814216815.png" alt="1721814216815" /></p>
+<p>属性</p>
+<p><img src="image/timeline/1721814247671.png" alt="1721814247671" /></p>
+<ol start="7">
+<li>检查是否是因为这个轨道有问题引起的，发现其他使用了此轨道的Timelien正常，排除这个原因</li>
+<li>修改轨道名称，将中文改为英文，看看是不是因为轨道名称引起的， <strong>发现正常了</strong></li>
+<li>修改轨道名称，将中文改为英文，播放针头托离起点，发布后运行， <strong>还是报错</strong></li>
+<li>新建（ <strong>不要复制</strong> ）相同功能的轨道，并新建（ <strong>不要复制</strong> ）对应片段，删除原有轨道，针头拖离起点， <strong>发布运行正常</strong></li>
+<li>总结： 有可能是这个轨道创建的时候，脚本未编写完成，导致这个轨道异常</li>
+</ol>
+<h4 id="第3次处理"><a class="header" href="#第3次处理">第3次处理</a></h4>
+<p><strong>使用第二次的方式还是为解决，通过调试代码找不到错误轨道</strong></p>
+<p>通过构建时，勾选 “development build” 得知是在 track.TimelineAsset 获取为空时，出现问题</p>
+<ul>
+<li>
+<p>当前Timeline上应该有GroupTrack，将组内的轨道拖动到组外，有可能的异常，如果拖到的是异常的轨道，会连带其他正常的轨道一起到组外，需要逐个的尝试</p>
+</li>
+<li>
+<p>逐个的删除轨道，一般也是组内的轨道，若异常会出现图情况</p>
+</li>
+</ul>
+<p><img src="image/timeline/1721814267535.png" alt="1721814267535" /></p>
+<p>错误信息如下</p>
+<pre><code>MissingReferenceException: The object of type 'AnimationTrack' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+UnityEngine.Object.get_name () (at &lt;c7a29af87eea4c208ef711c9671e7831&gt;:0)
+UnityEditor.Timeline.TimelineTrackErrorGUI.DrawMissingTrackHeader (UnityEngine.Rect headerRect, UnityEditor.Timeline.WindowState state) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/treeview/TrackGui/TimelineTrackErrorGUI.cs:76)
+UnityEditor.Timeline.TimelineTrackErrorGUI.Draw (UnityEngine.Rect headerRect, UnityEngine.Rect contentRect, UnityEditor.Timeline.WindowState state) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/treeview/TrackGui/TimelineTrackErrorGUI.cs:46)
+UnityEditor.Timeline.TimelineTreeView.OnRowGUI (UnityEngine.Rect rowRect, UnityEditor.IMGUI.Controls.TreeViewItem item, System.Int32 row, System.Boolean selected, System.Boolean focused) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/treeview/TimelineTreeView.cs:185)
+UnityEditor.IMGUI.Controls.TreeViewController.DoItemGUI (UnityEditor.IMGUI.Controls.TreeViewItem item, System.Int32 row, System.Single rowWidth, System.Boolean hasFocus) (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEditor.IMGUI.Controls.TreeViewController.IterateVisibleItems (System.Int32 firstRow, System.Int32 numVisibleRows, System.Single rowWidth, System.Boolean hasFocus) (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEditor.IMGUI.Controls.TreeViewController.OnGUI (UnityEngine.Rect rect, System.Int32 keyboardControlID) (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEditor.Timeline.TimelineTreeViewGUI.OnGUI (UnityEngine.Rect rect) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/treeview/TimelineTreeViewGUI.cs:152)
+UnityEditor.Timeline.TimelineWindow.DrawTracksGUI (UnityEngine.Rect clientRect, UnityEditor.Timeline.TimelineModeGUIState trackState) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow_TrackGui.cs:183)
+UnityEditor.Timeline.TimelineWindow.TracksGUI (UnityEngine.Rect clientRect, UnityEditor.Timeline.WindowState state, UnityEditor.Timeline.TimelineModeGUIState trackState) (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow_TrackGui.cs:47)
+UnityEditor.Timeline.TimelineWindow.TrackViewsGUI () (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow_Gui.cs:178)
+UnityEditor.Timeline.TimelineWindow.SequencerGUI () (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow_Gui.cs:270)
+UnityEditor.Timeline.TimelineWindow.DoLayout () (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow_Gui.cs:153)
+UnityEditor.Timeline.TimelineWindow.OnGUI () (at Library/PackageCache/com.unity.timeline@1.4.8/Editor/Window/TimelineWindow.cs:227)
+UnityEditor.HostView.InvokeOnGUI (UnityEngine.Rect onGUIPosition, UnityEngine.Rect viewRect) (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEditor.DockArea.DrawView (UnityEngine.Rect viewRect, UnityEngine.Rect dockAreaRect) (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEditor.DockArea.OldOnGUI () (at &lt;43587c69e7d54192b46754a593b0061f&gt;:0)
+UnityEngine.UIElements.IMGUIContainer.DoOnGUI (UnityEngine.Event evt, UnityEngine.Matrix4x4 parentTransform, UnityEngine.Rect clippingRect, System.Boolean isComputingLayout, UnityEngine.Rect layoutSize, System.Action onGUIHandler, System.Boolean canAffectFocus) (at &lt;033e99bd4b59428a814373dfbafe317f&gt;:0)
+UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr, Boolean&amp;)
+
+GUI Error: You are pushing more GUIClips than you are popping. Make sure they are balanced.
+UnityEngine.GUIUtility:ProcessEvent (int,intptr,bool&amp;)
+
+</code></pre>
+<ul>
+<li>Ctr+Z 后如下图所示</li>
+</ul>
+<p><img src="image/timeline/1721814291143.png" alt="1721814291143" /></p>
+<ul>
+<li>总结办法：1. 随意的将轨道在组外和组内拖动，查看是否正常;2. 逐个删除轨道，查看是否异常， 将出现的异常的组轨道以及异常轨道删除重新制作</li>
+</ul>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../unity/monobehavior.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../unity/vr/SteamVR.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../unity/monobehavior.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../unity/vr/SteamVR.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "unity/timeline.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/fzf.umd.js"></script>
+        <script src="../assets/elasticlunr.js"></script>
+        <script src="../assets/mermaid.min.js"></script>
+        <script src="../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

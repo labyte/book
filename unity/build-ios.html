@@ -1,0 +1,762 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>发布 IOS 平台 - Labyte Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/style1.css">
+        <link rel="stylesheet" href="../theme/css/table.css">
+        <link rel="stylesheet" href="../assets/mermaid.css">
+        <link rel="stylesheet" href="../assets/print.css">
+        <link rel="stylesheet" href="../assets/all-page.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Introduction.html">首页</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> DotNet</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/c-sharp.html"><strong aria-hidden="true">1.1.</strong> CSharp</a></li><li class="chapter-item "><a href="../dotnet/nuget.html"><strong aria-hidden="true">1.2.</strong> Nuget</a></li><li class="chapter-item "><a href="../dotnet/packages/messagepack.html"><strong aria-hidden="true">1.3.</strong> 包：Messagepack</a></li><li class="chapter-item "><a href="../dotnet/packages/memorypack.html"><strong aria-hidden="true">1.4.</strong> 包：MemoryPack</a></li><li class="chapter-item "><a href="../dotnet/packages/dotnetty.html"><strong aria-hidden="true">1.5.</strong> 包：DotNetty</a></li><li class="chapter-item "><a href="../dotnet/packages/stackexchange-redis.html"><strong aria-hidden="true">1.6.</strong> 包：StackExchange.Redis</a></li><li class="chapter-item "><a href="../dotnet/packages/epplus.html"><strong aria-hidden="true">1.7.</strong> 包：EPPlus</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/wpf/index.html"><strong aria-hidden="true">2.</strong> WPF</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/wpf/listbox.html"><strong aria-hidden="true">2.1.</strong> ListBox</a></li><li class="chapter-item "><a href="../dotnet/wpf/listview.html"><strong aria-hidden="true">2.2.</strong> ListView</a></li><li class="chapter-item "><a href="../dotnet/wpf/项目版本号.html"><strong aria-hidden="true">2.3.</strong> 项目版本号</a></li><li class="chapter-item "><a href="../dotnet/wpf/资源引用.html"><strong aria-hidden="true">2.4.</strong> 资源引用</a></li><li class="chapter-item "><a href="../dotnet/wpf/devexpress.html"><strong aria-hidden="true">2.5.</strong> DevExpress</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> WinForm</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/winform/tray.html"><strong aria-hidden="true">3.1.</strong> 托盘开发</a></li></ol></li><li class="chapter-item expanded "><a href="../dotnet/aspnet/aspnet.html"><strong aria-hidden="true">4.</strong> Asp.Net</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-signalr.html"><strong aria-hidden="true">4.1.</strong> SignalR</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-证书.html"><strong aria-hidden="true">4.2.</strong> 证书</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-jwt.html"><strong aria-hidden="true">4.3.</strong> Jwt</a></li><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-blazor.html"><strong aria-hidden="true">4.4.</strong> Blazor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dotnet/aspnet/aspnet-bootstrap-blazor.html"><strong aria-hidden="true">4.4.1.</strong> BootstrapBlazor</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">5.</strong> Unity</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../unity/ui.html"><strong aria-hidden="true">5.1.</strong> UI</a></li><li class="chapter-item "><a href="../unity/animation.html"><strong aria-hidden="true">5.2.</strong> 动画</a></li><li class="chapter-item "><a href="../unity/camera.html"><strong aria-hidden="true">5.3.</strong> 相机</a></li><li class="chapter-item "><a href="../unity/vector.html"><strong aria-hidden="true">5.4.</strong> 向量</a></li><li class="chapter-item "><a href="../unity/lighting.html"><strong aria-hidden="true">5.5.</strong> 灯光</a></li><li class="chapter-item "><a href="../unity/material-shader.html"><strong aria-hidden="true">5.6.</strong> 材质</a></li><li class="chapter-item "><a href="../unity/monobehavior.html"><strong aria-hidden="true">5.7.</strong> 行为脚本</a></li><li class="chapter-item "><a href="../unity/timeline.html"><strong aria-hidden="true">5.8.</strong> Timeline</a></li><li class="chapter-item "><a href="../unity/vr/SteamVR.html"><strong aria-hidden="true">5.9.</strong> Steam VR</a></li><li class="chapter-item "><a href="../unity/优化/资源优化.html"><strong aria-hidden="true">5.10.</strong> 资源优化</a></li><li class="chapter-item "><a href="../unity/特殊文件夹.html"><strong aria-hidden="true">5.11.</strong> 特殊文件夹</a></li><li class="chapter-item "><a href="../unity/build-window.html"><strong aria-hidden="true">5.12.</strong> 发布 Window 平台</a></li><li class="chapter-item "><a href="../unity/build-webgl.html"><strong aria-hidden="true">5.13.</strong> 发布 WebGL 平台</a></li><li class="chapter-item "><a href="../unity/build-android.html"><strong aria-hidden="true">5.14.</strong> 发布 安卓 平台</a></li><li class="chapter-item expanded "><a href="../unity/build-ios.html" class="active"><strong aria-hidden="true">5.15.</strong> 发布 IOS 平台</a></li><li class="chapter-item "><a href="../unity/packages/UniTask.html"><strong aria-hidden="true">5.16.</strong> 包：UniTask</a></li><li class="chapter-item "><a href="../unity/packages/sqlite.html"><strong aria-hidden="true">5.17.</strong> 包：Sqlite</a></li><li class="chapter-item "><a href="../unity/packages/StarterAssets.html"><strong aria-hidden="true">5.18.</strong> 包：StarterAssets</a></li><li class="chapter-item "><a href="../unity/packages/Addressables.html"><strong aria-hidden="true">5.19.</strong> 包：Addressables</a></li><li class="chapter-item "><a href="../unity/packages/CurvySpine.html"><strong aria-hidden="true">5.20.</strong> 包：CurvySpine</a></li><li class="chapter-item "><a href="../unity/packages/DoTween.html"><strong aria-hidden="true">5.21.</strong> 包：DoTween</a></li><li class="chapter-item "><a href="../unity/packages/EasySave.html"><strong aria-hidden="true">5.22.</strong> 包：EasySave</a></li><li class="chapter-item "><a href="../unity/packages/ET网络框架.html"><strong aria-hidden="true">5.23.</strong> 包：ET网络框架</a></li><li class="chapter-item "><a href="../unity/packages/InputSystemPackage.html"><strong aria-hidden="true">5.24.</strong> 包：InputSystemPackage</a></li><li class="chapter-item "><a href="../unity/packages/MagicOnion.html"><strong aria-hidden="true">5.25.</strong> 包：MagicOnion</a></li><li class="chapter-item "><a href="../unity/packages/NativeShare.html"><strong aria-hidden="true">5.26.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Nativefileso.html"><strong aria-hidden="true">5.27.</strong> 包：Nativefileso</a></li><li class="chapter-item "><a href="../unity/packages/Newtonsoft.html"><strong aria-hidden="true">5.28.</strong> 包：Newtonsoft</a></li><li class="chapter-item "><a href="../unity/packages/NewUIWidgets.html"><strong aria-hidden="true">5.29.</strong> 包：NewUIWidgets</a></li><li class="chapter-item "><a href="../unity/packages/NodeGraphProcessor.html"><strong aria-hidden="true">5.30.</strong> 包：NodeGraphProcessor</a></li><li class="chapter-item "><a href="../unity/packages/PDF插件.html"><strong aria-hidden="true">5.31.</strong> 包：PDF插件</a></li><li class="chapter-item "><a href="../unity/ide-vscode.html"><strong aria-hidden="true">5.32.</strong> IDE：VS Code</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../rust/rust.html"><strong aria-hidden="true">6.</strong> Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../rust/tauri.html"><strong aria-hidden="true">6.1.</strong> Tauri</a></li><li class="chapter-item "><a href="../rust/slint.html"><strong aria-hidden="true">6.2.</strong> Slint</a></li><li class="chapter-item "><a href="../rust/iced.html"><strong aria-hidden="true">6.3.</strong> Iced</a></li><li class="chapter-item "><a href="../rust/ecs.html"><strong aria-hidden="true">6.4.</strong> ECS</a></li><li class="chapter-item "><a href="../rust/mdbook.html"><strong aria-hidden="true">6.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../python/python.html"><strong aria-hidden="true">7.</strong> Python</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sql-server.html"><strong aria-hidden="true">8.1.</strong> SQL Server</a></li><li class="chapter-item "><a href="../database/my-sql.html"><strong aria-hidden="true">8.2.</strong> MySql</a></li><li class="chapter-item "><a href="../database/redis.html"><strong aria-hidden="true">8.3.</strong> Redis</a></li><li class="chapter-item "><a href="../database/mongodb.html"><strong aria-hidden="true">8.4.</strong> MongoDb</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../synology/synology.html"><strong aria-hidden="true">9.</strong> 群晖</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../synology/certficate.html"><strong aria-hidden="true">9.1.</strong> 证书</a></li><li class="chapter-item "><a href="../synology/drive.html"><strong aria-hidden="true">9.2.</strong> Drive</a></li><li class="chapter-item "><a href="../synology/反向代理服务器.html"><strong aria-hidden="true">9.3.</strong> 反向代理服务器</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../windows/index.html"><strong aria-hidden="true">10.</strong> Windows系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../windows/winsw.html"><strong aria-hidden="true">10.1.</strong> WinSW</a></li><li class="chapter-item "><a href="../windows/windows-commands.html"><strong aria-hidden="true">10.2.</strong> Windows 命令行</a></li><li class="chapter-item "><a href="../windows/mbr-gpt.html"><strong aria-hidden="true">10.3.</strong> 分区MBR格式转GPT格式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../mac/mac.html"><strong aria-hidden="true">11.</strong> MacOS</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../mac/xcode.html"><strong aria-hidden="true">11.1.</strong> XCode</a></li><li class="chapter-item "><a href="../mac/testflight.html"><strong aria-hidden="true">11.2.</strong> TestFlight</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Google</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Google/download-apk.html"><strong aria-hidden="true">12.1.</strong> 下载Google商店中的APK</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">13.</strong> 技术栈</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../technology-stack/nginx.html"><strong aria-hidden="true">13.1.</strong> Nginx</a></li><li class="chapter-item "><a href="../technology-stack/rabbitmq.html"><strong aria-hidden="true">13.2.</strong> RabbitMQ</a></li><li class="chapter-item "><a href="../technology-stack/git.html"><strong aria-hidden="true">13.3.</strong> Git</a></li><li class="chapter-item "><a href="../technology-stack/svn.html"><strong aria-hidden="true">13.4.</strong> SVN</a></li><li class="chapter-item "><a href="../technology-stack/vim.html"><strong aria-hidden="true">13.5.</strong> Vim</a></li><li class="chapter-item "><a href="../technology-stack/npm.html"><strong aria-hidden="true">13.6.</strong> Npm</a></li><li class="chapter-item "><a href="../technology-stack/pip.html"><strong aria-hidden="true">13.7.</strong> PIP</a></li><li class="chapter-item "><a href="../technology-stack/ssh.html"><strong aria-hidden="true">13.8.</strong> SSH</a></li><li class="chapter-item "><a href="../technology-stack/docker.html"><strong aria-hidden="true">13.9.</strong> Docker</a></li><li class="chapter-item "><a href="../technology-stack/regular-expression.html"><strong aria-hidden="true">13.10.</strong> 正则表达式</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> 云服务</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cloud-service/ali-cloud.html"><strong aria-hidden="true">14.1.</strong> 阿里云</a></li><li class="chapter-item "><a href="../cloud-service/self-built-server.html"><strong aria-hidden="true">14.2.</strong> 自建服务器</a></li><li class="chapter-item "><a href="../cloud-service/let-s-encrypt.html"><strong aria-hidden="true">14.3.</strong> Let's Encrypt</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> 软件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../softs/typora.html"><strong aria-hidden="true">15.1.</strong> Typora</a></li><li class="chapter-item "><a href="../softs/xournalpp.html"><strong aria-hidden="true">15.2.</strong> Xournal++</a></li><li class="chapter-item "><a href="../softs/bulk-rename-utility.html"><strong aria-hidden="true">15.3.</strong> Bulk Rename Utility</a></li><li class="chapter-item "><a href="../softs/exif-tool.html"><strong aria-hidden="true">15.4.</strong> ExifTool</a></li><li class="chapter-item "><a href="../softs/telegram.html"><strong aria-hidden="true">15.5.</strong> Telegram</a></li><li class="chapter-item "><a href="../softs/excel.html"><strong aria-hidden="true">15.6.</strong> Excel</a></li><li class="chapter-item "><a href="../softs/visual-studio.html"><strong aria-hidden="true">15.7.</strong> Visual Studio</a></li><li class="chapter-item "><a href="../softs/visual-studio-code.html"><strong aria-hidden="true">15.8.</strong> Visual Studio Code</a></li><li class="chapter-item "><a href="../softs/jetbrains-rider.html"><strong aria-hidden="true">15.9.</strong> JetBrains Rider</a></li><li class="chapter-item "><a href="../softs/others.html"><strong aria-hidden="true">15.10.</strong> 其他</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../markdown.html"><strong aria-hidden="true">16.</strong> Markdown</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+        
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="章节" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="主题" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="搜索. (快捷键: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Labyte Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="打印" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/labyte/book" title="Git 仓库" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="搜索 ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <style>
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 15px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局 */
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top; 
+}
+
+.excel-table th {
+    background-color: #f0f3f5;
+    font-weight: bold;
+}
+
+.excel-table tr:nth-child(even), table tr:nth-child(odd) {
+    background-color: transparent; /* 确保所有行背景色一致 */
+}
+
+.excel-table tr:hover {
+    background-color: inherit;
+}
+/*
+
+.excel-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.excel-table tr:hover {
+    background-color: #e9e9e9;
+}
+*/
+.excel-table th:nth-child(1), .excel-table td:nth-child(1) {
+    width: 20%;
+}
+
+.excel-table th:nth-child(2), .excel-table td:nth-child(2) {
+    width: 40%;
+}
+
+.excel-table th:nth-child(3), .excel-table td:nth-child(3) {
+    width: 40%;
+}
+</style>
+<h1 id="发布-ios-平台"><a class="header" href="#发布-ios-平台">发布 IOS 平台</a></h1>
+<p><a href="https://docs.unity.cn/cn/2021.1/Manual/iphone-BuildProcess.html">Unity官方文档 - iOS 构建过程详解</a></p>
+<h2 id="上架说明"><a class="header" href="#上架说明">上架说明</a></h2>
+<ol>
+<li>
+<p>注册一个苹果开发者账号，可以个人注册，或者公司注册，公司比较复杂，个人比较简单，个人的年费为688</p>
+</li>
+<li>
+<p>需要一个Mac，主要用于申请一些证书和使用Xcode软件（上架必备）</p>
+</li>
+<li>
+<p>请求证书，以及制作配置文件</p>
+</li>
+<li>
+<p>Unity Build IOS, 此过程在 windows上和mac上都可以进行，结果是得到一个 Xcode项目工程</p>
+</li>
+<li>
+<p>在 mac 上使用xcode 打开 上一步的项目设置分发</p>
+</li>
+<li>
+<p>测试分发：发布测试版本，就是不用上架审核，但是有限制</p>
+</li>
+<li>
+<p>上架分发，需要审核，终极目标。</p>
+</li>
+</ol>
+<h2 id="苹果开发者账号"><a class="header" href="#苹果开发者账号">苹果开发者账号</a></h2>
+<h3 id="注册"><a class="header" href="#注册">注册</a></h3>
+<p>首先需要开发者账号，且按年付费，具体注册流程如下：</p>
+<ol>
+<li>
+<p>手机下载 developer app 进行注册申请，在手机上下载app安装</p>
+</li>
+<li>
+<p>注意填写信息时，完全按照身份证上的填写，按照英文的格式填写，最好就是找个已经注册好的看下格式来填写（我还是失败了，最后是人工客服完成的，使用电话的方式，她帮你解决；使用邮件会来回折腾，还是不行）</p>
+</li>
+<li>
+<p>客户帮你解决后，回到app,退出再登录，才能继续注册流程，选择个人注册，直到付完费用688，订阅后，马上取消订阅，避免到时候忘了（若上架的账号没有继续订阅，未安装过此app的无法在商店找到此应用，安装过的还是可以找打）</p>
+</li>
+<li>
+<p>此时，在app上显示一个灰色的注册，说是我即将收到一个邮件</p>
+</li>
+<li>
+<p>收到邮件，上传身份证，正反面都要上传，完成激活，此时应该才是注册完成（给的邮件说是带有照片的，我就只上传照片的，最后人工后，说两面都要上传）</p>
+</li>
+<li>
+<p>总结：注册很狗屎，每次错也不晓得哪里错，不停的试，最后都是人工处理。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>注意事项（坑）</strong>：</p>
+<ol>
+<li>
+<p>看siki学院的视频，以为付费完就注册完了，实际上还要上传身份证</p>
+</li>
+<li>
+<p>我也的确收到邮件了，叫我上传身份证，但是我以为是之前注册失败，叫我上传，有几次失败就是叫上传，结果还是不行，所以我也没理</p>
+</li>
+<li>
+<p>我就还在等其他的邮件，在网页端登录，叫我继续注册流程，很郁闷。</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="续费"><a class="header" href="#续费">续费</a></h3>
+<p>订阅续费在手机上操作：设置/账号头像（名称）/订阅。即可看到已经停用的 <strong>Apple Developer</strong> ，点击续订即可。</p>
+<p>网上（ChatGpt）说的在开发者官网上的会员详情里面续订不行，就没有续订按钮。</p>
+<h2 id="一钥匙串创建证书"><a class="header" href="#一钥匙串创建证书">一、钥匙串创建证书</a></h2>
+<blockquote>
+<p>先创建好后面步骤要使用。</p>
+</blockquote>
+<ol>
+<li>
+<p>在 mac 上 打开钥匙串app</p>
+</li>
+<li>
+<p>在屏幕左上角：钥匙串访问-》证书助理-》从证书颁发机构请求证书</p>
+<p><img src="image/build-ios/image.png" alt="证书助理" /></p>
+</li>
+<li>
+<p>请求是：选择“存储到磁盘”，点击继续，保存即可</p>
+</li>
+<li>
+<p>注意这个证书，只能在本设备上使用，若其他电脑要使用这个证书，需要转换，方法待补充</p>
+</li>
+</ol>
+<h2 id="二证书"><a class="header" href="#二证书">二、证书</a></h2>
+<ol>
+<li>
+<p>登录开发者网站，进入<a href="https://developer.apple.com/account">Developer-账户</a>。</p>
+</li>
+<li>
+<p>选择证书（注意：如果官网存在协议更新，需要重新查看协议，并同意后，才能出现证书的相关操作，否者证书下没有可选操作）。
+<img src="image/build-ios/developer-%E8%AF%81%E4%B9%A6.png" alt="证书" /></p>
+</li>
+<li>
+<p>点击 <code>+</code>。
+<img src="image/build-ios/certificates-add.png" alt="alt text" /></p>
+</li>
+<li>
+<p>在 <code>Software</code> 下选择证书类型，在 <code>Services</code> 下选择需要的服务，点击继续。</p>
+<ul>
+<li><code>Apple Development</code>: 苹果所有终端的开发测试证书，包含 mac ios</li>
+<li><code>Apple Distribution</code>: 苹果所有终端的上架发布测试证书，包含 mac ios</li>
+<li><code>IOS App Development</code>：仅 ios 端的开发测试证书</li>
+<li><code>IOS Distribution (App Store and Ad Hoc)</code>：ios 端 的 上架商店证书</li>
+<li>其他同理</li>
+</ul>
+</li>
+<li>
+<p>上传之前使用钥匙串申请的证书，点击继续。</p>
+</li>
+<li>
+<p>下载申请好的证书，然后<strong>双击</strong>后安装到钥匙串中。</p>
+</li>
+<li>
+<p>最后我们在证书列表里面可以看到当前生气的证书，注：钥匙串申请的证书可以创建测试证书和分发证书。</p>
+</li>
+<li>
+<p>证书会过期（当开发者账号订阅过期时，证书也会过期）</p>
+</li>
+</ol>
+<h2 id="三identifiers标识符"><a class="header" href="#三identifiers标识符">三、Identifiers（标识符）</a></h2>
+<ol>
+<li>在证书、标识符和描述文件页面，左侧选择 Identifers ,点击 <code>Identifiers +</code></li>
+<li>选择 <code>App IDs</code></li>
+<li>选择 APP</li>
+<li>Regieste an App ID, 输入 bundle identifier，这个需要记住，后面在Unity工程设置中需要使用</li>
+<li>设置 App Services，这个根据需要选择，比如推送、支付等，点击 continue</li>
+<li>点击 register，注册完成</li>
+<li>在 Identifers 列表里面可以看到当前注册的 App ID，注：这个 App ID 会在后面的描述文件中使用到</li>
+</ol>
+<h2 id="四devices设备"><a class="header" href="#四devices设备">四、Devices（设备）</a></h2>
+<p>作用，收集需要参加测试手机的UDID号，添加到这里，在打包测试的时候，只有添加了的设备才能安装测试
+上架商店就不需要这个</p>
+<p>获取设备UDID
+通过下面的地址，在浏览器打开后，提示下载配置文件，然后安装，获取，发送给指定邮箱
+<a href="https://www.pgyer.com/tools/udid">https://www.pgyer.com/tools/udid</a></p>
+<h2 id="五profiles描述文件"><a class="header" href="#五profiles描述文件">五、Profiles（描述文件）</a></h2>
+<ol>
+<li>点击 + 。</li>
+<li>Register a New Provisioning Profile：选择类型，根据当前的测试设备和类型（测试/分发）来选择。</li>
+<li>Generate a Provisioning Profile：选择 App ID，Provisioning Profile Configuration 默认 选择 No,点击 continue.</li>
+<li>选择一个证书，点击继续。</li>
+<li>选择测试的设备，点击继续。</li>
+<li>填写描述文件名称，点击生成。</li>
+<li>下载描述文件，备用。</li>
+<li>在 Profiles 列表里面可以看到当前生成的描述文件，注：这个描述文件会在后面的打包中使用到。</li>
+</ol>
+<h2 id="六unity项目设置"><a class="header" href="#六unity项目设置">六、Unity项目设置</a></h2>
+<p>此处的设置可以在xcode里面修改，所以如果填写错误，不用再重新发布。</p>
+<ol>
+<li>可以在window上或者mac上进行</li>
+<li>设置公司名称</li>
+<li>设置product name：上架审核时，这个名称必须 app store connect上创建的app 名称相同，否审核不过</li>
+<li>设置version：只能包含"数字"和“.”，其他都是非法的，可以在xcode里面修改。</li>
+<li>设置bundle identifier： 这个必须和后面创建的证书时一致，可以在xcode里面修改。</li>
+<li>设置 Target device: 根据你的实际需求来，如果仅在iphone上运行，那么就选 iPhone only，否则在上架审核时，需要你上传其他设备的分辨率截图，多出很多事情，可以在xcode里面修改。</li>
+<li>目标最小ios版本，这个根据情况设置，可以在xcode里面修改。</li>
+</ol>
+<h2 id="七xcode项目设置"><a class="header" href="#七xcode项目设置">七、Xcode项目设置</a></h2>
+<blockquote>
+<p>version: 15.4</p>
+</blockquote>
+<p><a href="https://developer.apple.com/documentation/xcode/preparing-your-app-for-distribution">官网文档</a></p>
+<ol>
+<li>将Unity工程打包成Xcode工程，可以在Windows打包，也可以在mac上打包（未知原因：在mac上无法打开工程，一致卡在fbx的导入）</li>
+<li>双击Xcode文件，打开工程</li>
+<li>选中TARGETS 下的 第一个</li>
+</ol>
+<h3 id="1geneeral"><a class="header" href="#1geneeral">（1）Geneeral</a></h3>
+<ol>
+<li>
+<p><code>Suported Destinations</code>：设置支持的设备，这里删除掉ipad的设备，如果这里支持iPad,上架审核的时候，会叫你整ipad的截图，很多事情。</p>
+</li>
+<li>
+<p><code>Minimum Deployments</code>：设置最小的IOS版本。</p>
+</li>
+<li>
+<p><code>Identity</code>：主要设置下面两个选项</p>
+<ul>
+<li><code>Bundle Identifier</code>：证书里面填写的id，unity 中配置的一致。</li>
+<li><code>Version</code>：设置版本号，一种方式就是在unity里面设置好，另外一种方式就是在xcode 里面设置，这个只能包含 “数字”、“.”, 如 “1.0.1”， 不能有字母或者空格，如果发布的是测试版本，版本号可以不变，如果是上架审核，版本号增加比较好，不增加不会报错。</li>
+</ul>
+</li>
+<li>
+<p>设置 <code>app icon</code> ,这个在上架的时候必须有</p>
+</li>
+</ol>
+<h3 id="2signingcapabilities"><a class="header" href="#2signingcapabilities">（2）Signing&amp;Capabilities</a></h3>
+<p>Bundle Identifiers: 同创建证书时的一致</p>
+<p>在 all 标签下，选择profile，这里如果是构建测试的就import 测试的 配置，就是前面下载下来的，同理选择分发上架类型的，如果找不到文件，重启下xcode.</p>
+<p>错误信息：</p>
+<p><img src="image/build-ios/provisioning%20profile-error.png" alt="alt text" /></p>
+<p>解决(根据提示，xcode 11 及之后都要 apple distribution)：</p>
+<p><img src="image/build-ios/provisioning%20profile-error-ok.png" alt="alt text" /></p>
+<p>如果连接手机测试，此处要这样配置</p>
+<p><img src="image/build-ios/auto-mng-signing.png" alt="alt text" /></p>
+<h3 id="3resources-tages"><a class="header" href="#3resources-tages">（3）Resources Tages</a></h3>
+<p>暂无配置</p>
+<h3 id="4info"><a class="header" href="#4info">（4）Info</a></h3>
+<p><strong>Custom iOS Target Properties:</strong></p>
+<ul>
+<li>
+<p><code>App Transport Securiy Settings</code>：</p>
+<ul>
+<li><code>Allow Arbitrary Loads</code>：<code>Yes</code>,（这样就允许了http 未加密的方式访问网站，否则会报错）</li>
+</ul>
+</li>
+<li>
+<p>【新版xcode 没有这个】设置不使用出口合规证明 (仅在上架审核的时候需要)  <code>&lt;key&gt;ITSAppUsesNonExemptEncryption&lt;/key&gt;&lt;false/&gt;</code></p>
+</li>
+</ul>
+<h3 id="5build-settings"><a class="header" href="#5build-settings">（5）Build Settings</a></h3>
+<ul>
+<li>
+<p>User-Defined</p>
+<ul>
+<li>Eenable Bitcode : 设置为 false (打包的时候说是不赞成这个，不让通过)</li>
+</ul>
+</li>
+</ul>
+<h3 id="6连接手机测试"><a class="header" href="#6连接手机测试">（6）连接手机测试</a></h3>
+<ul>
+<li>需要手机和电脑连接，直接将app安装到手机上，适用于调试方式。</li>
+<li>在xcode上点击菜单：Product-&gt;Run。</li>
+</ul>
+<h3 id="7xcode-操作"><a class="header" href="#7xcode-操作">（7）Xcode 操作</a></h3>
+<h4 id="菜单"><a class="header" href="#菜单">菜单</a></h4>
+<ol>
+<li>菜单：Produr/Run: 直接连接手机，安装到手机运行</li>
+<li>菜单：ProdurArechive: 归档，用于构建 ipa 文件、上架商店，通过Testflight 测试</li>
+<li>菜单：Window/Organizer: 打开归档的窗口</li>
+</ol>
+<h4 id="navigator"><a class="header" href="#navigator">Navigator</a></h4>
+<p>左侧导航栏。</p>
+<ol>
+<li>Unity 中的 <code>StreamingAssets</code> 下的资源对应 <code>Data/Raw</code>，当需要修改这些资源时，不需要重新打包
+<img src="image/build-ios/data-raw.png" alt="data/raw" /></li>
+<li></li>
+</ol>
+<h2 id="八分发app"><a class="header" href="#八分发app">八、分发APP</a></h2>
+<p>该章节说明怎么进行 Testflight 测试、第三方分发Ipa包测试、以及最终上架苹果商店。</p>
+<p>ipa文件不能直接通过苹果手机安装，需要通过分发平台进行分发安装。</p>
+<p><a href="https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases">Xcode 操作文档（英文）</a></p>
+<p><a href="https://developer.apple.com/cn/help/app-store-connect/test-a-beta-version/testflight-overview/">App Store Connect 帮助 - 中文文档： add app,</a></p>
+<p><strong>各种运行方式</strong></p>
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>运行方式</th>
+                <th>分发类型</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>手机直接连接</td>
+                <td>无</td>
+                <td>调试</td>
+            </tr>
+              <tr>
+                <td>分发ipa</td>
+                <td>app store connect/testfliht only/ad hoc 都可以，仅是在中途将ipa 文件导出保存下来</td>
+                <td>构建之前要获取目标设备udid号进行注册<br>可以使用蒲公英云平台分发<br>不适合非注册人员安装<br>这种方式似乎不需要支付688费用，未确定</td>
+            </tr>
+              <tr>
+                <td>testflight</td>
+                <td>app store connect/testfliht only都可以</td>
+                <td>要运行的手机首先要在构建之前手机设备udid号进行注册<br>可以使用蒲公英云平台分发</td>
+            </tr>
+             <tr>
+                <td>app store</td>
+                <td>app store connect</td>
+                <td>正常用户使用</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h3 id="1创建您的应用程序的存档"><a class="header" href="#1创建您的应用程序的存档">（1）创建您的应用程序的存档</a></h3>
+<p>要使用任何分发方法，请先创建应用程序的存档。存档是应用程序的构建，包括调试信息，Xcode存储在捆绑包中。Xcode根据您为分发选择的分发配置重新打包存档的内容。</p>
+<p>在Xcode项目的主窗口中，从Scheme工具栏菜单中选择要构建的方案和运行目标。然后，选择 <code>Produnct&gt;Archive</code> ，为您选择的设备类构建该方案中包含的目标，并创建出现在档案管理器中的存档。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/394197047da27d4eb6d4dc6ffe161cf4/distributing-your-app-for-beta-testing-and-releases-1@2x.png" alt="档案组织者的屏幕截图，显示已选择的档案和分发应用程序按钮。" /></p>
+<p>您可以通过选择 <code>Window&gt;Organizer</code> 直接打开档案管理器。如果您想确认您的应用程序已准备好在未提交的情况下提交到TestFlight或App Store，请选择您的存档，然后单击 <code>Validate App</code> 。Xcode将对应用程序执行有限的自动初始验证并提供反馈。
+对于使用Mac Catalyst构建的Mac应用程序，请为iPad和Mac版本创建单独的存档。为Mac版本创建存档时，请选择“我的Mac”作为运行目标。</p>
+<h3 id="2选择一种分发方法"><a class="header" href="#2选择一种分发方法">（2）选择一种分发方法</a></h3>
+<p>您可以导出存档或将其上传到App Store Connect。如果您导出存档，您可以在App Store之外分发（通过第三方平台分发Ipa）。否则，将存档上传到App Store Connect，以通过TestFlight或App Store分发。</p>
+<p>从Xcode的 <strong>Organizer</strong> 窗口中，在边栏中选择“存档”，然后单击“分发应用程序”。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/ba54e01600bd0fc98291583e7215d2bd/distributing-your-app-for-beta-testing-and-releases-2@2x.png" alt="Archives Organizer的屏幕截图，显示选择分发方法对话框，并选择预配置的TestFlight和App Store选项。" /></p>
+<p>选择以下选项之一，使用推荐的设置进行分发：</p>
+<p>TestFlight &amp; App Store</p>
+<p>通过TestFlight分发并提交到App Store的默认设置。使用此选项更新存档中内容的构建号，执行自动代码签名，并使用符号上传应用程序。</p>
+<p>TestFlight Internal Only</p>
+<p>通过TestFlight分发的默认设置，并限制对团队的访问。使用此选项可防止应用程序的开发构建被提交到App Store。</p>
+<p>Release Testing 发布测试</p>
+<p>默认设置是在发布前分发要测试的版本。使用此选项执行类似于App Store分发选项的自动代码签名，并导出以安装在您的团队在App Store Connect注册的设备上。这种分发方法不适用于为Mac构建的应用程序。</p>
+<p>Enterprise（企业）</p>
+<p>分配给组织成员的默认设置。如果您是Apple Developer企业计划的一部分，请使用此选项。这种分发方法不适用于为Mac构建的应用程序。</p>
+<p>Direct Distribution（直接分销）</p>
+<p>直接分发macOS应用程序的默认设置。使用此选项对开发人员ID应用程序进行公证，以便直接分发。这种分发方法仅适用于为Mac构建的应用程序。</p>
+<p>Debugging 调试</p>
+<p>分发版本进行调试的默认设置。使用此选项导出版本，在您的团队在App Store Connect注册的设备上安装和调试。这使沙盒测试环境能够为一些支持它们的功能提供支持。</p>
+<p>选择分发选项后，单击分发按钮。Xcode开始处理、打包和上传。单击末尾的链接以访问App Store Connect上应用程序的构建页面，或单击导出按钮以在本地访问资产。</p>
+<blockquote>
+<p>笔记
+在您首次将应用程序上传到App Store之前，请创建一个应用程序记录以在App Store Connect中注册您的应用程序。如果您还没有这样做，Xcode会要求您提&gt; 供为您创建此记录所需的信息。有关更多信息，请参阅<a href="https://developer.apple.com/help/app-store-connect/create-an-app-record/add-a-new-app">创建应用程序记录</a>。</p>
+</blockquote>
+<h3 id="3创建自定义发行版"><a class="header" href="#3创建自定义发行版">（3）创建自定义发行版</a></h3>
+<p>要开始自定义分发，允许您配置自己的设置，请单击自定义选项。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/1ebd7fcf079ce9cf3d0331cfa2c7c518/distributing-your-app-for-beta-testing-and-releases-3@2x.png" alt="分发方法选择步骤的屏幕截图，显示所选的临时分发。" /></p>
+<p>从以下分发方法中选择：</p>
+<p>App Store Connect</p>
+<p>使用TestFlight或通过App Store进行分发。</p>
+<p>Ad Hoc（临时）</p>
+<p>分发到您在App Store Connect中注册的有限数量的设备。有关分发到您注册的设备的更多信息，请参阅<a href="https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices">将应用程序分发到注册设备</a>。</p>
+<p>Enterprise（企业）</p>
+<p>如果您是Apple Developer Enterprise Program的一部分，并准备将应用程序发布给组织中的用户，请分发给您的组织成员。</p>
+<p>Developer ID（开发人员ID）</p>
+<p>在App Store之外分发由苹果公证或使用开发人员ID签名的macOS应用程序。这种分发方法仅适用于为Mac构建的应用程序。</p>
+<p>Development（开发）</p>
+<p>分发到您在App Store Connect中注册的有限数量的设备。有关分发到您注册的设备的更多信息，请参阅<a href="https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices">将应用程序分发到注册设备</a>。</p>
+<p>Copy App（复制应用程序）</p>
+<p>在没有代码签名的情况下分发macOS应用程序。这种分发方法仅适用于为Mac构建的应用程序。</p>
+<p>如果您选择App Store Connect或Developer ID作为分发方法，您也会选择一个目标选项。您可以选择将构建版本上传到App Store，或将构建版本导出到本地以稍后上传。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/42129fbe9643b7d6d49e6b714d240933/distributing-your-app-for-beta-testing-and-releases-4@2x.png" alt="分发流程的屏幕截图，显示目标选项以及上传或导出选项。上传被选中" /></p>
+<p>在TestFlight或App Store上分发应用程序时，请选择如何管理符号和构建数字：</p>
+<p><img src="https://docs-assets.developer.apple.com/published/c9577bec89092a11e40b6ff4c8528605/distributing-your-app-for-beta-testing-and-releases-5@2x.png" alt="分发流程的屏幕截图显示App Store Connect分发选项，带有复选框，用于上传应用程序的符号，管理版本和构建版本号，以及仅限TestFlight内部测试。选中“上传应用程序的符号”和“管理版本和构建数字”复选框" /></p>
+<p>Strip Swift symbols 剥离Swift符号</p>
+<p>通过从Swift标准库中剥离符号来减小应用程序的大小。仅当您的项目嵌入了swift库时，此设置才可用。</p>
+<p>Upload your app’s symbols 上传您的应用程序的符号</p>
+<p>允许苹果为您提供符号崩溃日志和其他诊断信息。符号日志将日志中的内存地址替换为人类可读的函数名和行号。这些符号在测试您的应用程序与苹果产品和服务的兼容性方面也很有用。</p>
+<p>Manage version and build number 管理版本和构建号</p>
+<p>允许Xcode更新存档中所有内容的构建号。</p>
+<p>TestFlight internal testing only 仅限TestFlight内部测试</p>
+<p>准备通过TestFlight分发应用程序，并限制对您团队的访问。使用此选项可防止应用程序的开发构建被提交到App Store。</p>
+<p>在选择涉及代码签名的分发方法时，请选择代码签名方法。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/f018d363495f18c2d8872aeb7d2a48c6/distributing-your-app-for-beta-testing-and-releases-6@2x.png" alt="分发流程的屏幕截图显示了自动管理签名和手动管理签名分发的复选框。选中自动管理签名复选框" /></p>
+<p>选择“自动管理签名”允许Xcode为您管理签名。要手动对应用程序进行签名，您可以使用签名证书。有关共享签名证书的信息，请参阅将您的代码签名身份与Apple Developer Portal同步。</p>
+<p>当使用Ad Hoc或Development选项进行自我分发打包时，请选择是启用还是禁用App Thinning并配置按需资源设置。有关应用程序稀薄和按需资源的更多信息，请参阅减少应用程序的大小和进行高级优化以进一步减少应用程序的大小。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/8701513eaeb5a39fbda9c970a6f685c5/distributing-your-app-for-beta-testing-and-releases-7@2x.png" alt="显示临时分发设置的分发流程屏幕截图。该对话框包括应用程序瘦身弹出式菜单，其中选项为“无”，其他选项包括一个带有“包括无线安装清单”标签的复选框" /></p>
+<h3 id="4分发测试版"><a class="header" href="#4分发测试版">（4）分发测试版</a></h3>
+<p>要分发应用程序的测试版，以提供即将发布的版本的预览，请选择与您的测试资源一致的分发方法：</p>
+<ul>
+<li>
+<p>使用TestFlight将应用程序的测试版分发给内部和外部测试人员。TestFlight应用程序允许受邀用户安装、测试版测试、提供反馈并获取应用程序的更新。苹果为您分发测试版，您可以在App Store Connect中管理构建版本和用户。要了解更多信息，请参阅<a href="https://developer.apple.com/cn/help/app-store-connect/test-a-beta-version/overview-of-testflight">TestFlight概述</a>。</p>
+<p>在 Xcode 上传后，在网站上查看状态，如下图</p>
+<p><img src="image/build-ios/testflight%20%E6%B5%8B%E8%AF%95%E7%8A%B6%E6%80%81%E5%9B%BE.png" alt="alt text" /></p>
+</li>
+<li>
+<p>将测试版分发到开发人员帐户中的注册设备。仅当您可以保留部分有限的开发设备用于beta测试时，才选择此选项。要了解更多信息，请参阅<a href="https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices">将应用程序分发到注册设备</a>。</p>
+</li>
+<li>
+<p>对于macOS应用程序，在通过App Store分发应用程序之前，先将经过苹果公证的构建版本分发给测试人员。要了解更多信息，请参阅<a href="https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices">在分发前对macOS软件进行公证</a>。</p>
+</li>
+</ul>
+<p><img src="https://docs-assets.developer.apple.com/published/c67e305f2a0af926d2c0551f08aebb1d/distributing-your-app-for-beta-testing-and-releases-8@2x.png" alt="App Store Connect的屏幕截图显示了从Xcode上传的构建版本" /></p>
+<h3 id="5在app-store上发布"><a class="header" href="#5在app-store上发布">（5）在App Store上发布</a></h3>
+<p>测试最终版本后，将其提交到App Review，然后在App Store上提供。有关发布过程的更多信息，请参阅<a href="https://developer.apple.com/cn/help/app-store-connect/manage-your-apps-availability/overview-of-publishing-your-app">发布应用程序的概述</a>。</p>
+<p>转到App Review查看App Store和人机界面指南。有关特定平台的指导，请参阅<a href="https://developer.apple.com/cn/app-store/submitting">立即提交您的应用程序</a>。</p>
+<p>您可能需要在App Store Connect中输入其他信息，然后才能将应用程序提交到App Review。在您的应用程序上传或发布后，您无法更改其中一些元数据，因此仔细选择设置很重要。有关此元数据的更多信息，请转到App Store Connect帮助中的必需、可本地化和可编辑属性。</p>
+<p>如果您使用TestFlight分发测试版，并输入了App Store发布所需的其他信息，只需将App Store Connect中显示的最后一个版本提交到App Review即可。
+App Store Connect的屏幕截图，显示版本信息和提交以供审核。</p>
+<p>如果您没有使用TestFlight分发最终构建版本，请准备应用程序分发并创建应用程序的存档。在继续之前验证存档并修复任何验证错误。然后，将其上传到App Store Connect，并等待它通过App Store Connect验证测试。</p>
+<p>要将构建提交到App Review，请转到Submit for Review。</p>
+<h3 id="6注意事项"><a class="header" href="#6注意事项">（6）注意事项</a></h3>
+<p>有关注意事项可参考：<a href="https://developer.apple.com/cn/help/app-store-connect/reference/app-information">官方文档</a></p>
+<ol>
+<li><a href="https://developer.apple.com/cn/help/app-store-connect/create-an-app-record/add-a-new-app">添加App</a>时，填写app名称和unity里面的名称最好一样，两个名称不同或者相差很大，导致审核不通过，这里写的名称是商店里软件显示的名称，unity里面的名称，是安装后在手机桌面显示的名称，提交后，苹果会提示里两个名称不一样，会导致用户找不到下载的软件。</li>
+</ol>
+<p><img src="image/build-ios/1718095073433.png" alt="1718095073433" /></p>
+<ol start="2">
+<li>
+<p>上传完成后，在 App store connect 里的TestFlight 标签页查看，这个时候还不能在app store 页查看，因为还没提交</p>
+</li>
+<li>
+<p>在xcode 上传后，并不能立即进行testflight 测试，一般要显示“已批准/通知测试人员”才可以开始测试。
+<img src="image/build-ios/testflight%20%E6%B5%8B%E8%AF%95%E7%8A%B6%E6%80%81%E5%9B%BE.png" alt="" /></p>
+</li>
+<li>
+<p>管理 APP ID 不能参加测试，也就是开发者账户不能参加测试。</p>
+</li>
+<li>
+<p>提交构建版本，多个版本的时候选择最新的版本</p>
+</li>
+<li>
+<p>除了可选填的，都是必须填写的</p>
+</li>
+<li>
+<p>隐审核流程：私项填写完成后需要 <strong>发布</strong></p>
+</li>
+<li>
+<p>审核流程：各种网址（技术网址，隐私网址），填写公司网址，或者个人网址即可</p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/cn/help/app-store-connect/reference/maximum-build-file-sizes">构建版本大小要求</a></p>
+</li>
+<li>
+<p>审核流程：<a href="https://developer.apple.com/cn/help/app-store-connect/reference/screenshot-specifications">截屏规范</a>，用一个手机截图后，ps处理成对应分辨率的，上传失败会提示里，应该上传什么分辨率</p>
+</li>
+<li>
+<p>审核流程：只要你有登录界面，那么需要在testflight -》 测试信息中，勾选 “需要登录”，且输入登录审核的账号信息，即使输入任何账号和密码都可以，也需要勾选需求要登录，然后明确的输入一个账号和密码，否者审核不过。</p>
+</li>
+</ol>
+<p>若是企业定制版本的软件，不需要上架商店，而是希望通过内部分发的方式，参考：<a href="https://support.apple.com/zh-cn/guide/deployment/depe1553f932/web">分发类型</a></p>
+<p><a href="https://developer.apple.com/contact/request/unlisted-app/">使用非公开发方式发布</a></p>
+<h3 id="7问题汇总"><a class="header" href="#7问题汇总">（7）问题汇总</a></h3>
+<ol>
+<li>
+<p>提示邀请已被撤销或无效,请要求开发者发出新的邀请。</p>
+<blockquote>
+<p>看是否使用的是管理 APP ID。</p>
+</blockquote>
+</li>
+<li>
+<p>此Beta 版本现在不接受任何新的测试人员</p>
+<blockquote>
+<p>应该是该APP还未被批准使用TestFlight测试，首次提交一般上传后需要1天（头天下午上传，第二天10点可以）左右的时间，会收到一封邮件提示已批准使用TestFlight测试，然后可以发送邀请链接了，后面提交很快，基本上提交等待几分钟就可以测试。</p>
+</blockquote>
+</li>
+<li>
+<p>构建时提示禁用 bitcode</p>
+<blockquote>
+<p><a href="https://www.likecs.com/show-203846296.html">参考文章</a>:在 Xcode中 选择 buildsettings, 搜索 bitcode,设置为 <code>false</code>。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="九蒲公英分发"><a class="header" href="#九蒲公英分发">九、蒲公英分发</a></h2>
+<p>ipa文件不能直接通过苹果手机安装，需要通过分发平台进行分发安装。</p>
+<ol>
+<li>Product-&gt;Archive，等待编译完成</li>
+<li>编译完成后，Xcode会自动打开“Organizer”窗口</li>
+<li>你可以选择导出的配置文件和导出选项，然后点击“Export”按钮，选择“Save for Ad Hoc Deployment”或“Save for Enterprise Deployment”</li>
+<li>最后选择保存路径和文件名，完成IPA文件的生成。</li>
+<li>将ipa通过<a href="https://www.pgyer.com/">蒲公英分发平台</a>分发app</li>
+<li>打开蒲公英分发平台网站，注册账号上传ipa（名字最短那个文件） 分发app</li>
+</ol>
+<p>若提示需要钥匙串的密码，输入开机密码。并非用户账户密码。</p>
+<h2 id="十错误汇总"><a class="header" href="#十错误汇总">十、错误汇总</a></h2>
+<h3 id="pc端正常构建ios后无法进入场景"><a class="header" href="#pc端正常构建ios后无法进入场景">PC端正常，构建IOS后无法进入场景</a></h3>
+<p>情况说明：</p>
+<p>当前同个项目会发布4个软件（APP），前面两个正常，后面两个加载场景后无法进入场景</p>
+<p>后面两个场景有5个任务场景，当发布一个的时候又正常</p>
+<p>错误提示</p>
+<pre><code>MissingMethodException: Default constructor not found for type UnityEngine.ResourceManagement.AsyncOperations.ProviderOperation`1[[UnityEngine.AddressableAssets.Initialization.ResourceManagerRuntimeData, Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+  at System.RuntimeType.CreateInstanceMono (System.Boolean nonPublic) [0x00000] in &lt;00000000000000000000000000000000&gt;:0 
+  at System.Activator.CreateInstance (System.Type type, System.Boolean nonPublic) [0x00000] in &lt;00000000000000000000000000000000&gt;:0 
+  at UnityEngine.ResourceManagement.Util.LRUCacheAllocationStrategy.New (System.Type type, System.Int32 typeHash) [0x00000] in &lt;00000000000000000000000000000000&gt;:0 
+  at UnityEngine.ResourceManagement.ResourceManager.CreateOperation[T] (System.Type actualType, System.Int32 typeHash, UnityEngine.ResourceManagement.Util.IOperationCacheKey cacheKey, System.Action`1[T] onDestroyAction) [0x00000] in &lt;00000000000000000000000000000000&gt;:0 
+
+</code></pre>
+<p>尝试解决方案：<a href="https://blog.csdn.net/hack_yin/article/details/126028734">参考文章</a></p>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../unity/build-android.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../unity/packages/UniTask.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../unity/build-android.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../unity/packages/UniTask.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "unity/build-ios.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/fzf.umd.js"></script>
+        <script src="../assets/elasticlunr.js"></script>
+        <script src="../assets/mermaid.min.js"></script>
+        <script src="../assets/import-html.js"></script>
+
+
+    </div>
+    </body>
+</html>

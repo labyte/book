@@ -48,6 +48,22 @@
 
 # Rust
 
+
+## 教程
+
+- [官方 Rust](https://www.rust-lang.org/zh-CN/)
+
+- [官方 Rust程序设计员](https://kaisery.github.io/trpl-zh-cn/)
+
+- [官方 RUSTLINGS 课程](https://github.com/rust-lang/rustlings/) ： 包含很多练习，可以指引学习
+  
+- [官方 通过例子学习Rust](https://rustwiki.org/zh-CN/rust-by-example/)
+
+
+- [非官方 Rust语言圣经](https://course.rs/about-book.html)
+
+
+
 ## 安装
 
 [Rust 编程语言](https://doc.rust-lang.org/book/ch01-01-installation.html)

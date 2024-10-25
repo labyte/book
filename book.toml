@@ -1,19 +1,18 @@
 [book]
-authors = ["AByte-L"]
+authors = ["Labyte"]
 language = "zh-CN"
 multilingual = false
 src = "src"
-title = "星君的书"
-
-[dependencies]
-rand = "0.8"
+title = "Labyte Book"
 
 
+[output.html.playpen]
+editable = true
+editor = "ace"
 
-[preprocessor.toc]
-command = "mdbook-toc"
-renderer = ["html"]
-
+[output.html.fold]
+enable = true
+level = 1
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
@@ -24,8 +23,8 @@ plantuml-cmd="java -jar /opt/plantuml.jar"
 
 [output.html]
 mathjax-support = true
-additional-css = ["theme/pagetoc.css","theme/css/table.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
-additional-js = ["theme/pagetoc.js","assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js"]
+additional-css = ["theme/css/style1.css","theme/css/table.css","assets/mermaid.css", "assets/print.css", "assets/all-page.css"]
+additional-js = ["assets/custom3.js","assets/fzf.umd.js", "assets/elasticlunr.js", "assets/mermaid.min.js", "assets/import-html.js"]
 git-repository-url = "https://github.com/labyte/book"
 git-repository-icon = "fa-github"
 
@@ -37,3 +36,6 @@ boost-hierarchy = 2
 boost-paragraph = 1
 expand = true
 heading-split-level = 2
+
+[rust]
+edition = "2021"

@@ -1,6 +1,8 @@
 # Nuget
 
-## 迁移 .nuget 文件夹
+## .nuget 迁移到D盘
+
+> C 盘瘦身
 
 **.nuget** 默认在C盘，用于缓存我们使用过的包，随着项目越来越多，文件夹越来越大，占用C盘空间。
 
@@ -36,6 +38,11 @@
 
 - 将 **.nuget** 移动到 **D** 盘的 **Users** 文件夹下
 - 再次查看当前缓存路径 `dotnet nuget locals all --list`，确认修改成功
+
+
+**相关文章**
+
+- [.cargo-迁移到D盘](../rust/rust.md#cargo-迁移到d盘)
 
 ## 发布包
 

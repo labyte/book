@@ -215,3 +215,34 @@ note: if you need to support cargo 1.38 or earlier, you can symlink `config` to 
 [子节跳动镜像](https://rsproxy.cn)
 
 
+## .cargo 迁移到D盘
+
+> C 盘瘦身
+
+.cargo 包含了我们下载的很多库文件，后期会越来越大。
+
+在 Windows 系统上，将 .cargo 文件夹从默认位置（例如 C:\Users\ABYTE\.cargo）移动到 D 盘后，需要调整环境变量以让 Rust 工具链（如 rustup）能够找到新的路径。请按照以下步骤操作：
+
+移动 .cargo 文件夹：将 .cargo 文件夹从 C:\Users\ABYTE\ 移动到 D 盘，例如 D:\.cargo。
+
+设置环境变量：将新的 .cargo 路径添加到环境变量中。
+
+打开“系统属性”窗口：右键点击“此电脑” → “属性” → “高级系统设置” → “环境变量”。
+在“用户变量”或“系统变量”中找到 CARGO_HOME。如果没有此变量，点击“新建”添加一个，名称为 CARGO_HOME，值为 D:\.cargo。
+如果已经存在 CARGO_HOME，将其路径修改为 D:\.cargo。
+检查并更新路径：在同一窗口下检查 Path 变量，确保 D:\.cargo\bin 被添加到了 Path 中。如果没有，则添加一个新条目 D:\.cargo\bin。
+
+验证配置：打开新的命令提示符（cmd）或 PowerShell，运行以下命令确认 rustup 已识别新的路径：
+
+```sh
+
+rustup --version
+cargo --version
+```
+
+如果一切配置正确，这些命令应能够正常工作。
+
+
+**相关文章**
+
+- [.nuget-迁移到D盘](../dotnet/nuget.md#nuget-迁移到d盘)

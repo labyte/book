@@ -403,36 +403,6 @@ MaterialDialogService
              ComponentDispatcher.PopModal();
          }
 
-         //dialogAware.RequestClose -= callback;
-     }
-
-     /// <summary>
-     /// Configure <see cref="IDialogWindow"/> properties.
-     /// </summary>
-     /// <param name="window">The hosting window.</param>
-     /// <param name="dialogContent">The dialog to show.</param>
-     /// <param name="viewModel">The dialog's ViewModel.</param>
-     protected virtual void ConfigureDialogWindowProperties(IDialogWindow window, FrameworkElement dialogContent, IDialogAware viewModel)
-     {
-
-         var windowStyle = Prism.Dialogs.Dialog.GetWindowStyle(dialogContent);
-         if (windowStyle != null)
-             window.Style = windowStyle;
-
-         window.Content = dialogContent;
-         window.DataContext = viewModel; //we want the host window and the dialog to share the same data context
-
-         if (window.Owner == null)
-             window.Owner = Application.Current?.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive);
-     }
-
-     private void BeforeHandlerClose(IDialogResult res, string dialogHostName, Action<IDialogResult> callback)
-     {
-         if (DialogHost.IsDialogOpen(dialogHostName))
-         {
-             callback?.Invoke(res);
-             DialogHost.Close(dialogHostName);
-         }
      }
 
      private static void AutowireViewModel(object viewOrViewModel)

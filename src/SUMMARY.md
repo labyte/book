@@ -14,6 +14,7 @@
   - [ListView](dotnet/wpf/listview.md)
   - [项目版本号](dotnet/wpf/项目版本号.md)
   - [资源引用](dotnet/wpf/资源引用.md)
+  - [Prism框架](dotnet/wpf/prism.md)
   - [DevExpress](dotnet/wpf/devexpress.md)
 - [WinForm]()
   - [托盘开发](dotnet/winform/tray.md)

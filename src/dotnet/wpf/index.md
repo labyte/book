@@ -7,11 +7,11 @@
 
 - 打开工具，在底部选择 **SVG** 图片
   
-  ![alt text](image.png)
+![alt text](assets/index/image-1.png)
 
 - 在弹出的窗口中，切换到 **XAML** 查看代码
 
-  ![alt text](image-1.png)
+![alt text](assets/index/image.png)
 
 
 - 集成到资源字典，接下来我们可以把转换得到了xaml 集成到资源字典中，以下是直接放在 `App.xaml` 中（可创建一个资源文件来存放）：

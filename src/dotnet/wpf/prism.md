@@ -414,3 +414,145 @@ MaterialDialogService
      }
  }
 ```
+
+
+## 注入模块中的服务
+
+> 1. 服务是在模块中注册
+> 2. 不能在主窗体的 MainWindowViewModel 中注入服务，会报错，需要在导航的子页面中去注入。
+> 3. 在Loaded 事件中导航到子页面
+
+
+以使用 ESUI 模块为例。
+
+（1）创建一个WPF项目，并引用和店家模块
+
+```cs
+using ESUI;
+using ESUITest.Services;
+using ESUITest.Views;
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Regions;
+using Prism.Unity;
+using System;
+using System.Windows;
+
+namespace ESUITest
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : PrismApplication
+    {
+        protected override Window CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterSingleton<IESUITestService, ESUITestService>();
+            containerRegistry.RegisterForNavigation<MainView>();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Uri aero = new Uri("/PresentationFramework.Classic, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;component/themes/classic.xaml", UriKind.Relative);
+            Resources.MergedDictionaries.Add(Application.LoadComponent(aero) as ResourceDictionary);
+
+        }
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<ESUIModule>();
+        }
+      
+    }
+}
+
+```
+
+
+MainWindow.xaml
+
+```xml
+<Window x:Class="ESUITest.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ESUITest"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="900" Width="1600">
+
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.ContentRegion}" />
+    </Grid>
+    
+</Window>
+
+```
+MainWindow.cs
+
+```c#
+using Prism.Regions;
+using System.Windows;
+
+namespace ESUITest.Views
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private readonly IRegionManager _regionManager;
+
+        public MainWindow(IRegionManager regionManager)
+        {
+            InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+            _regionManager = regionManager;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, "MainView");
+        }
+    }
+}
+
+
+```
+
+
+MainViewModel.cs
+
+```c#
+using ESUI.MenuViewModels;
+using ESUI.Mvvm;
+using ESUI.Services.api;
+using ESUITest.Services;
+using Prism.Regions;
+
+namespace ESUITest.ViewModels
+{
+    internal class MainViewModel : BindableBase, IDestructible, INavigationAware, IConfirmNavigationRequest
+    {
+        private ATS_SystemMenuVM _mainMenu;
+        public ATS_SystemMenuVM MainMenu
+        {
+            get { return _mainMenu; }
+            set { SetProperty(ref _mainMenu, value); }
+        }
+
+        public MainViewModel(IRegionManager regionManager, IESUITestService eSUITestService, IESService esService) : base(regionManager)
+        {
+            MainMenu = esService.CreateATS_SystemMenuVM("系统");
+        }
+    }
+}
+
+```

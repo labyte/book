@@ -153,3 +153,20 @@ new Action(() => pwdBoxPWD.Focus()));
 - 点击A按钮，此时A按钮获得键盘焦点。
 - 按下空格键，执行跳转到B的代码逻辑，跳转到B页面。
 - 执行完成后，由于A按钮具有焦点会响应键盘，所以会执行A按钮的点击事件，既点击了A按钮，跳转到A页面。
+
+## Label 控件格式化
+
+> 单独使用 ContentStringFormat
+
+格式化日期
+
+```
+<Label Width="100" Height="30" Content="{Binding Path=DateTime.Now}" ContentStringFormat='{}{0:yyyy-MM-dd}'></Label>
+
+```
+格式化时间
+
+```
+<Label Width="100" Height="30" Content="{Binding Path=DateTime.Now}" ContentStringFormat='{}{0:hh:mm:ss}'></Label>
+
+```

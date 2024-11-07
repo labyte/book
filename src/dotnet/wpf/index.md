@@ -170,3 +170,121 @@ new Action(() => pwdBoxPWD.Focus()));
 <Label Width="100" Height="30" Content="{Binding Path=DateTime.Now}" ContentStringFormat='{}{0:hh:mm:ss}'></Label>
 
 ```
+
+
+## 上下文菜单
+
+**需求**
+
+- 菜单在外部定义，方便通用
+- 菜单需要控制激活，激活时右键显示菜单，未激活时不显示菜单
+- 此案例使用了Prism框架
+
+
+**重点**
+
+控制菜单 `Active` 不要使用 Visibility 来实现，因为右键的时都会创建 `PopupRoot`, 由于未显示，他们不会触发失去焦点，不会自动关闭，所以右键多个对象后，都会创建 PopupRoot,若此时激活菜单，那么界面上会出现很多菜单
+
+
+使用 `ContextMenuOpening` 来控制，希望把这些功能都在模块内实现，依次使用静态脚本来控制
+
+
+
+控制菜单 Active 的静态脚本 `ContextMenuHelper` 
+
+```c#
+using ESUI.Services.api;
+using System.Windows.Controls;
+
+namespace ESUI.Utilities
+{
+    /// <summary>
+    /// 上下文菜单帮助类
+    /// </summary>
+    public static class ContextMenuHelper
+    {
+        //菜单状态
+        private static bool _menuActiveState;
+
+        /// <summary>
+        /// 提供此静态属性给 前端 xaml 进行绑定
+        /// 使用案例
+        /// 根节点引入命名空间： xmlns:esui_util="clr-namespace:ESUI.Utilities;assembly=ESUI"
+        /// 在需要上下文菜单的元素节点使用 ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpeningHandler}"
+        /// </summary>
+        public static ContextMenuEventHandler ContextMenuOpening
+        {
+            get; internal set;
+        }
+
+        static ContextMenuHelper()
+        {
+            ContextMenuOpening = ContextMenuOpeningHandler;
+        }
+
+
+        private static void ContextMenuOpeningHandler(object sender, ContextMenuEventArgs e)
+        {
+            e.Handled = !_menuActiveState;
+        }
+    }
+}
+
+```
+
+**MenuView**
+
+菜单资源文件：模块 `ESUI` ，路径： `MenuViews/ATS_SignalMenu.xaml`
+
+```xml
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:converter="clr-namespace:ESUI.Converters"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="_menu">
+        <MenuItem Header="对象名称" />
+        <Separator />
+        <MenuItem Header="菜单1" IsCheckable="True"  />
+        
+    </ContextMenu>
+
+</ResourceDictionary>
+```
+
+
+使用菜单资源 `ContextMenu="{StaticResource _menu}"`，引入Active 控制脚本的命名空间 `xmlns:esui_util="clr-namespace:ESUI.Utilities;assembly=ESUI"`, 绑定 `ContextMenuOpening ` 事件： `ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}"`
+
+
+```xml
+<UserControl x:Class="ESUITest.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ESUITest.Views"        
+             xmlns:esui="clr-namespace:ESUI.Views;assembly=ESUI"        
+             xmlns:esui_util="clr-namespace:ESUI.Utilities;assembly=ESUI"        
+             xmlns:control="clr-namespace:ESUITest.Controls"        
+             xmlns:prism="http://prismlibrary.com/"        
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ESUI;component/MenuViews/ATS_SignalMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="12">
+         <Button  ContextMenu="{StaticResource _menu}" 
+                  ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}">
+          </Button>
+
+    </Grid>
+</UserControl>
+
+```
+
+
+注意：ContextMenuOpening 需要绑定的是一个属性值，不能直接绑定函数
+
+
+
+

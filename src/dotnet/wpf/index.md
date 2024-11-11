@@ -174,29 +174,151 @@ new Action(() => pwdBoxPWD.Focus()));
 
 ## 上下文菜单
 
-**需求**
 
-- 菜单在外部定义，方便通用
-- 菜单需要控制激活，激活时右键显示菜单，未激活时不显示菜单
-- 此案例使用了Prism框架
+### 在资源文件中定义菜单内容
 
-
-**重点**
-
-控制菜单 `Active` 不要使用 Visibility 来实现，因为右键的时都会创建 `PopupRoot`, 由于未显示，他们不会触发失去焦点，不会自动关闭，所以右键多个对象后，都会创建 PopupRoot,若此时激活菜单，那么界面上会出现很多菜单
+> 在资源文件中绑定上下文
 
 
-使用 `ContextMenuOpening` 来控制，希望把这些功能都在模块内实现，依次使用静态脚本来控制
+（1）定义菜单绑定的上下文 `MenuViewModel.cs`
 
+
+```c#
+
+namespace MenuDemo
+{
+    /// <summary>
+    /// 菜单绑定上下文
+    /// </summary>
+    public  class MenuData
+    {
+        //这里可改为通知属性
+       public string Name{get;set;} = "Name01";
+       public string ItemName{get;set;}= "Item01";
+    }
+}
+```
+
+（2）定义页面绑定的上下文 `MainWindowViewModel.cs`
+
+```c#
+
+namespace MenuDemo
+{
+    /// <summary>
+    /// 菜单绑定上下文
+    /// </summary>
+    public  class MainWindowViewModel
+    {
+        //这里可改为通知属性
+       public MenuData Menu{get;set;} = new MenuData();
+    }
+}
+```
+
+（3）定义菜单资源文件方式一（每项都指定对象Menu）：，路径： `MenuViews.xaml`
+
+> ⚠️ <span style="color:red;font-weight:bold;">这里固定了 属性名称必须为Menu</span> ，要解决参照: [使用附加属性绑定菜单的上下文](#使用附加属性绑定菜单的上下文推荐)
+
+
+```xml
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="_menu">
+        <MenuItem Header="{Binding Menu.Name}" />
+        <Separator />
+        <MenuItem Header="{Binding Menu.ItemName}" />
+    </ContextMenu>
+
+</ResourceDictionary>
+```
+
+（4）定义菜单资源文件方式二（在根节点上指定 Menu）：，路径： `MenuViews.xaml`
+
+`DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext.Menu}"`
+
+因为 ContextMenu 不直接属于视觉树里面的元素，所以要特殊处理
+
+不能这样   ~DataContext="{Binding Menu}"~ 
+
+> ⚠️ <span style="color:red;font-weight:bold;">这里固定了 属性名称必须为Menu</span>，要解决参照: [使用附加属性绑定菜单的上下文](#使用附加属性绑定菜单的上下文推荐)
+
+
+```xml
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="_menu" DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext.Menu}">
+        <MenuItem Header="{Binding Name}" />
+        <Separator />
+        <MenuItem Header="{Binding ItemName}" />
+    </ContextMenu>
+
+</ResourceDictionary>
+```
+
+(5) MainWindow.xaml
+
+```xml
+<Window x:Class="MenuDemo.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MenuDemo"        
+             xmlns:prism="http://prismlibrary.com/"   >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MenuDemo;component/MenuViews.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="12">
+         <Button  ContextMenu="{StaticResource _menu}" >
+         </Button>
+
+    </Grid>
+</Window>
+
+```
+
+
+(6) MainWindow.cs
+
+```cs
+public partial class MainWindow : Window
+{
+
+    public MainWindow()
+    {
+        InitializeComponent();
+       DataContext = new MainWindowViewModel();
+    }
+}
+
+```
+
+
+### 控制菜单的显示隐藏
+
+**需求描述**
+
+可禁止和激活菜单功能（即控制显示和不显示）
+
+
+**知识点**
+
+- 不要使用 `Visibility` 来实现，因为右键的时都会创建 `PopupRoot`, 由于未显示，他们不会触发失去焦点，不会自动关闭，所以右键多个对象后，都会创建 PopupRoot,若此时激活菜单，那么界面上会出现很多菜单
+- 使用 `ContextMenuOpening` 来控制，
+  - 若上下文菜单直接在 UserControl 或者 Windows 中定义，那么可直接添加 `ContextMenuOpening`的处理事件
+  - 若菜单的条目在一个资源中定义，可使用一个静态变量来进行绑定，本节主要介绍这种方式。
 
 
 控制菜单 Active 的静态脚本 `ContextMenuHelper` 
 
 ```c#
-using ESUI.Services.api;
-using System.Windows.Controls;
 
-namespace ESUI.Utilities
+namespace MenuDemo
 {
     /// <summary>
     /// 上下文菜单帮助类
@@ -205,6 +327,169 @@ namespace ESUI.Utilities
     {
         //菜单状态
         private static bool _menuActiveState;
+
+        /// <summary>
+        /// 提供此静态属性给 前端 ContextMenuOpening 进行绑定，不能直接绑定函数 ContextMenuOpeningHandler
+        /// 使用案例
+        /// 根节点引入命名空间： xmlns:local="clr-namespace:MenuDemo;assembly=MenuDemo"
+        /// 在需要上下文菜单的元素节点使用 ContextMenuOpening="{x:Static local:ContextMenuHelper.ContextMenuOpeningHandler}"
+        /// </summary>
+        public static ContextMenuEventHandler ContextMenuOpening
+        {
+            get; internal set;
+        }
+
+        static ContextMenuHelper()
+        {
+            ContextMenuOpening = ContextMenuOpeningHandler;
+        }
+
+        //切换菜单功能，更新状态
+        public static void SwitchActive(bool active)
+        {
+            _menuActiveState = active;
+        }
+
+        private static void ContextMenuOpeningHandler(object sender, ContextMenuEventArgs e)
+        {
+            e.Handled = !_menuActiveState;//根据变量判断是否取消事件。 _menuActiveState：false 时 e.Handled = true 表示取消
+        }
+    }
+}
+
+```
+
+前端绑定,注意在根目录引入：`xmlns:local="clr-namespace:MenuDemo;assembly=MenuDemo"`
+
+```xml
+  <Button  ContextMenu="{StaticResource _menu}" 
+                  ContextMenuOpening="{x:Static local:ContextMenuHelper.ContextMenuOpening}">
+   </Button>
+```
+
+### 无法引用静态资源同时绑定上下文
+
+
+
+这样能使用资源，但是无法绑定上下文
+```xml
+    <Button  DataContext="{Binding PlatformDemo}"
+                ContextMenu="{StaticResource zt}" >
+
+                <!--没有提供  ContextMenu.DataContext-->
+    </Button>
+                        
+
+```
+
+这样能绑定上下文，但是无法使用资源
+
+```xml
+
+
+    <Button>
+     <Button.ContextMenu>
+         <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext.Menu}">
+          <!--只能在这里添加item 或者 绑定 ItemSources(推荐)-->
+         </ContextMenu>
+     </Button.ContextMenu>
+ </Button>
+                        
+
+```
+
+### 通过嵌套元素来绑定菜单的上下文
+
+前面章节存在下面问题
+
+ ⚠️ <span style="color:red;font-weight:bold;">这里固定了 属性名称必须为Menu</span>
+
+ 下面通过嵌套来处理这个问题，把菜单放在 Button 的子元素，如下放在 TextBlock 上，这样在子元素上绑定 DataContext 为 Menu
+
+```xml
+<Button  DataContext="{Binding PlatformDemo}">
+    <Grid DataContext="{Binding Menu}"  ContextMenu="{StaticResource zt}">
+            <TextBlock Text="Button 的子元素上来绑定菜单 " />
+    <Grid/>
+</Button>
+```
+
+
+上面只能应对简单情况，如果子元素上又有元素绑定 PlatformDemo 中的对象呢，如下 TextBlock 需要绑定 PlatformDemo 中的 SomeName
+
+```xml
+<Button  DataContext="{Binding PlatformDemo}">
+    <Grid DataContext="{Binding Menu}"  ContextMenu="{StaticResource zt}">
+            <TextBlock Text="{Binding SomeName}" />
+    <Grid/>
+</Button>
+```
+
+
+### 使用附加属性绑定菜单的上下文（推荐）
+
+**使用场景**
+
+- 菜单内容在资源文件中定义
+- 菜单中的属性或者命令绑定了属性
+- 整个菜单需要绑定一个属性
+- 解决默认下不能同时引用资源又绑定菜单上下文的问题
+
+
+附件属性脚本 
+
+
+```c#
+using ESUI.Services.api;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Reflection;
+using System.Diagnostics;
+using System.Windows.Data;
+
+namespace ESUI.Utilities
+{
+    /// <summary>
+    /// 上下文菜单帮助类
+    /// </summary>
+    public static class ContextMenuHelper
+    {
+        #region 附加属性
+
+        public static readonly DependencyProperty DataContextProperty =
+       DependencyProperty.RegisterAttached(
+           "DataContext",
+           typeof(object),
+           typeof(ContextMenuHelper),
+           new PropertyMetadata(null, OnDataContextChanged));
+
+        public static void SetDataContext(UIElement element, object value)
+        {
+            element.SetValue(DataContextProperty, value);
+        }
+
+        public static object GetDataContext(UIElement element)
+        {
+            return element.GetValue(DataContextProperty);
+        }
+
+        private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is UIElement element && element is FrameworkElement frameworkElement)
+            {
+                // 获取绑定的值
+                var contextMenu = frameworkElement.ContextMenu;
+                if (contextMenu != null)
+                {
+                    contextMenu.SetBinding(ContextMenu.DataContextProperty,
+                        new Binding { Source =  e.NewValue });
+                }
+            }
+        }
+        #endregion
+
+        private static IESUIService _service;
 
         /// <summary>
         /// 提供此静态属性给 前端 xaml 进行绑定
@@ -222,69 +507,114 @@ namespace ESUI.Utilities
             ContextMenuOpening = ContextMenuOpeningHandler;
         }
 
-
+        internal static void Init(IESUIService service)
+        {
+            _service = service;
+        }
         private static void ContextMenuOpeningHandler(object sender, ContextMenuEventArgs e)
         {
-            e.Handled = !_menuActiveState;
+            e.Handled = !_service.IsMenuActive;
         }
     }
 }
 
 ```
 
-**MenuView**
 
-菜单资源文件：模块 `ESUI` ，路径： `MenuViews/ATS_SignalMenu.xaml`
+菜单资源定义
+
 
 ```xml
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:converter="clr-namespace:ESUI.Converters"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ContextMenu x:Key="_menu">
-        <MenuItem Header="对象名称" />
+        <MenuItem Header="{Binding Menu.Name}" />
         <Separator />
-        <MenuItem Header="菜单1" IsCheckable="True"  />
-        
+        <MenuItem Header="{Binding Menu.ItemName}" />
     </ContextMenu>
 
 </ResourceDictionary>
 ```
 
 
-使用菜单资源 `ContextMenu="{StaticResource _menu}"`，引入Active 控制脚本的命名空间 `xmlns:esui_util="clr-namespace:ESUI.Utilities;assembly=ESUI"`, 绑定 `ContextMenuOpening ` 事件： `ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}"`
-
+前端引用资源
 
 ```xml
-<UserControl x:Class="ESUITest.Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ESUITest.Views"        
-             xmlns:esui="clr-namespace:ESUI.Views;assembly=ESUI"        
-             xmlns:esui_util="clr-namespace:ESUI.Utilities;assembly=ESUI"        
-             xmlns:control="clr-namespace:ESUITest.Controls"        
-             xmlns:prism="http://prismlibrary.com/"        
-             prism:ViewModelLocator.AutoWireViewModel="True">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ESUI;component/MenuViews/ATS_SignalMenu.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Margin="12">
-         <Button  ContextMenu="{StaticResource _menu}" 
-                  ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}">
-          </Button>
-
-    </Grid>
-</UserControl>
+ <Button DataContext="{Binding PlatformDemo}" Content="{Binding Describe}"  
+         esui_util:ContextMenuHelper.DataContext="{Binding ContextMenu.PlacementTarget.DataContext.Menu2, RelativeSource={RelativeSource Self}}"
+         ContextMenu="{StaticResource _menu}"
+         ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}" >
+ </Button>
 
 ```
 
+- 指定对象的上下文 `DataContext="{Binding PlatformDemo}" `， `PlatformDemo` 中包含 `Menu` 属性
+- 附件属性的使用 `esui_util:ContextMenuHelper.DataContext="{Binding ContextMenu.PlacementTarget.DataContext.Menu, RelativeSource={RelativeSource Self}}"` ，其中的 `Menu`  名称就可以自定义了
+- 资源引用 ` ContextMenu="{StaticResource _menu}"`
+- 控制菜单激活 `ContextMenuOpening="{x:Static esui_util:ContextMenuHelper.ContextMenuOpening}"`
 
-注意：ContextMenuOpening 需要绑定的是一个属性值，不能直接绑定函数
 
 
 
+### 动态查找资源（拓展，没必要）
+
+
+```cs
+/// <summary>
+/// FindResource
+/// </summary>
+/// <param name="fileName"></param>
+/// <param name="resKey"></param>
+/// <exception cref="Exception"></exception>
+private static T FindResource<T>(string fileName,string resKey)
+{
+    // 获取资源文件的路径
+    string resourceFilePath = $"pack://application:,,,/ESUI;component/MenuViews/{fileName}.xaml";
+
+    // 创建一个ResourceDictionary并加载该资源文件
+    ResourceDictionary resourceDictionary = new ResourceDictionary();
+    resourceDictionary.Source = new Uri(resourceFilePath, UriKind.Absolute);
+
+    if (resourceDictionary.Count == 0)
+    {
+        throw new Exception($"“{resourceFilePath}” 中未定义资源");
+    }
+
+    if(resourceDictionary.Contains(resKey)) //注意 中包含了自身定义的资源也包含引入的
+    {
+        return (T)resourceDictionary[resKey];
+    }
+    else
+    {
+
+        throw new Exception($"“{resourceFilePath}” 中未找到 “{resKey}” 资源");
+    }
+ 
+}
+
+    // 动态绑定菜单资源
+  private static void ContextMenuOpeningHandler(object sender, ContextMenuEventArgs e)
+  {
+      if(_service.IsMenuActive)
+      {
+          FrameworkElement el = sender as FrameworkElement;
+
+          // "fileName", "key" 两个值通过 tag 或者 uid 传进来
+          el.ContextMenu = FindResource<ContextMenu>("fileName", "key");
+          if (el.ContextMenu.DataContext == null)
+          {
+              string vmName = el.Tag == null ? "Menu" : el.Tag.ToString();
+              BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+              var d = el.DataContext.GetType().GetProperty(vmName, bindingFlags);
+              object vm = null;
+              vm = d.GetValue(el.DataContext);
+              el.ContextMenu.DataContext = vm;
+          }
+      }
+      e.Handled = !_service.IsMenuActive;
+
+       
+  }
+```
 

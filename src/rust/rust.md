@@ -138,9 +138,41 @@ rustup self uninstall
     </table>
 </div>
 
-### 配置子项目在父项目中运行
+
+## 项目结构文件夹(目标表)
+
+### examples 目录
+
+[官网 exampels 目录](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#examples)
+
+- 在项目根目创建 `examples` 
+- 在此文件中只能包含 rs 脚本文件，且包含 `main` 函数
+- 示例：`examples/hello.rs`， 运行示例 `cargo run --example hello`
+- 可以指定crate-type字段以将示例编译为库（没研究）：
+
+[[example]]
+name = "foo"
+crate-type = ["staticlib"]
+
+注：这里仅能实现一些简单的脚本功能，如果要编写一些完整的项目示例，使用 [工作区](#工作区)
+
+### tests 目录
+
+[集成测试](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests)
+
+没研究
+
+### benches 目录
+
+[集成测试](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#benchmarks)
+
+基准测试
+
+## 工作区
 
 通过配置工作区来实现，[官方文档](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+
+详细功能见官网，此处介绍使用工作区配置子项目，使用场景为：在学习rust的适合，使用的一个仓库，但是中途很多练习项目，此时就可以通过工作区来配置。
 
 首先创建父级项目：
 
@@ -167,7 +199,7 @@ cargo new hello
 
 **配置方式：**
 
-首先在 rust_examples 项目的 Cargo.toml 文件中配置 `workspace` 工作区成员，
+首先在 rust_examples 项目的 `Cargo.toml` 文件中配置 `workspace` 工作区成员，
 
 ```toml
 [package]
@@ -177,10 +209,14 @@ edition = "2021"
 
 [workspace]
 members = [
-    "hello"
+    "hello","projects/hello1",,"projects/*"
 ]
 [dependencies]
 ```
+
+- hello: 代表在根目(Cargo.toam 所在目录)下
+- projects/hello1： 在 projects 下的hello1
+- projects/* : 在 projects 下的所有
 
 运行hello项目：
 
@@ -189,6 +225,9 @@ cargo run --package hello
 ```
 
 其他命令如 `build` 均可以用，但是构建的文件在 rust_examples 的 target文件夹下。
+
+
+
 
 ## 问题汇总
 

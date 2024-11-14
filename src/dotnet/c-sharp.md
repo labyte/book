@@ -590,8 +590,46 @@ public void Handler(T data)
 }
 ```
 
+## 代码混淆
+
+[使用Obfuscar对.NET开发的程序进行混淆](https://www.jianshu.com/p/870fe350f4ce)
+
+
+
+- NUGET 添加包 
+- 配置文件, `<Module file="$(InPath)\ObfuscarTest.dll"` 中指定混淆的 dll ，这里好像不能为 exe 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Obfuscator>
+	<Var name="InPath" value=".\bin\Release\net8.0" />
+	<Var name="OutPath" value=".\bin\Release\net8.0\Obfuscar" />
+	<Var name="KeepPublicApi" value="true" />
+	<Var name="HidePrivateApi" value="true" />
+	<Var name="HideStrings" value="true" />
+	<Var name="UseUnicodeNames" value="true" />
+	<Var name="ReuseNames" value="true" />
+	<Var name="RenameFields" value="true" />
+	<Var name="RegenerateDebugInfo" value="true" />
+	<Module file="$(InPath)\ObfuscarTest.dll" />
+	
+</Obfuscator>
+```
+- 配置文件的属性设置为内容，较新复制
+- 项目属性中，事件里面添加 生产后事件 `"$(Obfuscar)" Obfuscar.xml `
+- 注意在 Release 目录下 ../ Obfuscar 中的 dll 就是混淆后的
+- 将exe 和 其他文件拷贝过来即可。
+- 
+
+## .Net Reactor 加密
+
+免费加密软件
+
+[官网](https://www.eziriz.com/history.htm)
+
+[慧都上提供的手册](https://www.evget.com/doclib/s/146/14909)
+
 ## 开源项目
 
 1. [一款基于.Net WinForm的节点编辑器](https://github.com/DebugST/STNodeEditor)：纯GDI+绘制 使用方式非常简洁 提供了丰富的属性以及事件 可以非常方便的完成节点之间数据的交互及通知 大量的虚函数供开发者重写具有很高的自由性。
-
 

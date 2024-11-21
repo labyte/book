@@ -138,7 +138,22 @@
 
 ## 问题汇总
 
-### 部署后有的浏览器不能访问
+### 【开发】以一种访问权限不允许的方式做了一个访问套接字的尝试
+
+> 经验：多改几个端口尝试，且不要用一些特殊的端口
+
+网上说是防火墙、权限或者端口被占用导致的，解决办法
+
+- 以管理员权限运行VS
+- 检查端口是否被占用，查询某个端口 `netstat -ano | findstr :7000`，或者使用 `netsh interface ipv4 show excludedportrange protocol=tcp` 查询端口是否被占用
+
+**特殊情况**
+
+防火墙全部关闭、已经使用管理员运行了VS、检查端口 7000 也没被占用，但是未解决问题：
+
+改变端口尝试，并且如7001、7002等也不行，改为7340解决了问题。
+
+### 【部署】有的浏览器不能访问
 
 **环境**：
 
@@ -159,10 +174,13 @@ https://help.aliyun.com/document_detail/61819.html
 网站正常访问。
 
 
-### 重启IIS服务可能存在访问异常
+### 【部署】重启IIS服务可能存在访问异常
 
 
 > 错误信息： Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery|An exception was thrown while deserializing the token. Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException: The antiforgery token could not be decrypted.
 
 
 当IIS重启过程中，客户端通过刷新浏览器发起请求，由于两次请求的服务不一样，导致出现此错误信息，应该不影响。
+
+
+

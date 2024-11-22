@@ -61,6 +61,7 @@
   - [包：PDF插件](unity/packages/PDF插件.md)
   - [IDE：VS Code](unity/ide-vscode.md)
 ---
+- [Vue](vue/vue.md)
 - [Rust](rust/rust.md)
   - [Tauri](rust/tauri.md)
   - [Slint](rust/slint.md)

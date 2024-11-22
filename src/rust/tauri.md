@@ -8,7 +8,30 @@
 
 
 
-## 执行后不出现窗口
+
+## 调试
+
+### 前端调试
+
+**第一种方式**：通过 `Ctr+shift+I` 来打开 `DevTools` 调试工具，和浏览器的 `F12` 调试浏览器相同
+
+**第二种方式**：前端的调试可以通过点击链接在浏览器上进行渲染，按下 `F12` 来调试。
+
+### 后端调试
+
+根据 [Tauri 官网文档进行配置 ](https://tauri.app/zh-cn/develop/debug/vscode/)
+
+## Vue
+
+- 路由
+
+## Element-plus
+
+- 国际化
+
+
+## 异常汇总
+### 执行后不出现窗口
 
 可能的原因是还没编译完，编译完会出现 `Finished`
 
@@ -33,29 +56,15 @@
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 36s
 ```
 
+### failed to read plugin permissions: failed to read file: 系统找不到指定
 
-## 调试
+执行 `npm run tauri dev` 后 提示如下错误：
 
-### 前端调试
+```
+failed to read plugin permissions: failed to read file: 系统找不到指定
+```
 
-**第一种方式**：通过 `Ctr+shift+I` 来打开 `DevTools` 调试工具，和浏览器的 `F12` 调试浏览器相同
-
-**第二种方式**：前端的调试可以通过点击链接在浏览器上进行渲染，按下 `F12` 来调试。
-
-### 后端调试
-
-根据 [Tauri 官网文档进行配置 ](https://tauri.app/zh-cn/develop/debug/vscode/)
-
-## Vue
-
-- 路由
-
-## Element-plus
-
-- 国际化
-- 
-
-
+删掉 `target` 文件夹，重新运行
 
 
 ## 相关开源项目

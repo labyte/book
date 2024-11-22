@@ -21,16 +21,22 @@
 
 
 
-使用 淘宝 镜像
+（一）使用 淘宝 镜像
 
 ```shell
 npm config set registry https://registry.npm.taobao.org/
 ```
 
-使用 `cnpm`，‌这是淘宝提供的 `npm` 镜像，‌使用 `cnpm` 安装依赖通常会比使用 `npm` 快很多。‌例如，‌通过命令 `npm install -g cnpm --registry=https://registry.npm.taobao.org/` 来安装 `cnpm` ，‌然后使用 `cnpm install` 来安装包。‌
+（二）使用 `cnpm`，‌这是淘宝提供的 `npm` 镜像，‌使用 `cnpm` 安装依赖通常会比使用 `npm` 快很多。‌安装cnpm命令 
 
 ```shell
 npm install -g cnpm --registry=https://registry.npm.taobao.org/
+``` 
+
+使用 `cnpm install` 来安装包，如：
+
+```shell
+cnpm install xxxx
 ```
 
 ## 错误解决

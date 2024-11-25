@@ -62,6 +62,8 @@
   - [IDE：VS Code](unity/ide-vscode.md)
 ---
 - [Vue](vue/vue.md)
+  - [Vue 插件](vue/vue-packages.md)
+--- 
 - [Rust](rust/rust.md)
   - [Tauri](rust/tauri.md)
   - [Slint](rust/slint.md)

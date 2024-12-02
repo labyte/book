@@ -18,6 +18,7 @@
   - [DevExpress](dotnet/wpf/devexpress.md)
 - [WinForm]()
   - [托盘开发](dotnet/winform/tray.md)
+  - [DevExpress](dotnet/winform/devexpress.md)
 - [Asp.Net](dotnet/aspnet/aspnet.md)
   - [SignalR](dotnet/aspnet/aspnet-signalr.md)
   - [证书](dotnet/aspnet/aspnet-证书.md)

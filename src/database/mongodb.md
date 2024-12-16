@@ -28,7 +28,7 @@ net stop MongoDB
 net start MongoDB
 ```
 
-重启 MongoDB 服务（可以直接使用此命令代替上述两个命令）：
+重启 MongoDB 服务（可以直接使用此命令代替上述两个命令, 有时候会报错无法识别 &&）：
 
 ```bash
 net stop MongoDB && net start MongoDB
@@ -70,7 +70,6 @@ mongod --config "C:\Program Files\MongoDB\Server\5.0\bin\mongod.cfg"
 
 ### 远程连接
 
-⚠️⚠️⚠️ 设置远程连接，容易遭到攻击，谨慎使用 ⚠️⚠️⚠️
 
 > 失败信息：mongodb远程连接出现connect ECONNREFUSED（连接被拒绝）错误的解决方法
 
@@ -90,7 +89,10 @@ net:
 
 ```
 
-重启 `net stop MongoDB && net start MongoDB`
+先停止然后启动
+
+
+`net stop MongoDB` 和 `net start MongoDB` 
 
 ## MacOS
 

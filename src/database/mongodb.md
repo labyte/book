@@ -1,10 +1,13 @@
 # MongoDb
 
-[官方文档](https://mongodb.github.io/mongo-csharp-driver/2.0/reference/bson/mapping/)
+- [官方文档](https://mongodb.github.io/mongo-csharp-driver/2.0/reference/bson/mapping/)
 
-[MongoDB C#驱动程序](https://www.mongodb.com/docs/drivers/csharp/current/)
+- [MongoDB 手册](https://www.mongodb.com/zh-cn/docs/manual/)
 
-[Mongosh 文档](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#std-label-mdb-shell-overview)
+    - [MongoDB C#驱动程序](https://www.mongodb.com/docs/drivers/csharp/current/)
+
+    - [Mongosh 文档](https://www.mongodb.com/zh-cn/docs/mongodb-shell/#std-label-mdb-shell-overview)
+
 
 ## Windows
 
@@ -94,6 +97,29 @@ net:
 
 `net stop MongoDB` 和 `net start MongoDB` 
 
+#### Windows账户A访问Windows账户B安装的数据库
+
+使用 windwos 账户A 安装 MongoDB，切换到 windows 账户B 通过localhost:27017 来访问可能失败
+
+这通常与文件和服务的权限设置有关。以下是详细的解决方法：
+
+1. 为账户B授予MongoDB安装目录的访问权限
+   - 打开 MongoDB 安装目录（通常是 C:\Program Files\MongoDB\Server\<version>\）。
+   - 右键点击安装目录，选择“属性”。
+   - 转到“安全”选项卡，点击“编辑”按钮。
+   - 点击“添加”按钮，输入账户B的用户名，然后点击“检查名称”确认。
+   - 为账户B授予“读取和运行”、“列出文件夹内容”、“读取”和其他必要的权限。
+   - 点击“应用”并保存更改。
+2. 配置MongoDB服务的权限（重启即可）
+   - 打开“服务”窗口（按 Win + R，输入 services.msc，然后按 Enter）。
+   - 找到 MongoDB 服务，右键点击选择“属性”。
+   - 转到“登录”选项卡。
+   - 选择“此账户”，然后输入账户A的用户名和密码。
+   - 点击“应用”并重启MongoDB服务。
+
+**备注：MongoDBCompass 的安装是在账户目录下：`C:\Users\XXX\AppData\Local\MongoDBCompass`**
+
+
 ## MacOS
 
 ### 重启
@@ -139,6 +165,48 @@ mongod --config /usr/local/etc/mongod.conf
 通过这些步骤，你可以成功地在 macOS 上重启 MongoDB 服务。
 
 
+## 安全性
+
+注意： 当开放外网访问时，数据库默认没有启动访问控制，也就是只需要IP和端口就可以访问数据库，容易被攻击！！！
+
+
+### 仅在内网访问
+
+> 正常运营环境，应该放在内网访问
+
+大多数情况下数据库应该仅由服务器访问，它们应该在同一个内网中
+
+
+```
+mongodb://localhost:27017/
+```
+
+### 外网访问
+
+> 首先必须立刻，开启访问控制，否则别人使用IP和端口就能访问你的数据库，否则设置的账号密码不起作用
+
+1. 修改 `C:\Program Files\MongoDB\Server\7.0\bin\mongod.cfg` 配置文件中的 
+   1. `net` : 自定义端口，绑定所有的IP
+   2. `security`: 启用访问控制，访问需要账号密码，且根据账户的权限才能执行相应的操作
+
+```
+# mongod.conf
+
+net:
+  #port: 27017
+  port: 39363
+  #bindIp: 127.0.0.1
+  bindIp: 0.0.0.0
+
+
+security:
+    authorization: enabled
+
+```
+
+2. 启用访问控制后，就不能使用简单的 `mongodb://localhost:port` 进行访问了
+3. 具有授权信息的访问：`mongodb://admin:pwd@ip地址:端口/?authMechanism=SCRAM-SHA-1`
+4. 启用访问控制后，备份和恢复数据库需要具有对应角色的账户才能操作，具体参照[添加可以备份恢复的用户](#添加可以备份恢复的用户)
 
 ## 用户管理
 
@@ -146,7 +214,146 @@ mongod --config /usr/local/etc/mongod.conf
 
 [官方 用户管理方式](https://www.mongodb.com/zh-cn/docs/mongodb-shell/reference/methods/#user-management-methods)
 
-**添加用户**
+### 用户角色
+
+[内置角色](https://www.mongodb.com/zh-cn/docs/manual/core/authorization/)
+
+- 创建用户时需要给用户指定角色
+- 一个用户可以有多个角色，不同的角色具有不同的权限，并且会享受角色的最高权限
+  
+<style>
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 12px; /* 设置字体大小 */
+    table-layout: fixed; /* 固定表格布局  这样可实现表格第一列固定宽度，剩下的按比例自动拉伸*/
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #d0d7de;
+    padding: 8px;
+    text-align: left;
+}
+
+.excel-table th {
+    background-color: #f0f3f5;
+    font-weight: bold;
+}
+
+.excel-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.excel-table tr:hover {
+    background-color: #e9e9e9;
+}
+
+.excel-table th:nth-child(1), .excel-table td:nth-child(1) {
+    width: 10%;
+    /*  width: 100px; 固定第一列宽度 */
+}
+
+.excel-table th:nth-child(2), .excel-table td:nth-child(2) {
+    width: 10%;
+}
+
+.excel-table th:nth-child(3), .excel-table td:nth-child(3) {
+    width: 70%;
+}
+.excel-table th:nth-child(4), .excel-table td:nth-child(3) {
+    width: 10%;
+}
+</style>
+
+**常用角色**
+
+<div class="table-container">
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>角色</th>
+                <th>权限</th>
+                <th>使用频率</th>
+            </tr>
+        </thead>
+        <tbody>
+         <tr>
+                <td>超级用户角色</td>
+                <td>root</td>
+                <td>最高权限</td>
+                <td>高</td>
+            </tr>
+            <tr>
+                <td rowspan="2">数据库用户角色</td>
+                <td>read</td>
+                <td>只能读链接3</td>
+                <td>低</td>
+            </tr>
+            <tr>
+                <td>readWrite</td>
+                <td>可读可写，服务器使用的数据库账户</td>
+                <td>高</td>
+            </tr>
+            <tr>
+                <td rowspan="3">数据库管理角色</td>
+                <td>dbAdmin</td>
+                <td>提供执行管理任务的能力，例如架构相关任务、索引和收集统计信息。该角色不授予用户和角色管理特权.</td>
+                <td>一般</td>
+            </tr>
+            <tr>
+                <td>dbOwner</td>
+                <td>数据库所有者可以对数据库执行任何管理操作。此角色结合了 readWrite、dbAdmin 和 userAdmin 角色授予的权限。</td>
+                <td>低</td>
+            </tr>
+            <tr>
+                <td>userAdmin</td>
+                <td>提供在当前数据库上创建和修改角色和用户的能力。由于 userAdmin 角色允许用户向任何用户（包括自己）授予任何特权，因此该角色还间接提供对数据库或（如果作用域为 admin 数据库）集群的超级用户访问权限。</td>
+                <td>低</td>
+            </tr>
+            <tr>
+                <td rowspan="2">备份和恢复角色</td>
+                <td>backup</td>
+                <td>备份</td>
+                <td>一般</td>
+            </tr>
+             <tr>
+                <td>restore</td>
+                <td>恢复</td>
+                <td>低</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+### 添加Root用户
+
+添加一个超级管理员账户，此账户可以对其他管理员进行操作（注意，若要启动访问控制，在启动之前需要先添加一个超级管理员，以方便管理数据库和用户）
+
+```
+
+//root权限的
+use admin
+db.createUser(
+  {
+    user: "root",
+    pwd:  "123456",
+    roles: [ { role: "root", db: "admin" } ]
+  }
+)
+```
+
+### 添加readWrite用户
+
+此用户提供给服务器连接数据库
 
 ```javascript
 
@@ -159,6 +366,41 @@ db.createUser({
     {role:"readWrite",db:"TSIM"}]
 })
 ```
+
+
+### 添加可以备份恢复的用户
+
+在启用访问控制的情况下，此用户可实现对数据库进行备份和恢复
+
+```javascript
+
+use admin
+db.createUser({
+  user: "br",
+  pwd: "br123",
+  roles: [
+    { role: "backup", db: "admin" },
+    { role: "restore", db: "admin" }
+  ]
+})
+```
+
+备份命令
+
+```bash
+mongodump --uri="mongodb://br:br123@IP地址:端口" --out=一个文件夹
+```
+
+恢复命令
+
+```bash
+mongorestore --uri="mongodb://br:br123@localhost:端口/数据库名称?authMechanism=SCRAM-SHA-1&authSource=admin" --nsInclude="数据库名称.*" D:\TSIM\mongodb_backup\backup\指定还原的文件路径\TSIM
+```
+
+- 就按照这个格式，替换用户、密码、IP、端口、要恢复的数据库名称、恢复的文件夹路径，否则出现些奇奇怪怪的问题，如skip。。。。
+- --nsInclude="数据库名称.*" 表示数据库下的所有集合，若只还原某个集合如（Users）那么写 `--nsInclude="数据库名称.Users"`,多个时：`--nsInclude="数据库名称.Users",--nsInclude="数据库名称.集合2"`
+
+### 其他操作
 
 **删除 `admin` 用户**
 
@@ -540,6 +782,11 @@ scp -r /path/to/backup user@target_host:/path/to/destination
 mongorestore --uri="mongodb://username:password@target_host:port/dbname" /path/to/destination/backup
 ```
 
+
+### 启用了访问控制处理
+
+参照[添加可以备份恢复的用户](#添加可以备份恢复的用户)
+
 ### 异常处理
 
 SASL（Simple Authentication and Security Layer）错误通常与身份验证和安全相关，特别是在连接到 MongoDB 时使用用户名和密码进行身份验证时。为了排查和解决这个问题，请按照以下步骤操作：
@@ -603,25 +850,3 @@ MongoDB 3.0 及以上版本默认使用 SCRAM-SHA-1 进行身份验证，MongoDB
 ### 在线迁移
 
 如果你需要在迁移过程中保持数据库的高可用性，可以考虑使用 MongoDB 的副本集（replica set）来进行无缝迁移。这个方法更为复杂，但可以确保在迁移过程中数据的持续可用。
-
-## Windows 账户问题
-
-使用 windwos 账户A 安装 MongoDB，切换到 windows 账户B 通过localhost:27017 来访问可能失败
-
-这通常与文件和服务的权限设置有关。以下是详细的解决方法：
-
-1. 为账户B授予MongoDB安装目录的访问权限
-   - 打开 MongoDB 安装目录（通常是 C:\Program Files\MongoDB\Server\<version>\）。
-   - 右键点击安装目录，选择“属性”。
-   - 转到“安全”选项卡，点击“编辑”按钮。
-   - 点击“添加”按钮，输入账户B的用户名，然后点击“检查名称”确认。
-   - 为账户B授予“读取和运行”、“列出文件夹内容”、“读取”和其他必要的权限。
-   - 点击“应用”并保存更改。
-2. 配置MongoDB服务的权限（重启即可）
-   - 打开“服务”窗口（按 Win + R，输入 services.msc，然后按 Enter）。
-   - 找到 MongoDB 服务，右键点击选择“属性”。
-   - 转到“登录”选项卡。
-   - 选择“此账户”，然后输入账户A的用户名和密码。
-   - 点击“应用”并重启MongoDB服务。
-
-**备注：MongoDBCompass 的安装是在账户目录下：`C:\Users\XXX\AppData\Local\MongoDBCompass`**

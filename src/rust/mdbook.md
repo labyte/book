@@ -209,6 +209,18 @@ a内容：
 [跳转到 a 的章节2](a.md#chapter-2)
 ```
 
+## 在一个全新的电脑上搭建Mdbook环境
+> 若要运行此仓库为例
+### 安装
+1. [下载rust](https://www.rust-lang.org/tools/install)
+2. 安装 `mdbook`, 命令 `cargo install mdbook`
+3. 安装预处理器： 命令 `cargo install mdbook-mermaid`
+4. 安装预处理器： 命令 `cargo install mdbook-plantuml`
+
+### 去除评论
+
+- `\theme\index.hbs` 中删除 218 行 `   <div id="giscus-container"></div>`
+- custom3.js 中删除 82行到157行
 
 
 ## 异常汇总

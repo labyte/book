@@ -105,8 +105,9 @@ tr {
             </tr>
              <tr>
                 <td>5</td>
-                <td><a  target="_blank" href="https://ghyinyue.com/">果核音乐</a></td>
-                <td>输入歌曲名称，搜索后进行下载，可下载无损版本，每天下载20首</td>
+                <td><a  target="_blank" href="https://music.aqzscn.cn/">音流(音乐播放器)</a></td>
+                <td>音流是一款 NAS 音乐播放器，可以连接到您部署在 NAS 上的音乐服务1，能让您在不同平台2享受一致的音乐盛宴。跨平台支持
+可在 Android、iOS、macOS 和 Windows 上使用，并提供与平台一致的体验。</td>
             </tr>
         </tbody>
     </table>

@@ -100,6 +100,67 @@ python.exe -m markitdown test.docx > test.md
 
 
 
+## Imagemagick
 
+> 图片格式转换
 
+[官网](https://imagemagick.org/script/download.php)
 
+### 安装
+
+- 按下图下载
+  ![alt text](assets/file-conversion/image.png)
+
+- 安装过程中，确保勾选了 “Install legacy utilities (e.g., convert)” 选项。这个选项确保你可以使用命令行工具（如 convert）进行操作。
+- 在安装时，还可以选择将 ImageMagick 添加到系统的 PATH 环境变量，这样你就可以在任何地方直接运行命令。
+- 如果在安装时没有选择将 ImageMagick 添加到 PATH 环境变量，或者你不确定是否已经配置，可以手动添加它：路径一般为: `C:\Program Files\ImageMagick-x.x.x-Q16`，其中 x.x.x 是你安装的版本号
+
+### 使用
+
+注意：7版本和之前的版本有很大的不同，下面以最新7版本为例
+
+转换webp图片为JPG图片(PowerShell)：
+
+```shell
+magick input.webp output.jpg
+```
+或
+
+```shell
+convert input.webp output.jpg
+```
+
+批量转换当前目录webp图片为JPG图片(PowerShell)：
+
+```shell
+magick mogrify -format JPEG *.webp
+```
+
+批量转换并且删除源文件(PowerShell)
+
+```shell
+foreach ($file in Get-ChildItem -Filter *.emf) {
+    # 定义输出文件路径
+    $outputPath = "$($file.DirectoryName)\$($file.BaseName).png"
+
+    # 转换文件为 PNG 格式
+    magick $file.FullName $outputPath
+
+    # 删除原始 EMF 文件
+    Remove-Item $file.FullName -Force
+}
+
+```
+
+指定源文件路径批量转换：
+
+```shell
+magick mogrify -format JPEG -path /path/to/dir *.webp
+```
+
+在cmd中使用for批量转换(使用失败)
+
+``` 
+for /r %f in (*.emf) do magick "%f" "%~dpnf.png"
+
+```

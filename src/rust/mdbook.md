@@ -24,6 +24,21 @@ mdbook build --open
 mdbook serve --open
 ```
 
+## 渲染器
+
+### 章节折叠渲染器配置
+
+在book.toml中配置
+
+```
+[output.html.fold]
+enable = true # 启用
+level = 0  # 0：打开网站时，全部关闭，1：所有第一层级的展开，2：第二层级的展开...
+
+```
+
+## 预处理
+
 ## 主题
 
 ### 设置界面字体
@@ -31,6 +46,7 @@ mdbook serve --open
 - `theme/css/general.css` 中的 `:root` 和 `Body` 可整体调整左侧章节目录和整文的字体大小
 
 - `theme/css/chrome.css` 中的 `.sidebar` 可整体调整左侧章节目录字体大小，两者结合，可满足相关需求
+
 
 
 ### 设置整文行间距
@@ -49,14 +65,20 @@ theme/css/general.css:
 
 **PageToc**：比较简单容易配置的目录插件，但是显示感觉怪怪的，在加上目录后，文章内容还是居中，就导致布局不合理
 
-**[可自定义标题目录，为配置成功](https://github.com/zjp-CN/mdbook-theme?tab=readme-ov-file)**，该主题在Pagetoc的基础上添加了自定义功能，可配置文章内容全屏显示，但是配置后运行不起来，即使克隆作者的仓库也运行不起来。
+**[可自定义标题目录，未配置成功](https://github.com/zjp-CN/mdbook-theme?tab=readme-ov-file)**，该主题在Pagetoc的基础上添加了自定义功能，可配置文章内容全屏显示，但是配置后运行不起来，即使克隆作者的仓库也运行不起来。
+
 
 
 ### 直接使用开源仓库
 
 可以直接克隆一些开源的仓库，作为模板进行编写。
 
-- [Rust语言圣经](https://course.rs/about-book.html)：支持章节收缩，支持较好的目录，支持评论，不支持中文搜索，本仓库也使用了它的上述功能，自己实现了中文搜索。
+[Rust语言圣经](https://course.rs/about-book.html)：
+
+- 支持章节收缩
+- 支持较好的目录
+- 支持评论
+- 不支持中文搜索，本仓库也使用了它的上述功能，自己实现了中文搜索。
 
 
 ## 中文支持
@@ -222,6 +244,9 @@ a内容：
 - `\theme\index.hbs` 中删除 218 行 `   <div id="giscus-container"></div>`
 - custom3.js 中删除 82行到157行
 
+## 注意事项
+
+- 章节的节点不要关联两个相同的文档，特别是两个相邻的，会导致点击下一章节无法跳转到下一章节（因为下一章节的链接和当前一样）
 
 ## 异常汇总
 

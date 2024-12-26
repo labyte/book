@@ -74,9 +74,9 @@ python.exe -m markitdown test.docx > test.md
 
 ## Pandoc
 
-[Pandoc](https://github.com/jgm/pandoc/tree/3.6.1)
+- [Pandoc](https://github.com/jgm/pandoc/tree/3.6.1)
 
-[下载](https://pandoc.org/installing.html)
+- [下载](https://pandoc.org/installing.html)
 
 ### 介绍
 
@@ -87,9 +87,10 @@ python.exe -m markitdown test.docx > test.md
 > world 转 md
 
 - 表格的格式混乱
+
 - 图片能够很好的提取出来
 
-### 使用方式
+### 一般用法
 
 安装好后，重新打开终端输入下面命令
 
@@ -99,6 +100,34 @@ python.exe -m markitdown test.docx > test.md
 注意：如果不加上 `--extract-media=./` ，不提取图片
 
 
+### 合并转换
+
+> powershell
+
+合并当前目录下的所有文档  
+
+```powershell
+ pandoc (Get-ChildItem -Filter *.docx).FullName -s -o output.docx
+```
+
+- -s ：单文件
+- -o: 输出路径
+
+注意：如果输出为md,加上 `--extract-media=./` 
+
+
+### 合并指定文件
+
+> powershell
+
+合并当前目录下的所有文档  
+
+
+```powershell
+ pandoc 1.docx 2.docx -s -o output.md --extract-media=./
+```
+
+注意：如果输出为md,加上 `--extract-media=./` 
 
 ## Imagemagick
 
@@ -115,20 +144,26 @@ python.exe -m markitdown test.docx > test.md
 - 在安装时，还可以选择将 ImageMagick 添加到系统的 PATH 环境变量，这样你就可以在任何地方直接运行命令。
 - 如果在安装时没有选择将 ImageMagick 添加到 PATH 环境变量，或者你不确定是否已经配置，可以手动添加它：路径一般为: `C:\Program Files\ImageMagick-x.x.x-Q16`，其中 x.x.x 是你安装的版本号
 
-### 使用
+### 使用示例说明
 
-注意：7版本和之前的版本有很大的不同，下面以最新7版本为例
+- 注意：7版本和之前的版本有很大的不同，下面以最新7版本为例
 
-转换webp图片为JPG图片(PowerShell)：
+- 使用示例系统环境 Windows
+
+- 工具：PowerShell
+
+- 使用CMD失败
+
+### 单张转换
+
+转换webp图片为JPG图片
 
 ```shell
 magick input.webp output.jpg
 ```
-或
 
-```shell
-convert input.webp output.jpg
-```
+### 批量转换
+
 
 批量转换当前目录webp图片为JPG图片(PowerShell)：
 
@@ -136,7 +171,8 @@ convert input.webp output.jpg
 magick mogrify -format JPEG *.webp
 ```
 
-批量转换并且删除源文件(PowerShell)
+### 批量转换并删除源文件
+
 
 ```shell
 foreach ($file in Get-ChildItem -Filter *.emf) {
@@ -152,10 +188,28 @@ foreach ($file in Get-ChildItem -Filter *.emf) {
 
 ```
 
+### 递归批量转换并删除源文件
+
+
 指定源文件路径批量转换：
 
 ```shell
-magick mogrify -format JPEG -path /path/to/dir *.webp
+# 获取当前执行命令的目录
+$sourceDirectory = Get-Location
+
+# 递归查找所有 .emf 文件
+Get-ChildItem -Path $sourceDirectory -Recurse -Filter "*.emf" | ForEach-Object {
+    # 定义输出文件路径
+    $outputFile = $_.FullName.Replace($_.Extension, ".png")
+
+    # 使用 ImageMagick 转换文件
+    magick  $_.FullName $outputFile
+
+    # 如果转换成功，删除源文件
+    if (Test-Path $outputFile) {
+        Remove-Item $_.FullName
+    }
+}
 ```
 
 在cmd中使用for批量转换(使用失败)

@@ -62,6 +62,8 @@
   - [包：PDF插件](unity/packages/PDF插件.md)
   - [IDE：VS Code](unity/ide-vscode.md)
 ---
+- [Qt](qt/qt.md)
+---
 - [Vue](vue/vue.md)
   - [Vue 插件](vue/vue-packages.md)
 --- 

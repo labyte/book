@@ -1,5 +1,70 @@
 # Qt 开发笔记
 
+## 资源文件
+
+[官网 Qt 资源系统](https://doc.qt.io/qt-6/zh/resources.html)
+
+**一、必须先配置 CMakeList.text**
+
+必须 启用了CMAKE_AUTORCC ，才可以直接将.qrc 文件作为源代码添加到可执行文件或库中。然后，引用的资源文件就会嵌入到二进制文件中：
+``` cpp
+set(CMAKE_AUTORCC ON)
+
+qt_add_executable(my_app
+    application.qrc
+    main.cpp
+)
+```
+
+
+> AUTORCC 在多个项目中使用时，仅在根项目中添加rc资源文件有效（或者操作不对，未验证）
+
+AUTORCC 的另一个替代方法是使用 Qt6Core 的 CMake 函数qt_add_resources，它对资源的创建提供了更多控制。例如，它允许您直接在项目文件中指定资源的内容，而无需先编写.qrc 文件：
+
+
+```cpp
+qt_add_resources(my_app "app_images"
+    PREFIX "/"
+    FILES
+        images/copy.png
+        images/cut.png
+        images/new.png
+        images/open.png
+        images/paste.png
+        images/save.png
+)
+```
+
+**二、创建资源文件**
+
+通过新建文件 Qt Resource File 创建
+
+```xml
+<RCC>
+    <qresource prefix="/">
+        <file>images/copy.png</file>
+        <file>images/cut.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/paste.png</file>
+        <file>images/save.png</file>
+    </qresource>
+</RCC>
+```
+
+
+**三、赋值资源路径使用**
+![alt text](assets/qt/image.png)
+
+
+```qml
+ Image {
+        width: 200
+        height: 200
+        source: "qrc:/images/logo.png"
+    }
+```
+
 ## 设置应用程序图标
 
 ### 官方说明
@@ -190,3 +255,9 @@ endif()
 
 D:\Qt\6.9.1\mingw_64\bin\windeployqt6.exe --qmldir=F:\000-Labyte\Projects\mine-music\Config --qmldir=F:\000-Labyte\Projects\mine-music\Controls --qmldir=F:\000-Labyte\Projects\mine-music\Player Minemusic.exe
 ```
+
+
+## 系统托盘图标
+
+
+[官网：SystemTrayIcon](https://doc.qt.io/qt-6/zh/qml-qt-labs-platform-systemtrayicon.html)
